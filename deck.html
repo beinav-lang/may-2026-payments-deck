@@ -1307,12 +1307,12 @@
       <div class="chart-wrap" style="height: 260px"><canvas id="chart-arr"></canvas></div>
     </div>
 
-    <!-- ============ FUNNEL TIERS ============ -->
+    <!-- ============ FUNNEL TIERS · MAY vs APRIL (plan baseline TBD for May) ============ -->
     <div class="pva2-legend" style="margin-bottom:8px">
-      <span><span class="swatch plan"></span>Plan (target)</span>
-      <span><span class="swatch beat"></span>Actual · beat</span>
-      <span><span class="swatch miss"></span>Actual · miss</span>
-      <span style="color:var(--subtle)">bars sized to % of plan</span>
+      <span><span class="swatch plan"></span>April final (reference)</span>
+      <span><span class="swatch beat"></span>May actual · up MoM</span>
+      <span><span class="swatch miss"></span>May actual · down MoM</span>
+      <span style="color:var(--subtle)">bars sized to ratio vs April · plan-vs-actual returns next cycle</span>
     </div>
 
     <div class="pva2-tiers">
@@ -1322,46 +1322,46 @@
         <div class="pva2-tier-label">
           <div class="step">Tier 1</div>
           <div class="name">Top of Funnel
-            <span class="verdict miss">▼ Missed plan</span>
+            <span class="verdict beat">▲ Up MoM</span>
           </div>
         </div>
         <div class="pva2-tier-bars">
           <div class="pva2-bar-row">
-            <div class="metric-name">Net New Price Units<span class="sub">almost the entire new-units acquisition was offset by churn in April</span></div>
+            <div class="metric-name">Net New Price Units<span class="sub">net change in billable units in the cycle · acquisition − churn − downgrades + upgrades</span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 23.8%"></div>
+              <div class="pva2-bar-plan"   style="width: 52.8%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
             </div>
-            <div class="delta miss">
-              <span class="head">3,242</span>
-              <span class="pct">vs 13,628 plan · 23.8%</span>
+            <div class="delta beat">
+              <span class="head">6,143</span>
+              <span class="pct">vs Apr 3,242 · +89.5% MoM · −60% YoY</span>
             </div>
           </div>
           <div class="pva2-bar-row">
             <div class="metric-name">Price Units<span class="sub">total billable rentable units</span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 95.4%"></div>
+              <div class="pva2-bar-plan"   style="width: 98.8%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
             </div>
-            <div class="delta miss">
-              <span class="head">498,944</span>
-              <span class="pct">vs 523,240 plan · 95.4%</span>
+            <div class="delta beat">
+              <span class="head">505,087</span>
+              <span class="pct">vs Apr 498,944 · +1.2% MoM · +27.0% YoY</span>
             </div>
           </div>
           <div class="pva2-bar-row">
-            <div class="metric-name">Product Units<span class="sub">price units × product attach (90.2% vs 89.0% plan)</span></div>
+            <div class="metric-name">Product Units<span class="sub">price units × product attach (90.4% vs Apr 90.2%)</span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 96.7%"></div>
+              <div class="pva2-bar-plan"   style="width: 98.6%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
             </div>
-            <div class="delta miss">
-              <span class="head">450,239</span>
-              <span class="pct">vs 465,684 plan · 96.7%</span>
+            <div class="delta beat">
+              <span class="head">456,654</span>
+              <span class="pct">vs Apr 450,239 · +1.4% MoM · +29.5% YoY</span>
             </div>
           </div>
         </div>
         <div class="pva2-tier-take">
-          Net new Price Units fell <strong class="red">~10K short</strong> (new acquisition − churn − downgrades + upgrades). <strong>Product attach actually beat</strong> (90.2% vs 89.0%) — the attach engine is fine; the net inflow is what missed.
+          Net new Price Units <strong class="green">nearly doubled MoM</strong> (3.2K → 6.1K) — the acquisition engine reaccelerated after April's softness, though still <strong class="red">−60% YoY</strong>. Product attach ticked up to 90.4%.
         </div>
       </div>
 
@@ -1370,46 +1370,46 @@
         <div class="pva2-tier-label">
           <div class="step">Tier 2</div>
           <div class="name">Eligibility
-            <span class="verdict beat">▲ Beat plan</span>
+            <span class="verdict beat">▲ Up MoM</span>
           </div>
         </div>
         <div class="pva2-tier-bars">
           <div class="pva2-bar-row">
-            <div class="metric-name">Active Leases<span class="sub">smaller base — but converted harder</span></div>
+            <div class="metric-name">Active Leases<span class="sub">denominator outran the numerator in May</span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 96.3%"></div>
-            </div>
-            <div class="delta miss">
-              <span class="head">377,970</span>
-              <span class="pct">vs 392,414 plan · 96.3%</span>
-            </div>
-          </div>
-          <div class="pva2-bar-row">
-            <div class="metric-name">Active Leases with MA<span class="sub">MA attach 91.1% vs 91.0% plan</span></div>
-            <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 96.8%"></div>
-            </div>
-            <div class="delta miss">
-              <span class="head">344,427</span>
-              <span class="pct">vs 355,701 plan · 96.8%</span>
-            </div>
-          </div>
-          <div class="pva2-bar-row">
-            <div class="metric-name">Eligible Leases<span class="sub">% Eligible 71.8% vs 68.0% plan — <strong style="color:var(--green)">+3.8pp</strong></sub></span></div>
-            <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 91.4%"></div>
+              <div class="pva2-bar-plan"   style="width: 97.4%"></div>
               <div class="pva2-bar-actual beat" style="width: 100%"></div>
             </div>
             <div class="delta beat">
-              <span class="head">271,434</span>
-              <span class="pct">vs 265,897 plan · 102.1%</span>
+              <span class="head">388,032</span>
+              <span class="pct">vs Apr 377,970 · +2.7% MoM · +30.2% YoY</span>
+            </div>
+          </div>
+          <div class="pva2-bar-row">
+            <div class="metric-name">Active Leases with MA<span class="sub">MA attach 91.5% vs Apr 91.1%</span></div>
+            <div class="pva2-bar-track">
+              <div class="pva2-bar-plan"   style="width: 97.0%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
+            </div>
+            <div class="delta beat">
+              <span class="head">354,893</span>
+              <span class="pct">vs Apr 344,427 · +3.0% MoM · +33.3% YoY</span>
+            </div>
+          </div>
+          <div class="pva2-bar-row">
+            <div class="metric-name">Eligible Leases<span class="sub">% Eligible 71.7% vs Apr 71.8% (essentially flat)</span></div>
+            <div class="pva2-bar-track">
+              <div class="pva2-bar-plan"   style="width: 97.6%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
+            </div>
+            <div class="delta beat">
+              <span class="head">278,223</span>
+              <span class="pct">vs Apr 271,434 · +2.5% MoM</span>
             </div>
           </div>
         </div>
         <div class="pva2-tier-take">
-          Even with a smaller Active Lease base, <strong class="green">Eligible Leases beat plan by +5.5K</strong>. MA attach and active-tenant attach both ran hot. Eligibility funnel is healthier than commit assumed.
+          All three eligibility metrics ticked up MoM — Active +2.7%, MA-attached +3.0%, Eligible +2.5%. <strong>Eligibility plateau holds at ~71.8%</strong>; the funnel mouth widened again but conversion couldn't keep pace (Tier 3).
         </div>
       </div>
 
@@ -1418,46 +1418,46 @@
         <div class="pva2-tier-label">
           <div class="step">Tier 3</div>
           <div class="name">Conversion to Paid
-            <span class="verdict beat">▲ Beat plan</span>
+            <span class="verdict miss">▼ Down MoM</span>
           </div>
         </div>
         <div class="pva2-tier-bars">
           <div class="pva2-bar-row">
-            <div class="metric-name">Paid Leases<span class="sub">+44.2% YoY · record month</span></div>
+            <div class="metric-name">Paid Leases<span class="sub">+41.7% YoY but only +252 vs Apr</span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 99.0%"></div>
-              <div class="pva2-bar-actual beat" style="width: 100%"></div>
+              <div class="pva2-bar-plan"   style="width: 99.9%"></div>
+              <div class="pva2-bar-actual flat" style="width: 100%"></div>
             </div>
-            <div class="delta beat">
-              <span class="head">181,687</span>
-              <span class="pct">vs 179,949 plan · 101.0%</span>
+            <div class="delta flat">
+              <span class="head">181,927</span>
+              <span class="pct">vs Apr 181,687 · +0.13% MoM · +41.7% YoY</span>
             </div>
           </div>
           <div class="pva2-bar-row">
-            <div class="metric-name">% Paid from Active Lease<span class="sub">48.07% vs 45.9% plan — <strong style="color:var(--green)">+2.2pp</strong></sub></span></div>
+            <div class="metric-name">% Paid from Active Lease<span class="sub">46.88% vs Apr 48.07% — <strong style="color:var(--warn)">−1.19pp</strong></sub></span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 95.5%"></div>
-              <div class="pva2-bar-actual beat" style="width: 100%"></div>
+              <div class="pva2-bar-plan"   style="width: 100%"></div>
+              <div class="pva2-bar-actual miss" style="width: 97.5%"></div>
             </div>
-            <div class="delta beat">
-              <span class="head">48.07%</span>
-              <span class="pct">vs 45.9% plan · 104.7%</span>
+            <div class="delta miss">
+              <span class="head">46.88%</span>
+              <span class="pct">vs Apr 48.07% · −1.19pp MoM · +3.82pp YoY</span>
             </div>
           </div>
           <div class="pva2-bar-row">
-            <div class="metric-name">Avg Volume per Paid Lease<span class="sub">$1,720 vs $1,682 plan</span></div>
+            <div class="metric-name">Avg Volume per Paid Lease<span class="sub">$1,706 vs Apr $1,720 — partial-month effect mostly</span></div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 97.8%"></div>
-              <div class="pva2-bar-actual beat" style="width: 100%"></div>
+              <div class="pva2-bar-plan"   style="width: 100%"></div>
+              <div class="pva2-bar-actual miss" style="width: 99.2%"></div>
             </div>
-            <div class="delta beat">
-              <span class="head">$1,720</span>
-              <span class="pct">vs $1,682 plan · 102.3%</span>
+            <div class="delta miss">
+              <span class="head">$1,706</span>
+              <span class="pct">vs Apr $1,720 · −0.8% MoM · +3.4% YoY</span>
             </div>
           </div>
         </div>
         <div class="pva2-tier-take">
-          Conversion <strong class="green">absorbed the top-of-funnel softness</strong>. +2.2pp on % paid from active is the single largest driver of why ARR didn't miss. Engagement quality up across the board.
+          Conversion was <strong class="red">the regression layer</strong>. Paid count nearly flat (+252) while active +10.1K → <strong class="red">−1.19pp MoM on % paid</strong>. The denominator outran the numerator; UpMarket paid count actually fell −701 (see exec summary).
         </div>
       </div>
 
@@ -1466,57 +1466,57 @@
         <div class="pva2-tier-label">
           <div class="step">Tier 4</div>
           <div class="name">Outcome — ARR
-            <span class="verdict flat">≈ On plan</span>
+            <span class="verdict beat">▲ Up MoM</span>
           </div>
         </div>
         <div class="pva2-tier-bars">
           <div class="pva2-bar-row">
             <div class="metric-name">Total Payments ARR</div>
             <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual flat" style="width: 99.6%"></div>
+              <div class="pva2-bar-plan"   style="width: 99.4%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
             </div>
-            <div class="delta flat">
-              <span class="head">$15.49M</span>
-              <span class="pct">vs $15.55M plan · 99.6%</span>
-            </div>
-          </div>
-          <div class="pva2-bar-row">
-            <div class="metric-name">Additional ARR<span class="sub">Feb's calendar-inflated cycle pulled ARR forward · skews Additional ARR in the months that follow</span></div>
-            <div class="pva2-bar-track">
-              <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 67.4%"></div>
-            </div>
-            <div class="delta miss">
-              <span class="head">$510.6K</span>
-              <span class="pct">vs $757.7K plan · 67.4%</span>
+            <div class="delta beat">
+              <span class="head">$15.59M</span>
+              <span class="pct">vs Apr $15.49M · +0.6% MoM · +39.9% YoY</span>
             </div>
           </div>
           <div class="pva2-bar-row">
-            <div class="metric-name">Card Amount<span class="sub">structural drag — Chapter 03 unpacks</span></div>
+            <div class="metric-name">Additional ARR<span class="sub">Apr→May ARR step-up vs the ramp trajectory</span></div>
             <div class="pva2-bar-track">
               <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 99.1%"></div>
+              <div class="pva2-bar-actual miss" style="width: 19.6%"></div>
             </div>
             <div class="delta miss">
-              <span class="head">$54.66M</span>
-              <span class="pct">vs $55.17M plan · 99.1%</span>
+              <span class="head">$100K</span>
+              <span class="pct">vs Apr $511K · −80% MoM · ARR ramp slowed</span>
             </div>
           </div>
           <div class="pva2-bar-row">
-            <div class="metric-name">% Card<span class="sub">17.49% vs 18.23% plan — <strong style="color:var(--warn)">−0.74pp</strong></sub></span></div>
+            <div class="metric-name">Card Amount<span class="sub">card share at series low 17.43% (vs Apr 17.49%)</span></div>
             <div class="pva2-bar-track">
               <div class="pva2-bar-plan"   style="width: 100%"></div>
-              <div class="pva2-bar-actual miss" style="width: 96.0%"></div>
+              <div class="pva2-bar-actual miss" style="width: 99.0%"></div>
             </div>
             <div class="delta miss">
-              <span class="head">17.49%</span>
-              <span class="pct">vs 18.23% plan · 96.0%</span>
+              <span class="head">$54.10M</span>
+              <span class="pct">vs Apr $54.66M · −1.0% MoM · +38.8% YoY</span>
+            </div>
+          </div>
+          <div class="pva2-bar-row">
+            <div class="metric-name">% Card<span class="sub">17.43% (new 12-mo low) — ACH continues to outgrow card</span></div>
+            <div class="pva2-bar-track">
+              <div class="pva2-bar-plan"   style="width: 100%"></div>
+              <div class="pva2-bar-actual miss" style="width: 99.7%"></div>
+            </div>
+            <div class="delta miss">
+              <span class="head">17.43%</span>
+              <span class="pct">vs Apr 17.49% · −0.06pp MoM · −0.97pp YoY</span>
             </div>
           </div>
         </div>
         <div class="pva2-tier-take">
-          ARR <em>level</em> is <strong>essentially on plan</strong> (−$61K, 99.6%) — but Additional ARR <strong class="red">missed by $247K (67% of plan)</strong>. The structural drag is <strong class="red">card mix −0.74pp</strong> — ACH outgrew card again. Chapter 03 unpacks why.
+          Total Payments ARR <strong class="green">$15.59M (+0.6% MoM, +39.9% YoY)</strong> — but the <strong class="red">step-up to April was just +$100K</strong> (vs Apr's +$511K), and card share notched a new low at 17.43%. ARR is growing; ARR <em>velocity</em> slowed.
         </div>
       </div>
 
@@ -1527,50 +1527,53 @@
     <!-- ============ FULL TABLE — collapsed by default ============ -->
     <details class="pva2-details">
       <summary>
-        Full 21-metric Planned vs Actual table
+        Full 21-metric table · May actuals vs April final + YoY
       </summary>
+      <div style="font-size: 11px; color: var(--muted); padding: 8px 0; line-height: 1.5; font-style: italic">
+        Source: canonical Snowflake refresh (2026-05-27). Plan column TBD pending finance's May targets next cycle close (~Jun 25).
+      </div>
       <table class="pva2-table">
         <thead>
           <tr>
             <th class="left">Metric</th>
-            <th>Planned</th>
-            <th>Actual</th>
-            <th>Δ vs Plan</th>
-            <th>% of Plan</th>
-            <th>MoM</th>
-            <th>YoY</th>
+            <th>April final</th>
+            <th>May actual</th>
+            <th>Δ MoM</th>
+            <th>% MoM</th>
+            <th>YoY vs May '25</th>
+            <th>% YoY</th>
           </tr>
         </thead>
         <tbody>
           <tr class="tier-head"><td class="left" colspan="7">Tier 1 · Top of Funnel</td></tr>
-          <tr><td class="left">Price Units</td><td>523,240</td><td>498,944</td><td class="muted-c">−24,296</td><td><span class="att miss">95.4%</span></td><td>+0.7%</td><td>+30.6%</td></tr>
-          <tr><td class="left">Net New Price Units</td><td>13,628</td><td>3,242</td><td class="muted-c">−10,386</td><td><span class="att miss">23.8%</span></td><td>−32.3%</td><td>−65.2%</td></tr>
-          <tr><td class="left">Product Units</td><td>465,684</td><td>450,239</td><td class="muted-c">−15,445</td><td><span class="att miss">96.7%</span></td><td>+1.0%</td><td>+31.3%</td></tr>
-          <tr><td class="left">Product Units to Price Units</td><td>89.0%</td><td>90.2%</td><td class="muted-c">+1.2pp</td><td><span class="att beat">101.4%</span></td><td>+0.3pp</td><td>+0.5pp</td></tr>
+          <tr><td class="left">Price Units</td><td>498,944</td><td>505,087</td><td class="muted-c">+6,143</td><td><span class="att beat">+1.2%</span></td><td>+107,479</td><td>+27.0%</td></tr>
+          <tr><td class="left">Net New Price Units</td><td>3,242</td><td>6,143</td><td class="muted-c">+2,901</td><td><span class="att beat">+89.5%</span></td><td>−9,279</td><td>−60.2%</td></tr>
+          <tr><td class="left">Product Units</td><td>450,239</td><td>456,654</td><td class="muted-c">+6,415</td><td><span class="att beat">+1.4%</span></td><td>+104,160</td><td>+29.5%</td></tr>
+          <tr><td class="left">Product Units to Price Units</td><td>90.2%</td><td>90.4%</td><td class="muted-c">+0.2pp</td><td><span class="att flat">+0.2%</span></td><td>+1.7pp</td><td>+1.9%</td></tr>
 
           <tr class="tier-head"><td class="left" colspan="7">Tier 2 · Eligibility</td></tr>
-          <tr><td class="left">Active Leases</td><td>392,414</td><td>377,970</td><td class="muted-c">−14,444</td><td><span class="att miss">96.3%</span></td><td>+1.6%</td><td>+30.7%</td></tr>
-          <tr><td class="left">Active Leases to Product Units</td><td>84.0%</td><td>83.9%</td><td class="muted-c">−0.1pp</td><td><span class="att flat">99.9%</span></td><td>+0.5pp</td><td>−0.4pp</td></tr>
-          <tr><td class="left">Active Lease with MA</td><td>355,701</td><td>344,427</td><td class="muted-c">−11,274</td><td><span class="att miss">96.8%</span></td><td>+1.7%</td><td>+33.6%</td></tr>
-          <tr><td class="left">MA Attach Rate</td><td>91.0%</td><td>91.1%</td><td class="muted-c">+0.1pp</td><td><span class="att beat">100.1%</span></td><td>+0.1pp</td><td>+2.0pp</td></tr>
-          <tr><td class="left">Active Leases with Active Tenant</td><td>280,550</td><td>279,395</td><td class="muted-c">−1,155</td><td><span class="att flat">99.6%</span></td><td>+2.4%</td><td>—</td></tr>
-          <tr><td class="left">Active Tenants Leases Attach Rate</td><td>72.0%</td><td>73.9%</td><td class="muted-c">+1.9pp</td><td><span class="att beat">102.6%</span></td><td>+0.6pp</td><td>—</td></tr>
-          <tr><td class="left">Eligible Leases (active tenant + MA)</td><td>265,897</td><td>271,434</td><td class="muted-c">+5,537</td><td><span class="att beat">102.1%</span></td><td>+2.4%</td><td>—</td></tr>
-          <tr><td class="left">% Eligible from Active Leases</td><td>68.0%</td><td>71.8%</td><td class="muted-c">+3.8pp</td><td><span class="att beat">105.6%</span></td><td>+0.6pp</td><td>—</td></tr>
+          <tr><td class="left">Active Leases (snapshot)</td><td>377,970</td><td>388,032</td><td class="muted-c">+10,062</td><td><span class="att beat">+2.7%</span></td><td>+89,974</td><td>+30.2%</td></tr>
+          <tr><td class="left">Active Leases to Product Units</td><td>83.9%</td><td>85.0%</td><td class="muted-c">+1.1pp</td><td><span class="att beat">+1.3%</span></td><td>+0.4pp</td><td>+0.4%</td></tr>
+          <tr><td class="left">Active Lease with MA</td><td>344,427</td><td>354,893</td><td class="muted-c">+10,466</td><td><span class="att beat">+3.0%</span></td><td>+88,617</td><td>+33.3%</td></tr>
+          <tr><td class="left">MA Attach Rate</td><td>91.1%</td><td>91.5%</td><td class="muted-c">+0.4pp</td><td><span class="att beat">+0.4%</span></td><td>+2.1pp</td><td>+2.4%</td></tr>
+          <tr><td class="left">Active Leases with Active Tenant</td><td>279,395</td><td>286,431</td><td class="muted-c">+7,036</td><td><span class="att beat">+2.5%</span></td><td>—</td><td>—</td></tr>
+          <tr><td class="left">Active Tenants Leases Attach Rate</td><td>73.9%</td><td>73.8%</td><td class="muted-c">−0.1pp</td><td><span class="att flat">−0.1%</span></td><td>—</td><td>—</td></tr>
+          <tr><td class="left">Eligible Leases (active tenant + MA)</td><td>271,434</td><td>278,223</td><td class="muted-c">+6,789</td><td><span class="att beat">+2.5%</span></td><td>—</td><td>—</td></tr>
+          <tr><td class="left">% Eligible from Active Leases</td><td>71.8%</td><td>71.7%</td><td class="muted-c">−0.1pp</td><td><span class="att flat">−0.1%</span></td><td>—</td><td>—</td></tr>
 
           <tr class="tier-head"><td class="left" colspan="7">Tier 3 · Conversion to Paid</td></tr>
-          <tr><td class="left">Paid Leases</td><td>179,949</td><td>181,687</td><td class="muted-c">+1,738</td><td><span class="att beat">101.0%</span></td><td>+4.0%</td><td>+44.2%</td></tr>
-          <tr><td class="left">% Paid from Active Lease</td><td>45.9%</td><td>48.07%</td><td class="muted-c">+2.2pp</td><td><span class="att beat">104.7%</span></td><td>+1.1pp</td><td>+4.5pp</td></tr>
-          <tr><td class="left">% Paid from Eligible</td><td>68.0%</td><td>66.94%</td><td class="muted-c">−1.1pp</td><td><span class="att miss">98.4%</span></td><td>+1.0pp</td><td>—</td></tr>
-          <tr><td class="left">Avg Volume per Paid Lease</td><td>$1,682</td><td>$1,720</td><td class="muted-c">+$38</td><td><span class="att beat">102.3%</span></td><td>+1.0%</td><td>+4.7%</td></tr>
+          <tr><td class="left">Paid Leases</td><td>181,687</td><td>181,927</td><td class="muted-c">+240</td><td><span class="att flat">+0.1%</span></td><td>+53,580</td><td>+41.7%</td></tr>
+          <tr><td class="left">% Paid from Active Lease</td><td>48.07%</td><td>46.89%</td><td class="muted-c">−1.18pp</td><td><span class="att miss">−2.5%</span></td><td>+3.83pp</td><td>+8.9%</td></tr>
+          <tr><td class="left">% Paid from Eligible</td><td>66.94%</td><td>65.40%</td><td class="muted-c">−1.54pp</td><td><span class="att miss">−2.3%</span></td><td>—</td><td>—</td></tr>
+          <tr><td class="left">Avg Volume per Paid Lease</td><td>$1,720</td><td>$1,706</td><td class="muted-c">−$14</td><td><span class="att miss">−0.8%</span></td><td>+$56</td><td>+3.4%</td></tr>
 
           <tr class="tier-head"><td class="left" colspan="7">Tier 4 · Outcome — ARR</td></tr>
-          <tr><td class="left">Total Volume</td><td>$302.59M</td><td>$312.44M</td><td class="muted-c">+$9.85M</td><td><span class="att beat">103.3%</span></td><td>+5.1%</td><td>+50.9%</td></tr>
-          <tr><td class="left">Card Amount</td><td>$55.17M</td><td>$54.66M</td><td class="muted-c">−$510K</td><td><span class="att miss">99.1%</span></td><td>+3.6%</td><td>+45.2%</td></tr>
-          <tr><td class="left">% Card</td><td>18.23%</td><td>17.49%</td><td class="muted-c">−0.74pp</td><td><span class="att miss">96.0%</span></td><td>−0.25pp</td><td>−0.69pp</td></tr>
-          <tr><td class="left">Platform Fee ARR (NSF)</td><td>$1.80M</td><td>$1.82M</td><td class="muted-c">+$20K</td><td><span class="att beat">101.1%</span></td><td>+11.8%</td><td>+91.2%</td></tr>
-          <tr class="is-total"><td class="left">Total Payments ARR</td><td>$15.55M</td><td>$15.49M</td><td class="muted-c">−$61K</td><td><span class="att flat">99.6%</span></td><td>+3.4%</td><td>+43.9%</td></tr>
-          <tr><td class="left">Additional ARR</td><td>$757,686</td><td>$510,618</td><td class="muted-c">−$247K</td><td><span class="att miss">67.4%</span></td><td>recovery</td><td>−5.1%</td></tr>
+          <tr><td class="left">Total Volume</td><td>$312.44M</td><td>$310.39M</td><td class="muted-c">−$2.05M</td><td><span class="att miss">−0.7%</span></td><td>+$98.55M</td><td>+46.5%</td></tr>
+          <tr><td class="left">Card Amount</td><td>$54.66M</td><td>$54.10M</td><td class="muted-c">−$557K</td><td><span class="att miss">−1.0%</span></td><td>+$15.12M</td><td>+38.8%</td></tr>
+          <tr><td class="left">% Card</td><td>17.49%</td><td>17.43%</td><td class="muted-c">−0.06pp</td><td><span class="att flat">−0.3%</span></td><td>−0.97pp</td><td>−5.3%</td></tr>
+          <tr><td class="left">Platform Fee ARR (NSF)</td><td>$1.82M</td><td>$2.04M</td><td class="muted-c">+$226K</td><td><span class="att beat">+12.4%</span></td><td>+$1.02M</td><td>+99.6%</td></tr>
+          <tr class="is-total"><td class="left">Total Payments ARR</td><td>$15.49M</td><td>$15.59M</td><td class="muted-c">+$104K</td><td><span class="att beat">+0.6%</span></td><td>+$4.45M</td><td>+39.9%</td></tr>
+          <tr><td class="left">Additional ARR (MoM step-up)</td><td>$511K</td><td>$100K</td><td class="muted-c">−$411K</td><td><span class="att miss">−80.4%</span></td><td>—</td><td>—</td></tr>
         </tbody>
       </table>
     </details>
@@ -4407,7 +4410,6 @@ const cardByPop = [
   // Jan/Feb/Mar '25 ftCardShare and retCardShare estimated from cardAdoption rates × the
   // adoption→share ratio (FT 0.686, Ret 0.628) measured in Apr '25; absolute card/ach
   // amounts unknown for these months and left at 0 (only affects the tooltip blended calc).
-  { month:'2025-01', ftCard:0, ftAch:0, retCard:0, retAch:0, ftCardShare:30.74, retCardShare:15.95, ftTenants:0, retTenants:0 },
   { month:'2025-02', ftCard:0, ftAch:0, retCard:0, retAch:0, ftCardShare:32.59, retCardShare:16.07, ftTenants:0, retTenants:0 },
   { month:'2025-03', ftCard:0, ftAch:0, retCard:0, retAch:0, ftCardShare:36.08, retCardShare:16.39, ftTenants:0, retTenants:0 },
   { month:'2025-04', ftCard:6.83, ftAch:13.71, retCard:30.73, retAch:153.45, ftCardShare:33.26, retCardShare:16.69, ftTenants:12718, retTenants:115281 },
@@ -4465,7 +4467,6 @@ const cohortDataAll = {
 };
 
 const churnedAccounts = [
-  { month:"Jan 25", accts:  92, arr: 127 },
   { month:"Feb 25", accts: 116, arr: 130 },
   { month:"Mar 25", accts:  70, arr:  97 },
   { month:"Apr 25", accts:  98, arr: 144 },
@@ -4484,7 +4485,6 @@ const churnedAccounts = [
 ];
 
 const cardAdoption = [
-  { month:"Jan 25", ft:44.8, ret:25.4 },
   { month:"Feb 25", ft:47.5, ret:25.6 },
   { month:"Mar 25", ft:52.6, ret:26.1 },
   { month:"Apr 25", ft:48.5, ret:26.6 },
@@ -4516,7 +4516,6 @@ const w45Data = [
 ];
 
 const nsfData = [
-  { month:"Jan '25", arr:0.93, txns:null, pct:null, partial:false },
   { month:"Feb '25", arr:0.87, txns:null, pct:null, partial:false },
   { month:"Mar '25", arr:0.81, txns:2848, pct:2.78, partial:false },
   { month:"Apr '25", arr:0.95, txns:3241, pct:2.97, partial:false },
@@ -4942,7 +4941,6 @@ new Chart(document.getElementById('chart-waterfall'), {
 // Jan-Apr '25 hardcoded from canonical Snowflake query (stripe_payments by payments_month).
 // May '25 onward computed from cardByPop $ values above.
 const _preMay25 = [
-  { month: '2025-01', pct: 17.63 },
   { month: '2025-02', pct: 17.89 },
   { month: '2025-03', pct: 18.62 },
   { month: '2025-04', pct: 18.39 }
