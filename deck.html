@@ -1298,7 +1298,7 @@
     </div>
 
     <div style="margin-top: -10px; margin-bottom: 18px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px; font-style: italic">
-      May ARR vs plan, card volume vs plan, and Net New Price Units vs plan refresh after full-month settlement (next cycle close, ~Jun 25). ARR shown below is preliminary, derived from May paid-lease count × April $/lease run-rate.
+      May actuals via canonical Snowflake refresh (2026-05-27). Plan-side comparisons (May plan ARR / card volume / Net New Price Units) refresh after full-month settlement next cycle (~Jun 25). Detail bars and table below show May actuals with April-final and YoY context.
     </div>
 
     <!-- ARR trend folded in from former slide 04 — Feb peak → Mar dip → Apr recovery -->
@@ -4371,29 +4371,27 @@ const fmtMonthShort = (m) => {
 };
 
 // ---------- Data ----------
-// ARR ($M) is real Total Payments ARR from the canonical query
-// ((arr_pmt_rev + app_fee_rev) × 12 from STRIPE_CONNECT). Source dates Mar '25 → Apr '26.
-// Pre-Mar '25 months have no `arr` set (line will start at Mar '25).
+// ARR ($M) = real Total Payments ARR from canonical Snowflake query
+// ((arr_pmt_rev + app_fee_rev) × 12 from STRIPE_CONNECT). Refreshed via snow CLI 2026-05-27.
+// active/paid from paid_leases_trend; arr from STRIPE_CONNECT.
+// Window: Feb '25 → May '26 (Jan '25 dropped per user request).
 const trend = [
-  {month:'2025-01', active:307230, paid:135825, pct:44.21, arr:  9.11},
-  {month:'2025-02', active:312870, paid:139725, pct:44.66, arr:  9.82},
-  {month:'2025-03', active:316200, paid:138355, pct:43.76, arr: 10.23},
-  {month:'2025-04', active:317800, paid:138498, pct:43.58, arr: 10.76},
-  {month:'2025-05', active:319500, paid:138290, pct:43.28, arr: 11.14},
-  {month:'2025-06', active:320600, paid:139600, pct:43.54, arr: 11.67},
-  {month:'2025-07', active:321870, paid:140100, pct:43.53, arr: 12.07},
-  {month:'2025-08', active:323035, paid:141610, pct:43.84, arr: 12.23},
-  {month:'2025-09', active:328116, paid:146347, pct:44.60, arr: 12.93},
-  {month:'2025-10', active:338093, paid:151517, pct:44.82, arr: 13.09},
-  {month:'2025-11', active:344019, paid:155940, pct:45.33, arr: 13.50},
-  {month:'2025-12', active:351276, paid:158904, pct:45.24, arr: 13.71},
-  {month:'2026-01', active:357225, paid:165152, pct:46.23, arr: 14.28},
+  {month:'2025-02', active:270328, paid:115429, pct:42.70, arr:  9.82},
+  {month:'2025-03', active:280653, paid:119867, pct:42.71, arr: 10.23},
+  {month:'2025-04', active:289184, paid:126027, pct:43.58, arr: 10.76},
+  {month:'2025-05', active:298058, paid:128347, pct:43.06, arr: 11.14},
+  {month:'2025-06', active:307890, paid:132901, pct:43.16, arr: 11.67},
+  {month:'2025-07', active:315845, paid:137920, pct:43.67, arr: 12.07},
+  {month:'2025-08', active:323035, paid:141612, pct:43.84, arr: 12.23},
+  {month:'2025-09', active:328116, paid:146349, pct:44.60, arr: 12.93},
+  {month:'2025-10', active:338093, paid:151518, pct:44.82, arr: 13.09},
+  {month:'2025-11', active:344019, paid:155941, pct:45.33, arr: 13.50},
+  {month:'2025-12', active:351276, paid:158905, pct:45.24, arr: 13.71},
+  {month:'2026-01', active:357225, paid:165153, pct:46.23, arr: 14.28},
   {month:'2026-02', active:363773, paid:172728, pct:47.48, arr: 15.49},
   {month:'2026-03', active:372121, paid:174676, pct:46.94, arr: 14.98},
   {month:'2026-04', active:378053, paid:181687, pct:48.06, arr: 15.49},
-  // May ARR preliminary — derived from May paid leases × April $/lease run-rate ($85.27).
-  // Replace with actual finance number when the May ARR refresh lands (~Jun 25).
-  {month:'2026-05', active:388114, paid:181939, pct:46.88, arr: 15.50}
+  {month:'2026-05', active:388114, paid:181939, pct:46.88, arr: 15.59}
 ];
 const arrSeries = trend.map(t => t.arr ?? null);
 // Real 2026 plan targets (provided). Pre-2026 months are null — plan line only renders Jan '26 onward.
