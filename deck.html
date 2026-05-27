@@ -1270,11 +1270,12 @@
         <div class="chapter-name">Planned vs Actual</div>
       </div>
     </div>
-    <h2 class="section-title">Plan vs Actual · <em style="color:var(--muted); font-size: 0.6em; letter-spacing: 1px; text-transform: uppercase">Last fully-settled month: April 2026</em></h2>
+    <h2 class="section-title">Plan vs Actual · <em style="color:var(--muted); font-size: 0.6em; letter-spacing: 1px; text-transform: uppercase">April final + May to-date</em></h2>
 
-    <div class="plan-strip" style="margin-top: 18px; margin-bottom: 28px">
+    <!-- April final vs Plan -->
+    <div class="plan-strip" style="margin-top: 18px; margin-bottom: 14px">
       <div class="ps-head">
-        <h3>Top-of-funnel miss, conversion beat, card-mix the only unrecovered drag — ARR on plan.</h3>
+        <h3>April final · top-of-funnel miss, conversion beat, card-mix the only unrecovered drag — ARR on plan.</h3>
       </div>
       <div class="plan-cell">
         <div class="pl-label">Net New Price Units</div>
@@ -1294,6 +1295,35 @@
         <div class="pl-vs">Plan $15.55M</div>
         <span class="pl-gap">−$61K · 99.6%</span>
       </div>
+    </div>
+
+    <!-- May to-date snapshot (no plan comparison yet — May plan/ARR/card refresh next cycle) -->
+    <div class="plan-strip" style="margin-bottom: 28px; background: rgba(49,133,252,0.06); border-left: 3px solid #3185FC">
+      <div class="ps-head">
+        <h3 style="color: #1e3a8a">May to-date · denominator outran numerator, PM-side hit a record.</h3>
+      </div>
+      <div class="plan-cell">
+        <div class="pl-label">May Paid Leases</div>
+        <div class="pl-actual">181.9K</div>
+        <div class="pl-vs">vs Apr 181.7K · +252</div>
+        <span class="pl-gap" style="color:#dc2626">active +10K · denominator outran</span>
+      </div>
+      <div class="plan-cell">
+        <div class="pl-label">May Paid %</div>
+        <div class="pl-actual">46.88%</div>
+        <div class="pl-vs">vs Apr 48.06%</div>
+        <span class="pl-gap" style="color:#dc2626">−1.18pp MoM · +3.82pp YoY</span>
+      </div>
+      <div class="plan-cell">
+        <div class="pl-label">May Invite-at-Active · Mature</div>
+        <div class="pl-actual">74.07%</div>
+        <div class="pl-vs">vs Apr 59.44%</div>
+        <span class="pl-gap" style="color:#059669">+14.6pp MoM · new record</span>
+      </div>
+    </div>
+
+    <div style="margin-top: -10px; margin-bottom: 18px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px; font-style: italic">
+      May ARR vs plan, card volume vs plan, and Net New Price Units vs plan refresh after full-month settlement (next cycle close, ~Jun 25).
     </div>
 
     <!-- ARR trend folded in from former slide 04 — Feb peak → Mar dip → Apr recovery -->
@@ -1649,7 +1679,7 @@
 
     <!-- FT volume by month — overall only (cross-ref slide 7 first_time) -->
     <div class="chart-shell" style="margin-top: 14px">
-      <div class="ch-title">First-time paid leases by month <span style="font-weight: 500; color: var(--muted); font-size: 11.5px">· overall · Sep '25 → Apr '26</span></div>
+      <div class="ch-title">First-time paid leases by month <span style="font-weight: 500; color: var(--muted); font-size: 11.5px">· overall · Sep '25 → May '26</span></div>
       <div class="chart-wrap" style="height: 260px"><canvas id="chart-slide5-ft-volume"></canvas></div>
     </div>
 
@@ -1660,6 +1690,8 @@
 (function() {
   // New active leases per cohort + eligible split, by view (All / Mature / Onboarding)
   // Source: /tmp/new_lease_eligibility.sql
+  // Apr '26 and earlier use kpi_dashboard (re-tenant-excluded + MA + monthly-or-shorter filter).
+  // May '26 uses new_lease_eligibility CSV (no re-tenant exclusion yet — see footnote on slide).
   const eligByView = {
     Mature: [
       { month: "Sep '25", total:  9115, eligible: 5633 },
@@ -1670,6 +1702,7 @@
       { month: "Feb '26", total: 13461, eligible: 9012 },
       { month: "Mar '26", total: 14598, eligible: 9347 },
       { month: "Apr '26", total: 15273, eligible: 9657 },
+      { month: "May '26", total: 18570, eligible: 10137 },
     ],
     Onboarding: [
       { month: "Sep '25", total:  6191, eligible: 1159 },
@@ -1680,6 +1713,7 @@
       { month: "Feb '26", total:  8734, eligible: 3193 },
       { month: "Mar '26", total:  7564, eligible: 2113 },
       { month: "Apr '26", total:  8534, eligible: 2577 },
+      { month: "May '26", total:  7056, eligible:  1148 },
     ],
     All: [
       { month: "Sep '25", total: 15306, eligible:  6792 },
@@ -1690,10 +1724,11 @@
       { month: "Feb '26", total: 22195, eligible: 12205 },
       { month: "Mar '26", total: 22162, eligible: 11460 },
       { month: "Apr '26", total: 23807, eligible: 12234 },
+      { month: "May '26", total: 25626, eligible: 11285 },
     ],
   };
   // Per-view bar max so the bars scale visibly (Mature & Onboarding have smaller totals than All)
-  const viewMax = { Mature: 18, Onboarding: 14, All: 28 };
+  const viewMax = { Mature: 21, Onboarding: 14, All: 30 };
 
   const PINK = '#ff4998', BLUE = '#3185FC';
   let eligChart = null;
@@ -1847,7 +1882,8 @@
     { m: "Jan '26", v: 14698 },
     { m: "Feb '26", v: 14434 },
     { m: "Mar '26", v: 14114 },
-    { m: "Apr '26", v: 15116 }
+    { m: "Apr '26", v: 15116 },
+    { m: "May '26", v: 14356 }
   ];
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof Chart === 'undefined') return;
@@ -2027,7 +2063,7 @@
 
       <div id="cohort-heatmap"></div>
       <div style="margin-top: 8px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px; font-style: italic">
-        Heatmap cohort definition excludes re-tenants (~9% of cohort each month) and shows leases first-active per payments-month. May '26 cohort completes next cycle — see the narrative cards above for May figures from the canonical paid-leases CSV.
+        Sep '25 – Apr '26 cohorts use the canonical re-tenant-excluded definition (~9% of each cohort filtered out). <strong style="color: var(--text); font-style: normal">May '26* row uses the broader `paid_leases_cohort_heatmap` CSV definition</strong> (no re-tenant exclusion) since the canonical kpi_dashboard query requires the +45d retention look-forward and completes next cycle. Comparable Apr '26 from the same CSV definition: All 27,061 / 25.2% M0 · Mature 17,317 / 27.6% M0 · Onboarding 9,744 / 5.0% M0.
       </div>
     </div>
 
@@ -2146,13 +2182,43 @@
 
     <div style="margin-top: 28px">
       <h2 class="section-title">
-        <span style="color: #dc2626">April card share landed at 17.49%</span> · First-time tenants are the line that's moving. <em style="color: var(--muted); font-size: 0.6em; letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 6px">Last fully-settled month: April 2026 · May card data refreshes next cycle</em>
+        <span style="color: #dc2626">April card share landed at 17.49%</span> · First-time tenants are the line that's moving.
       </h2>
     </div>
 
+    <!-- May to-date status panel (FT-side data available, overall card-share lags) -->
+    <div style="margin-top: 14px; padding: 16px 20px; background: rgba(49,133,252,0.06); border-left: 3px solid #3185FC; border-radius: 8px; font-size: 13px; line-height: 1.6; color: var(--text)">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 8px">May 2026 · Status</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 10px">
+        <div>
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Mature&nbsp;(13+)</div>
+          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">33.4%</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">3,681 card / 4,157 ACH · 7,838 FT</div>
+        </div>
+        <div>
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Developed&nbsp;(7–12)</div>
+          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">31.3%</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">822 card / 961 ACH · 1,783 FT</div>
+        </div>
+        <div>
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Growth&nbsp;(3–6)</div>
+          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">28.0%</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">1,134 card / 1,498 ACH · 2,632 FT</div>
+        </div>
+        <div>
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Onboarding&nbsp;(0–2)</div>
+          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">24.8%</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">780 card / 1,330 ACH · 2,110 FT</div>
+        </div>
+      </div>
+      <div style="font-size: 11px; color: var(--muted); line-height: 1.5; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.06)">
+        <strong style="color: var(--text)">May FT-side card share is now visible by account age</strong> — Mature 33.4% holds the highest card adoption, Onboarding (0–2 months) lowest at 24.8%. <strong style="color: var(--text)">Overall card volume share</strong> (including returning tenants and full-month settlement) refreshes next cycle close, ~Jun 25. The April-final 17.49% number below is the most recent overall reading.
+      </div>
+    </div>
+
     <!-- Overall card-share trend (12 months) -->
-    <div class="chart-shell" style="margin-top: 12px">
-      <div class="ch-title">Overall card volume share <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Apr '25 → Apr '26</span></div>
+    <div class="chart-shell" style="margin-top: 16px">
+      <div class="ch-title">Overall card volume share <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Apr '25 → Apr '26 · May refreshes ~Jun 25</span></div>
       <div class="chart-wrap" style="height: 200px"><canvas id="chart-card-share-trend"></canvas></div>
     </div>
 
@@ -2618,11 +2684,21 @@
       </div>
     </div>
 
-    <h2 class="section-title">NSF rebounded with ACH. <span style="color: var(--muted); font-size: 0.55em; letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 6px">Last fully-settled month: April 2026</span></h2>
+    <h2 class="section-title">NSF rebounded with ACH.</h2>
+
+    <!-- May to-date status panel (NSF data lags by one cycle) -->
+    <div style="margin-top: 14px; padding: 16px 20px; background: rgba(49,133,252,0.06); border-left: 3px solid #3185FC; border-radius: 8px; font-size: 13px; line-height: 1.6; color: var(--text)">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 8px">May 2026 · Watch</div>
+      <div style="font-size: 13px; color: var(--text); line-height: 1.65">
+        <strong style="color: var(--text)">May ACH volume and NSF data refresh after full-month settlement (~Jun 25).</strong> Two May signals to watch when the data lands:
+        (1) <strong>May churned leases hit 20,998 — series high</strong> (+19% vs Apr); historically churn and NSF rate correlate, so NSF rate may tick up from April's 3.20%.
+        (2) <strong>Mature acquisition wave grew +7.2% MoM (18.6K new active)</strong>; ACH volume should track up proportionally, holding NSF $ ARR on its upward path.
+      </div>
+    </div>
 
     <!-- Headline summary card -->
     <div style="margin-top: 14px; padding: 14px 18px; background: linear-gradient(135deg, rgba(14,116,144,0.08) 0%, rgba(49,133,252,0.06) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; line-height: 1.6; color: var(--text)">
-      NSF ARR <strong style="color: #0e7490">$1.82M ATH</strong> (+91% YoY) tracks ACH growth. The <strong>% NSF rate is stable</strong> inside its 12-month band.
+      <strong style="color: #0e7490">April final:</strong> NSF ARR <strong style="color: #0e7490">$1.82M ATH</strong> (+91% YoY) tracks ACH growth. The <strong>% NSF rate is stable</strong> inside its 12-month band.
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
@@ -4386,7 +4462,8 @@ const cohortDataAll = {
     { cohort: "Jan '26", size: 20097, pct: [24.6, 43.2, 45.1, 45.2, null, null, null, null], counts: [4947, 8687, 9060, 9080, null, null, null, null] },
     { cohort: "Feb '26", size: 22348, pct: [24.5, 42.6, 48.0, null, null, null, null, null], counts: [5486, 9525, 10733, null, null, null, null, null] },
     { cohort: "Mar '26", size: 22350, pct: [22.4, 40.4, null, null, null, null, null, null], counts: [5008, 9027, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 23908, pct: [25.2, null, null, null, null, null, null, null], counts: [6018, null, null, null, null, null, null, null] }
+    { cohort: "Apr '26", size: 23908, pct: [25.2, null, null, null, null, null, null, null], counts: [6018, null, null, null, null, null, null, null] },
+    { cohort: "May '26*", size: 25626, pct: [20.4, null, null, null, null, null, null, null], counts: [5225, null, null, null, null, null, null, null] }
   ],
   Mature: [
     { cohort: "Sep '25", size: 12456, pct: [31.7, 48.9, 51.2, 49.1, 47.6, 46.7, 43.8, 42.2], counts: [3953, 6092, 6372, 6112, 5929, 5819, 5451, 5255] },
@@ -4396,7 +4473,8 @@ const cohortDataAll = {
     { cohort: "Jan '26", size: 12222, pct: [33.4, 49.7, 51.0, 49.8, null, null, null, null], counts: [4088, 6078, 6237, 6086, null, null, null, null] },
     { cohort: "Feb '26", size: 13608, pct: [33.5, 47.1, 50.7, null, null, null, null, null], counts: [4557, 6406, 6904, null, null, null, null, null] },
     { cohort: "Mar '26", size: 14785, pct: [28.5, 45.4, null, null, null, null, null, null], counts: [4215, 6706, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 15374, pct: [32.5, null, null, null, null, null, null, null], counts: [4992, null, null, null, null, null, null, null] }
+    { cohort: "Apr '26", size: 15374, pct: [32.5, null, null, null, null, null, null, null], counts: [4992, null, null, null, null, null, null, null] },
+    { cohort: "May '26*", size: 18570, pct: [26.2, null, null, null, null, null, null, null], counts: [4868, null, null, null, null, null, null, null] }
   ],
   Onboarding: [
     { cohort: "Sep '25", size: 9662,  pct: [7.3, 24.8, 28.3, 28.8, 28.2, 28.0, 26.5, 26.4], counts: [702, 2392, 2739, 2778, 2729, 2701, 2561, 2548] },
@@ -4406,7 +4484,8 @@ const cohortDataAll = {
     { cohort: "Jan '26", size: 7875,  pct: [10.9, 33.1, 35.8, 38.0, null, null, null, null], counts: [859, 2609, 2823, 2994, null, null, null, null] },
     { cohort: "Feb '26", size: 8740,  pct: [10.6, 35.7, 43.8, null, null, null, null, null], counts: [929, 3119, 3829, null, null, null, null, null] },
     { cohort: "Mar '26", size: 7565,  pct: [10.5, 30.7, null, null, null, null, null, null], counts: [793, 2321, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 8534,  pct: [12.0, null, null, null, null, null, null, null], counts: [1026, null, null, null, null, null, null, null] }
+    { cohort: "Apr '26", size: 8534,  pct: [12.0, null, null, null, null, null, null, null], counts: [1026, null, null, null, null, null, null, null] },
+    { cohort: "May '26*", size: 7056, pct: [5.1, null, null, null, null, null, null, null], counts: [357, null, null, null, null, null, null, null] }
   ]
 };
 
