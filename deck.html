@@ -1666,7 +1666,7 @@
       </div>
     </div>
 
-    <h2 class="section-title">The cohort flipped: Mature acquisition <em style="color: var(--green)">hit a 9-mo high</em> · Onboarding <em style="color: var(--warn)">shrank −28% MoM</em>. Per-cohort eligibility held.</h2>
+    <h2 class="section-title">The cohort flipped: Mature acquisition <em style="color: var(--green)">hit a 9-mo high</em> · Onboarding <em style="color: var(--warn)">shrank −28% MoM</em>. Cohort eligibility ticked up to 44.0%.</h2>
 
     <div class="chart-shell" style="margin-top: 14px">
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px">
@@ -1685,24 +1685,26 @@
 
     <!-- May cohort-shift insight card -->
     <div style="margin-top: 14px; padding: 18px 22px; background: rgba(223,254,2,0.22); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 May reshaped the cohort mix — Mature acquisition surged, Onboarding contracted. Eligibility rates per cohort essentially flat.</div>
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 May reshaped the cohort mix — Mature acquisition surged, Onboarding contracted. Cohort eligibility nudged UP to 44.0% (+2.5pp MoM).</div>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px">
         <div style="padding: 12px 14px; background: rgba(5,150,105,0.10); border-left: 3px solid var(--green); border-radius: 4px; font-size: 13px; line-height: 1.5">
           <div style="font-size: 11px; font-weight: 700; color: #047857; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Mature (3+ mo) · Up</div>
           <div><strong>New active 18,570</strong> · +7.2% MoM · highest in 9-month series</div>
-          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Eligibility 54.6% (vs Apr 55.7%, flat); invite-at-activation <strong style="color: var(--text)">74.07% — new record (+14.6pp MoM)</strong></div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Cohort eligibility 54.6% (vs Apr 55.7%, flat); invite-at-activation <strong style="color: var(--text)">74.07% — new record (+14.6pp MoM)</strong></div>
         </div>
         <div style="padding: 12px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 13px; line-height: 1.5">
           <div style="font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Onboarding (0–2 mo) · Down</div>
           <div><strong>New active 7,056</strong> · <strong style="color: var(--warn)">−27.6% MoM</strong> (9.7K → 7.1K)</div>
-          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Eligibility 16.3% (vs Apr 16.4%, flat); invite-at-activation 17.80% (flat MoM)</div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Cohort eligibility 16.3% (vs Apr 16.4%, flat); invite-at-activation 17.80% (flat MoM)</div>
         </div>
       </div>
 
-      <strong>Per-cohort eligibility rates held flat</strong> — Mature ~55%, Onboarding ~16% — so the cohort eligibility story didn't change. <strong>What changed is the mix:</strong> the total new-active cohort shrank slightly (27.1K Apr → 25.6K May, −5.5%) and tilted ~73% Mature / 27% Onboarding (vs ~64/36 Apr). PM-side improvement is concentrated on Mature: the +14.6pp Mature invite-at-activation jump (record) is the cleanest signal of better invite-timing workflow.
+      <strong>Per-cohort eligibility rates held flat</strong> — Mature ~55%, Onboarding ~16%. <strong>The combined cohort eligibility actually ticked UP</strong> from 41.5% (Apr) to 44.0% (May) — purely a mix effect, because the cohort tilted toward the higher-eligibility Mature tier (~73/27 May vs ~64/36 Apr). PM-side improvement is concentrated on Mature: the +14.6pp Mature invite-at-activation jump (record) is the cleanest signal of better invite-timing workflow.
       <br><br>
-      <span style="font-size: 11.5px; color: var(--muted); font-style: italic">Definition note: Sep '25 – Apr '26 cohorts in the chart above use kpi_dashboard (re-tenant-excluded, MA + monthly-or-shorter filter). May '26 uses new_lease_eligibility CSV (broader definition) since kpi_dashboard requires a +45d retention look-forward — comparable May values from the same prior-cycle definition close next cycle.</span>
+      <strong>Reconcile with Slide 4 (71.7% eligibility):</strong> Slide 4 is the <em>stock</em> measure — all 388K active leases at cycle close, of which 71.7% are eligible. This chart is the <em>flow</em> measure — only the ~25K leases first-active during the May cycle, of which 44.0% became eligible by the cycle close (the 24th). Different denominators by design; both pulled from the same eligibility flag definitions (active + active-tenant + MA).
+      <br><br>
+      <span style="font-size: 11.5px; color: var(--muted); font-style: italic">Data note: all months in the chart now sourced from <code style="background:rgba(0,0,0,0.04); padding:1px 4px; border-radius:3px; font-size:10.5px">new_lease_eligibility.sql</code> for consistency (previously Sep '25 – Apr '26 used kpi_dashboard's re-tenant-excluded view, which made May appear like a regression when it was actually a definition shift). Same eligibility flag semantics as Slide 4.</span>
     </div>
 
     <!-- FT volume by month — overall only (cross-ref slide 7 first_time) -->
@@ -1718,40 +1720,43 @@
 (function() {
   // New active leases per cohort + eligible split, by view (All / Mature / Onboarding)
   // Source: /tmp/new_lease_eligibility.sql
-  // Apr '26 and earlier use kpi_dashboard (re-tenant-excluded + MA + monthly-or-shorter filter).
-  // May '26 uses new_lease_eligibility CSV (no re-tenant exclusion yet — see footnote on slide).
+  // All months sourced from new_lease_eligibility.csv (DWH_PROD.STG.STG_LEASE_DAILY)
+  // for consistency — previously Sep '25–Apr '26 used kpi_dashboard (re-tenant
+  // excluded + MA-only filter), which made May appear like a regression when it
+  // was actually a definition change. Same SQL/source as Slide 4's eligibility
+  // (different scope: this is cohort/flow, Slide 4 is stock).
   const eligByView = {
     Mature: [
-      { month: "Sep '25", total:  9115, eligible: 5633 },
-      { month: "Oct '25", total: 12191, eligible: 7466 },
-      { month: "Nov '25", total: 12345, eligible: 7815 },
-      { month: "Dec '25", total: 11183, eligible: 7020 },
-      { month: "Jan '26", total: 12137, eligible: 8084 },
-      { month: "Feb '26", total: 13461, eligible: 9012 },
-      { month: "Mar '26", total: 14598, eligible: 9347 },
-      { month: "Apr '26", total: 15273, eligible: 9657 },
+      { month: "Sep '25", total: 12759, eligible: 7671 },
+      { month: "Oct '25", total: 12522, eligible: 7036 },
+      { month: "Nov '25", total: 13391, eligible: 7825 },
+      { month: "Dec '25", total: 12018, eligible: 6831 },
+      { month: "Jan '26", total: 12944, eligible: 7969 },
+      { month: "Feb '26", total: 16044, eligible: 9776 },
+      { month: "Mar '26", total: 15837, eligible: 9283 },
+      { month: "Apr '26", total: 17317, eligible: 9639 },
       { month: "May '26", total: 18570, eligible: 10137 },
     ],
     Onboarding: [
-      { month: "Sep '25", total:  6191, eligible: 1159 },
-      { month: "Oct '25", total: 10725, eligible: 2902 },
-      { month: "Nov '25", total: 10106, eligible: 1629 },
-      { month: "Dec '25", total:  9724, eligible: 1720 },
-      { month: "Jan '26", total:  7752, eligible: 2052 },
-      { month: "Feb '26", total:  8734, eligible: 3193 },
-      { month: "Mar '26", total:  7564, eligible: 2113 },
-      { month: "Apr '26", total:  8534, eligible: 2577 },
-      { month: "May '26", total:  7056, eligible:  1148 },
+      { month: "Sep '25", total:  9309, eligible: 1858 },
+      { month: "Oct '25", total:  9863, eligible: 2693 },
+      { month: "Nov '25", total: 10313, eligible: 1622 },
+      { month: "Dec '25", total: 11902, eligible: 1750 },
+      { month: "Jan '26", total:  8768, eligible: 1771 },
+      { month: "Feb '26", total: 10769, eligible: 3002 },
+      { month: "Mar '26", total: 11197, eligible: 1602 },
+      { month: "Apr '26", total:  9744, eligible: 1594 },
+      { month: "May '26", total:  7056, eligible: 1148 },
     ],
     All: [
-      { month: "Sep '25", total: 15306, eligible:  6792 },
-      { month: "Oct '25", total: 22916, eligible: 10368 },
-      { month: "Nov '25", total: 22451, eligible:  9444 },
-      { month: "Dec '25", total: 20907, eligible:  8740 },
-      { month: "Jan '26", total: 19889, eligible: 10136 },
-      { month: "Feb '26", total: 22195, eligible: 12205 },
-      { month: "Mar '26", total: 22162, eligible: 11460 },
-      { month: "Apr '26", total: 23807, eligible: 12234 },
+      { month: "Sep '25", total: 22068, eligible:  9529 },
+      { month: "Oct '25", total: 22385, eligible:  9729 },
+      { month: "Nov '25", total: 23704, eligible:  9447 },
+      { month: "Dec '25", total: 23920, eligible:  8581 },
+      { month: "Jan '26", total: 21712, eligible:  9740 },
+      { month: "Feb '26", total: 26813, eligible: 12778 },
+      { month: "Mar '26", total: 27034, eligible: 10885 },
+      { month: "Apr '26", total: 27061, eligible: 11233 },
       { month: "May '26", total: 25626, eligible: 11285 },
     ],
   };
