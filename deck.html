@@ -1666,7 +1666,7 @@
       </div>
     </div>
 
-    <h2 class="section-title">Eligibility lift is intact — but Mature M0 conversion softened in May.</h2>
+    <h2 class="section-title">The cohort flipped: Mature acquisition <em style="color: var(--green)">hit a 9-mo high</em> · Onboarding <em style="color: var(--warn)">shrank −28% MoM</em>. Per-cohort eligibility held.</h2>
 
     <div class="chart-shell" style="margin-top: 14px">
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px">
@@ -1683,10 +1683,26 @@
       <div class="chart-wrap" style="height: 520px"><canvas id="chart-new-eligibility"></canvas></div>
     </div>
 
-    <!-- Verified-insight card -->
+    <!-- May cohort-shift insight card -->
     <div style="margin-top: 14px; padding: 18px 22px; background: rgba(223,254,2,0.22); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 Onboarding accounts drove ~85% of the eligibility lift — by sending more invites, not by better acceptance.</div>
-      Of the +7 pp cohort-level eligibility lift (44.4% → 51.4%, Sep '25 → Apr '26), <strong>Onboarding accounts climbed +11.5 pp (18.7% → 30.2%)</strong> while Mature accounts moved just <strong>+1.4 pp (61.8% → 63.2%)</strong>. The mechanism is invite <em>volume</em>, not invite <em>quality</em>: through Mar '26, Onboarding's invite-at-activation rate had already lifted <strong>+13 pp</strong> while Mature was essentially flat (<strong>+1 pp</strong>). <strong>Registration-from-invite rate is steady for both cohorts.</strong>
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 May reshaped the cohort mix — Mature acquisition surged, Onboarding contracted. Eligibility rates per cohort essentially flat.</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px">
+        <div style="padding: 12px 14px; background: rgba(5,150,105,0.10); border-left: 3px solid var(--green); border-radius: 4px; font-size: 13px; line-height: 1.5">
+          <div style="font-size: 11px; font-weight: 700; color: #047857; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Mature (3+ mo) · Up</div>
+          <div><strong>New active 18,570</strong> · +7.2% MoM · highest in 9-month series</div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Eligibility 54.6% (vs Apr 55.7%, flat); invite-at-activation <strong style="color: var(--text)">74.07% — new record (+14.6pp MoM)</strong></div>
+        </div>
+        <div style="padding: 12px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 13px; line-height: 1.5">
+          <div style="font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Onboarding (0–2 mo) · Down</div>
+          <div><strong>New active 7,056</strong> · <strong style="color: var(--warn)">−27.6% MoM</strong> (9.7K → 7.1K)</div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Eligibility 16.3% (vs Apr 16.4%, flat); invite-at-activation 17.80% (flat MoM)</div>
+        </div>
+      </div>
+
+      <strong>Per-cohort eligibility rates held flat</strong> — Mature ~55%, Onboarding ~16% — so the cohort eligibility story didn't change. <strong>What changed is the mix:</strong> the total new-active cohort shrank slightly (27.1K Apr → 25.6K May, −5.5%) and tilted ~73% Mature / 27% Onboarding (vs ~64/36 Apr). PM-side improvement is concentrated on Mature: the +14.6pp Mature invite-at-activation jump (record) is the cleanest signal of better invite-timing workflow.
+      <br><br>
+      <span style="font-size: 11.5px; color: var(--muted); font-style: italic">Definition note: Sep '25 – Apr '26 cohorts in the chart above use kpi_dashboard (re-tenant-excluded, MA + monthly-or-shorter filter). May '26 uses new_lease_eligibility CSV (broader definition) since kpi_dashboard requires a +45d retention look-forward — comparable May values from the same prior-cycle definition close next cycle.</span>
     </div>
 
     <!-- FT volume by month — overall only (cross-ref slide 7 first_time) -->
