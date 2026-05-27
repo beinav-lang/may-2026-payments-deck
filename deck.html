@@ -1270,37 +1270,12 @@
         <div class="chapter-name">Planned vs Actual</div>
       </div>
     </div>
-    <h2 class="section-title">Plan vs Actual · <em style="color:var(--muted); font-size: 0.6em; letter-spacing: 1px; text-transform: uppercase">April final + May to-date</em></h2>
+    <h2 class="section-title">Plan vs Actual · <em style="color:var(--muted); font-size: 0.6em; letter-spacing: 1px; text-transform: uppercase">May to-date</em></h2>
 
-    <!-- April final vs Plan -->
-    <div class="plan-strip" style="margin-top: 18px; margin-bottom: 14px">
+    <!-- May to-date strip -->
+    <div class="plan-strip" style="margin-top: 18px; margin-bottom: 28px">
       <div class="ps-head">
-        <h3>April final · top-of-funnel miss, conversion beat, card-mix the only unrecovered drag — ARR on plan.</h3>
-      </div>
-      <div class="plan-cell">
-        <div class="pl-label">Net New Price Units</div>
-        <div class="pl-actual">3,242</div>
-        <div class="pl-vs">Plan 13,628</div>
-        <span class="pl-gap">−10,386 · 24% of plan</span>
-      </div>
-      <div class="plan-cell">
-        <div class="pl-label">April Card Volume</div>
-        <div class="pl-actual">$54.66M</div>
-        <div class="pl-vs">Plan $55.17M</div>
-        <span class="pl-gap">−$510K · 99.1%</span>
-      </div>
-      <div class="plan-cell">
-        <div class="pl-label">April ARR</div>
-        <div class="pl-actual">$15.49M</div>
-        <div class="pl-vs">Plan $15.55M</div>
-        <span class="pl-gap">−$61K · 99.6%</span>
-      </div>
-    </div>
-
-    <!-- May to-date snapshot (no plan comparison yet — May plan/ARR/card refresh next cycle) -->
-    <div class="plan-strip" style="margin-bottom: 28px; background: rgba(49,133,252,0.06); border-left: 3px solid #3185FC">
-      <div class="ps-head">
-        <h3 style="color: #1e3a8a">May to-date · denominator outran numerator, PM-side hit a record.</h3>
+        <h3>May to-date · paid % regressed, denominator outran numerator, PM-side hit a record.</h3>
       </div>
       <div class="plan-cell">
         <div class="pl-label">May Paid Leases</div>
@@ -1323,7 +1298,7 @@
     </div>
 
     <div style="margin-top: -10px; margin-bottom: 18px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px; font-style: italic">
-      May ARR vs plan, card volume vs plan, and Net New Price Units vs plan refresh after full-month settlement (next cycle close, ~Jun 25).
+      May ARR vs plan, card volume vs plan, and Net New Price Units vs plan refresh after full-month settlement (next cycle close, ~Jun 25). ARR shown below is preliminary, derived from May paid-lease count × April $/lease run-rate.
     </div>
 
     <!-- ARR trend folded in from former slide 04 — Feb peak → Mar dip → Apr recovery -->
@@ -4416,7 +4391,9 @@ const trend = [
   {month:'2026-02', active:363773, paid:172728, pct:47.48, arr: 15.49},
   {month:'2026-03', active:372121, paid:174676, pct:46.94, arr: 14.98},
   {month:'2026-04', active:378053, paid:181687, pct:48.06, arr: 15.49},
-  {month:'2026-05', active:388114, paid:181939, pct:46.88, arr: null}
+  // May ARR preliminary — derived from May paid leases × April $/lease run-rate ($85.27).
+  // Replace with actual finance number when the May ARR refresh lands (~Jun 25).
+  {month:'2026-05', active:388114, paid:181939, pct:46.88, arr: 15.50}
 ];
 const arrSeries = trend.map(t => t.arr ?? null);
 // Real 2026 plan targets (provided). Pre-2026 months are null — plan line only renders Jan '26 onward.
