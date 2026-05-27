@@ -1,0 +1,37 @@
+MONTH,ACCOUNT_PAID_SEGMENT,TENANTS,DBTENANTS
+2025-01-01,Account first-time paid this month,2874,369
+2025-01-01,Existing account (paid before),9563,2608
+2025-02-01,Account first-time paid this month,1745,359
+2025-02-01,Existing account (paid before),9528,2836
+2025-03-01,Account first-time paid this month,1789,290
+2025-03-01,Existing account (paid before),9931,2977
+2025-04-01,Account first-time paid this month,1601,308
+2025-04-01,Existing account (paid before),11117,3117
+2025-05-01,Account first-time paid this month,1444,274
+2025-05-01,Existing account (paid before),10336,3203
+2025-06-01,Account first-time paid this month,2059,308
+2025-06-01,Existing account (paid before),11088,3313
+2025-07-01,Account first-time paid this month,1821,278
+2025-07-01,Existing account (paid before),11954,3363
+2025-08-01,Account first-time paid this month,1640,297
+2025-08-01,Existing account (paid before),12257,3446
+2025-09-01,Account first-time paid this month,1665,259
+2025-09-01,Existing account (paid before),11741,3478
+2025-10-01,Account first-time paid this month,2143,282
+2025-10-01,Existing account (paid before),10743,3424
+2025-11-01,Account first-time paid this month,1777,254
+2025-11-01,Existing account (paid before),11525,3432
+2025-12-01,Account first-time paid this month,1280,234
+2025-12-01,Existing account (paid before),9661,3341
+2026-01-01,Account first-time paid this month,3263,345
+2026-01-01,Existing account (paid before),11406,3388
+2026-02-01,Account first-time paid this month,2039,321
+2026-02-01,Existing account (paid before),12481,3774
+2026-03-01,Account first-time paid this month,1389,260
+2026-03-01,Existing account (paid before),12644,3641
+2026-04-01,Account first-time paid this month,1578,271
+2026-04-01,Existing account (paid before),13676,3853
+2026-05-01,Account first-time paid this month,1625,248
+2026-05-01,Existing account (paid before),12744,3885
+2026-06-01,Account first-time paid this month,16,14
+2026-06-01,Existing account (paid before),686,513
