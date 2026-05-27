@@ -1625,7 +1625,7 @@
           <div class="chapter-name">Active Leases Overview</div>
         </div>
       </div>
-      <h2 class="section-title">46.88% paid · <em>−1.18pp MoM</em> — the denominator outran the numerator.</h2>
+      <h2 class="section-title">46.88% paid · <em>−1.18pp MoM</em>, but <em style="color: var(--green)">+1.07pp vs plan</em> — eligibility holds at 71.7%, conversion-from-eligible the soft spot.</h2>
     </div>
 
     <div class="chart-shell">
@@ -1643,8 +1643,12 @@
 
     <!-- Insight card -->
     <div style="margin-top:14px; padding:18px 22px; background:rgba(223,254,2,0.22); border-left:5px solid #162050; border-radius:8px; font-size:14px; color:var(--text); line-height:1.65">
-      <div style="font-size:15.5px; font-weight:800; color:#162050; margin-bottom:10px; line-height:1.4">💡 The 13-month story is eligibility expansion — but May's MoM step-back is on the paid-of-active denominator.</div>
-      Active leases climbed <strong>+34.2% over the past 13 months</strong> (Apr '25 → May '26, 289K → 388K), and headline payment penetration rose <strong>+3.30 pp to 46.88%</strong> (Apr '25 43.58% → May '26 46.88%). Through Apr '26 the lift was almost entirely an <em>eligibility</em> story — share of active meeting the bar to transact expanded to <strong>71.8% (+4.2 pp since Aug '25)</strong> while <strong>paid-of-eligible was essentially flat at 65–67%</strong>. <strong>May's MoM regression (−1.18pp)</strong> sits on the paid-of-active denominator: active grew +2.7% and paid grew only +0.14%. Paid-of-eligible for May closes next cycle.
+      <div style="font-size:15.5px; font-weight:800; color:#162050; margin-bottom:10px; line-height:1.4">💡 Eligibility plateau holds at ~71.7% — May beat the eligibility plan by +4.0pp. The pp regression is on % Paid / Eligible.</div>
+      <strong>Eligibility (active w/ active-tenant + MA):</strong> 278.2K leases · <strong style="color: var(--green)">71.70% of active, +4.0pp vs plan (67.7%)</strong>, essentially flat MoM (71.80% Apr → 71.70% May). The funnel mouth widened on schedule — eligibility leases came in at <strong style="color: var(--green)">100.8% of plan</strong> despite Active Leases at 95.2% of plan.
+      <br><br>
+      <strong>% Paid / Eligible (conversion-from-eligible):</strong> 65.40% · <strong style="color: var(--warn)">−1.54pp MoM</strong> (Apr 66.94%) and <strong style="color: var(--warn)">−2.3pp vs plan</strong> (67.66%). This is the soft spot — it had been creeping up Aug '25–Feb '26 (64.88% → 66.74%) but reversed Mar–May. With the eligibility base bigger, more eligible leases are sitting unpaid in their first cycle.
+      <br><br>
+      <strong>% Paid / Active (headline):</strong> 46.88% · <strong style="color: var(--warn)">−1.18pp MoM</strong>, but <strong style="color: var(--green)">+1.07pp vs plan</strong>. The MoM regression is driven by the denominator effect (+10.1K active, +252 paid). YoY: <strong>+3.82pp</strong> (May '25 43.06%).
     </div>
 
   </div>
@@ -4760,7 +4764,10 @@ const eligByMonth = {
   '2026-01': { eligible: 251155, pctElig: 70.31, pctPaidElig: 65.76 },
   '2026-02': { eligible: 258792, pctElig: 71.14, pctPaidElig: 66.74 },
   '2026-03': { eligible: 265069, pctElig: 71.23, pctPaidElig: 65.90 },
-  '2026-04': { eligible: 271434, pctElig: 71.80, pctPaidElig: 66.94 }
+  '2026-04': { eligible: 271434, pctElig: 71.80, pctPaidElig: 66.94 },
+  // 2026-05 added from Snowflake refresh (2026-05-27):
+  //   eligible 278,223 / active 388,032 (=71.70% elig) · 181,927 paid (=65.40% paid/elig)
+  '2026-05': { eligible: 278223, pctElig: 71.70, pctPaidElig: 65.40 }
 };
 const activeBarData = trendFromMar25.map(t => t.active / 1000); // K
 const pctPaidActive = trendFromMar25.map(t => t.pct);
