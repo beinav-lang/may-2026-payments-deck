@@ -1652,14 +1652,24 @@
       <span style="color:#7c3aed"><strong>Paid</strong> = ≥1 successful payment in the cycle.</span>
     </div>
 
-    <!-- Insight card -->
+    <!-- Seasonality insight card -->
     <div style="margin-top:14px; padding:18px 22px; background:rgba(223,254,2,0.22); border-left:5px solid #162050; border-radius:8px; font-size:14px; color:var(--text); line-height:1.65">
-      <div style="font-size:15.5px; font-weight:800; color:#162050; margin-bottom:10px; line-height:1.4">💡 Eligibility plateau holds at ~71.7% — May beat the eligibility plan by +4.0pp. The pp regression is on % Paid / Eligible.</div>
-      <strong>Eligibility (active w/ active-tenant + MA):</strong> 278.2K leases · <strong style="color: var(--green)">71.70% of active, +4.0pp vs plan (67.7%)</strong>, essentially flat MoM (71.80% Apr → 71.70% May). The funnel mouth widened on schedule — eligibility leases came in at <strong style="color: var(--green)">100.8% of plan</strong> despite Active Leases at 95.2% of plan.
-      <br><br>
-      <strong>% Paid / Eligible (conversion-from-eligible):</strong> 65.40% · <strong style="color: var(--warn)">−1.54pp MoM</strong> (Apr 66.94%) and <strong style="color: var(--warn)">−2.3pp vs plan</strong> (67.66%). This is the soft spot — it had been creeping up Aug '25–Feb '26 (64.88% → 66.74%) but reversed Mar–May. With the eligibility base bigger, more eligible leases are sitting unpaid in their first cycle.
-      <br><br>
-      <strong>% Paid / Active (headline):</strong> 46.88% · <strong style="color: var(--warn)">−1.18pp MoM</strong>, but <strong style="color: var(--green)">+1.07pp vs plan</strong>. The MoM regression is driven by the denominator effect (+10.1K active, +252 paid). YoY: <strong>+3.82pp</strong> (May '25 43.06%).
+      <div style="font-size:15.5px; font-weight:800; color:#162050; margin-bottom:10px; line-height:1.4">💡 Apr→May reversion is a recurring pattern — May 2025 showed the same shape.</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px">
+        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #94a3b8; border-radius: 6px; font-size: 12.5px; line-height: 1.55">
+          <div style="font-size: 11px; font-weight: 700; color: #475569; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">May 2025 (last year)</div>
+          <div>Mar 42.71% → Apr 43.58% (+0.87pp) → <strong style="color: var(--warn)">May 43.06% (−0.52pp)</strong></div>
+          <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Same shape: Apr peak, May reverts. Paid count grew +2,320 MoM (vs +6,160 in Mar→Apr) — slowdown.</div>
+        </div>
+        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #162050; border-radius: 6px; font-size: 12.5px; line-height: 1.55">
+          <div style="font-size: 11px; font-weight: 700; color: #162050; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">May 2026 (this year)</div>
+          <div>Mar 46.94% → Apr 48.06% (+1.12pp) → <strong style="color: var(--warn)">May 46.88% (−1.18pp)</strong></div>
+          <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Same shape, sharper. Paid count grew +252 (vs +7,011 Mar→Apr) — much steeper drop than 2025.</div>
+        </div>
+      </div>
+
+      <p style="margin: 0"><strong>The seasonality:</strong> April reliably runs above trend (tax-season effect, calendar-unwind boost), then May reverts. <strong>2026's reversion is sharper than 2025's</strong> (paid Δ slowed 96% Mar→Apr vs Apr→May, vs 62% slowdown in 2025) — driven by the structural items on slide 5: one-PM cancellation event, tenant-churn baseline drift, NSF rate uptick. The shape is seasonal; the magnitude is real.</p>
     </div>
 
   </div>
@@ -4262,6 +4272,7 @@ const fmtMonthShort = (m) => {
 // active/paid from paid_leases_trend; arr from STRIPE_CONNECT.
 // Window: Feb '25 → May '26 (Jan '25 dropped per user request).
 const trend = [
+  {month:'2025-01', active:259661, paid:110517, pct:42.56, arr: null},
   {month:'2025-02', active:270328, paid:115429, pct:42.70, arr:  9.82},
   {month:'2025-03', active:280653, paid:119867, pct:42.71, arr: 10.23},
   {month:'2025-04', active:289184, paid:126027, pct:43.58, arr: 10.76},
@@ -4279,7 +4290,9 @@ const trend = [
   {month:'2026-04', active:378053, paid:181687, pct:48.06, arr: 15.49},
   {month:'2026-05', active:388114, paid:181939, pct:46.88, arr: 15.59}
 ];
-const arrSeries = trend.map(t => t.arr ?? null);
+// Slide 3 ARR chart skips Jan '25 (no ARR data — only paid/active for slide 4)
+const trendForArr = trend.slice(1);
+const arrSeries = trendForArr.map(t => t.arr ?? null);
 // Real 2026 plan targets (provided). Pre-2026 months are null — plan line only renders Jan '26 onward.
 const arrPlanByMonth = {
   '2026-01': 14.03,
@@ -4288,7 +4301,7 @@ const arrPlanByMonth = {
   '2026-04': 15.55,
   '2026-05': 16.24
 };
-const arrPlan = trend.map(t => arrPlanByMonth[t.month] ?? null);
+const arrPlan = trendForArr.map(t => arrPlanByMonth[t.month] ?? null);
 
 const cardByPop = [
   // Jan/Feb/Mar '25 ftCardShare and retCardShare estimated from cardAdoption rates × the
@@ -4478,7 +4491,7 @@ const monthLabels = arr => arr.map(x => fmtMonth(x.month || x));
 new Chart(document.getElementById('chart-arr'), {
   type: 'line',
   data: {
-    labels: monthLabels(trend),
+    labels: monthLabels(trendForArr),
     datasets: [
       { label: 'ARR', data: arrSeries, borderColor: C.blue,
         backgroundColor: 'rgba(37,99,235,0.06)', borderWidth: 2.5, fill: true,
@@ -4608,7 +4621,8 @@ new Chart(document.getElementById('chart-breakdown'), {
 //   eligible = leases_daily_snapshot status=ACTIVE + active_tenant_flag=1 + merchant_account_flag=1
 //   paid = COUNT(DISTINCT lease_id) WHERE payments_month = cycle
 // Eligible data is only populated Aug '25 onward (table started mid-2025).
-const trendFromMar25 = trend.slice(2);
+// Slide 4 uses the full trend (Jan '25 onwards) — variable kept for backward compat
+const trendFromMar25 = trend;
 const eligByMonth = {
   '2025-08': { eligible: 218267, pctElig: 67.57, pctPaidElig: 64.88 },
   '2025-09': { eligible: 223905, pctElig: 68.24, pctPaidElig: 65.36 },
