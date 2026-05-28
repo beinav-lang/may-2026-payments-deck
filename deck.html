@@ -1677,51 +1677,68 @@
       </div>
     </div>
 
-    <h2 class="section-title">The cohort flipped: Mature acquisition <em style="color: var(--green)">hit a 9-mo high</em> · Onboarding <em style="color: var(--warn)">shrank −28% MoM</em>. Cohort eligibility ticked up to 44.0%.</h2>
+    <h2 class="section-title">Onboarding cohorts ramp eligibility +25-30pp by M2 — but never catch Mature; both plateau then slowly decay.</h2>
 
     <div class="chart-shell" style="margin-top: 14px">
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px">
-        <div class="ch-title" style="margin: 0">New active leases · per activation cohort · <span style="font-weight:500; color:var(--muted); font-size:11.5px">Onboarding (0–2 mo on platform)</span></div>
+        <div class="ch-title" style="margin: 0">New active leases · per activation cohort · M0 eligibility split</div>
         <div class="cohort-toggle" id="elig-view-toggle" style="margin: 0">
-          <button data-elig-view="All" onclick="setEligView('All')">All</button>
+          <button class="active" data-elig-view="All" onclick="setEligView('All')">All</button>
           <button data-elig-view="Mature" onclick="setEligView('Mature')">Mature (3+ mo)</button>
-          <button class="active" data-elig-view="Onboarding" onclick="setEligView('Onboarding')">Onboarding (0–2 mo)</button>
+          <button data-elig-view="Onboarding" onclick="setEligView('Onboarding')">Onboarding (0–2 mo)</button>
         </div>
       </div>
-      <div style="font-size: 11px; color: var(--muted); margin: -2px 0 8px; line-height: 1.5">
-        Cohort = leases first-active in the payments-month (cycle 25th → 24th). <strong style="color: var(--text)">Eligibility measured at cycle close (the 24th)</strong> — i.e., lease is <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">status='ACTIVE' AND active_tenant_flag=1 AND merchant_account_flag=1</code> on the 24th of its activation month. Lookback window varies by activation day (max ~30 days, min ~1 day).
-      </div>
-      <div class="chart-wrap" style="height: 520px"><canvas id="chart-new-eligibility"></canvas></div>
+      <div class="chart-wrap" style="height: 320px"><canvas id="chart-new-eligibility"></canvas></div>
     </div>
 
-    <!-- May cohort-shift insight card -->
+    <!-- Eligibility cohort heatmap · M0 → M7 lifecycle -->
+    <div class="chart-shell" style="margin-top: 16px">
+      <div class="cohort-meta">
+        <div class="ch-title" id="elig-cohort-title" style="margin-bottom:0">% Eligible by cohort · M0 → M7 · All accounts</div>
+      </div>
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin: 10px 0 12px; flex-wrap:wrap">
+        <div>
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:6px">Account type</div>
+          <div class="cohort-toggle" id="elig-cohort-toggle" style="margin-left:0">
+            <button class="active" data-elig-coh-view="All" onclick="setEligCohView('All')">All</button>
+            <button data-elig-coh-view="Mature" onclick="setEligCohView('Mature')">Mature (3+ mo)</button>
+            <button data-elig-coh-view="Onboarding" onclick="setEligCohView('Onboarding')">Onboarding (0–2 mo)</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); margin-bottom:6px; text-align:right">Value</div>
+          <div class="cohort-toggle" id="elig-cohort-mode-toggle" style="margin-left:0">
+            <button class="active" data-elig-coh-mode="pct" onclick="setEligCohMode('pct')">%</button>
+            <button data-elig-coh-mode="count" onclick="setEligCohMode('count')"># Leases</button>
+          </div>
+        </div>
+      </div>
+      <div id="elig-cohort-heatmap"></div>
+      <div style="margin-top: 8px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px; font-style: italic">
+        Cohort = leases first-active in payments-month (cycle 25→24). Eligibility checked on the 24th of cohort_month + M_offset cycle. Lease = status='ACTIVE' + portal-active tenant ≥1 + PM has Merchant Account enabled. Same flag definition as Slide 4 (stock measure). Cells where target month falls in Jun '26 (partial cycle) shown as empty.
+      </div>
+    </div>
+
+    <!-- Insight card · acquisition + ramp + gap finding -->
     <div style="margin-top: 14px; padding: 18px 22px; background: rgba(223,254,2,0.22); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 May reshaped the cohort mix — Mature acquisition surged, Onboarding contracted. Cohort eligibility nudged UP to 44.0% (+2.5pp MoM).</div>
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 12px; line-height: 1.4">💡 May cohort flipped Mature-heavy + the heatmap reveals a permanent eligibility gap between Mature and Onboarding.</div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px">
-        <div style="padding: 12px 14px; background: rgba(5,150,105,0.10); border-left: 3px solid var(--green); border-radius: 4px; font-size: 13px; line-height: 1.5">
-          <div style="font-size: 11px; font-weight: 700; color: #047857; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Mature (3+ mo) · Up</div>
-          <div><strong>New active 18,570</strong> · +7.2% MoM · highest in 9-month series</div>
-          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Cohort eligibility 54.6% (vs Apr 55.7%, flat); invite-at-activation <strong style="color: var(--text)">74.07% — new record (+14.6pp MoM)</strong></div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px">
+        <div style="padding: 12px 14px; background: rgba(5,150,105,0.10); border-left: 3px solid var(--green); border-radius: 4px; font-size: 13px; line-height: 1.55">
+          <div style="font-size: 11px; font-weight: 700; color: #047857; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Mature (3+ mo) · acquisition Up</div>
+          <div><strong>New active 18,570 in May</strong> · +7.2% MoM · 9-mo high</div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">M0 elig ~55-62% · ramps to <strong style="color: var(--text)">~63-68% peak at M1</strong> · then slowly declines to ~56-60% by M7</div>
         </div>
-        <div style="padding: 12px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 13px; line-height: 1.5">
-          <div style="font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Onboarding (0–2 mo) · Down</div>
-          <div><strong>New active 7,056</strong> · <strong style="color: var(--warn)">−27.6% MoM</strong> (9.7K → 7.1K)</div>
-          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">Cohort eligibility 16.3% (vs Apr 16.4%, flat); invite-at-activation 17.80% (flat MoM)</div>
+        <div style="padding: 12px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 13px; line-height: 1.55">
+          <div style="font-size: 11px; font-weight: 700; color: #b45309; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px">Onboarding (0–2 mo) · acquisition Down</div>
+          <div><strong>New active 7,056 in May</strong> · <strong style="color: var(--warn)">−27.6% MoM</strong> (9.7K → 7.1K)</div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 3px">M0 elig ~15-28% · ramps to <strong style="color: var(--text)">~42-55% peak at M2-M3</strong> · plateau ~10pp BELOW Mature, then decays</div>
         </div>
       </div>
 
-      <strong>Per-cohort eligibility rates held flat</strong> — Mature ~55%, Onboarding ~16%. <strong>The combined cohort eligibility actually ticked UP</strong> from 41.5% (Apr) to 44.0% (May) — purely a mix effect, because the cohort tilted toward the higher-eligibility Mature tier (~73/27 May vs ~64/36 Apr). PM-side improvement is concentrated on Mature: the +14.6pp Mature invite-at-activation jump (record) is the cleanest signal of better invite-timing workflow.
-      <br><br>
-      <strong>Reconcile with Slide 4 (71.7% eligibility):</strong> Slide 4 is the <em>stock</em> measure — all 388K active leases at cycle close, of which 71.7% are eligible. This chart is the <em>flow</em> measure — only the ~25K leases first-active during the May cycle, of which 44.0% became eligible by the cycle close (the 24th). Different denominators by design; both pulled from the same eligibility flag definitions (active + active-tenant + MA).
-      <br><br>
-      <span style="font-size: 11.5px; color: var(--muted); font-style: italic">Data note: all months in the chart now sourced from <code style="background:rgba(0,0,0,0.04); padding:1px 4px; border-radius:3px; font-size:10.5px">new_lease_eligibility.sql</code> for consistency (previously Sep '25 – Apr '26 used kpi_dashboard's re-tenant-excluded view, which made May appear like a regression when it was actually a definition shift). Same eligibility flag semantics as Slide 4.</span>
-    </div>
-
-    <!-- FT volume by month — overall only (cross-ref slide 7 first_time) -->
-    <div class="chart-shell" style="margin-top: 14px">
-      <div class="ch-title">First-time paid leases by month <span style="font-weight: 500; color: var(--muted); font-size: 11.5px">· overall · Sep '25 → May '26</span></div>
-      <div class="chart-wrap" style="height: 260px"><canvas id="chart-slide5-ft-volume"></canvas></div>
+      <p style="margin: 0"><strong>The heatmap surfaces a structural finding</strong> — Onboarding cohorts ramp eligibility fast (M0→M2: +25-30pp) but <strong>never converge to Mature's level</strong>. Mature plateaus around 65%, Onboarding plateaus around 50% — a permanent ~15pp gap that persists through M7. Both then slowly decay as tenants leave / MA gets disabled / portal access lapses.</p>
+      <p style="margin: 8px 0 0"><strong>For May:</strong> M0 entries are in normal range (Mature 54.6% in series-bottom but inside band 55-62%; Onboarding 16.3% in band 15-28%). The acquisition-mix shift to Mature-heavy is the bigger story than cohort-quality.</p>
+      <p style="margin: 8px 0 0; font-size: 12px; color: var(--muted)"><strong style="color: var(--text)">Reconcile with Slide 4 (71.7% stock eligibility):</strong> Slide 4 is all 388K active leases at one point in time (stock). This chart traces each ~25K-lease cohort over 8 months (flow). Different lenses, same eligibility flag.</p>
     </div>
 
   </div>
@@ -1776,7 +1793,7 @@
 
   const PINK = '#ff4998', BLUE = '#3185FC';
   let eligChart = null;
-  let currentView = 'Onboarding';
+  let currentView = 'All';
 
   function buildChart(view) {
     const data = eligByView[view];
@@ -1915,65 +1932,127 @@
 </script>
 
 <script>
-(function() {
-  // Slide 5 · FT volume by month (overall) - matches slide 7 first_time exactly
-  // Source: /tmp/ft_paths_by_cohort_v2.csv (Mature.total + Onboarding.total per cycle)
-  const ftS5 = [
-    { m: "Sep '25", v: 12884 },
-    { m: "Oct '25", v: 12841 },
-    { m: "Nov '25", v: 13296 },
-    { m: "Dec '25", v: 10868 },
-    { m: "Jan '26", v: 14698 },
-    { m: "Feb '26", v: 14434 },
-    { m: "Mar '26", v: 14114 },
-    { m: "Apr '26", v: 15116 },
-    { m: "May '26", v: 14356 }
-  ];
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Chart === 'undefined') return;
-    const el = document.getElementById('chart-slide5-ft-volume');
-    if (!el) return;
-    const aprIdx = ftS5.length - 1;
-    const janIdx = ftS5.findIndex(d => d.m === "Jan '26");
-    new Chart(el, {
-      type: 'bar',
-      data: {
-        labels: ftS5.map(d => d.m),
-        datasets: [{
-          label: 'First-time paid leases',
-          data: ftS5.map(d => d.v),
-          backgroundColor: ftS5.map((_, i) => i >= janIdx ? '#162050' : 'rgba(22,32,80,0.35)'),
-          borderRadius: 4,
-          datalabels: {
-            display: true,
-            anchor: 'end', align: 'top', offset: 4,
-            color: ctx => ctx.dataIndex >= janIdx ? '#162050' : '#94a3b8',
-            font: ctx => ({ weight: ctx.dataIndex >= janIdx ? 800 : 600, size: 11, family: 'Poppins' }),
-            formatter: v => v.toLocaleString()
-          }
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 22, right: 16, bottom: 4, left: 8 } },
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: c => 'FT: ' + c.parsed.y.toLocaleString() } }
-        },
-        scales: {
-          x: {
-            grid: { display: false },
-            ticks: {
-              font: ctx => ({ size: 11, weight: ctx.index === aprIdx ? 800 : 600, family: 'Poppins' }),
-              color: ctx => ctx.index === aprIdx ? '#162050' : '#64748b'
-            }
-          },
-          y: { display: false, beginAtZero: true }
-        }
-      }
-    });
+// Slide 5 · Eligibility cohort heatmap (% eligible at M0..M7 per activation cohort)
+// Source: /tmp/eligibility_heatmap_v2.sql · Snowflake refresh 2026-05-29
+// Cells where target month > 2026-05 are null (Jun '26 cycle partial — only ~5 days in).
+const eligCohortData = {
+  All: [
+    { cohort: "Sep '25", size: 22068, pct: [43.2, 54.8, 55.9, 55.6, 54.8, 53.5, 52.1, 50.6], counts: [9530, 12085, 12336, 12260, 12091, 11801, 11508, 11162] },
+    { cohort: "Oct '25", size: 22385, pct: [43.5, 56.8, 58.5, 58.8, 57.5, 56.1, 54.5, 52.9], counts: [9730, 12704, 13087, 13166, 12873, 12559, 12195, 11844] },
+    { cohort: "Nov '25", size: 23704, pct: [39.8, 50.2, 55.0, 55.1, 54.0, 52.6, 50.7, null], counts: [9439, 11892, 13037, 13062, 12806, 12459, 12024, null] },
+    { cohort: "Dec '25", size: 23920, pct: [35.9, 52.4, 54.9, 55.1, 53.9, 51.9, null, null], counts: [8576, 12526, 13143, 13178, 12890, 12423, null, null] },
+    { cohort: "Jan '26", size: 21712, pct: [44.9, 57.1, 58.1, 57.1, 55.3, null, null, null], counts: [9745, 12406, 12609, 12406, 12013, null, null, null] },
+    { cohort: "Feb '26", size: 26813, pct: [47.6, 56.4, 61.0, 59.3, null, null, null, null], counts: [12775, 15117, 16345, 15912, null, null, null, null] },
+    { cohort: "Mar '26", size: 27034, pct: [40.3, 51.3, 53.3, null, null, null, null, null], counts: [10882, 13860, 14406, null, null, null, null, null] },
+    { cohort: "Apr '26", size: 27061, pct: [41.5, 53.4, null, null, null, null, null, null], counts: [11244, 14449, null, null, null, null, null, null] },
+    { cohort: "May '26", size: 25626, pct: [44.1, null, null, null, null, null, null, null], counts: [11289, null, null, null, null, null, null, null] }
+  ],
+  Mature: [
+    { cohort: "Sep '25", size: 12759, pct: [60.1, 67.5, 66.7, 65.3, 63.9, 61.7, 59.7, 57.5], counts: [7668, 8612, 8510, 8332, 8153, 7872, 7617, 7336] },
+    { cohort: "Oct '25", size: 12522, pct: [56.2, 63.8, 63.4, 63.0, 60.9, 59.1, 57.3, 55.6], counts: [7037, 7989, 7939, 7889, 7626, 7401, 7175, 6962] },
+    { cohort: "Nov '25", size: 13391, pct: [58.4, 64.7, 64.7, 62.5, 60.9, 59.0, 56.6, null], counts: [7820, 8664, 8664, 8369, 8155, 7901, 7579, null] },
+    { cohort: "Dec '25", size: 12018, pct: [56.8, 65.7, 64.7, 63.9, 61.5, 59.0, null, null], counts: [6826, 7896, 7776, 7680, 7391, 7091, null, null] },
+    { cohort: "Jan '26", size: 12944, pct: [61.6, 67.6, 67.0, 65.5, 62.8, null, null, null], counts: [7974, 8750, 8672, 8478, 8129, null, null, null] },
+    { cohort: "Feb '26", size: 16044, pct: [60.9, 66.3, 66.1, 62.8, null, null, null, null], counts: [9771, 10637, 10605, 10076, null, null, null, null] },
+    { cohort: "Mar '26", size: 15837, pct: [58.6, 64.4, 64.1, null, null, null, null, null], counts: [9280, 10199, 10152, null, null, null, null, null] },
+    { cohort: "Apr '26", size: 17317, pct: [55.7, 62.9, null, null, null, null, null, null], counts: [9646, 10892, null, null, null, null, null, null] },
+    { cohort: "May '26", size: 18570, pct: [54.6, null, null, null, null, null, null, null], counts: [10139, null, null, null, null, null, null, null] }
+  ],
+  Onboarding: [
+    { cohort: "Sep '25", size:  9309, pct: [20.0, 37.3, 41.1, 42.2, 42.3, 42.2, 41.8, 41.1], counts: [1862, 3472, 3826, 3928, 3938, 3928, 3891, 3826] },
+    { cohort: "Oct '25", size:  9863, pct: [27.3, 47.8, 52.2, 53.5, 53.2, 52.3, 50.9, 49.5], counts: [2693, 4715, 5148, 5277, 5247, 5158, 5020, 4882] },
+    { cohort: "Nov '25", size: 10313, pct: [15.7, 31.3, 42.4, 45.5, 45.1, 44.2, 43.1, null], counts: [1619, 3228, 4373, 4692, 4651, 4558, 4445, null] },
+    { cohort: "Dec '25", size: 11902, pct: [14.7, 38.9, 45.1, 46.2, 46.2, 44.8, null, null], counts: [1750, 4630, 5368, 5499, 5499, 5332, null, null] },
+    { cohort: "Jan '26", size:  8768, pct: [20.2, 41.7, 44.9, 44.8, 44.3, null, null, null], counts: [1771, 3656, 3937, 3928, 3884, null, null, null] },
+    { cohort: "Feb '26", size: 10769, pct: [27.9, 41.6, 53.3, 54.2, null, null, null, null], counts: [3005, 4480, 5740, 5837, null, null, null, null] },
+    { cohort: "Mar '26", size: 11197, pct: [14.3, 32.7, 38.0, null, null, null, null, null], counts: [1601, 3661, 4255, null, null, null, null, null] },
+    { cohort: "Apr '26", size:  9744, pct: [16.4, 36.5, null, null, null, null, null, null], counts: [1598, 3557, null, null, null, null, null, null] },
+    { cohort: "May '26", size:  7056, pct: [16.3, null, null, null, null, null, null, null], counts: [1150, null, null, null, null, null, null, null] }
+  ]
+};
+
+let eligCohView = 'All';
+let eligCohMode = 'pct';
+
+function renderEligCohortHeatmap() {
+  const data = eligCohortData[eligCohView];
+  const months = ['M0','M1','M2','M3','M4','M5','M6','M7'];
+  const mode = eligCohMode;
+
+  // Per-column scales for proper relative coloring within each maturity column
+  const colScales = months.map((_, i) => {
+    if (mode === 'pct') {
+      const vals = data.map(c => c.pct[i]).filter(v => v != null);
+      if (!vals.length) return null;
+      return { min: Math.min(...vals), max: Math.max(...vals) };
+    }
+    const vals = data.map(c => c.counts[i]).filter(v => v != null);
+    if (!vals.length) return null;
+    return { min: 0, max: Math.max(...vals) };
   });
-})();
+
+  const normInCol = (v, i) => {
+    const s = colScales[i];
+    if (!s || s.max === s.min) return 0.5;
+    return Math.max(0, Math.min(1, (v - s.min) / (s.max - s.min)));
+  };
+
+  let html = '<table class="heatmap">';
+  html += '<colgroup><col class="col-cohort"><col class="col-size">';
+  months.forEach(() => { html += '<col class="col-month">'; });
+  html += '</colgroup>';
+  html += '<thead><tr>';
+  html += '<th class="left">Cohort</th><th class="right">New Active Leases</th>';
+  months.forEach(m => { html += `<th>${m}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  data.forEach(c => {
+    const isDivider = c.cohort === "Jan '26";
+    html += isDivider
+      ? `<tr style="border-top: 3px solid #162050"><td colspan="10" style="padding: 6px 0 4px; background: rgba(22,32,80,0.04); font-size: 10.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #162050; text-align: left; padding-left: 8px">— Jan '26 onward —</td></tr><tr>`
+      : `<tr>`;
+    html += `<td class="cohort-name">${c.cohort}</td>`;
+    html += `<td class="cohort-size">${c.size.toLocaleString()}</td>`;
+    for (let i = 0; i < 8; i++) {
+      const v = (mode === 'pct') ? c.pct[i] : c.counts[i];
+      if (v == null) { html += `<td class="heat empty">—</td>`; continue; }
+      const t = (mode === 'pct') ? normInCol(v, i) : ((colScales[i] && colScales[i].max) ? v / colScales[i].max : 0);
+      const label = (mode === 'pct') ? v.toFixed(1) + '%' : v.toLocaleString();
+      html += `<td class="heat" style="background:${heatColorByT(t)}; color:${textColorForT(t)};">${label}</td>`;
+    }
+    html += `</tr>`;
+  });
+  html += '</tbody></table>';
+  const container = document.getElementById('elig-cohort-heatmap');
+  if (container) container.innerHTML = html;
+
+  const accLabel = { All: 'All accounts', Mature: 'Mature accounts (3+ months on platform)', Onboarding: 'Onboarding accounts (0–2 months on platform)' }[eligCohView];
+  const valLabel = { pct: '% Eligible', count: '# Eligible' }[mode];
+  const t = document.getElementById('elig-cohort-title');
+  if (t) t.textContent = `${valLabel} by cohort · M0 → M7 · ${accLabel}`;
+}
+
+window.setEligCohView = function(view) {
+  eligCohView = view;
+  document.querySelectorAll('#elig-cohort-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.eligCohView === view);
+  });
+  renderEligCohortHeatmap();
+};
+
+window.setEligCohMode = function(mode) {
+  eligCohMode = mode;
+  document.querySelectorAll('#elig-cohort-mode-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.eligCohMode === mode);
+  });
+  renderEligCohortHeatmap();
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  // heatColorByT/textColorForT are declared later in the file but available via hoisting
+  // (they're function declarations). Render after DOM is parsed.
+  if (typeof heatColorByT === 'function') renderEligCohortHeatmap();
+});
 </script>
 
 <!-- ============================================================ -->
