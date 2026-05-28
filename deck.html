@@ -2251,7 +2251,7 @@
 
     <!-- Overall card-share trend (12 months) -->
     <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">Overall card volume share <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Apr '25 → Apr '26 · May refreshes ~Jun 25</span></div>
+      <div class="ch-title">Overall card volume share <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Feb '25 → May '26</span></div>
       <div class="chart-wrap" style="height: 200px"><canvas id="chart-card-share-trend"></canvas></div>
     </div>
 
@@ -2391,7 +2391,7 @@
           High-rent (≥$1,200) tenants are increasingly choosing ACH at first payment — card adoption inside that bucket drifted from <strong>34.8% → 32.3%</strong> (−2.5 pp Sep '25 → Apr '26), while the &lt;$1,200 sweet spot stayed flat at ~58%. <strong>~35% of the FT card-share drop</strong> traces here, <em>not</em> to mix or PM tail. Next investigation: payment-method funnel UX, Plaid placement, default option logic.
         </div>
         <div style="background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px">
-          <div style="font-size: 10.5px; font-weight: 700; color: var(--muted); letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 2px">FT card adoption by rent bucket <span style="font-weight: 500; text-transform: none; letter-spacing: 0">· Sep '25 → Apr '26</span></div>
+          <div style="font-size: 10.5px; font-weight: 700; color: var(--muted); letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 2px">FT card adoption by rent bucket <span style="font-weight: 500; text-transform: none; letter-spacing: 0">· Sep '25 → Apr '26 (May refreshes next cycle)</span></div>
           <div style="height: 130px"><canvas id="chart-within-bucket"></canvas></div>
         </div>
       </div>
@@ -2737,12 +2737,12 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
       <div class="chart-shell">
         <div class="ch-title">NSF ARR</div>
-        <div class="ch-sub">14-month trend · Mar '25 → Apr '26</div>
+        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
         <div class="chart-wrap" style="height: 320px"><canvas id="chart-nsf-arr"></canvas></div>
       </div>
       <div class="chart-shell">
         <div class="ch-title">NSF transactions &amp; % of ACH</div>
-        <div class="ch-sub">14-month trend · Mar '25 → Apr '26</div>
+        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
         <div class="chart-wrap" style="height: 320px"><canvas id="chart-nsf-txns"></canvas></div>
       </div>
     </div>
@@ -4480,7 +4480,8 @@ const cardByPop = [
   { month:'2026-01', ftCard:7.42, ftAch:16.21, retCard:42.76, retAch:206.42, ftCardShare:31.40, retCardShare:17.16, ftTenants:14669, retTenants:152522 },
   { month:'2026-02', ftCard:7.67, ftAch:17.17, retCard:46.06, retAch:223.67, ftCardShare:30.88, retCardShare:17.08, ftTenants:14520, retTenants:160441 },
   { month:'2026-03', ftCard:7.16, ftAch:16.80, retCard:45.60, retAch:223.19, ftCardShare:29.87, retCardShare:16.97, ftTenants:14033, retTenants:162512 },
-  { month:'2026-04', ftCard:7.67, ftAch:18.61, retCard:46.98, retAch:234.72, ftCardShare:29.19, retCardShare:16.68, ftTenants:15254, retTenants:168631 }
+  { month:'2026-04', ftCard:7.67, ftAch:18.61, retCard:46.98, retAch:234.72, ftCardShare:29.19, retCardShare:16.68, ftTenants:15254, retTenants:168631 },
+  { month:'2026-05', ftCard:7.75, ftAch:17.15, retCard:46.35, retAch:234.52, ftCardShare:31.13, retCardShare:16.50, ftTenants:14433, retTenants:169517 }
 ];
 
 // Lease cohorts (lease_cohort.sql) — % paid leases AND # paid leases at M0..M7 per cohort
@@ -4555,7 +4556,8 @@ const cardAdoption = [
   { month:"Jan 26", ft:44.8, ret:27.4 },
   { month:"Feb 26", ft:44.9, ret:27.2 },
   { month:"Mar 26", ft:43.7, ret:27.1 },
-  { month:"Apr 26", ft:42.7, ret:26.9 }
+  { month:"Apr 26", ft:42.7, ret:26.9 },
+  { month:"May 26", ft:45.0, ret:27.0 }
 ];
 
 // Why 45 days — distribution of paying leases by days-to-first-payment bucket.
@@ -4586,7 +4588,8 @@ const nsfData = [
   { month:"Jan '26", arr:1.66, txns:5122, pct:3.61, partial:false },
   { month:"Feb '26", arr:1.78, txns:5236, pct:3.43, partial:false },
   { month:"Mar '26", arr:1.63, txns:4614, pct:3.09, partial:false },
-  { month:"Apr '26", arr:1.82, txns:5072, pct:3.20, partial:false }
+  { month:"Apr '26", arr:1.82, txns:5072, pct:3.20, partial:false },
+  { month:"May '26", arr:2.04, txns:5723, pct:3.69, partial:false }
 ];
 
 const breakdown = [
