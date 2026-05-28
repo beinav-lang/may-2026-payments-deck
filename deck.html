@@ -2145,6 +2145,36 @@
 
     <h2 class="section-title">What's underneath · MoM flow + churn watch.</h2>
 
+    <!-- May paid-lease summary card -->
+    <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px">What happened to paid leases in May</div>
+      <div style="font-size: 15px; line-height: 1.65; margin-bottom: 14px">
+        May paid leases landed at <strong>181.9K (+252 net MoM)</strong> — essentially flat despite real gains, because churn at <strong style="background: rgba(220,38,38,0.15); color: #b91c1c; padding: 1px 8px; border-radius: 4px; font-weight: 800">−21,000</strong> (highest in series) offset the inflow. <strong>Numerator barely moved · denominator grew +10K</strong> → paid % dropped 1.18pp.
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px">
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ First-time paid</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--blue); margin-top: 2px">+14,356</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">vs Apr 15,116 · −5%</div>
+        </div>
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ Reactivated</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--green); margin-top: 2px">+6,930</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">vs Apr 9,548 · −27%</div>
+        </div>
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Existing (retained)</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--purple); margin-top: 2px">160,689</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">paid Apr + May · steady base</div>
+        </div>
+        <div style="padding: 10px 12px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.25); border-left: 4px solid #dc2626; border-radius: 6px">
+          <div style="font-size: 10px; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 800">− Churned</div>
+          <div style="font-size: 20px; font-weight: 800; color: #b91c1c; margin-top: 2px">−20,998</div>
+          <div style="font-size: 10.5px; color: #b91c1c; margin-top: 2px; font-weight: 700">vs Apr −17,653 · highest in series</div>
+        </div>
+      </div>
+    </div>
+
     <div class="chart-shell" data-chart-breakdown-shell style="margin-top: 14px">
       <div class="ch-title">Paid Leases breakdown</div>
       <div class="chart-wrap" style="height:560px"><canvas id="chart-breakdown"></canvas></div>
@@ -2160,8 +2190,8 @@
 
     <!-- Churn breakdown by cause · monthly stacked -->
     <div style="margin-top: 16px; padding: 18px 22px; background: rgba(223,254,2,0.18); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 4px; line-height: 1.4">💡 Churn breakdown by cause · Sep '25 → May '26 — what drove May's increase</div>
-      <div style="font-size: 12px; color: var(--muted); margin-bottom: 14px">May +3.4K vs Apr · <strong style="color:#b45309">churn_tenant +2.5K (the partial-cycle artifact bucket)</strong> · <strong style="color:#1e3a8a">lease_end +0.4K (proportional to base growth)</strong> · <strong style="color:#b91c1c">db_tenant +0.4K (small but +227% YoY)</strong></div>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px">Insight · what drove the May increase</div>
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 Churn breakdown by cause · Sep '25 → May '26</div>
 
       <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11.5px; margin-bottom: 8px">
         <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active · ~49% historical late-pay rate</span></div>
@@ -2169,50 +2199,8 @@
         <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop · ~4% late-pay (real churn)</span></div>
       </div>
 
-      <div class="chart-wrap" style="height: 340px"><canvas id="chart-churn-breakdown"></canvas></div>
-
-      <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(22,32,80,0.10); font-size: 12px; color: var(--muted); line-height: 1.6">
-        <strong style="color: var(--text)">Read:</strong> May's +3.4K MoM increase is <strong>~75% from `churn_tenant`</strong> — the bucket that historically half-reclassifies as late-pay after the next cycle closes. The two real-churn buckets (lease_end + db_tenant = 7,846 in May) grew ~13% MoM combined — consistent with the +2.7% base growth + the elevating PM-cancel signal.
-        <br><strong style="color: var(--text)">Watch:</strong> <strong>db_tenant churn (PM cancellations) at +227% YoY</strong> + the parallel <strong>NSF rate uptick (3.20% → 3.69%)</strong> — both point at credit quality / PM retention, not headline tenant behavior.
-      </div>
+      <div class="chart-wrap" style="height: 360px"><canvas id="chart-churn-breakdown"></canvas></div>
     </div>
-
-    <details class="pva2-details" open>
-      <summary>May lease-flow decomposition · Apr → May (headline, before late-pay correction)</summary>
-
-      <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-top:16px">
-        <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid var(--purple); border-radius:8px">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Existing paid (retained)</div>
-          <div style="font-size:22px; font-weight:800; color:var(--purple)">+3,666</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">160.7K paid Apr+May (vs 157.0K Apr base) · steady-base growth</div>
-        </div>
-        <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid var(--green); border-radius:8px">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Reactivated</div>
-          <div style="font-size:22px; font-weight:800; color:var(--green)">−2,618</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">6.9K (vs 9.5K Apr) · <strong>April's calendar tailwind reversed</strong></div>
-        </div>
-        <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:8px">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">First-time paid</div>
-          <div style="font-size:22px; font-weight:800; color:var(--blue)">−760</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">14.4K (vs 15.1K Apr) · still well above 12-month baseline</div>
-        </div>
-        <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid var(--warn); border-radius:8px">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Churned · partial-cycle</div>
-          <div style="font-size:22px; font-weight:800; color:var(--warn)">+3,345</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">21.0K headline · <strong style="color:var(--text)">≈14.2K after late-pay correction</strong> (see panel above)</div>
-        </div>
-        <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid #162050; border-radius:8px">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Active denominator</div>
-          <div style="font-size:22px; font-weight:800; color:#162050">+10,061</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">388.1K (vs 378.1K Apr, +2.66%) · denominator dilution drives the pp drop</div>
-        </div>
-      </div>
-
-      <div class="chart-shell" style="margin-top: 18px">
-        <div class="ch-title">Paid-leases flow bridge · Apr 48.06% → May 46.88%</div>
-        <div class="chart-wrap h300"><canvas id="chart-waterfall"></canvas></div>
-      </div>
-    </details>
 
   </div>
 </section>
@@ -4955,54 +4943,6 @@ new Chart(document.getElementById('chart-pct-paid'), {
   })
 });
 
-// 4. Waterfall (May pp drivers · Apr 48.06% → May 46.88%)
-//   Denominator dilution = 48.06 − (paid_apr / active_may) = 48.06 − (181687/388114) = -1.25pp
-//   Numerator gain      = (paid_may - paid_apr) / active_may × 100 = +252/388114 = +0.07pp
-//   Net = -1.18pp
-const wfApr = 48.06;
-const wfMay = 46.88;
-const wfDenomDrag = -1.25;
-const wfNumGain   = +0.07;
-new Chart(document.getElementById('chart-waterfall'), {
-  type: 'bar',
-  data: {
-    labels: ['Apr baseline', 'Denominator dilution', 'Numerator gain', 'May actual'],
-    datasets: [
-      // base offsets so each bar sits at the right height
-      { label: 'base',
-        data: [0, wfApr + wfDenomDrag, wfApr + wfDenomDrag, 0],
-        backgroundColor: 'rgba(0,0,0,0)', stack: 'wf', borderWidth: 0 },
-      { label: 'pp',
-        data: [wfApr, -wfDenomDrag, wfNumGain, wfMay],
-        stack: 'wf',
-        backgroundColor: ['#94a3b8', 'rgba(220,38,38,0.78)', 'rgba(5,150,105,0.78)', 'rgba(124,58,237,0.85)'],
-        borderRadius: 4, borderSkipped: false, borderWidth: 0,
-        datalabels: {
-          display: true, anchor: 'end', align: 'top', offset: 4,
-          color: ctx => ctx.dataIndex === 3 ? '#dc2626' : (ctx.dataIndex === 0 ? '#1e293b' : '#475569'),
-          font: ctx => ({
-            weight: ctx.dataIndex === 3 ? 800 : (ctx.dataIndex === 0 ? 800 : 600),
-            size: ctx.dataIndex === 3 ? 13 : (ctx.dataIndex === 0 ? 12 : 10)
-          }),
-          formatter: (v, ctx) => {
-            if (ctx.dataIndex === 0) return wfApr.toFixed(2) + '%';
-            if (ctx.dataIndex === 3) return wfMay.toFixed(2) + '%';
-            if (ctx.dataIndex === 1) return wfDenomDrag.toFixed(2) + 'pp';
-            return '+' + wfNumGain.toFixed(2) + 'pp';
-          }
-        }
-      }
-    ]
-  },
-  options: baseOpts({
-    plugins: { legend: { display: false }, tooltip: { enabled: false } },
-    scales: {
-      x: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 } } },
-      y: { stacked: true, ticks: { callback: v => v + '%' }, suggestedMin: 46, suggestedMax: 49, display: false }
-    }
-  })
-});
-
 // 4a. Churn breakdown by cause · monthly stacked bars · Sep '25 → May '26
 // Source: ad-hoc Snowflake (Mature + Onboarding combined) — see /tmp/churn_decomp.sql
 const churnBreakdown = [
@@ -5018,34 +4958,47 @@ const churnBreakdown = [
 ];
 if (document.getElementById('chart-churn-breakdown')) {
   const cbLastIdx = churnBreakdown.length - 1;
+  // Order matters in Chart.js stacked bars — first dataset is at the BOTTOM of the stack.
+  // db_tenant on bottom (smallest), lease_end middle, tenant on top.
   new Chart(document.getElementById('chart-churn-breakdown'), {
     type: 'bar',
     data: {
       labels: churnBreakdown.map(d => d.month),
       datasets: [
-        { label: 'churn_tenant',    data: churnBreakdown.map(d => d.tenant),
-          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(245,158,11,0.95)' : 'rgba(245,158,11,0.70)'),
-          stack: 'churn', borderRadius: 0, borderSkipped: false, borderWidth: 0 },
-        { label: 'churn_lease_end', data: churnBreakdown.map(d => d.lease_end),
-          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(49,133,252,0.95)' : 'rgba(49,133,252,0.70)'),
-          stack: 'churn', borderRadius: 0, borderSkipped: false, borderWidth: 0 },
         { label: 'churn_db_tenant', data: churnBreakdown.map(d => d.db_tenant),
           backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(220,38,38,0.95)' : 'rgba(220,38,38,0.70)'),
+          stack: 'churn', borderRadius: 0, borderSkipped: false, borderWidth: 0,
+          datalabels: {
+            display: true, anchor: 'center', align: 'center',
+            color: '#fff',
+            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 10 }),
+            formatter: v => v.toLocaleString()
+          }
+        },
+        { label: 'churn_lease_end', data: churnBreakdown.map(d => d.lease_end),
+          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(49,133,252,0.95)' : 'rgba(49,133,252,0.70)'),
+          stack: 'churn', borderRadius: 0, borderSkipped: false, borderWidth: 0,
+          datalabels: {
+            display: true, anchor: 'center', align: 'center',
+            color: '#fff',
+            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11 }),
+            formatter: v => v.toLocaleString()
+          }
+        },
+        { label: 'churn_tenant', data: churnBreakdown.map(d => d.tenant),
+          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(245,158,11,0.95)' : 'rgba(245,158,11,0.75)'),
           stack: 'churn', borderRadius: 3, borderSkipped: false, borderWidth: 0,
           datalabels: {
-            display: true, anchor: 'end', align: 'top', offset: 4,
-            color: ctx => ctx.dataIndex === cbLastIdx ? '#dc2626' : '#1e293b',
-            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: ctx.dataIndex === cbLastIdx ? 13 : 11 }),
-            formatter: (_, ctx) => {
-              const d = churnBreakdown[ctx.dataIndex];
-              return (d.tenant + d.lease_end + d.db_tenant).toLocaleString();
-            }
+            display: true, anchor: 'center', align: 'center',
+            color: '#1e293b',
+            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11.5 }),
+            formatter: v => v.toLocaleString()
           }
         }
       ]
     },
     options: baseOpts({
-      layout: { padding: { top: 28, right: 16, bottom: 4, left: 8 } },
+      layout: { padding: { top: 30, right: 16, bottom: 4, left: 8 } },
       plugins: {
         legend: { display: false },
         tooltip: {
