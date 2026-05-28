@@ -2106,9 +2106,6 @@
       </div>
 
       <div id="cohort-heatmap"></div>
-      <div style="margin-top: 8px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px; font-style: italic">
-        Sep '25 – Apr '26 cohorts use the canonical re-tenant-excluded definition (~9% of each cohort filtered out). <strong style="color: var(--text); font-style: normal">May '26* row uses the broader `paid_leases_cohort_heatmap` CSV definition</strong> (no re-tenant exclusion) since the canonical kpi_dashboard query requires the +45d retention look-forward and completes next cycle. Comparable Apr '26 from the same CSV definition: All 27,061 / 25.2% M0 · Mature 17,317 / 27.6% M0 · Onboarding 9,744 / 5.0% M0.
-      </div>
     </div>
 
     <!-- Two stacked context cards: upper-funnel watch + Jan conversion step-up -->
@@ -4488,39 +4485,41 @@ const cardByPop = [
 // Lease cohorts (lease_cohort.sql) — % paid leases AND # paid leases at M0..M7 per cohort
 // Cohort = leases that became active in the payments-month (Sep '25 → Apr '26)
 // Three account-type views: All | Mature (3+ mo) | Onboarding (0–2 mo)
+// All cohorts sourced from paid_leases_cohort_heatmap.csv (broader definition,
+// no re-tenant exclusion) — consistent across all months.
 const cohortDataAll = {
   All: [
-    { cohort: "Sep '25", size: 22118, pct: [21.0, 38.4, 41.2, 40.2, 39.1, 38.5, 36.2, 35.3], counts: [4655, 8484, 9111, 8890, 8658, 8520, 8012, 7803] },
-    { cohort: "Oct '25", size: 23356, pct: [19.9, 40.1, 42.0, 42.3, 41.7, 39.1, 37.8, null], counts: [4647, 9355, 9809, 9885, 9747, 9131, 8824, null] },
-    { cohort: "Nov '25", size: 22640, pct: [19.9, 33.5, 39.3, 40.2, 38.7, 37.5, null, null], counts: [4497, 7575, 8899, 9090, 8759, 8485, null, null] },
-    { cohort: "Dec '25", size: 20991, pct: [18.0, 38.3, 44.1, 42.9, 41.4, null, null, null], counts: [3775, 8039, 9252, 9013, 8697, null, null, null] },
-    { cohort: "Jan '26", size: 20097, pct: [24.6, 43.2, 45.1, 45.2, null, null, null, null], counts: [4947, 8687, 9060, 9080, null, null, null, null] },
-    { cohort: "Feb '26", size: 22348, pct: [24.5, 42.6, 48.0, null, null, null, null, null], counts: [5486, 9525, 10733, null, null, null, null, null] },
-    { cohort: "Mar '26", size: 22350, pct: [22.4, 40.4, null, null, null, null, null, null], counts: [5008, 9027, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 23908, pct: [25.2, null, null, null, null, null, null, null], counts: [6018, null, null, null, null, null, null, null] },
-    { cohort: "May '26*", size: 25626, pct: [20.4, null, null, null, null, null, null, null], counts: [5225, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size: 22068, pct: [16.66, 34.77, 38.44, 37.82, 37.45, 37.30, 35.34, 34.42], counts: [3677, 7673, 8482, 8346, 8265, 8231, 7800, 7595] },
+    { cohort: "Oct '25", size: 22385, pct: [18.04, 37.31, 39.69, 41.03, 40.63, 38.54, 37.54, 35.59], counts: [4039, 8351, 8884, 9183, 9094, 8627, 8404, 7966] },
+    { cohort: "Nov '25", size: 23704, pct: [17.53, 30.45, 37.03, 38.42, 37.28, 36.09, 33.95, 1.54], counts: [4155, 7217, 8779, 9106, 8838, 8556, 8047, 364] },
+    { cohort: "Dec '25", size: 23920, pct: [14.09, 32.34, 37.86, 37.57, 36.82, 34.53, 1.65, null], counts: [3369, 7736, 9057, 8987, 8808, 8259, 395, null] },
+    { cohort: "Jan '26", size: 21712, pct: [19.78, 36.08, 38.68, 39.43, 36.77, 1.66, null, null], counts: [4295, 7833, 8397, 8561, 7984, 361, null, null] },
+    { cohort: "Feb '26", size: 26813, pct: [19.53, 35.57, 41.30, 40.53, 1.99, null, null, null], counts: [5236, 9537, 11075, 10867, 535, null, null, null] },
+    { cohort: "Mar '26", size: 27034, pct: [16.32, 31.96, 36.22, 1.81, null, null, null, null], counts: [4413, 8640, 9791, 489, null, null, null, null] },
+    { cohort: "Apr '26", size: 27061, pct: [19.46, 33.30, 1.71, null, null, null, null, null], counts: [5265, 9010, 463, null, null, null, null, null] },
+    { cohort: "May '26", size: 25626, pct: [20.39, 2.52, null, null, null, null, null, null], counts: [5225, 646, null, null, null, null, null, null] }
   ],
   Mature: [
-    { cohort: "Sep '25", size: 12456, pct: [31.7, 48.9, 51.2, 49.1, 47.6, 46.7, 43.8, 42.2], counts: [3953, 6092, 6372, 6112, 5929, 5819, 5451, 5255] },
-    { cohort: "Oct '25", size: 12555, pct: [29.8, 44.8, 46.5, 45.3, 44.2, 41.6, 40.0, null], counts: [3737, 5619, 5841, 5690, 5552, 5217, 5026, null] },
-    { cohort: "Nov '25", size: 12513, pct: [31.9, 46.3, 48.4, 48.3, 45.5, 43.9, null, null], counts: [3987, 5792, 6051, 6042, 5698, 5491, null, null] },
-    { cohort: "Dec '25", size: 11239, pct: [28.9, 47.5, 50.5, 48.6, 46.2, null, null, null], counts: [3243, 5338, 5677, 5466, 5190, null, null, null] },
-    { cohort: "Jan '26", size: 12222, pct: [33.4, 49.7, 51.0, 49.8, null, null, null, null], counts: [4088, 6078, 6237, 6086, null, null, null, null] },
-    { cohort: "Feb '26", size: 13608, pct: [33.5, 47.1, 50.7, null, null, null, null, null], counts: [4557, 6406, 6904, null, null, null, null, null] },
-    { cohort: "Mar '26", size: 14785, pct: [28.5, 45.4, null, null, null, null, null, null], counts: [4215, 6706, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 15374, pct: [32.5, null, null, null, null, null, null, null], counts: [4992, null, null, null, null, null, null, null] },
-    { cohort: "May '26*", size: 18570, pct: [26.2, null, null, null, null, null, null, null], counts: [4868, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size: 12759, pct: [25.8, 44.8, 46.9, 45.4, 44.4, 44.1, 41.7, 40.1], counts: [3294, 5710, 5983, 5795, 5670, 5626, 5322, 5116] },
+    { cohort: "Oct '25", size: 12522, pct: [26.4, 41.0, 42.7, 42.8, 42.0, 39.9, 38.6, 36.4], counts: [3303, 5134, 5347, 5364, 5265, 4998, 4836, 4554] },
+    { cohort: "Nov '25", size: 13391, pct: [27.7, 41.8, 44.4, 44.5, 42.1, 40.7, 37.6, 1.9], counts: [3712, 5604, 5950, 5960, 5644, 5453, 5040, 252] },
+    { cohort: "Dec '25", size: 12018, pct: [24.6, 41.7, 44.5, 43.7, 40.8, 38.1, 1.9, null], counts: [2953, 5014, 5349, 5250, 4909, 4576, 230, null] },
+    { cohort: "Jan '26", size: 12944, pct: [29.3, 44.8, 45.7, 44.9, 42.4, 1.9, null, null], counts: [3790, 5793, 5920, 5815, 5488, 244, null, null] },
+    { cohort: "Feb '26", size: 16044, pct: [29.0, 41.5, 44.4, 42.2, 2.3, null, null, null], counts: [4658, 6664, 7123, 6778, 376, null, null, null] },
+    { cohort: "Mar '26", size: 15837, pct: [25.6, 41.9, 43.6, 2.2, null, null, null, null], counts: [4052, 6630, 6902, 352, null, null, null, null] },
+    { cohort: "Apr '26", size: 17317, pct: [27.6, 40.3, 2.1, null, null, null, null, null], counts: [4779, 6987, 355, null, null, null, null, null] },
+    { cohort: "May '26", size: 18570, pct: [26.2, 3.2, null, null, null, null, null, null], counts: [4868, 599, null, null, null, null, null, null] }
   ],
   Onboarding: [
-    { cohort: "Sep '25", size: 9662,  pct: [7.3, 24.8, 28.3, 28.8, 28.2, 28.0, 26.5, 26.4], counts: [702, 2392, 2739, 2778, 2729, 2701, 2561, 2548] },
-    { cohort: "Oct '25", size: 10801, pct: [8.4, 34.6, 36.7, 38.8, 38.8, 36.2, 35.2, null], counts: [910, 3736, 3968, 4195, 4195, 3914, 3798, null] },
-    { cohort: "Nov '25", size: 10127, pct: [5.0, 17.6, 28.1, 30.1, 30.2, 29.6, null, null], counts: [510, 1783, 2848, 3048, 3061, 2994, null, null] },
-    { cohort: "Dec '25", size: 9752,  pct: [5.5, 27.7, 36.7, 36.4, 36.0, null, null, null], counts: [532, 2701, 3575, 3547, 3507, null, null, null] },
-    { cohort: "Jan '26", size: 7875,  pct: [10.9, 33.1, 35.8, 38.0, null, null, null, null], counts: [859, 2609, 2823, 2994, null, null, null, null] },
-    { cohort: "Feb '26", size: 8740,  pct: [10.6, 35.7, 43.8, null, null, null, null, null], counts: [929, 3119, 3829, null, null, null, null, null] },
-    { cohort: "Mar '26", size: 7565,  pct: [10.5, 30.7, null, null, null, null, null, null], counts: [793, 2321, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 8534,  pct: [12.0, null, null, null, null, null, null, null], counts: [1026, null, null, null, null, null, null, null] },
-    { cohort: "May '26*", size: 7056, pct: [5.1, null, null, null, null, null, null, null], counts: [357, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size:  9309, pct: [4.1, 21.1, 26.8, 27.4, 27.9, 28.0, 26.6, 26.6], counts: [383, 1963, 2499, 2551, 2595, 2605, 2478, 2479] },
+    { cohort: "Oct '25", size:  9863, pct: [7.5, 32.6, 35.9, 38.7, 38.8, 36.8, 36.2, 34.6], counts: [736, 3217, 3537, 3819, 3829, 3629, 3568, 3412] },
+    { cohort: "Nov '25", size: 10313, pct: [4.3, 15.6, 27.4, 30.5, 31.0, 30.1, 29.2, 1.1], counts: [443, 1613, 2829, 3146, 3194, 3103, 3007, 112] },
+    { cohort: "Dec '25", size: 11902, pct: [3.5, 22.9, 31.2, 31.4, 32.8, 30.9, 1.4, null], counts: [416, 2722, 3708, 3737, 3899, 3683, 165, null] },
+    { cohort: "Jan '26", size:  8768, pct: [5.8, 23.3, 28.3, 31.3, 28.5, 1.3, null, null], counts: [505, 2040, 2477, 2746, 2496, 117, null, null] },
+    { cohort: "Feb '26", size: 10769, pct: [5.4, 26.7, 36.7, 38.0, 1.5, null, null, null], counts: [578, 2873, 3952, 4089, 159, null, null, null] },
+    { cohort: "Mar '26", size: 11197, pct: [3.2, 18.0, 25.8, 1.2, null, null, null, null], counts: [361, 2010, 2889, 137, null, null, null, null] },
+    { cohort: "Apr '26", size:  9744, pct: [5.0, 20.8, 1.1, null, null, null, null, null], counts: [486, 2023, 108, null, null, null, null, null] },
+    { cohort: "May '26", size:  7056, pct: [5.1, 0.7, null, null, null, null, null, null], counts: [357, 47, null, null, null, null, null, null] }
   ]
 };
 
