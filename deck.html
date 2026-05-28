@@ -995,9 +995,9 @@
       <div class="tldr-label">TL;DR</div>
       <p>
         <strong>Verdict:</strong> May regressed <strong>to 46.88% paid (−1.18pp MoM)</strong> from April's 48.06% record. <strong>Paid leases held nearly flat at 181.9K (+252)</strong> while <strong>active grew +10.1K (+2.7%)</strong> — the denominator moved, the numerator didn't.
-        <strong>Underneath:</strong> reactivations dropped <span class="red">−27% MoM (9.5K → 6.9K)</span>, churned leases rebounded <span class="red">+19% MoM (17.7K → 21.0K)</span>, and <span class="red">UpMarket paid count actually fell −701</span> (paid % −3.42pp). The regression isn't only denominator dilution — UpMarket and MidMarket softened on conversion too.
+        <strong>Underneath:</strong> reactivations dropped <span class="red">−27% MoM (9.5K → 6.9K)</span>, headline churned leases at <span class="red">21.0K (+19% MoM)</span> — but <strong>~half of "tenant churn" is partial-cycle artifact</strong> (rent paid May 25–31 lands in next cycle bucket); projected true May churn ≈14.2K, down from Apr's 17.7K (slide 7). <span class="red">UpMarket paid count actually fell −701</span> (paid % −3.42pp) — segments softened on conversion too.
         <strong>PM-side bright spot:</strong> <span class="green">Mature invite-at-activation hit 74.07% (+14.6pp MoM, new record)</span> — the leading PM indicator improved sharply even as tenant-side conversion regressed.
-        <strong>Also in the back half:</strong> Churn baseline appears structurally higher (~17K → ~21K, May = highest in series); PM Adoption analysis identifies <strong>~23% of accounts flaggable</strong> with a 0.94-AUC risk score; Q2 lever portfolio still ~$675K ARR + 4pp funnel uplift if all four land.
+        <strong>Also in the back half:</strong> <strong>PM-cancel churn +35% MoM, +227% YoY</strong> (small absolute count but the highest-growth churn category); PM Adoption analysis identifies <strong>~23% of accounts flaggable</strong> with a 0.94-AUC risk score; Q2 lever portfolio still ~$675K ARR + 4pp funnel uplift if all four land.
         <strong>Data caveat:</strong> May is a partial snapshot (through May 24). ARR vs plan, card share, NSF, and churned-account metrics use the most recent fully-settled month (April) — see slide footers.
       </p>
     </div>
@@ -1027,9 +1027,9 @@
         <div class="metric-tag"><span class="neg">▼ −27% MoM</span> (9.5K → 6.9K) · April's calendar tailwind reversed</div>
       </div>
       <div class="metric flag">
-        <div class="metric-label">Churned Leases</div>
+        <div class="metric-label">Churned Leases · partial-cycle</div>
         <div class="metric-num">20,998</div>
-        <div class="metric-tag"><span class="neg">▲ +19% MoM</span> (17.7K → 21.0K) · highest in series</div>
+        <div class="metric-tag"><span class="neg">▲ +19% MoM</span> headline · <span class="pos">≈14.2K after late-pay correction</span> · see slide 7</div>
       </div>
       <div class="metric up">
         <div class="metric-label">First-time Payers</div>
@@ -2077,7 +2077,7 @@
       </div>
     </div>
     <div>
-      <h2 class="section-title" style="margin-bottom:0">Reactivations dropped −27% · churn rebounded +19% = <em>May's −1.18pp</em>.</h2>
+      <h2 class="section-title" style="margin-bottom:0">Reactivations dropped −27% · churn headline +19% (≈flat after late-pay correction) = <em>May's −1.18pp</em>.</h2>
     </div>
 
     <div class="chart-shell" style="margin-top: 12px">
@@ -2158,22 +2158,43 @@
       <span style="color:var(--warn); font-weight:700">Churned</span> = paid previous month, not this
     </div>
 
-    <div class="pullquote" style="margin-top: 16px">
-      <div class="pq-label">⚠ Watch</div>
-      <p>Churn baseline appears to have <strong>stepped up</strong> from ~14K (Sep '25–Feb '26) to ~16–17K. That's not a calendar story.</p>
+    <!-- Churn late-pay correction · the headline 21K is partial-cycle inflated -->
+    <div style="margin-top: 16px; padding: 18px 22px; background: rgba(223,254,2,0.18); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 May's 21K "churn" is partial-cycle inflated. Real underlying churn is ≈ 14K — flat-to-down vs April.</div>
+
+      <p style="margin: 0 0 12px 0"><strong>Cycle convention 25→24 systematically buckets late-pay tenants as "churned".</strong> A tenant who pays in the last week of a calendar month (e.g., May 25–31) falls into the next 25→24 cycle (Jun bucket), not the current one — so they show up as a May "churner" who then "reactivates" in June. Across all 15 prior cycles, <strong>45–55% (median ~49%) of "tenant churn" classifications paid in the very next cycle</strong>. They're not real churn — they're late-payers within the cycle bucketing.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px">
+        <div style="padding: 12px 14px; background: rgba(220,38,38,0.08); border-left: 3px solid var(--warn); border-radius: 4px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">Headline churned</div>
+          <div style="font-size: 22px; font-weight: 800; color: var(--warn); margin-top: 4px">20,998</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">+19% MoM (Apr 17.7K)</div>
+        </div>
+        <div style="padding: 12px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">Expected late-pay</div>
+          <div style="font-size: 22px; font-weight: 800; color: #b45309; margin-top: 4px">~6,500</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">~49% of 13.1K tenant_churn category × historical baseline</div>
+        </div>
+        <div style="padding: 12px 14px; background: rgba(5,150,105,0.08); border-left: 3px solid var(--green); border-radius: 4px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">Projected true May churn</div>
+          <div style="font-size: 22px; font-weight: 800; color: var(--green); margin-top: 4px">~14,200</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px"><strong style="color: var(--text)">Down ~3.4K vs Apr 17.7K</strong> · once Jun cycle settles</div>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; line-height: 1.6"><strong>Churn split by cause (Mature, May headline):</strong>
+        <br>· <strong>`churn_tenant` 13,063 (62.5%)</strong> — PM active + lease in-term, tenant didn't pay this cycle. <strong style="color:var(--warn)">~49% historical late-pay rate</strong> · this is the entire artifact bucket.
+        <br>· <strong>`churn_lease_end` 6,232 (29.8%)</strong> — lease ended naturally. Only ~1.2% late-pay. Real churn, +7% MoM (proportional to base growth).
+        <br>· <strong>`churn_db_tenant` 1,614 (7.7%)</strong> — PM cancelled DoorLoop subscription. ~3.9% late-pay. Real churn, <strong>+35% MoM</strong>, <strong>+227% YoY</strong> (494 → 1,614). Small absolute count but growing fast — worth a finance lens on PM-side retention.
+      </div>
+
+      <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(22,32,80,0.10); font-size: 11.5px; color: var(--muted); line-height: 1.55">
+        <strong style="color: var(--text)">Action:</strong> reframe the May churn read. Headline +19% MoM is a measurement artifact (it's measured 2 days post-cycle-close vs ~30 days for April). Compare like-for-like by waiting until Jun cycle closes (~Jun 25) to lock the late-pay carryover — projected to land ≈14.2K, <em>down</em> from April. Real watch-items: <strong style="color: var(--text)">PM-cancel churn +35% MoM and +227% YoY</strong> + the NSF rate uptick (3.20% → 3.69%) which is the same credit-quality signal under a different lens.
+      </div>
     </div>
 
     <details class="pva2-details" open>
-      <summary>May lease-flow decomposition · Apr → May</summary>
-
-      <div style="margin-top:18px; padding:14px 18px; background:#f7f9fd; border:1px solid var(--divider); border-radius:10px; font-size:12.5px; color:var(--muted); line-height:1.75">
-        <strong style="color:var(--text)">What each component means →</strong><br>
-        <span style="color:var(--purple); font-weight:700">Existing paid (retained)</span> = leases that paid in both April and May · the steady base ·
-        <span style="color:var(--green); font-weight:700">Reactivated</span> = paid this month + some prior month, not last month · the recovery flow ·
-        <span style="color:var(--blue); font-weight:700">First-time paid</span> = paid for the first time this month ·
-        <span style="color:var(--warn); font-weight:700">Churned</span> = paid in April, not in May ·
-        <span style="font-weight:700; color:#162050">Active denominator</span> = +10,061 new active leases that grew the base (mostly +18.6K Mature minus exits)
-      </div>
+      <summary>May lease-flow decomposition · Apr → May (headline, before late-pay correction)</summary>
 
       <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-top:16px">
         <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid var(--purple); border-radius:8px">
@@ -2192,9 +2213,9 @@
           <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">14.4K (vs 15.1K Apr) · still well above 12-month baseline</div>
         </div>
         <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid var(--warn); border-radius:8px">
-          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Churned</div>
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Churned · partial-cycle</div>
           <div style="font-size:22px; font-weight:800; color:var(--warn)">+3,345</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">21.0K (vs 17.7K Apr) · highest in 18-month series</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5">21.0K headline · <strong style="color:var(--text)">≈14.2K after late-pay correction</strong> (see panel above)</div>
         </div>
         <div style="padding:14px 16px; background:#fff; border:1px solid var(--border); border-left:3px solid #162050; border-radius:8px">
           <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px">Active denominator</div>
