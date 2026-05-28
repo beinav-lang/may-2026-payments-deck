@@ -2158,72 +2158,22 @@
       <span style="color:var(--warn); font-weight:700">Churned</span> = paid previous month, not this
     </div>
 
-    <!-- Churn breakdown by cause -->
+    <!-- Churn breakdown by cause · monthly stacked -->
     <div style="margin-top: 16px; padding: 18px 22px; background: rgba(223,254,2,0.18); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 12px; line-height: 1.4">💡 Churn split by cause · Mature, May '26 — most of the headline 21K is in a single bucket that historically half late-pays.</div>
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 4px; line-height: 1.4">💡 Churn breakdown by cause · Sep '25 → May '26 — what drove May's increase</div>
+      <div style="font-size: 12px; color: var(--muted); margin-bottom: 14px">May +3.4K vs Apr · <strong style="color:#b45309">churn_tenant +2.5K (the partial-cycle artifact bucket)</strong> · <strong style="color:#1e3a8a">lease_end +0.4K (proportional to base growth)</strong> · <strong style="color:#b91c1c">db_tenant +0.4K (small but +227% YoY)</strong></div>
 
-      <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 14px; margin-bottom: 12px">
-
-        <!-- churn_tenant (62.5%) -->
-        <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #f59e0b; border-radius: 8px; position: relative">
-          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px">
-            <div style="font-size: 10.5px; font-weight: 700; color: #b45309; text-transform: uppercase; letter-spacing: 0.6px">churn_tenant · PM + lease still active</div>
-            <div style="font-size: 11px; font-weight: 700; color: #b45309; background: rgba(245,158,11,0.15); padding: 2px 8px; border-radius: 10px">62.5%</div>
-          </div>
-          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px">
-            <div style="font-size: 28px; font-weight: 800; color: #162050; line-height: 1">13,063</div>
-            <div style="font-size: 12px; color: var(--muted)">leases</div>
-          </div>
-          <div style="display: flex; gap: 14px; font-size: 11px; color: var(--muted); margin-bottom: 8px">
-            <div><strong style="color: var(--warn)">+24% MoM</strong> (Apr 10.5K)</div>
-            <div><strong style="color: var(--warn)">+49% YoY</strong> (May '25 8.8K)</div>
-          </div>
-          <div style="padding: 8px 10px; background: rgba(245,158,11,0.10); border-radius: 4px; font-size: 11.5px; line-height: 1.5">
-            <strong style="color: #b45309">~49% historical late-pay rate.</strong> Tenants who pay May 25–31 land in next cycle bucket and show up here. <strong style="color: var(--text)">Most of this bucket isn't real churn</strong> — it reclassifies as reactivated/existing once Jun cycle closes (~Jun 25).
-          </div>
-        </div>
-
-        <!-- churn_lease_end (29.8%) -->
-        <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #3185FC; border-radius: 8px">
-          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px">
-            <div style="font-size: 10.5px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">churn_lease_end</div>
-            <div style="font-size: 11px; font-weight: 700; color: #1e3a8a; background: rgba(49,133,252,0.15); padding: 2px 8px; border-radius: 10px">29.8%</div>
-          </div>
-          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px">
-            <div style="font-size: 28px; font-weight: 800; color: #162050; line-height: 1">6,232</div>
-            <div style="font-size: 12px; color: var(--muted)">leases</div>
-          </div>
-          <div style="font-size: 11px; color: var(--muted); margin-bottom: 8px">
-            <strong style="color: var(--text)">+7.4% MoM</strong> · +35% YoY
-          </div>
-          <div style="padding: 8px 10px; background: rgba(49,133,252,0.06); border-radius: 4px; font-size: 11.5px; line-height: 1.5">
-            <strong style="color: #1e3a8a">Lease ended naturally.</strong> Real churn. Only ~1.2% late-pay. Growth roughly proportional to the +2.7% MoM active-lease base — this is natural turnover, not a story.
-          </div>
-        </div>
-
-        <!-- churn_db_tenant (7.7%) -->
-        <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
-          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px">
-            <div style="font-size: 10.5px; font-weight: 700; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.6px">churn_db_tenant · PM cancelled</div>
-            <div style="font-size: 11px; font-weight: 700; color: #b91c1c; background: rgba(220,38,38,0.15); padding: 2px 8px; border-radius: 10px">7.7%</div>
-          </div>
-          <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px">
-            <div style="font-size: 28px; font-weight: 800; color: #162050; line-height: 1">1,614</div>
-            <div style="font-size: 12px; color: var(--muted)">leases</div>
-          </div>
-          <div style="display: flex; gap: 14px; font-size: 11px; color: var(--muted); margin-bottom: 8px">
-            <div><strong style="color: var(--warn)">+35% MoM</strong></div>
-            <div><strong style="color: var(--warn)">+227% YoY</strong> (494 → 1,614)</div>
-          </div>
-          <div style="padding: 8px 10px; background: rgba(220,38,38,0.08); border-radius: 4px; font-size: 11.5px; line-height: 1.5">
-            <strong style="color: #b91c1c">PM cancelled DoorLoop subscription.</strong> Real churn (3.9% late-pay). Small absolute count but the <strong style="color: var(--text)">highest-growth churn category</strong> — the actual signal. Worth a finance lens on PM-side retention.
-          </div>
-        </div>
-
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11.5px; margin-bottom: 8px">
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active · ~49% historical late-pay rate</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally · ~1% late-pay (real churn)</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop · ~4% late-pay (real churn)</span></div>
       </div>
 
-      <div style="padding-top: 10px; border-top: 1px solid rgba(22,32,80,0.10); font-size: 12px; color: var(--muted); line-height: 1.6">
-        <strong style="color: var(--text)">Read together:</strong> the two real-churn buckets (lease_end + db_tenant = 7,846 leases) grew ~13% MoM combined — consistent with the +2.7% base growth plus the elevating PM-cancel signal. The tenant bucket adds 13,063 of noise that obscures the real read. <strong style="color: var(--text)">Action:</strong> watch <strong>db_tenant churn (PM cancellations)</strong> and the parallel <strong>NSF rate uptick (3.20% → 3.69%)</strong> — both point at credit quality / PM retention, not headline tenant behavior.
+      <div class="chart-wrap" style="height: 340px"><canvas id="chart-churn-breakdown"></canvas></div>
+
+      <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(22,32,80,0.10); font-size: 12px; color: var(--muted); line-height: 1.6">
+        <strong style="color: var(--text)">Read:</strong> May's +3.4K MoM increase is <strong>~75% from `churn_tenant`</strong> — the bucket that historically half-reclassifies as late-pay after the next cycle closes. The two real-churn buckets (lease_end + db_tenant = 7,846 in May) grew ~13% MoM combined — consistent with the +2.7% base growth + the elevating PM-cancel signal.
+        <br><strong style="color: var(--text)">Watch:</strong> <strong>db_tenant churn (PM cancellations) at +227% YoY</strong> + the parallel <strong>NSF rate uptick (3.20% → 3.69%)</strong> — both point at credit quality / PM retention, not headline tenant behavior.
       </div>
     </div>
 
@@ -5052,6 +5002,75 @@ new Chart(document.getElementById('chart-waterfall'), {
     }
   })
 });
+
+// 4a. Churn breakdown by cause · monthly stacked bars · Sep '25 → May '26
+// Source: ad-hoc Snowflake (Mature + Onboarding combined) — see /tmp/churn_decomp.sql
+const churnBreakdown = [
+  { month: "Sep '25", tenant: 8224,  lease_end: 5258, db_tenant:  782 },
+  { month: "Oct '25", tenant: 8628,  lease_end: 4733, db_tenant:  646 },
+  { month: "Nov '25", tenant: 9257,  lease_end: 4816, db_tenant: 1036 },
+  { month: "Dec '25", tenant: 9374,  lease_end: 4219, db_tenant:  883 },
+  { month: "Jan '26", tenant: 10719, lease_end: 4620, db_tenant: 1212 },
+  { month: "Feb '26", tenant: 9450,  lease_end: 4477, db_tenant: 1020 },
+  { month: "Mar '26", tenant: 11951, lease_end: 5192, db_tenant: 1364 },
+  { month: "Apr '26", tenant: 10624, lease_end: 5831, db_tenant: 1198 },
+  { month: "May '26", tenant: 13159, lease_end: 6255, db_tenant: 1625 }
+];
+if (document.getElementById('chart-churn-breakdown')) {
+  const cbLastIdx = churnBreakdown.length - 1;
+  new Chart(document.getElementById('chart-churn-breakdown'), {
+    type: 'bar',
+    data: {
+      labels: churnBreakdown.map(d => d.month),
+      datasets: [
+        { label: 'churn_tenant',    data: churnBreakdown.map(d => d.tenant),
+          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(245,158,11,0.95)' : 'rgba(245,158,11,0.70)'),
+          stack: 'churn', borderRadius: 0, borderSkipped: false, borderWidth: 0 },
+        { label: 'churn_lease_end', data: churnBreakdown.map(d => d.lease_end),
+          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(49,133,252,0.95)' : 'rgba(49,133,252,0.70)'),
+          stack: 'churn', borderRadius: 0, borderSkipped: false, borderWidth: 0 },
+        { label: 'churn_db_tenant', data: churnBreakdown.map(d => d.db_tenant),
+          backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(220,38,38,0.95)' : 'rgba(220,38,38,0.70)'),
+          stack: 'churn', borderRadius: 3, borderSkipped: false, borderWidth: 0,
+          datalabels: {
+            display: true, anchor: 'end', align: 'top', offset: 4,
+            color: ctx => ctx.dataIndex === cbLastIdx ? '#dc2626' : '#1e293b',
+            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: ctx.dataIndex === cbLastIdx ? 13 : 11 }),
+            formatter: (_, ctx) => {
+              const d = churnBreakdown[ctx.dataIndex];
+              return (d.tenant + d.lease_end + d.db_tenant).toLocaleString();
+            }
+          }
+        }
+      ]
+    },
+    options: baseOpts({
+      layout: { padding: { top: 28, right: 16, bottom: 4, left: 8 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString(),
+            footer: items => {
+              const d = churnBreakdown[items[0].dataIndex];
+              return 'Total: ' + (d.tenant + d.lease_end + d.db_tenant).toLocaleString();
+            }
+          }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false },
+             ticks: {
+               font: ctx => ({ weight: ctx.index === cbLastIdx ? 800 : 600, size: 11 }),
+               color: ctx => ctx.index === cbLastIdx ? '#162050' : '#64748b'
+             } },
+        y: { stacked: true, beginAtZero: true,
+             ticks: { font: { size: 10 }, callback: v => v.toLocaleString() },
+             grid: { color: 'rgba(0,0,0,0.04)' } }
+      }
+    })
+  });
+}
 
 // 4b. Overall card-share trend (blended) — Jan '25 → Apr '26 (16 months)
 // Blended share = card volume / (card + ach) volume
