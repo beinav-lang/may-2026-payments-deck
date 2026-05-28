@@ -1669,7 +1669,7 @@
         </div>
       </div>
 
-      <p style="margin: 0"><strong>The seasonality:</strong> April reliably runs above trend (tax-season effect, calendar-unwind boost), then May reverts. <strong>2026's reversion is sharper than 2025's</strong> (paid Δ slowed 96% Mar→Apr vs Apr→May, vs 62% slowdown in 2025) — driven by the structural items on slide 5: one-PM cancellation event, tenant-churn baseline drift, NSF rate uptick. The shape is seasonal; the magnitude is real.</p>
+      <p style="margin: 0"><strong>The seasonality:</strong> April reliably runs above trend, then May reverts. <strong>2026's reversion is sharper than 2025's</strong> — driven by the structural items on slide 5: one-PM cancellation event, tenant-churn baseline drift, NSF rate uptick. The shape is seasonal; the magnitude is real.</p>
     </div>
 
   </div>
@@ -4671,24 +4671,60 @@ new Chart(document.getElementById('chart-pct-paid'), {
         backgroundColor: 'rgba(124,58,237,0.08)',
         borderWidth: 4,
         segment: {
-          borderWidth: ctx => (ctx.p0DataIndex >= 10 ? 6 : 4)
+          borderWidth: ctx => (ctx.p0DataIndex >= 11 ? 6 : 4)
         },
-        pointRadius: ctx => ctx.dataIndex >= 10 ? 8 : 5,
-        pointBackgroundColor: C.purple,
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
+        // Highlight April (Apr '25 idx 3, Apr '26 idx 15) and May (May '25 idx 4, May '26 idx 16)
+        // across both years to visualize the seasonal pattern.
+        pointRadius: ctx => {
+          const i = ctx.dataIndex;
+          if (i === 3 || i === 15 || i === 4 || i === 16) return 11;
+          return i >= 11 ? 8 : 5;
+        },
+        pointBackgroundColor: ctx => {
+          const i = ctx.dataIndex;
+          if (i === 3 || i === 15) return '#f59e0b';     // April · amber/peak
+          if (i === 4 || i === 16) return '#dc2626';     // May   · red/reversion
+          return C.purple;
+        },
+        pointBorderColor: ctx => {
+          const i = ctx.dataIndex;
+          if (i === 3 || i === 15 || i === 4 || i === 16) return '#fff';
+          return '#fff';
+        },
+        pointBorderWidth: ctx => {
+          const i = ctx.dataIndex;
+          if (i === 3 || i === 15 || i === 4 || i === 16) return 3;
+          return 2;
+        },
         tension: 0.3,
         yAxisID: 'yPct',
         order: 2,
         datalabels: {
           display: true, anchor: 'center', align: 'center',
           backgroundColor: '#fff',
-          borderColor: C.purple,
-          borderWidth: 2,
+          borderColor: ctx => {
+            const i = ctx.dataIndex;
+            if (i === 3 || i === 15) return '#f59e0b';
+            if (i === 4 || i === 16) return '#dc2626';
+            return C.purple;
+          },
+          borderWidth: ctx => {
+            const i = ctx.dataIndex;
+            return (i === 3 || i === 15 || i === 4 || i === 16) ? 3 : 2;
+          },
           borderRadius: 4,
           padding: { top: 4, bottom: 4, left: 7, right: 7 },
-          color: C.purple,
-          font: { weight: 800, size: 14 },
+          color: ctx => {
+            const i = ctx.dataIndex;
+            if (i === 3 || i === 15) return '#b45309';
+            if (i === 4 || i === 16) return '#b91c1c';
+            return C.purple;
+          },
+          font: ctx => {
+            const i = ctx.dataIndex;
+            const big = (i === 3 || i === 15 || i === 4 || i === 16);
+            return { weight: 800, size: big ? 15 : 14 };
+          },
           formatter: v => v == null ? '' : v.toFixed(2) + '%'
         }
       },
