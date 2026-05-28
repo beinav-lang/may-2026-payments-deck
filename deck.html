@@ -1639,6 +1639,29 @@
       <h2 class="section-title">% Paid 46.88% · <em style="color: var(--warn)">−1.18pp MoM</em> · <em style="color: var(--green)">+1.07pp vs plan</em>. Apr→May reversion is seasonal — 2× sharper than 2025.</h2>
     </div>
 
+    <!-- Top summary card -->
+    <div style="margin-bottom: 14px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.05) 0%, rgba(124,58,237,0.05) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 12px; line-height: 1.4">% paid leases went down with eligibility rate unchanged. Apr→May reversion is seasonal — 2× sharper than 2025.</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 6px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Paid / Active</div>
+          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px">
+            <div style="font-size: 22px; font-weight: 800; color: var(--purple)">48.06% → 46.88%</div>
+            <div style="font-size: 13px; font-weight: 800; color: var(--warn)">▼ −1.18pp MoM</div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">YoY +3.82pp (May '25 43.06%) · vs Plan +1.07pp</div>
+        </div>
+        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #2563eb; border-radius: 6px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Eligible / Active</div>
+          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px">
+            <div style="font-size: 22px; font-weight: 800; color: #1d4ed8">71.80% → 71.70%</div>
+            <div style="font-size: 13px; font-weight: 800; color: #64748b">─ flat (−0.10pp)</div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">vs Plan +4.0pp · funnel-mouth healthy</div>
+        </div>
+      </div>
+    </div>
+
     <div class="chart-shell">
       <div class="ch-title">Total active leases</div>
       <div class="chart-wrap" style="height:520px"><canvas id="chart-pct-paid"></canvas></div>
@@ -1652,23 +1675,6 @@
       <span style="color:#7c3aed"><strong>Paid</strong> = ≥1 successful payment in the cycle.</span>
     </div>
 
-    <!-- Seasonality insight card -->
-    <div style="margin-top:14px; padding:18px 22px; background:rgba(223,254,2,0.22); border-left:5px solid #162050; border-radius:8px; font-size:14px; color:var(--text); line-height:1.65">
-      <div style="font-size:15.5px; font-weight:800; color:#162050; margin-bottom:10px; line-height:1.4">💡 Apr→May reversion is a recurring pattern — May 2025 showed the same shape.</div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px">
-        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #94a3b8; border-radius: 6px; font-size: 12.5px; line-height: 1.55">
-          <div style="font-size: 11px; font-weight: 700; color: #475569; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">May 2025 (last year)</div>
-          <div>Mar 42.71% → Apr 43.58% (+0.87pp) → <strong style="color: var(--warn)">May 43.06% (−0.52pp)</strong></div>
-        </div>
-        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #162050; border-radius: 6px; font-size: 12.5px; line-height: 1.55">
-          <div style="font-size: 11px; font-weight: 700; color: #162050; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">May 2026 (this year)</div>
-          <div>Mar 46.94% → Apr 48.06% (+1.12pp) → <strong style="color: var(--warn)">May 46.88% (−1.18pp)</strong></div>
-        </div>
-      </div>
-
-      <p style="margin: 0"><strong>The seasonality:</strong> April reliably runs above trend, then May reverts. <strong>2026's reversion is sharper than 2025's</strong> — driven by the structural items on slide 5: one-PM cancellation event, tenant-churn baseline drift, NSF rate uptick. The shape is seasonal; the magnitude is real.</p>
-    </div>
 
   </div>
 </section>
