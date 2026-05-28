@@ -1544,9 +1544,20 @@
               <span class="pct">vs 18.26% plan · 95.5%</span>
             </div>
           </div>
+          <div class="pva2-bar-row">
+            <div class="metric-name">Platform Fee ARR (NSF)<span class="sub">+$176K vs plan · NSF rate ticked up to 3.69% (Apr 3.20%)</span></div>
+            <div class="pva2-bar-track">
+              <div class="pva2-bar-plan"   style="width: 91.4%"></div>
+              <div class="pva2-bar-actual beat" style="width: 100%"></div>
+            </div>
+            <div class="delta beat">
+              <span class="head">$2.04M</span>
+              <span class="pct">vs $1.87M plan · 109.4%</span>
+            </div>
+          </div>
         </div>
         <div class="pva2-tier-take">
-          ARR missed by <strong class="red">−$649K (96.0% of plan)</strong> — the gap is acquisition (Tier 1 at 31% of plan on net new Price Units) plus card-mix drag (% Card −0.83pp vs plan). <strong class="green">NSF/Platform Fee ARR beat plan by +$176K (109%)</strong> — partial offset. Additional ARR ($100K vs $676K plan) shows ARR velocity well below trajectory.
+          ARR missed by <strong class="red">−$649K (96.0% of plan)</strong> — the gap is acquisition (Tier 1 at 31% of plan on net new Price Units) plus card-mix drag (% Card −0.83pp vs plan). <strong class="green">Platform Fee ARR (NSF) beat plan by +$176K (109%)</strong> — partial offset, driven by higher NSF rate (3.69% vs ~3.0% historical). Additional ARR ($100K vs $676K plan) shows ARR velocity well below trajectory.
         </div>
       </div>
 
@@ -2717,21 +2728,11 @@
       </div>
     </div>
 
-    <h2 class="section-title">NSF rebounded with ACH.</h2>
+    <h2 class="section-title">NSF rebounded with ACH — May ARR doubled YoY, rate ticked up.</h2>
 
-    <!-- May to-date status panel (NSF data lags by one cycle) -->
-    <div style="margin-top: 14px; padding: 16px 20px; background: rgba(49,133,252,0.06); border-left: 3px solid #3185FC; border-radius: 8px; font-size: 13px; line-height: 1.6; color: var(--text)">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 8px">May 2026 · Watch</div>
-      <div style="font-size: 13px; color: var(--text); line-height: 1.65">
-        <strong style="color: var(--text)">May ACH volume and NSF data refresh after full-month settlement (~Jun 25).</strong> Two May signals to watch when the data lands:
-        (1) <strong>May churned leases hit 20,998 — series high</strong> (+19% vs Apr); historically churn and NSF rate correlate, so NSF rate may tick up from April's 3.20%.
-        (2) <strong>Mature acquisition wave grew +7.2% MoM (18.6K new active)</strong>; ACH volume should track up proportionally, holding NSF $ ARR on its upward path.
-      </div>
-    </div>
-
-    <!-- Headline summary card -->
+    <!-- May headline summary card -->
     <div style="margin-top: 14px; padding: 14px 18px; background: linear-gradient(135deg, rgba(14,116,144,0.08) 0%, rgba(49,133,252,0.06) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; line-height: 1.6; color: var(--text)">
-      <strong style="color: #0e7490">April final:</strong> NSF ARR <strong style="color: #0e7490">$1.82M ATH</strong> (+91% YoY) tracks ACH growth. The <strong>% NSF rate is stable</strong> inside its 12-month band.
+      <strong style="color: #0e7490">May 2026:</strong> NSF ARR <strong style="color: #0e7490">$2.04M ATH</strong> (<strong>+100% YoY</strong> · May '25 $1.02M, +12.4% MoM) tracks ACH growth. <strong>NSF rate ticked up to 3.69%</strong> (Apr 3.20%, +0.49pp MoM) — still inside the 12-month band (3.09%–4.00%) but trending toward the top.
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
@@ -5223,8 +5224,8 @@ new Chart(document.getElementById('chart-card-cause'), {
 //    chart-nsf-txns: only months with txns data (filter null), 14 months Mar '25 → Apr '26
 const NSF_TEAL = '#0e7490';
 
-// April '26 is the index of the latest mature month for emphasis (not the trailing partial)
-const nsfApr26Idx = nsfData.findIndex(d => d.month === "Apr '26");
+// May '26 is the index of the latest mature month for emphasis
+const nsfMay26Idx = nsfData.findIndex(d => d.month === "May '26");
 
 if (document.getElementById('chart-nsf-arr')) new Chart(document.getElementById('chart-nsf-arr'), {
   type: 'line',
@@ -5236,8 +5237,8 @@ if (document.getElementById('chart-nsf-arr')) new Chart(document.getElementById(
       borderColor: NSF_TEAL,
       backgroundColor: 'rgba(14,116,144,0.06)',
       borderWidth: 2.5, fill: true, tension: 0.3,
-      pointRadius: nsfData.map((d,i)=> i === nsfApr26Idx ? 8 : (d.partial ? 5 : 5)),
-      pointBackgroundColor: nsfData.map(d => d.partial ? '#fff' : (d.month === "Apr '26" ? '#dc2626' : NSF_TEAL)),
+      pointRadius: nsfData.map((d,i)=> i === nsfMay26Idx ? 8 : (d.partial ? 5 : 5)),
+      pointBackgroundColor: nsfData.map(d => d.partial ? '#fff' : (d.month === "May '26" ? '#dc2626' : NSF_TEAL)),
       pointBorderColor: nsfData.map(d => d.partial ? '#dc2626' : '#fff'),
       pointBorderWidth: nsfData.map(d => d.partial ? 2 : 1.5),
       segment: {
@@ -5249,12 +5250,12 @@ if (document.getElementById('chart-nsf-arr')) new Chart(document.getElementById(
         color: ctx => {
           const d = nsfData[ctx.dataIndex];
           if (d.partial) return '#dc2626';
-          if (d.month === "Apr '26") return '#dc2626';
+          if (d.month === "May '26") return '#dc2626';
           return '#475569';
         },
         font: ctx => {
           const d = nsfData[ctx.dataIndex];
-          const emphasis = d.partial || d.month === "Apr '26";
+          const emphasis = d.partial || d.month === "May '26";
           return { weight: emphasis ? 800 : 600, size: emphasis ? 13 : 10 };
         },
         formatter: (v, ctx) => {
@@ -5269,7 +5270,7 @@ if (document.getElementById('chart-nsf-arr')) new Chart(document.getElementById(
     plugins: { legend: { display: false } },
     scales: {
       x: { grid: { display: false }, ticks: { color: C.muted, font: { size: 9 } } },
-      y: { display: false, suggestedMin: 0.6, suggestedMax: 2.1 }
+      y: { display: false, suggestedMin: 0.6, suggestedMax: 2.25 }
     }
   })
 });
