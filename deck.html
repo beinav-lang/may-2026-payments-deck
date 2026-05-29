@@ -4687,16 +4687,21 @@ const seasonalityBandPlugin = {
       ctx.globalAlpha = 1;
       ctx.restore();
 
-      // 3. Year label pill at the top-center of the band
+      // 3. Year label pill — anchored to the BOTTOM-center of the band so it
+      // hugs the x-axis area and stays clear of the K-value labels above the
+      // active-leases bars at the top of the chart.
       const midX = (aprX + mayX) / 2;
       ctx.save();
       ctx.font = "800 11px 'Poppins', sans-serif";
       const yearText = 'APR → MAY  ' + p.year;
-      const padX = 9, padY = 4;
+      const padX = 9;
       const tw = ctx.measureText(yearText).width;
-      const pillH = 22;
+      const pillH = 20;
       const pillX = midX - tw/2 - padX;
-      const pillY = top + 2;
+      // Sit just above the bottom edge of the chart area — well below the
+      // line points (which live in the upper-third of the chart on the yPct
+      // scale) and clear of the K-value labels at the top.
+      const pillY = bottom - pillH - 6;
       ctx.fillStyle = p.accent;
       ctx.beginPath();
       const r = 4;
@@ -4893,20 +4898,52 @@ new Chart(document.getElementById('chart-pct-paid'), {
         yAxisID: 'yPct',
         order: 2,
         datalabels: {
-          display: ctx => {
-            // Suppress the Apr/May value labels — the callout pills carry the
-            // delta story now, and the bare value labels would overlap them.
+          display: true,
+          // Apr/May points (idx 3/4, 15/16): drop the % label BELOW the line so
+          // it doesn't fight the callout pill above. Others: center on the
+          // line (white pill on the trace, as before).
+          anchor: ctx => {
             const i = ctx.dataIndex;
-            return !(i === 3 || i === 4 || i === 15 || i === 16);
+            return (i === 3 || i === 4 || i === 15 || i === 16) ? 'end' : 'center';
           },
-          anchor: 'center', align: 'center',
+          align: ctx => {
+            const i = ctx.dataIndex;
+            return (i === 3 || i === 4 || i === 15 || i === 16) ? 'bottom' : 'center';
+          },
+          offset: ctx => {
+            const i = ctx.dataIndex;
+            return (i === 3 || i === 4 || i === 15 || i === 16) ? 12 : 0;
+          },
           backgroundColor: '#fff',
-          borderColor: C.purple,
-          borderWidth: 2,
+          borderColor: ctx => {
+            const i = ctx.dataIndex;
+            if (i === 3 || i === 4)  return '#b45309'; // tint 2025 Apr/May to match band
+            if (i === 15 || i === 16) return '#b91c1c'; // tint 2026 Apr/May to match band
+            return C.purple;
+          },
+          borderWidth: ctx => {
+            const i = ctx.dataIndex;
+            return (i === 3 || i === 4 || i === 15 || i === 16) ? 1.5 : 2;
+          },
           borderRadius: 4,
-          padding: { top: 4, bottom: 4, left: 7, right: 7 },
-          color: C.purple,
-          font: { weight: 800, size: 14 },
+          padding: ctx => {
+            const i = ctx.dataIndex;
+            return (i === 3 || i === 4 || i === 15 || i === 16)
+              ? { top: 2, bottom: 2, left: 5, right: 5 }
+              : { top: 4, bottom: 4, left: 7, right: 7 };
+          },
+          color: ctx => {
+            const i = ctx.dataIndex;
+            if (i === 3 || i === 4)  return '#b45309';
+            if (i === 15 || i === 16) return '#b91c1c';
+            return C.purple;
+          },
+          font: ctx => {
+            const i = ctx.dataIndex;
+            return (i === 3 || i === 4 || i === 15 || i === 16)
+              ? { weight: 800, size: 11 }
+              : { weight: 800, size: 14 };
+          },
           formatter: v => v == null ? '' : v.toFixed(2) + '%'
         }
       },
