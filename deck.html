@@ -1733,8 +1733,8 @@
 
       <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
         <div style="font-size: 10.5px; font-weight: 700; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px">#2 · One PM cancellation event</div>
-        <div style="font-size: 15px; font-weight: 800; color: #162050; line-height: 1.3; margin-bottom: 6px">+271 leases lost  ·  cancelled May 18</div>
-        <div style="font-size: 12px; color: var(--muted); line-height: 1.55">A single PM (<code style="font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 4px; border-radius: 3px">656df0...</code>) cancelled their DoorLoop subscription mid-May → 271 leases churned at once. Total db_tenant churn <strong style="color: var(--text)">+35% MoM, +227% YoY</strong>.</div>
+        <div style="font-size: 15px; font-weight: 800; color: #162050; line-height: 1.3; margin-bottom: 6px"><strong>Shelter Rock</strong>  ·  277 paid leases lost  ·  cancelled May 18</div>
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.55"><strong style="color: var(--text)">Biggest single-PM cancellation in 12 months</strong> (next largest: John King / Realty Zero at 220, Dec '25). Total db_tenant churn <strong style="color: var(--text)">+35% MoM, +227% YoY</strong>.</div>
         <div style="margin-top: 8px; padding: 6px 10px; background: rgba(220,38,38,0.08); border-radius: 4px; font-size: 11px; color: #b91c1c; font-weight: 700">65% of the db_tenant MoM increase · concentrated event</div>
       </div>
 
@@ -1759,7 +1759,18 @@
 <script>
 // Slide 5 · Reactivated leases monthly · Sep '25 → May '26
 // Highlights April as the year-high outlier (calendar-unwind from March's compressed cycle)
+// Reactivated leases, Jan '25 → May '26 (17 months) — extended for seasonality
+// Apr '25 (idx 3) + Apr '26 (idx 15) highlighted amber/red (peaks)
+// May '25 (idx 4) + May '26 (idx 16) highlighted to match slide 4
 const reactivationHistory = [
+  { m: "Jan '25", v: 5033 },
+  { m: "Feb '25", v: 4714 },
+  { m: "Mar '25", v: 4548 },
+  { m: "Apr '25", v: 5907 },
+  { m: "May '25", v: 4779 },
+  { m: "Jun '25", v: 5769 },
+  { m: "Jul '25", v: 6006 },
+  { m: "Aug '25", v: 6467 },
   { m: "Sep '25", v: 6118 },
   { m: "Oct '25", v: 6335 },
   { m: "Nov '25", v: 6236 },
@@ -1775,8 +1786,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof Chart === 'undefined') return;
   const el = document.getElementById('chart-reactivation-history');
   if (!el) return;
-  const aprIdx = reactivationHistory.findIndex(d => d.m === "Apr '26");
-  const mayIdx = reactivationHistory.findIndex(d => d.m === "May '26");
+  // Highlight Apr (idx 3, 15) amber + May (idx 4, 16) red — matches slide 4 seasonality treatment
+  const isApr = i => (i === 3 || i === 15);
+  const isMay = i => (i === 4 || i === 16);
+  const isHighlight = i => (isApr(i) || isMay(i));
   new Chart(el, {
     type: 'bar',
     data: {
@@ -1785,17 +1798,19 @@ document.addEventListener('DOMContentLoaded', function() {
         label: 'Reactivated leases',
         data: reactivationHistory.map(d => d.v),
         backgroundColor: reactivationHistory.map((_, i) =>
-          i === aprIdx ? 'rgba(220,38,38,0.85)'
-          : i === mayIdx ? 'rgba(22,32,80,0.85)'
-          : 'rgba(124,58,237,0.55)'
+          isApr(i) ? 'rgba(245,158,11,0.90)'      // April peak — amber
+          : isMay(i) ? 'rgba(220,38,38,0.85)'     // May reversion — red
+          : 'rgba(124,58,237,0.50)'               // others — purple
         ),
         borderRadius: 4, borderSkipped: false, borderWidth: 0,
         datalabels: {
           display: true, anchor: 'end', align: 'top', offset: 4,
-          color: ctx => ctx.dataIndex === aprIdx ? '#dc2626' : (ctx.dataIndex === mayIdx ? '#162050' : '#64748b'),
+          color: ctx => isApr(ctx.dataIndex) ? '#b45309'
+                       : isMay(ctx.dataIndex) ? '#b91c1c'
+                       : '#64748b',
           font: ctx => ({
-            weight: (ctx.dataIndex === aprIdx || ctx.dataIndex === mayIdx) ? 800 : 700,
-            size: (ctx.dataIndex === aprIdx || ctx.dataIndex === mayIdx) ? 13 : 11
+            weight: isHighlight(ctx.dataIndex) ? 800 : 700,
+            size: isHighlight(ctx.dataIndex) ? 13 : 11
           }),
           formatter: v => (v/1000).toFixed(1) + 'K'
         }
@@ -1812,8 +1827,10 @@ document.addEventListener('DOMContentLoaded', function() {
         x: {
           grid: { display: false },
           ticks: {
-            font: ctx => ({ size: 11, weight: (ctx.index === aprIdx || ctx.index === mayIdx) ? 800 : 600 }),
-            color: ctx => ctx.index === aprIdx ? '#dc2626' : (ctx.index === mayIdx ? '#162050' : '#64748b')
+            font: ctx => ({ size: 11, weight: isHighlight(ctx.index) ? 800 : 600 }),
+            color: ctx => isApr(ctx.index) ? '#b45309'
+                          : isMay(ctx.index) ? '#b91c1c'
+                          : '#64748b'
           }
         },
         y: { display: false, beginAtZero: true, grace: '15%' }
