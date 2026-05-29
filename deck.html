@@ -1830,7 +1830,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundColor: reactivationHistory.map((_, i) =>
           isApr(i) ? 'rgba(245,158,11,0.90)'      // April peak — amber
           : isMay(i) ? 'rgba(220,38,38,0.85)'     // May reversion — red
-          : 'rgba(124,58,237,0.50)'               // others — purple
+          : 'rgba(148,163,184,0.55)'              // others — light grey
         ),
         borderRadius: 4, borderSkipped: false, borderWidth: 0,
         datalabels: {
@@ -5023,6 +5023,14 @@ new Chart(document.getElementById('chart-pct-paid'), {
 // 4a. Churn breakdown by cause · monthly stacked bars · Sep '25 → May '26
 // Source: ad-hoc Snowflake (Mature + Onboarding combined) — see /tmp/churn_decomp.sql
 const churnBreakdown = [
+  { month: "Jan '25", tenant: 7111,  lease_end: 2982, db_tenant:  597 },
+  { month: "Feb '25", tenant: 7351,  lease_end: 3041, db_tenant:  704 },
+  { month: "Mar '25", tenant: 7987,  lease_end: 3237, db_tenant:  636 },
+  { month: "Apr '25", tenant: 7917,  lease_end: 3778, db_tenant:  676 },
+  { month: "May '25", tenant: 8848,  lease_end: 4629, db_tenant:  501 },
+  { month: "Jun '25", tenant: 7718,  lease_end: 5484, db_tenant:  682 },
+  { month: "Jul '25", tenant: 8222,  lease_end: 5569, db_tenant:  675 },
+  { month: "Aug '25", tenant: 9186,  lease_end: 6349, db_tenant:  677 },
   { month: "Sep '25", tenant: 8224,  lease_end: 5258, db_tenant:  782 },
   { month: "Oct '25", tenant: 8628,  lease_end: 4733, db_tenant:  646 },
   { month: "Nov '25", tenant: 9257,  lease_end: 4816, db_tenant: 1036 },
@@ -5074,9 +5082,13 @@ if (document.getElementById('chart-churn-breakdown')) {
                 formatter: v => v.toLocaleString()
               },
               total: {
-                anchor: 'end', align: 'top', offset: 4,
+                anchor: 'end', align: 'end', offset: -2,
                 color: ctx => ctx.dataIndex === cbLastIdx ? '#b91c1c' : '#162050',
-                font: ctx => ({ weight: 800, size: ctx.dataIndex === cbLastIdx ? 14 : 12 }),
+                font: ctx => ({ weight: 800, size: ctx.dataIndex === cbLastIdx ? 13 : 11 }),
+                backgroundColor: 'rgba(255,255,255,0.92)',
+                borderColor: ctx => ctx.dataIndex === cbLastIdx ? '#b91c1c' : 'rgba(22,32,80,0.20)',
+                borderWidth: 1, borderRadius: 4,
+                padding: { top: 2, bottom: 2, left: 5, right: 5 },
                 formatter: (_, ctx) => {
                   const d = churnBreakdown[ctx.dataIndex];
                   return (d.tenant + d.lease_end + d.db_tenant).toLocaleString();
