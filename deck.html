@@ -1754,12 +1754,16 @@
 
     <!-- DRIVER #1 · Reactivation -->
     <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
-      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 6px">
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px">
         <div style="font-size: 16px; font-weight: 900; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.8px">Driver #1 · Reactivation</div>
         <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 9,548 → May 6,930 · <span style="color: var(--warn)">−2,618 (−27%)</span></div>
       </div>
-      <div style="font-size: 12.5px; color: var(--muted); line-height: 1.55">April was the 9-month series peak (calendar-unwind from March's compressed cycle). May at 6,930 is just slightly above the Sep-Dec baseline (~6.3K) — normalization, not weakness.</div>
-      <div class="chart-wrap" style="height: 240px; margin-top: 10px"><canvas id="chart-reactivation-history"></canvas></div>
+      <div class="chart-wrap" style="height: 240px"><canvas id="chart-reactivation-history"></canvas></div>
+
+      <!-- Insight card under chart -->
+      <div style="margin-top: 14px; padding: 14px 18px; background: rgba(124,58,237,0.06); border-left: 4px solid var(--purple); border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text)">
+        April was the 9-month series peak (calendar-unwind from March's compressed cycle). May at 6,930 is just slightly above the Sep-Dec baseline (~6.3K) — <strong style="color: var(--text)">normalization, not weakness</strong>.
+      </div>
     </div>
 
     <!-- DRIVER #2 · Churn -->
@@ -1769,8 +1773,9 @@
         <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 17,653 → May 20,998 · <span style="color: var(--warn)">+3,345 (+19%)</span></div>
       </div>
 
-      <div style="font-size: 12.5px; font-weight: 700; color: #475569; font-style: italic; margin: 0 0 8px; padding-left: 4px">
-        Number of leases paid in April and didn't pay in May
+      <!-- Insight card above chart -->
+      <div style="padding: 14px 18px; background: rgba(220,38,38,0.05); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text); margin: 0 0 10px">
+        Churn climbed to <strong>21.0K — highest in the 17-month series</strong> (Jan '25 onwards). Most of the lift was <strong style="color: #b45309">churn_tenant</strong> (PM + lease still active, tenant didn't pay) — corroborated by NSF rate <strong>3.20% → 3.69%</strong> credit-quality drift.
       </div>
       <div class="chart-wrap" style="height: 320px"><canvas id="chart-churn-breakdown"></canvas></div>
       <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 10px 0 0; justify-content: center">
@@ -5128,6 +5133,7 @@ if (document.getElementById('chart-churn-breakdown')) {
           backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(245,158,11,0.95)' : 'rgba(245,158,11,0.75)'),
           stack: 'churn', borderRadius: 3, borderSkipped: false, borderWidth: 0,
           datalabels: {
+            display: true,
             anchor: 'center', align: 'center',
             color: '#1e293b',
             font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11.5 }),
