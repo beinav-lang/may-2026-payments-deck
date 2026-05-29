@@ -1676,13 +1676,88 @@
   </div>
 </section>
 
+
 <!-- ============================================================ -->
-<!-- SECTION 04b · NEW ACTIVE LEASES & ELIGIBILITY                  -->
+<!-- SECTION 05 · PAID LEASES BREAKDOWN                             -->
+<!-- ============================================================ -->
+<section data-slide-title="Paid Leases Breakdown">
+  <div class="wrap">
+    <div class="chapter">
+      <div class="chapter-num">05</div>
+      <div class="chapter-meta">
+        <div class="chapter-name">Paid Leases Breakdown</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">What's underneath · MoM flow + churn watch.</h2>
+
+    <!-- May paid-lease summary card -->
+    <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px">What happened to paid leases in May</div>
+      <div style="font-size: 15px; line-height: 1.65; margin-bottom: 14px">
+        May paid leases landed at <strong>181.9K (+252 net MoM)</strong> — essentially flat despite real gains, because churn at <strong style="background: rgba(220,38,38,0.15); color: #b91c1c; padding: 1px 8px; border-radius: 4px; font-weight: 800">−21,000</strong> (highest in series) offset the inflow. <strong>Numerator barely moved · denominator grew +10K</strong> → paid % dropped 1.18pp.
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px">
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ First-time paid · Δ vs Apr</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−760</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 14,356 · vs Apr 15,116 (−5%)</div>
+        </div>
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ Reactivated · Δ vs Apr</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−2,618</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 6,930 · vs Apr 9,548 (−27%)</div>
+        </div>
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Existing (retained) · Δ vs Apr</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--green); margin-top: 2px">+3,666</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 160,689 · vs Apr 157,023 (+2.3%)</div>
+        </div>
+        <div style="padding: 10px 12px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.25); border-left: 4px solid #dc2626; border-radius: 6px">
+          <div style="font-size: 10px; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 800">− Churned · Δ vs Apr</div>
+          <div style="font-size: 20px; font-weight: 800; color: #b91c1c; margin-top: 2px">+3,345</div>
+          <div style="font-size: 10.5px; color: #b91c1c; margin-top: 2px; font-weight: 700">May 20,998 · vs Apr 17,653 · highest in series</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-shell" data-chart-breakdown-shell style="margin-top: 14px">
+      <div class="ch-title">Paid Leases breakdown</div>
+      <div class="chart-wrap" style="height:560px"><canvas id="chart-breakdown"></canvas></div>
+    </div>
+
+    <div style="margin-top:12px; padding:10px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--muted); line-height:1.6">
+      <strong style="color:var(--text)">Definitions →</strong>
+      <span style="color:var(--green); font-weight:700">Reactivated</span> = paid this month + in some prior month, not previous ·
+      <span style="color:var(--blue); font-weight:700">First-time</span> = paid for the first time ·
+      <span style="color:var(--purple); font-weight:700">Existing</span> = paid this and previous month ·
+      <span style="color:var(--warn); font-weight:700">Churned</span> = paid previous month, not this
+    </div>
+
+    <!-- Churn breakdown by cause · monthly stacked -->
+    <div style="margin-top: 16px; padding: 18px 22px; background: rgba(223,254,2,0.18); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px">Insight · what drove the May increase</div>
+      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 Churn breakdown by cause</div>
+
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11.5px; margin-bottom: 8px">
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
+      </div>
+
+      <div class="chart-wrap" style="height: 360px"><canvas id="chart-churn-breakdown"></canvas></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 06 · WHY % PAID DROPPED                                -->
 <!-- ============================================================ -->
 <section data-slide-title="Why % Paid Dropped">
   <div class="wrap">
     <div class="chapter">
-      <div class="chapter-num">05</div>
+      <div class="chapter-num">06</div>
       <div class="chapter-meta">
         <div class="chapter-name">Why % Paid Dropped MoM</div>
       </div>
@@ -1842,7 +1917,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- ============================================================ -->
-<!-- SECTION 02b · LEASE ACTIVATION COHORTS (split from Paid Leases) -->
+<!-- SECTION 07 · LEASE ACTIVATION COHORTS                          -->
 <!-- ============================================================ -->
 <section data-slide-title="Lease Activation Cohorts">
   <div class="wrap">
@@ -1936,7 +2011,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
     <div class="chapter" style="margin-bottom: 10px">
-      <div class="chapter-num">06</div>
+      <div class="chapter-num">07</div>
       <div class="chapter-meta">
         <div class="chapter-name">Lease Activation Cohorts</div>
       </div>
@@ -1995,81 +2070,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </div>
 </section>
-
-<!-- ============================================================ -->
-<!-- SECTION 06b · PAID LEASES BREAKDOWN (split from Paid Leases)   -->
-<!-- ============================================================ -->
-<section data-slide-title="Paid Leases Breakdown">
-  <div class="wrap">
-    <div class="chapter">
-      <div class="chapter-num">07</div>
-      <div class="chapter-meta">
-        <div class="chapter-name">Paid Leases Breakdown</div>
-      </div>
-    </div>
-
-    <h2 class="section-title">What's underneath · MoM flow + churn watch.</h2>
-
-    <!-- May paid-lease summary card -->
-    <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px">What happened to paid leases in May</div>
-      <div style="font-size: 15px; line-height: 1.65; margin-bottom: 14px">
-        May paid leases landed at <strong>181.9K (+252 net MoM)</strong> — essentially flat despite real gains, because churn at <strong style="background: rgba(220,38,38,0.15); color: #b91c1c; padding: 1px 8px; border-radius: 4px; font-weight: 800">−21,000</strong> (highest in series) offset the inflow. <strong>Numerator barely moved · denominator grew +10K</strong> → paid % dropped 1.18pp.
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px">
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ First-time paid · Δ vs Apr</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−760</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 14,356 · vs Apr 15,116 (−5%)</div>
-        </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ Reactivated · Δ vs Apr</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−2,618</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 6,930 · vs Apr 9,548 (−27%)</div>
-        </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Existing (retained) · Δ vs Apr</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--green); margin-top: 2px">+3,666</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 160,689 · vs Apr 157,023 (+2.3%)</div>
-        </div>
-        <div style="padding: 10px 12px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.25); border-left: 4px solid #dc2626; border-radius: 6px">
-          <div style="font-size: 10px; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 800">− Churned · Δ vs Apr</div>
-          <div style="font-size: 20px; font-weight: 800; color: #b91c1c; margin-top: 2px">+3,345</div>
-          <div style="font-size: 10.5px; color: #b91c1c; margin-top: 2px; font-weight: 700">May 20,998 · vs Apr 17,653 · highest in series</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="chart-shell" data-chart-breakdown-shell style="margin-top: 14px">
-      <div class="ch-title">Paid Leases breakdown</div>
-      <div class="chart-wrap" style="height:560px"><canvas id="chart-breakdown"></canvas></div>
-    </div>
-
-    <div style="margin-top:12px; padding:10px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--muted); line-height:1.6">
-      <strong style="color:var(--text)">Definitions →</strong>
-      <span style="color:var(--green); font-weight:700">Reactivated</span> = paid this month + in some prior month, not previous ·
-      <span style="color:var(--blue); font-weight:700">First-time</span> = paid for the first time ·
-      <span style="color:var(--purple); font-weight:700">Existing</span> = paid this and previous month ·
-      <span style="color:var(--warn); font-weight:700">Churned</span> = paid previous month, not this
-    </div>
-
-    <!-- Churn breakdown by cause · monthly stacked -->
-    <div style="margin-top: 16px; padding: 18px 22px; background: rgba(223,254,2,0.18); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px">Insight · what drove the May increase</div>
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 Churn breakdown by cause</div>
-
-      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11.5px; margin-bottom: 8px">
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
-      </div>
-
-      <div class="chart-wrap" style="height: 360px"><canvas id="chart-churn-breakdown"></canvas></div>
-    </div>
-
-  </div>
-</section>
-
 <section class="paper" data-slide-title="Card Performance · The What">
   <div class="wrap">
     <div class="chapter">
