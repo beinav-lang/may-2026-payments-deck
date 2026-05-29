@@ -5043,10 +5043,61 @@ const churnBreakdown = [
 ];
 if (document.getElementById('chart-churn-breakdown')) {
   const cbLastIdx = churnBreakdown.length - 1;
+  // Custom plugin to draw total pills above each stacked bar (Chart.js datalabels
+  // multi-label syntax was inconsistent on this version — drawing manually is reliable).
+  const churnTotalPlugin = {
+    id: 'churnTotalPill',
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea } = chart;
+      const topMeta = chart.getDatasetMeta(2); // 'churn_tenant' is the 3rd dataset (top of stack)
+      if (!topMeta || !topMeta.data) return;
+      ctx.save();
+      topMeta.data.forEach((bar, i) => {
+        const d = churnBreakdown[i];
+        if (!d) return;
+        const total = d.tenant + d.lease_end + d.db_tenant;
+        const isMay26 = i === cbLastIdx;
+        const text = total.toLocaleString();
+        const fontSize = isMay26 ? 13 : 11;
+        ctx.font = `800 ${fontSize}px Poppins, system-ui, sans-serif`;
+        const padX = 5, padY = 2;
+        const textW = ctx.measureText(text).width;
+        const pillW = textW + padX * 2;
+        const pillH = fontSize + padY * 2 + 2;
+        const x = bar.x - pillW / 2;
+        const y = bar.y - pillH - 4; // 4px above the top of the topmost bar
+        if (y < chartArea.top - 4) return; // clip if off-canvas
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.strokeStyle = isMay26 ? '#b91c1c' : 'rgba(22,32,80,0.30)';
+        ctx.lineWidth = 1;
+        const r = 4;
+        // rounded rect
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + pillW - r, y);
+        ctx.quadraticCurveTo(x + pillW, y, x + pillW, y + r);
+        ctx.lineTo(x + pillW, y + pillH - r);
+        ctx.quadraticCurveTo(x + pillW, y + pillH, x + pillW - r, y + pillH);
+        ctx.lineTo(x + r, y + pillH);
+        ctx.quadraticCurveTo(x, y + pillH, x, y + pillH - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = isMay26 ? '#b91c1c' : '#162050';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        ctx.fillText(text, x + pillW / 2, y + pillH / 2);
+      });
+      ctx.restore();
+    }
+  };
   // Order matters in Chart.js stacked bars — first dataset is at the BOTTOM of the stack.
   // db_tenant on bottom (smallest), lease_end middle, tenant on top.
   new Chart(document.getElementById('chart-churn-breakdown'), {
     type: 'bar',
+    plugins: [churnTotalPlugin],
     data: {
       labels: churnBreakdown.map(d => d.month),
       datasets: [
@@ -5074,27 +5125,10 @@ if (document.getElementById('chart-churn-breakdown')) {
           backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(245,158,11,0.95)' : 'rgba(245,158,11,0.75)'),
           stack: 'churn', borderRadius: 3, borderSkipped: false, borderWidth: 0,
           datalabels: {
-            labels: {
-              segment: {
-                anchor: 'center', align: 'center',
-                color: '#1e293b',
-                font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11.5 }),
-                formatter: v => v.toLocaleString()
-              },
-              total: {
-                anchor: 'end', align: 'end', offset: -2,
-                color: ctx => ctx.dataIndex === cbLastIdx ? '#b91c1c' : '#162050',
-                font: ctx => ({ weight: 800, size: ctx.dataIndex === cbLastIdx ? 13 : 11 }),
-                backgroundColor: 'rgba(255,255,255,0.92)',
-                borderColor: ctx => ctx.dataIndex === cbLastIdx ? '#b91c1c' : 'rgba(22,32,80,0.20)',
-                borderWidth: 1, borderRadius: 4,
-                padding: { top: 2, bottom: 2, left: 5, right: 5 },
-                formatter: (_, ctx) => {
-                  const d = churnBreakdown[ctx.dataIndex];
-                  return (d.tenant + d.lease_end + d.db_tenant).toLocaleString();
-                }
-              }
-            }
+            anchor: 'center', align: 'center',
+            color: '#1e293b',
+            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11.5 }),
+            formatter: v => v.toLocaleString()
           }
         }
       ]
