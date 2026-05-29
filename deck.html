@@ -1661,7 +1661,6 @@
     </div>
 
     <div class="chart-shell">
-      <div class="ch-title">Total active leases</div>
       <div class="chart-wrap" style="height:520px"><canvas id="chart-pct-paid"></canvas></div>
     </div>
 
@@ -5016,11 +5015,11 @@ new Chart(document.getElementById('chart-pct-paid'), {
     ]
   },
   options: baseOpts({
-    layout: { padding: { top: 32, right: 20, bottom: 10, left: 8 } },
+    layout: { padding: { top: 8, right: 20, bottom: 10, left: 8 } },
     plugins: {
       legend: {
         display: true, position: 'top', align: 'center',
-        labels: { boxWidth: 18, boxHeight: 14, font: { size: 14, weight: 800 }, padding: 18, color: '#162050', usePointStyle: true, pointStyle: 'rect' }
+        labels: { boxWidth: 18, boxHeight: 14, font: { size: 14, weight: 800 }, padding: 14, color: '#162050', usePointStyle: true, pointStyle: 'rect' }
       }
     },
     scales: {
