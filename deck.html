@@ -1734,19 +1734,6 @@
       <span style="color:var(--warn); font-weight:700">Churned</span> = paid previous month, not this
     </div>
 
-    <!-- Churn breakdown by cause · monthly stacked -->
-    <div style="margin-top: 16px; padding: 18px 22px; background: rgba(223,254,2,0.18); border-left: 5px solid #162050; border-radius: 8px; font-size: 14px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 4px">Insight · what drove the May increase</div>
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 10px; line-height: 1.4">💡 Churn breakdown by cause</div>
-
-      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11.5px; margin-bottom: 8px">
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 12px; height: 12px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
-      </div>
-
-      <div class="chart-wrap" style="height: 360px"><canvas id="chart-churn-breakdown"></canvas></div>
-    </div>
 
   </div>
 </section>
@@ -1763,69 +1750,32 @@
       </div>
     </div>
 
-    <h2 class="section-title">April was the outlier, not May. Calendar-driven reactivation peak reverted to baseline — plus two real structural watch-items.</h2>
+    <h2 class="section-title">Two drivers: reactivation reverted to baseline · churn spiked +19%.</h2>
 
-    <!-- Quick math card -->
-    <div style="margin-top: 14px; padding: 16px 20px; background: linear-gradient(135deg, rgba(22,32,80,0.05) 0%, rgba(124,58,237,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; color: var(--text)">
-      <div style="font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px">Quick math · Apr 48.06% → May 46.88% (−1.18pp)</div>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px">
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--warn); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Active denominator</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−1.25pp</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">+10.1K active leases (+2.7%) · mostly Mature acquisition</div>
-        </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Paid numerator</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--green); margin-top: 2px">+0.07pp</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">+252 paid leases (181.7K → 181.9K)</div>
-        </div>
-        <div style="padding: 10px 12px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.20); border-left: 3px solid #dc2626; border-radius: 6px">
-          <div style="font-size: 10px; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 800">Net MoM</div>
-          <div style="font-size: 18px; font-weight: 800; color: #b91c1c; margin-top: 2px">−1.18pp</div>
-          <div style="font-size: 10.5px; color: #b91c1c; margin-top: 2px; font-weight: 700">Denominator outran the numerator</div>
-        </div>
+    <!-- DRIVER #1 · Reactivation -->
+    <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px">
+        <div style="font-size: 11px; font-weight: 700; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.6px">Driver #1 · Reactivation</div>
+        <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 9,548 → May 6,930 · <span style="color: var(--warn)">−2,618 (−27%)</span></div>
       </div>
+      <div style="font-size: 12.5px; color: var(--muted); line-height: 1.55">April was the 9-month series peak (calendar-unwind from March's compressed cycle). May at 6,930 is just slightly above the Sep-Dec baseline (~6.3K) — normalization, not weakness.</div>
+      <div class="chart-wrap" style="height: 240px; margin-top: 10px"><canvas id="chart-reactivation-history"></canvas></div>
     </div>
 
-    <!-- Reactivation history chart · shows April as outlier -->
-    <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">Reactivated leases · monthly · Sep '25 → May '26</div>
-      <div style="font-size: 11px; color: var(--muted); margin-top: -4px; margin-bottom: 6px">
-        <strong style="color: var(--text)">Reactivated</strong> = paid this cycle, not last, but paid in some earlier cycle. Sensitive to calendar effects (compressed/expanded cycles push tenants between months).
+    <!-- DRIVER #2 · Churn -->
+    <div style="margin-top: 16px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px">
+        <div style="font-size: 11px; font-weight: 700; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.6px">Driver #2 · Churn</div>
+        <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 17,653 → May 20,998 · <span style="color: var(--warn)">+3,345 (+19%)</span></div>
       </div>
-      <div class="chart-wrap" style="height: 240px"><canvas id="chart-reactivation-history"></canvas></div>
-    </div>
+      <div style="font-size: 12.5px; color: var(--muted); line-height: 1.55"><strong style="color: var(--text)">Shelter Rock</strong> cancelled May 18 = 277 leases (biggest single-PM cancel in 12 months). Tenant_churn baseline +19% real MoM after late-pay correction. <strong style="color: var(--text)">NSF rate 3.20% → 3.69%</strong> corroborates the credit-quality drift.</div>
 
-    <!-- Three driver cards -->
-    <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px">
-
-      <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
-        <div style="font-size: 10.5px; font-weight: 700; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px">#1 · Reactivation reverted to baseline</div>
-        <div style="font-size: 15px; font-weight: 800; color: #162050; line-height: 1.3; margin-bottom: 6px">Apr 9,548 → May 6,930  ·  −2,618 (−27%)</div>
-        <div style="font-size: 12px; color: var(--muted); line-height: 1.55">April was the <strong style="color: var(--text)">9-month series peak</strong> (calendar-unwind from March's compressed cycle). May at 6,930 is just slightly above the Sep-Dec baseline (~6.3K).</div>
-        <div style="margin-top: 8px; padding: 6px 10px; background: rgba(124,58,237,0.10); border-radius: 4px; font-size: 11px; color: #6d28d9; font-weight: 700">~77% of the inflow drop · normalization, not weakness</div>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 10px 0 6px">
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
       </div>
-
-      <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
-        <div style="font-size: 10.5px; font-weight: 700; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px">#2 · One PM cancellation event</div>
-        <div style="font-size: 15px; font-weight: 800; color: #162050; line-height: 1.3; margin-bottom: 6px"><strong>Shelter Rock</strong>  ·  277 paid leases lost  ·  cancelled May 18</div>
-        <div style="font-size: 12px; color: var(--muted); line-height: 1.55"><strong style="color: var(--text)">Biggest single-PM cancellation in 12 months</strong> (next largest: John King / Realty Zero at 220, Dec '25). Total db_tenant churn <strong style="color: var(--text)">+35% MoM, +227% YoY</strong>.</div>
-        <div style="margin-top: 8px; padding: 6px 10px; background: rgba(220,38,38,0.08); border-radius: 4px; font-size: 11px; color: #b91c1c; font-weight: 700">65% of the db_tenant MoM increase · concentrated event</div>
-      </div>
-
-      <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--warn); border-radius: 8px">
-        <div style="font-size: 10.5px; font-weight: 700; color: #b45309; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px">#3 · Tenant-churn baseline drift</div>
-        <div style="font-size: 15px; font-weight: 800; color: #162050; line-height: 1.3; margin-bottom: 6px">+19% real MoM  ·  +0.49pp NSF rate</div>
-        <div style="font-size: 12px; color: var(--muted); line-height: 1.55">Headline tenant_churn +24% MoM. After late-pay reclassification (~49% historical), real underlying growth is <strong style="color: var(--text)">~+19%</strong>. NSF rate 3.20% → 3.69% corroborates a credit-quality drift.</div>
-        <div style="margin-top: 8px; padding: 6px 10px; background: rgba(245,158,11,0.10); border-radius: 4px; font-size: 11px; color: #b45309; font-weight: 700">Real signal · watch alongside NSF rate</div>
-      </div>
-
-    </div>
-
-    <!-- Bottom line insight -->
-    <div style="margin-top: 16px; padding: 16px 22px; background: rgba(223,254,2,0.22); border-left: 5px solid #162050; border-radius: 8px; font-size: 13.5px; color: var(--text); line-height: 1.65">
-      <div style="font-size: 14.5px; font-weight: 800; color: #162050; margin-bottom: 6px">💡 Bottom line · April was inflated, not May weak. Real underlying growth ≈ +1,700 paid leases.</div>
-      <p style="margin: 4px 0 0">Strip April's calendar-driven reactivation surplus (~+2,500 above baseline) and the underlying engine still added ~+2,750 paid leases — still below the 12-month average (~+4-5K/mo) but materially better than the headline +252 suggests. The slowdown vs that 12-mo average is <strong>structural churn drift</strong> (~−1,065 real) — concentrated in one PM event + a broader credit-quality signal that matches the NSF uptick.</p>
+      <div class="chart-wrap" style="height: 320px"><canvas id="chart-churn-breakdown"></canvas></div>
     </div>
 
   </div>
