@@ -1764,18 +1764,23 @@
 
     <!-- DRIVER #2 · Churn -->
     <div style="margin-top: 16px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
-      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 10px">
         <div style="font-size: 11px; font-weight: 700; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.6px">Driver #2 · Churn</div>
         <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 17,653 → May 20,998 · <span style="color: var(--warn)">+3,345 (+19%)</span></div>
       </div>
-      <div style="font-size: 12.5px; color: var(--muted); line-height: 1.55"><strong style="color: var(--text)">Shelter Rock</strong> cancelled May 18 = 277 leases (biggest single-PM cancel in 12 months). Tenant_churn baseline +19% real MoM after late-pay correction. <strong style="color: var(--text)">NSF rate 3.20% → 3.69%</strong> corroborates the credit-quality drift.</div>
 
-      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 10px 0 6px">
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 0 0 6px">
         <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
         <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
         <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
       </div>
-      <div class="chart-wrap" style="height: 320px"><canvas id="chart-churn-breakdown"></canvas></div>
+      <div class="chart-wrap" style="height: 340px"><canvas id="chart-churn-breakdown"></canvas></div>
+
+      <!-- Insight callout: Shelter Rock -->
+      <div style="margin-top: 14px; padding: 14px 18px; background: rgba(220,38,38,0.06); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text)">
+        <div style="font-size: 11px; font-weight: 800; color: #b91c1c; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px">🚨 Shelter Rock · cancelled May 18</div>
+        <div><strong style="color: #162050; font-size: 14px">277 paid leases lost</strong> — all 277 paid in April, then <strong style="color: var(--text)">zero</strong> paid in May after the PM cancelled their DoorLoop subscription. <strong style="color: var(--text)">Biggest single-PM cancellation in 12 months</strong> (next largest: John King / Realty Zero · 220 leases · Dec '25).</div>
+      </div>
     </div>
 
   </div>
@@ -5061,10 +5066,23 @@ if (document.getElementById('chart-churn-breakdown')) {
           backgroundColor: churnBreakdown.map((_,i) => i === cbLastIdx ? 'rgba(245,158,11,0.95)' : 'rgba(245,158,11,0.75)'),
           stack: 'churn', borderRadius: 3, borderSkipped: false, borderWidth: 0,
           datalabels: {
-            display: true, anchor: 'center', align: 'center',
-            color: '#1e293b',
-            font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11.5 }),
-            formatter: v => v.toLocaleString()
+            labels: {
+              segment: {
+                anchor: 'center', align: 'center',
+                color: '#1e293b',
+                font: ctx => ({ weight: ctx.dataIndex === cbLastIdx ? 800 : 700, size: 11.5 }),
+                formatter: v => v.toLocaleString()
+              },
+              total: {
+                anchor: 'end', align: 'top', offset: 4,
+                color: ctx => ctx.dataIndex === cbLastIdx ? '#b91c1c' : '#162050',
+                font: ctx => ({ weight: 800, size: ctx.dataIndex === cbLastIdx ? 14 : 12 }),
+                formatter: (_, ctx) => {
+                  const d = churnBreakdown[ctx.dataIndex];
+                  return (d.tenant + d.lease_end + d.db_tenant).toLocaleString();
+                }
+              }
+            }
           }
         }
       ]
