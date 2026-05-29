@@ -1758,12 +1758,11 @@
         <div style="font-size: 16px; font-weight: 900; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.8px">Driver #1 · Reactivation</div>
         <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 9,548 → May 6,930 · <span style="color: var(--warn)">−2,618 (−27%)</span></div>
       </div>
-      <div class="chart-wrap" style="height: 240px"><canvas id="chart-reactivation-history"></canvas></div>
-
-      <!-- Insight card under chart -->
-      <div style="margin-top: 14px; padding: 14px 18px; background: rgba(124,58,237,0.06); border-left: 4px solid var(--purple); border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text)">
+      <!-- Insight card above chart -->
+      <div style="padding: 14px 18px; background: rgba(124,58,237,0.06); border-left: 4px solid var(--purple); border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text); margin: 0 0 10px">
         April was the 9-month series peak (calendar-unwind from March's compressed cycle). May at 6,930 is just slightly above the Sep-Dec baseline (~6.3K) — <strong style="color: var(--text)">normalization, not weakness</strong>.
       </div>
+      <div class="chart-wrap" style="height: 240px"><canvas id="chart-reactivation-history"></canvas></div>
     </div>
 
     <!-- DRIVER #2 · Churn -->
@@ -1775,7 +1774,7 @@
 
       <!-- Insight card above chart -->
       <div style="padding: 14px 18px; background: rgba(220,38,38,0.05); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text); margin: 0 0 10px">
-        Churn climbed to <strong>21.0K — highest in the 17-month series</strong> (Jan '25 onwards). Most of the lift was <strong style="color: #b45309">churn_tenant</strong> (PM + lease still active, tenant didn't pay) — corroborated by NSF rate <strong>3.20% → 3.69%</strong> credit-quality drift.
+        Churn climbed to <strong>21.0K — highest in the 17-month series</strong> (Jan '25 onwards). Biggest % surge: <strong style="color: #b91c1c">churn_db_tenant +36% MoM, +227% YoY</strong> (PM cancellations, led by Shelter Rock). Tenant_churn contributed the largest absolute count (<strong>+2,535 leases</strong>) — corroborated by NSF rate <strong>3.20% → 3.69%</strong> credit-quality drift.
       </div>
       <div class="chart-wrap" style="height: 320px"><canvas id="chart-churn-breakdown"></canvas></div>
       <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 10px 0 0; justify-content: center">
