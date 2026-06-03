@@ -234,7 +234,18 @@
   h2.section-title em { font-style: normal; color: var(--warn); font-weight: 800; }
   h2.section-title .accent { color: var(--blue); font-weight: 800; }
 
-  /* Slide-number tag — faded big number above the eyebrow, no lines */
+  /* Slide head — thin top rule + slide number on the LEFT of the eyebrow */
+  .slide-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-top: 1px solid rgba(22, 32, 80, 0.12);
+    padding-top: 14px;
+    margin-bottom: 12px;
+  }
+  .slide-head .title-eyebrow { margin-bottom: 0; }
+
+  /* Slide-number tag — faded big number, no lines on its own */
   .slide-num {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 56px;
@@ -245,6 +256,7 @@
     margin-bottom: 8px;
     display: block;
   }
+  .slide-head .slide-num { margin-bottom: 0; }
   body.slide-mode .slide-num { font-size: 44px; }
 
   /* "DEFINITION" eyebrow above a section-title — small uppercase blue label */
@@ -1161,7 +1173,7 @@
 
 <header class="cover" data-slide-title="Executive Summary">
   <div class="wrap">
-    <div class="slide-num">02</div>
+    <div class="slide-head"><div class="slide-num">02</div><div class="title-eyebrow">Executive Summary</div></div>
     <h1>May gave back April's gain — <em>paid % fell 1.18pp to 46.88%</em>: active jumped +10K but paid count barely moved (+252). The PM-side engine quietly hit a new high.</h1>
     <div class="tldr">
       <div class="tldr-label">TL;DR</div>
@@ -1436,8 +1448,7 @@
 
 <section class="tight" data-slide-title="Planned vs Actual">
   <div class="wrap">
-    <div class="slide-num">03</div>
-      <div class="title-eyebrow warn">Planned vs Actual · May 2026</div>
+    <div class="slide-head"><div class="slide-num">03</div><div class="title-eyebrow warn">Planned vs Actual</div></div>
     <h2 class="section-title">ARR missed plan by <span class="title-accent red">$649K</span> — the unit miss, not take rate.</h2>
 
     <!-- Headline plan-vs-actual stats · 5 metrics -->
@@ -1446,31 +1457,31 @@
         <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">May ARR</div>
         <div style="font-size: 24px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 4px">$15.59M</div>
         <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan $16.24M</div>
-        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c">−$649K · 96.0%</div>
+        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−$649K · 96.0%</div>
       </div>
       <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
         <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">Net New Price Units</div>
         <div style="font-size: 24px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 4px">6,143</div>
         <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan 19,883</div>
-        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c">−13,740 · 30.9%</div>
+        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−13,740 · 30.9%</div>
       </div>
       <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
         <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">Total Price Units</div>
         <div style="font-size: 24px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 4px">505,087</div>
         <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan 543,123</div>
-        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c">−38,036 · 93.0%</div>
+        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−38,036 · 93.0%</div>
       </div>
       <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
         <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Card</div>
         <div style="font-size: 24px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 4px">17.43%</div>
         <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan 18.26%</div>
-        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c">−0.83pp · 95.5%</div>
+        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−0.83pp · 95.5%</div>
       </div>
       <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
         <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">Card Volume</div>
         <div style="font-size: 24px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 4px">$54.10M</div>
         <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan $57.29M</div>
-        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c">−$3.19M · 94.4%</div>
+        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−$3.19M · 94.4%</div>
       </div>
     </div>
 
@@ -1818,8 +1829,7 @@
 <section data-slide-title="Active Leases Overview">
   <div class="wrap">
     <div style="margin-bottom: 18px">
-      <div class="slide-num">04</div>
-      <div class="title-eyebrow">Active Leases · % Paid</div>
+      <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">Active Leases Overview</div></div>
       <h2 class="section-title">% Paid dropped <span class="title-accent red">−1.18pp MoM</span> — still +1.07pp vs plan.</h2>
     </div>
 
@@ -1866,8 +1876,7 @@
 <!-- ============================================================ -->
 <section data-slide-title="Paid Leases Breakdown">
   <div class="wrap">
-    <div class="slide-num">05</div>
-      <div class="title-eyebrow">Paid Leases · Breakdown</div>
+    <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Paid Leases Breakdown</div></div>
     <h2 class="section-title">Paid leases held <span class="title-accent">flat</span> — +252 net MoM, churn at a series high.</h2>
 
     <!-- May paid-lease summary card -->
@@ -1922,8 +1931,7 @@
 <!-- ============================================================ -->
 <section data-slide-title="Why % Paid Leases Dropped">
   <div class="wrap">
-    <div class="slide-num">06</div>
-      <div class="title-eyebrow warn">Why % Paid Leases Dropped</div>
+    <div class="slide-head"><div class="slide-num">06</div><div class="title-eyebrow warn">Why % Paid Leases Dropped</div></div>
     <h2 class="section-title">Two drivers: reactivation reverted · churn <span class="title-accent red">+19%</span>.</h2>
 
     <!-- DRIVER #1 · Reactivation -->
@@ -2147,8 +2155,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
     <div>
-      <div class="slide-num">07</div>
-      <div class="title-eyebrow">Lease Activation · Cohort Heatmap</div>
+      <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Lease Activation Cohorts</div></div>
       <h2 class="section-title" style="margin-bottom:0">Reactivations −27% + churn +19% = <span class="title-accent red">May's −1.18pp</span>.</h2>
     </div>
 
@@ -2205,8 +2212,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The What">
   <div class="wrap">
     <div style="margin-top: 28px">
-      <div class="slide-num">08</div>
-      <div class="title-eyebrow green">Card Performance · The What</div>
+      <div class="slide-head"><div class="slide-num">08</div><div class="title-eyebrow green">Card Performance · The What</div></div>
       <h2 class="section-title">First-time tenants <span class="title-accent">rebounded</span> in May (+2.3pp) — slide broken.</h2>
     </div>
 
@@ -2263,8 +2269,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
-    <div class="slide-num">09</div>
-      <div class="title-eyebrow muted">Card Performance · The Why · Last fully-settled: April 2026</div>
+    <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow muted">Card Performance · The Why</div></div>
     <h2 class="section-title">Inflow is shifting <span class="title-accent red">out of the sweet-spot</span> — and a tail of PMs is ACH-only.</h2>
 
     <!-- Two-column layout: each side has an explainer card above its chart -->
@@ -2402,8 +2407,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
     <div>
-      <div class="slide-num">10</div>
-      <div class="title-eyebrow">Payment Retention · Eligibility-Adjusted</div>
+      <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Payment Retention Cohort</div></div>
       <h2 class="section-title" style="margin-bottom:0">Card-first cohorts churn <span class="title-accent red">2× faster</span> than ACH — even after stripping lease churn.</h2>
     </div>
 
@@ -2786,8 +2790,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section class="paper" data-slide-title="NSF">
   <div class="wrap">
-    <div class="slide-num">11</div>
-      <div class="title-eyebrow warn">NSF · May 2026</div>
+    <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow warn">NSF</div></div>
     <h2 class="section-title">NSF ARR <span class="title-accent">doubled YoY</span> — rate ticked up to 3.69%.</h2>
 
     <!-- May headline summary card -->
@@ -2853,8 +2856,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </style>
   <div class="wrap">
     <div style="margin-bottom: 14px">
-      <div class="slide-num">12</div>
-      <div class="title-eyebrow warn">Churned Accounts · May 2026</div>
+      <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow warn">Churned Accounts</div></div>
       <h2 class="section-title" style="margin-bottom: 0">Lost ARR re-accelerated <span class="title-accent red">+23% MoM</span> — count holds the plateau.</h2>
 
       <div style="margin-top: 12px; padding:16px 22px; background:#fff; border:1px solid var(--border); border-left:5px solid var(--orange); border-radius:12px">
@@ -2890,8 +2892,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section data-slide-title="First Time Paying Tenants">
   <div class="wrap">
     <div style="margin-top: 18px">
-      <div class="slide-num">13</div>
-      <div class="title-eyebrow muted">Placeholder · Next Cycle</div>
+      <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow muted">First Time Paying Tenants</div></div>
       <h2 class="section-title">First Time Paying Tenants.</h2>
     </div>
 
@@ -3560,8 +3561,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <section class="paper">
   <div class="wrap">
-    <div class="slide-num">14</div>
-      <div class="title-eyebrow">PM Adoption · Data Findings</div>
+    <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">PM Adoption · Data Findings</div></div>
     <h2 class="section-title">Adoption is a <span class="title-accent">setup problem</span>, not a size problem — 0.94-AUC risk score.</h2>
 
     <details class="methodology-collapse">
@@ -3834,8 +3834,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Funnel Methodology">
   <div class="wrap">
-    <div class="slide-num">15</div>
-      <div class="title-eyebrow">Methodology</div>
+    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Funnel Methodology</div></div>
     <h2 class="section-title">From lease activation to <span class="title-accent">payment retention</span>.</h2>
 
     <style>
@@ -4013,8 +4012,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap">
       <div>
-        <div class="slide-num">16</div>
-      <div class="title-eyebrow">Lease Funnel</div>
+        <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Lease Funnel</div></div>
         <h2 class="section-title" style="margin: 0">Where leases <span class="title-accent red">drop off</span> — invite, activation, payment, retention.</h2>
         <div style="font-size: 11px; color: var(--muted); margin-top: 4px; font-style: italic">
           Refreshed May 10, 2026 from <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">kpi_dashboard_v2.sql</code> · <strong style="color: var(--text); font-style: normal">Ex-re-tenants</strong> (re-tenant leases stripped from all months &amp; stages).
@@ -4228,7 +4226,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section>
   <div class="wrap">
-    <div class="slide-num">17</div>
+    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Action Items</div></div>
     <div class="q2-frame">
       <div class="q2-frame-header">
         <h2>Four Q2 levers to lift payments revenue</h2>
