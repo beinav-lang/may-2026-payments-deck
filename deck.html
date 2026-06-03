@@ -2704,49 +2704,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<!-- ============================================================ -->
-<!-- SECTION · RESEARCH APPROACH (PM card adoption)               -->
-<!-- ============================================================ -->
-<style>
-  .rp-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 26px 24px 28px;
-    position: relative;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-    display: flex;
-    flex-direction: column;
-  }
-  .rp-status {
-    position: absolute; top: 18px; right: 18px;
-    padding: 5px 14px; border-radius: 8px;
-    font-size: 11px; font-weight: 800;
-    letter-spacing: 0.3px;
-  }
-  .rp-status.live { border: 1.5px solid #16a34a; color: #16a34a; background: #f0fdf4; }
-  .rp-status.done { background: #166534; color: #fff; border: 1.5px solid #166534; }
-  .rp-status.wip  { border: 1.5px solid #ea580c; color: #ea580c; background: #fff7ed; }
-  .rp-num {
-    font-size: 40px; font-weight: 800; color: #16a34a;
-    line-height: 1; margin-bottom: 14px; letter-spacing: -1px;
-  }
-  .rp-title {
-    font-size: 19px; font-weight: 800; color: var(--text);
-    line-height: 1.2; margin-bottom: 4px;
-  }
-  .rp-subtitle {
-    font-size: 12px; font-weight: 800; color: var(--blue);
-    text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 18px;
-  }
-  .rp-list {
-    font-size: 13.5px; line-height: 1.55; color: var(--text);
-    padding-left: 20px; margin: 0;
-  }
-  .rp-list li { margin-bottom: 10px; }
-  .rp-list li:last-child { margin-bottom: 0; }
-  .rp-list a { color: var(--blue); font-weight: 700; text-decoration: underline; }
-</style>
 
 <section data-slide-title="Churned Accounts">
   <style>
@@ -2775,12 +2732,12 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="chapter-name">Churned Accounts</div>
         </div>
       </div>
-      <h2 class="section-title" style="margin-bottom: 0">Lost ARR pulled back from the March peak — <span class="accent">but account count held flat</span> at the 6-month plateau. <span style="color: var(--muted); font-size: 0.55em; letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 6px; font-weight: 600">Last fully-settled month: April 2026</span></h2>
+      <h2 class="section-title" style="margin-bottom: 0">May churn ticked up — <span class="accent">$232K lost ARR (+23% MoM)</span>, count at 130 (+2 MoM vs the 128 plateau). <span style="color: var(--muted); font-size: 0.55em; letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 6px; font-weight: 600">May 2026 cycle</span></h2>
 
       <div style="margin-top: 12px; padding:16px 22px; background:#fff; border:1px solid var(--border); border-left:5px solid var(--orange); border-radius:12px">
         <div style="font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:1.3px; color:var(--orange); margin-bottom:8px">⚠ The story</div>
         <p style="font-size:14px; line-height:1.65; color:var(--muted); margin:0">
-          April churn is <strong style="color:var(--text)">flat MoM on count (128) but down 25% on ARR</strong> — the difference is $/account ($1.96K Mar → $1.47K Apr). Volume hasn't improved; we just lost a less-expensive cohort this month. <strong style="color:var(--text)">YoY +30%</strong> on both accounts and ARR is the harder signal — the elevated churn baseline is structural, not seasonal.
+          May churn count holds the 6-month plateau (130 vs Apr 128, Mar 128) — <strong style="color:var(--text)">but lost ARR re-accelerated $188K → $232K (+23% MoM)</strong>. $/account climbed back to <strong style="color:var(--text)">$1.78K</strong> (Apr was the unusually low $/account month at $1.47K). <strong style="color:var(--text)">YoY +28%</strong> on count, <strong style="color:var(--text)">+42% on ARR</strong> — the elevated churn baseline is sticky, not transient.
         </p>
       </div>
 
@@ -2804,62 +2761,26 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-<section data-slide-title="PM Adoption · Research Approach">
+<!-- ============================================================ -->
+<!-- SECTION 13 · FIRST-TIME PAYING TENANTS (placeholder)         -->
+<!-- ============================================================ -->
+<section data-slide-title="First Time Paying Tenants">
   <div class="wrap">
     <div class="chapter">
       <div class="chapter-num">13</div>
       <div class="chapter-meta">
-        <div class="chapter-name">PM Adoption · Research Approach</div>
+        <div class="chapter-name">First Time Paying Tenants</div>
       </div>
     </div>
 
     <div style="margin-top: 18px">
-      <h2 class="section-title">Three lenses on the same question · <em>What PMs say · what the data shows · the nuance.</em></h2>
-      <p class="lede">
-        To understand why card adoption diverges across PMs, we triangulate. Each lens answers a different question — together they tell us where to intervene and how.
-      </p>
+      <h2 class="section-title">First Time Paying Tenants</h2>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px">
-      <!-- Card 1: Qualitative Survey -->
-      <div class="rp-card">
-        <span class="rp-status live">Live</span>
-        <div class="rp-num">1</div>
-        <div class="rp-title">Qualitative Survey</div>
-        <div class="rp-subtitle">What PMs say</div>
-        <ul class="rp-list">
-          <li>Survey PMs across the high and low adoption</li>
-          <li>Uncover what high-adoption PMs did differently (mandated portal, stopped accepting checks, etc.)</li>
-          <li>Surface blockers for low-adoption PMs — trust, setup.</li>
-          <li><a href="#">Survey Strategy</a></li>
-        </ul>
-      </div>
-
-      <!-- Card 2: Data Investigation -->
-      <div class="rp-card">
-        <span class="rp-status done">Done</span>
-        <div class="rp-num">2</div>
-        <div class="rp-title">Data Investigation</div>
-        <div class="rp-subtitle">What the data shows</div>
-        <ul class="rp-list">
-          <li>Find behavioral signatures of high-adoption PMs in product data</li>
-          <li>Did they invite tenants earlier? Use specific features alongside payments?</li>
-          <li>Build a repeatable signal → proactive nudges &amp; onboarding interventions</li>
-        </ul>
-      </div>
-
-      <!-- Card 3: User Interviews -->
-      <div class="rp-card">
-        <span class="rp-status wip">WIP</span>
-        <div class="rp-num">3</div>
-        <div class="rp-title">User Interviews</div>
-        <div class="rp-subtitle">The nuance layer</div>
-        <ul class="rp-list">
-          <li>1:1 with PMs on both ends of the spectrum</li>
-          <li>High-adoption: uncover the mindset, moments, and decisions that got them there</li>
-          <li>Low-adoption: understand real blockers — tenant resistance, product confidence, or awareness</li>
-        </ul>
-      </div>
+    <!-- Placeholder content area — to be filled with FT-tenant analysis -->
+    <div style="margin-top: 80px; padding: 80px 40px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 12px; text-align: center">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: var(--muted)">Placeholder</div>
+      <div style="font-size: 15px; color: var(--muted); margin-top: 10px; line-height: 1.6">Content to be added in a follow-up cycle.</div>
     </div>
   </div>
 </section>
@@ -4559,7 +4480,8 @@ const churnedAccounts = [
   { month:"Jan 26", accts: 135, arr: 199 },
   { month:"Feb 26", accts: 138, arr: 199 },
   { month:"Mar 26", accts: 128, arr: 251 },
-  { month:"Apr 26", accts: 128, arr: 188 }
+  { month:"Apr 26", accts: 128, arr: 188 },
+  { month:"May 26", accts: 130, arr: 232 }
 ];
 
 const cardAdoption = [
