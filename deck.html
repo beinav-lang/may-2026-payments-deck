@@ -2270,95 +2270,73 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow muted">Card Performance · The Why</div></div>
-    <h2 class="section-title">Inflow is shifting <span class="title-accent red">out of the sweet-spot</span> — and a tail of PMs is ACH-only.</h2>
+    <h2 class="section-title">May's +1.9pp card rebound is <span class="title-accent red">PM-mix noise</span> — not an adoption signal.</h2>
+    <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1000px">
+      Aggregate FT card share is a <strong style="color: var(--text)">portfolio-weighted average</strong>. With Costello-scale PMs swinging it ±1pp on their own, the metric is <strong style="color: var(--text)">unreadable for tenant-behaviour questions at monthly resolution</strong>.
+    </p>
 
-    <!-- Two-column layout: each side has an explainer card above its chart -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px">
-
-      <!-- LEFT column: Rent-mix shift -->
-      <div style="display: flex; flex-direction: column; gap: 12px">
-        <div style="padding: 12px 16px; background: rgba(255,73,152,0.08); border-left: 4px solid #ff4998; border-radius: 6px">
-          <div style="font-size: 13.5px; font-weight: 800; color: #ff4998; letter-spacing: -0.1px">Rent-mix shift</div>
-          <div style="font-size: 12.5px; color: var(--text); line-height: 1.55; margin-top: 4px">
-            <strong>New active leases</strong> are increasingly above the <strong>$1,200 ACH-leaning bucket</strong>. Sweet-spot share shrank from <strong>47.0% → 43.3%</strong> (Sep → Apr) — mechanical, no tenant changed behavior.
-          </div>
-        </div>
-        <div class="chart-shell">
-          <div class="ch-title">Rent distribution <span style="font-weight: 500; color: var(--muted); font-size: 11px">· new active leases</span></div>
-          <div class="chart-wrap" style="height: 280px"><canvas id="chart-rent-mix"></canvas></div>
-          <div style="margin-top: 4px; text-align: center; font-size: 10.5px; color: var(--muted)">
-            <span style="display:inline-block;width:9px;height:9px;background:#ff4998;border-radius:2px;vertical-align:middle;margin-right:4px"></span>
-            <strong style="color: var(--text)">&lt;$1,200 · sweet spot</strong>
-            &nbsp;
-            <span style="display:inline-block;width:9px;height:9px;background:#3185FC;border-radius:2px;vertical-align:middle;margin-right:4px"></span>
-            <strong style="color: var(--text)">≥$1,200 · ACH-leaning</strong>
-          </div>
+    <!-- Section 1 · The mechanics of noise -->
+    <div style="display: grid; grid-template-columns: 1.05fr 1fr; gap: 14px; margin-top: 8px">
+      <div style="padding: 14px 18px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 10px">⚠ The mechanics of noise</div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: var(--text)">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border)">
+              <th style="text-align: left; padding: 6px 8px; font-weight: 700; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px">Source of swing</th>
+              <th style="text-align: right; padding: 6px 8px; font-weight: 700; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px">Monthly swing capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding: 8px; line-height: 1.5">One Costello-style PM (~200 FT, 0% card)</td><td style="padding: 8px; text-align: right; font-weight: 800; color: #b91c1c">±1.0pp</td></tr>
+            <tr><td style="padding: 8px; line-height: 1.5">Top-15 onboarders' card-mix variance</td><td style="padding: 8px; text-align: right; font-weight: 800; color: #b91c1c">±0.5–1pp</td></tr>
+            <tr style="border-top: 1px solid var(--border)"><td style="padding: 10px 8px; font-weight: 700">Combined PM-mix noise band, MoM</td><td style="padding: 10px 8px; text-align: right; font-weight: 800; font-size: 14.5px; color: #b91c1c">±1.5–2pp</td></tr>
+            <tr style="background: rgba(220,38,38,0.06)"><td style="padding: 10px 8px; font-weight: 700; color: var(--text)">May actual swing</td><td style="padding: 10px 8px; text-align: right; font-weight: 800; font-size: 14.5px; color: var(--text)">+1.9pp</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top: 10px; font-size: 11.5px; color: var(--muted); line-height: 1.55; font-style: italic">
+          May's swing sits <strong style="color: var(--text); font-style: normal">fully inside the PM-mix noise band</strong>. No tenant-behaviour inference is warranted.
         </div>
       </div>
 
-      <!-- RIGHT column: ACH-only PM tail -->
-      <div style="display: flex; flex-direction: column; gap: 12px">
-        <div style="padding: 12px 16px; background: rgba(49,133,252,0.08); border-left: 4px solid #3185FC; border-radius: 6px">
-          <div style="font-size: 13.5px; font-weight: 800; color: #3185FC; letter-spacing: -0.1px">ACH-only PM tail</div>
-          <div style="font-size: 12.5px; color: var(--text); line-height: 1.55; margin-top: 4px">
-            Growing cohort of PMs whose first-time tenants almost never pay by card (≤5% card · ≥20 FT). Count <strong>tripled Sep → Apr (3 → 9)</strong> — likely a PM preference.
-          </div>
-        </div>
-        <div class="chart-shell">
-          <div class="ch-title">ACH-only PMs per month <span style="font-weight: 500; color: var(--muted); font-size: 11px">· ≤5% card · ≥20 FT</span></div>
-          <div class="chart-wrap" style="height: 280px"><canvas id="chart-achonly-trend"></canvas></div>
-        </div>
-        <!-- Top 3 ACH-only PMs -->
-        <div style="padding: 10px 14px; background: #fff; border: 1px solid var(--border); border-radius: 6px; font-size: 11.5px; line-height: 1.55; color: var(--text)">
-          <div style="font-size: 10.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 6px">Top 3 ACH-only PMs · ranked by FT contribution during ACH-only months</div>
-          <div style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 0.85fr 0.7fr; gap: 10px; align-items: baseline; padding: 3px 0; border-bottom: 1px solid var(--divider); font-size: 10.5px; color: var(--muted); font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase">
-            <span>PM</span>
-            <span>Segment</span>
-            <span>1st invoice</span>
-            <span>Prominent FT month</span>
-            <span style="text-align: right">Active leases</span>
-          </div>
-          <div style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 0.85fr 0.7fr; gap: 10px; align-items: baseline; padding: 4px 0; border-bottom: 1px solid var(--divider)">
-            <span><strong>Costello Management</strong></span>
-            <span style="color: var(--text)">Upper-Market</span>
-            <span style="color: var(--text)">Nov '25</span>
-            <span style="color: var(--pink); font-weight: 800">Mar '26 · 778 FT</span>
-            <span style="color: var(--text); text-align: right; font-weight: 700">984</span>
-          </div>
-          <div style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 0.85fr 0.7fr; gap: 10px; align-items: baseline; padding: 4px 0; border-bottom: 1px solid var(--divider)">
-            <span><strong>Off Campus Philly</strong></span>
-            <span style="color: var(--text)">Upper-Market</span>
-            <span style="color: var(--text)">Feb '23</span>
-            <span style="color: var(--text)">±37 / month</span>
-            <span style="color: var(--text); text-align: right; font-weight: 700">783</span>
-          </div>
-          <div style="display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 0.85fr 0.7fr; gap: 10px; align-items: baseline; padding: 4px 0">
-            <span><strong>Brooklane Apartments</strong></span>
-            <span style="color: var(--text)">Mid-Market</span>
-            <span style="color: var(--text)">Feb '23</span>
-            <span style="color: var(--text)">±22 / month</span>
-            <span style="color: var(--text); text-align: right; font-weight: 700">447</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Third card · within-bucket behavior (unexplained) + supporting chart -->
-    <div style="margin-top: 14px; padding: 12px 16px; background: rgba(245,158,11,0.10); border-left: 4px solid #f59e0b; border-radius: 6px">
-      <div style="font-size: 13.5px; font-weight: 800; color: #b45309; letter-spacing: -0.1px">Within-bucket behavior <span style="font-weight: 500; color: var(--muted); font-size: 11.5px">· unexplained mechanism</span></div>
-      <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: center; margin-top: 6px">
-        <div style="font-size: 12.5px; color: var(--text); line-height: 1.55">
-          High-rent (≥$1,200) tenants are increasingly choosing ACH at first payment — card adoption inside that bucket drifted from <strong>34.8% → 32.3%</strong> (−2.5 pp Sep '25 → Apr '26), while the &lt;$1,200 sweet spot stayed flat at ~58%. <strong>~35% of the FT card-share drop</strong> traces here, <em>not</em> to mix or PM tail. Next investigation: payment-method funnel UX, Plaid placement, default option logic.
-        </div>
-        <div style="background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px">
-          <div style="font-size: 10.5px; font-weight: 700; color: var(--muted); letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 2px">FT card adoption by rent bucket <span style="font-weight: 500; text-transform: none; letter-spacing: 0">· Sep '25 → Apr '26 (May refreshes next cycle)</span></div>
-          <div style="height: 130px"><canvas id="chart-within-bucket"></canvas></div>
+      <!-- The trend chart with rolling median -->
+      <div class="chart-shell">
+        <div class="ch-title">FT card volume share · trend, not spot</div>
+        <div class="ch-sub" style="font-size: 11px; color: var(--muted); margin-bottom: 4px">14 months · spot (blue) vs 6-mo rolling median (navy)</div>
+        <div class="chart-wrap" style="height: 230px"><canvas id="chart-ft-card-trend"></canvas></div>
+        <div style="margin-top: 6px; font-size: 11.5px; color: var(--muted); line-height: 1.5">
+          Spot is bouncy; the <strong style="color: var(--text)">6-mo rolling median is still drifting down</strong>. May lands <em>on</em> the trend line, not above it — the slope hasn't reversed.
         </div>
       </div>
     </div>
 
-  </div>
+    <!-- Section 3 · Three metrics to build -->
+    <div style="margin-top: 14px; padding: 14px 18px; background: rgba(49,133,252,0.06); border-left: 4px solid #3185FC; border-radius: 8px">
+      <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 10px">📐 Metrics we'd need to actually answer "is behaviour changing?"</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px">
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 6px">
+          <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">① New-PM card adoption</div>
+          <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 4px">in their first 90 days. <strong>Leading indicator</strong> — sees the Costello wave 1–2 cycles before it hits aggregate.</div>
+        </div>
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 6px">
+          <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">② Median per-PM card share</div>
+          <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 4px">across top 50 PMs. <strong>Portfolio-neutral</strong> — strips out PM-mix volatility.</div>
+        </div>
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 6px">
+          <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">③ Within-PM cohort drift</div>
+          <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 4px">same PM, ΔMoM in FT card share. <strong>True behavioural signal</strong> — different tenants, same PM context.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom exec strip -->
+    <div style="margin-top: 14px; padding: 14px 18px; background: rgba(223,254,2,0.20); border-left: 5px solid #162050; border-radius: 8px; font-size: 13.5px; color: var(--text); line-height: 1.6">
+      <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050; margin-bottom: 8px">📣 The exec takeaway</div>
+      Don't celebrate May's +1.9pp. Don't worry about Apr's −1.4pp either. The underlying trend is still drifting down — <strong>the noise just got louder</strong>. <strong>Action:</strong> report aggregate FT card share alongside the 6-mo rolling median (or stop reporting it monthly) until the three portfolio-neutral metrics above are instrumented.
+    </div>
+
+    <!-- Drop the v1 narrative charts — kept their JS containers commented out below in case
+         someone wants to revive them; the canvases are removed so the chart init is a no-op. -->
+
 </section>
 
 <!-- ============================================================ -->
@@ -2740,6 +2718,88 @@ document.addEventListener('DOMContentLoaded', function() {
         scales: {
           x: { grid: { display: false }, ticks: { font: { size: 8.5 }, color: '#64748b', maxRotation: 0, autoSkip: false } },
           y: { display: false, suggestedMin: 28, suggestedMax: 62 }
+        }
+      }
+    });
+  });
+})();
+
+// Slide 9 v5 · FT card volume share trend (spot + 6-mo rolling median)
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Chart === 'undefined') return;
+    const el = document.getElementById('chart-ft-card-trend');
+    if (!el || typeof cardByPop === 'undefined') return;
+
+    // Series: ftCardShare from cardByPop (16 months · Feb '25 → May '26)
+    const labels = cardByPop.map(c => {
+      const [y, m] = c.month.split('-');
+      return new Date(+y, +m-1, 1).toLocaleString('en', { month: 'short' }) + " '" + y.slice(2);
+    });
+    const spot = cardByPop.map(c => c.ftCardShare);
+
+    // 6-mo trailing rolling median
+    const rollingMedian = spot.map((_, i) => {
+      const start = Math.max(0, i - 5);
+      const window = spot.slice(start, i + 1).slice().sort((a, b) => a - b);
+      const mid = Math.floor(window.length / 2);
+      return window.length % 2 ? window[mid] : (window[mid - 1] + window[mid]) / 2;
+    });
+
+    const lastIdx = spot.length - 1;
+
+    new Chart(el, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Spot · FT card volume share',
+            data: spot,
+            borderColor: '#60a5fa',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: spot.map((_, i) => i === lastIdx ? 6 : 3),
+            pointBackgroundColor: spot.map((_, i) => i === lastIdx ? '#dc2626' : '#60a5fa'),
+            pointBorderColor: '#fff',
+            pointBorderWidth: 1.5,
+            datalabels: {
+              display: ctx => ctx.dataIndex === 0 || ctx.dataIndex === ctx.dataset.data.length - 1,
+              color: ctx => ctx.dataIndex === ctx.dataset.data.length - 1 ? '#dc2626' : '#1d4ed8',
+              anchor: 'end', align: 'top', offset: 6,
+              font: ctx => ({ weight: 800, size: ctx.dataIndex === ctx.dataset.data.length - 1 ? 12 : 10 }),
+              formatter: v => v.toFixed(1) + '%'
+            }
+          },
+          {
+            label: '6-mo rolling median',
+            data: rollingMedian,
+            borderColor: '#162050',
+            backgroundColor: 'transparent',
+            borderWidth: 3,
+            tension: 0.35,
+            pointRadius: 0,
+            datalabels: {
+              display: ctx => ctx.dataIndex === ctx.dataset.data.length - 1,
+              color: '#162050',
+              anchor: 'end', align: 'bottom', offset: 8,
+              font: { weight: 800, size: 11 },
+              formatter: v => 'median ' + v.toFixed(1) + '%'
+            }
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        layout: { padding: { top: 18, right: 70, bottom: 8, left: 8 } },
+        plugins: {
+          legend: { display: true, position: 'top', align: 'start',
+            labels: { boxWidth: 12, boxHeight: 2, font: { size: 10.5, weight: 600 }, padding: 8, color: '#64748b' } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10, weight: 600 }, color: '#64748b' } },
+          y: { display: false, suggestedMin: 26, suggestedMax: 40 }
         }
       }
     });
