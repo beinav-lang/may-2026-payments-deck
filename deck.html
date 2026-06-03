@@ -2210,9 +2210,16 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 <section class="paper" data-slide-title="Card Performance · The What">
+  <style>
+    /* Maximize chart box width — reduce side padding so labels render in full */
+    section[data-slide-title="Card Performance · The What"] .chart-shell,
+    body.slide-mode section[data-slide-title="Card Performance · The What"] .chart-shell {
+      padding: 14px 8px 12px !important;
+    }
+  </style>
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">08</div><div class="title-eyebrow">Card Performance · The What</div></div>
-    <h2 class="section-title">First-time tenants <span class="title-accent">rebounded</span> in May (+2.3pp) — slide broken.</h2>
+    <h2 class="section-title">Overall card share <span class="title-accent red">dipped to 17.69%</span> (new low) — but FT-side rebounded <span class="title-accent">+2.3pp</span>.</h2>
 
     <!-- Overall card-share trend (12 months) -->
     <div class="chart-shell" style="margin-top: 16px">
@@ -5508,12 +5515,12 @@ new Chart(document.getElementById('chart-card-share-trend'), {
           weight: ctx.dataIndex === cstLast ? 800 : 700,
           size: ctx.dataIndex === cstLast ? 12.5 : 10
         }),
-        formatter: (v, ctx) => v.toFixed(2) + '%' + (ctx.dataIndex === cstLast ? ' · lowest since Jan \'25' : '')
+        formatter: (v, ctx) => v.toFixed(2) + '%' + (ctx.dataIndex === cstLast ? ' · new low' : '')
       }
     }]
   },
   options: baseOpts({
-    layout: { padding: { top: 28, right: 180, bottom: 8, left: 8 } },
+    layout: { padding: { top: 28, right: 220, bottom: 8, left: 8 } },
     plugins: { legend: { display: false }, datalabels: { clip: false } },
     scales: {
       x: { grid: { display: false }, ticks: { font: { size: 10, weight: 600 }, color: '#64748b' } },
