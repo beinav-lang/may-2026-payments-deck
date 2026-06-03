@@ -2269,85 +2269,38 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">Card adoption has been <span class="title-accent red">drifting down for 15 months</span> — across every PM cohort. Not a May story.</h2>
+    <h2 class="section-title">Two real drivers: <span class="title-accent red">amount drift</span> + <span class="title-accent red">new-PM cohort</span>. Mix shift was neutral.</h2>
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1080px">
-      The full timeline of FT card adoption per PM-tenure bucket. <strong style="color: var(--text)">All five cohorts drift down in parallel</strong> —
-      0–3 mo (new PMs) the steepest, mature 24+ mo the gentlest. The broad uniformity points to a
-      <strong style="color: var(--text)">platform-level driver</strong> (UX, defaults, or transaction-amount mix)
-      more than a PM-acquisition story alone.
+      15-month FT card share: <strong style="color: var(--text)">47.9% → 44.6%</strong> (−3.3pp). All five PM-tenure cohorts fell in parallel — the drop is behavioural, not portfolio recomposition.
     </p>
 
-    <!-- Driver #1 — 15-month time-series per PM-tenure cohort -->
-    <div class="chart-shell" style="margin-top: 4px">
-      <div class="ch-title">① FT card adoption by PM tenure · <span style="font-weight: 500; color: var(--muted); font-size: 11px">16 cycles · Feb '25 → May '26 · every cohort drifts down</span></div>
+    <!-- The chart — proof of cross-cohort drift -->
+    <div class="chart-shell">
+      <div class="ch-title">FT card adoption by PM tenure · <span style="font-weight: 500; color: var(--muted); font-size: 11px">16 cycles · Feb '25 → May '26</span></div>
       <div class="chart-wrap" style="height: 280px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
-      <div style="margin-top: 6px; font-size: 11.5px; color: var(--muted); line-height: 1.55">
-        15-month deltas: 0–3 mo (NEW) <strong style="color: #b91c1c">−9.7pp</strong> · 3–6 mo −3.4pp · 6–12 mo −3.4pp · 12–24 mo −2.1pp · 24+ mo (MATURE) <strong>−2.4pp</strong>.
-        <strong style="color: var(--text)">No bucket escaped.</strong> The 0–3 mo line tracks ~5–10pp below the others throughout — a structural gap that widened over the period.
-      </div>
     </div>
 
-    <!-- Two competing explanations side-by-side -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px">
+    <!-- Two driver cards · the only thing besides the chart -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
 
-      <!-- Hypothesis A: transaction-amount drift (NEW addition per analyst) -->
-      <div style="padding: 14px 18px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 6px">② Hypothesis A · Amount drift</div>
-        <div style="font-size: 14.5px; font-weight: 800; color: var(--text); margin-bottom: 4px">Median FT amount rose <span style="color: #b45309">$1,050 → $1,150</span> (+10%)</div>
-        <div style="font-size: 12.5px; color: var(--text); line-height: 1.55">
-          Sweet-spot share (&lt;$1,200) shrank 54.8% → 51.3%. Higher transactions are structurally ACH-heavier (card fees scale). A platform-level mechanical drag on <em>every</em> bucket.
+      <!-- Driver 1 · Amount drift (platform-wide) -->
+      <div style="padding: 16px 20px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 8px">Driver 1 · Amount drift · platform-wide</div>
+        <div style="font-size: 28px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 6px">$1,050 → <span style="color: #b45309">$1,150</span></div>
+        <div style="font-size: 13px; color: var(--text); line-height: 1.55">
+          Median FT amount up <strong>+10%</strong>; sweet-spot (&lt;$1,200) share shrank <strong>54.8% → 51.3%</strong>. Higher rents are structurally ACH-heavier. Affects every cohort uniformly.
         </div>
       </div>
 
-      <!-- Hypothesis B: new-PM acquisition shift -->
-      <div style="padding: 14px 18px; background: rgba(49,133,252,0.06); border-left: 4px solid #3185FC; border-radius: 8px">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 6px">③ Hypothesis B · New-PM acquisition</div>
-        <div style="font-size: 14.5px; font-weight: 800; color: var(--text); margin-bottom: 4px">0–3 mo tenants: <span style="color: #b91c1c">46.8% → 37.1%</span> (−9.7pp)</div>
-        <div style="font-size: 12.5px; color: var(--text); line-height: 1.55">
-          New-PM tenants pick card ~10pp less than 15 months ago. Possible PM-acquisition-source / vertical shift toward structurally-ACH segments. Explains the steepest bucket but not the others.
+      <!-- Driver 2 · New-PM cohort -->
+      <div style="padding: 16px 20px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · New-PM cohort · 3× the drop</div>
+        <div style="font-size: 28px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 6px">46.8% → <span style="color: #b91c1c">37.1%</span></div>
+        <div style="font-size: 13px; color: var(--text); line-height: 1.55">
+          0–3 mo PMs fell <strong>−9.7pp</strong>. Other cohorts fell 2–3pp. The PM-acquisition funnel is producing tenants that prefer ACH at a higher rate.
         </div>
       </div>
-    </div>
 
-    <!-- Decomposition strip (compact, 4-row including interaction) -->
-    <div style="margin-top: 12px; padding: 12px 18px; background: #fff; border: 1px solid var(--border); border-radius: 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; font-size: 12.5px">
-      <div>
-        <div style="font-size: 10.5px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px">Shift-share decomp</div>
-        <div style="margin-top: 4px; font-size: 13px; color: var(--text); line-height: 1.5">Laspeyres · Feb '25 baseline weights × Feb→May rate change</div>
-      </div>
-      <div style="text-align: center">
-        <div style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px">Mix shift</div>
-        <div style="font-size: 20px; font-weight: 800; color: #059669">+0.4pp</div>
-        <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">slightly favourable</div>
-      </div>
-      <div style="text-align: center">
-        <div style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px">Within-bucket</div>
-        <div style="font-size: 20px; font-weight: 800; color: #b91c1c">−4.3pp</div>
-        <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">+0.6pp interaction term</div>
-      </div>
-      <div style="text-align: center; border-left: 1px solid var(--border); padding-left: 10px">
-        <div style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px">Total · 15 mo</div>
-        <div style="font-size: 20px; font-weight: 800; color: #b91c1c">−3.3pp</div>
-        <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">47.9% → 44.6%</div>
-      </div>
-    </div>
-
-    <!-- Action strip — directive, owners assigned -->
-    <div style="margin-top: 14px; padding: 14px 18px; background: rgba(223,254,2,0.20); border-left: 5px solid #162050; border-radius: 8px; font-size: 13.5px; color: var(--text); line-height: 1.6">
-      <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050; margin-bottom: 8px">📣 Next steps · readouts by next monthly</div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
-        <div>
-          <strong>① FT signup-flow UX audit</strong> — what default payment method is presented to a newly-onboarded PM's first wave of tenants? Has the order / Plaid placement / default toggle changed in the last 6 months?
-          <div style="margin-top: 4px; font-size: 11px; color: var(--muted); font-weight: 700">Owner: Payments PM</div>
-        </div>
-        <div>
-          <strong>② Amount-stratified re-run</strong> — re-do the by-tenure decomp <em>within</em> each rent bucket (&lt;$1,200, $1,200–$2,000, $2,000+). If the 0–3 mo drop persists across all bands, it's not amount mix — it's behavioural.
-          <div style="margin-top: 4px; font-size: 11px; color: var(--muted); font-weight: 700">Owner: Analytics</div>
-        </div>
-      </div>
-      <div style="margin-top: 10px; font-size: 11px; color: var(--muted); line-height: 1.5; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.06)">
-        <strong style="color: var(--text)">Caveats:</strong> Top-50 PM cut is by 15-mo total FT volume — rewards PMs that were big across the whole window. PM-tenure uses FACT_CUSTOMER_DAILY_PROFILE.first_paid_invoice_date (sensitive to billing resets / pauses). Endpoint sensitivity: Feb '25 vs Apr '26 endpoints give a much flatter aggregate picture.
-      </div>
     </div>
 
 </section>
