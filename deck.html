@@ -2063,38 +2063,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div style="margin-top: 28px">
       <h2 class="section-title">
-        <span style="color: #dc2626">April card share landed at 17.49%</span> · First-time tenants are the line that's moving.
+        April overall card share 17.49% · <span style="color: #059669">First-time tenants rebounded in May (+2.3pp)</span> — breaking the slide.
       </h2>
-    </div>
-
-    <!-- May to-date status panel (FT-side data available, overall card-share lags) -->
-    <div style="margin-top: 14px; padding: 16px 20px; background: rgba(49,133,252,0.06); border-left: 3px solid #3185FC; border-radius: 8px; font-size: 13px; line-height: 1.6; color: var(--text)">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 8px">May 2026 · Status</div>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 10px">
-        <div>
-          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Mature&nbsp;(13+)</div>
-          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">33.4%</div>
-          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">3,681 card / 4,157 ACH · 7,838 FT</div>
-        </div>
-        <div>
-          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Developed&nbsp;(7–12)</div>
-          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">31.3%</div>
-          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">822 card / 961 ACH · 1,783 FT</div>
-        </div>
-        <div>
-          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Growth&nbsp;(3–6)</div>
-          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">28.0%</div>
-          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">1,134 card / 1,498 ACH · 2,632 FT</div>
-        </div>
-        <div>
-          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600">May FT card share · Onboarding&nbsp;(0–2)</div>
-          <div style="font-size: 18px; font-weight: 800; color: #162050; margin-top: 4px">24.8%</div>
-          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">780 card / 1,330 ACH · 2,110 FT</div>
-        </div>
-      </div>
-      <div style="font-size: 11px; color: var(--muted); line-height: 1.5; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.06)">
-        <strong style="color: var(--text)">May FT-side card share is now visible by account age</strong> — Mature 33.4% holds the highest card adoption, Onboarding (0–2 months) lowest at 24.8%. <strong style="color: var(--text)">Overall card volume share</strong> (including returning tenants and full-month settlement) refreshes next cycle close, ~Jun 25. The April-final 17.49% number below is the most recent overall reading.
-      </div>
     </div>
 
     <!-- Overall card-share trend (12 months) -->
@@ -5267,12 +5237,12 @@ new Chart(document.getElementById('chart-card-adoption'), {
         backgroundColor: 'rgba(96,165,250,0.07)',
         borderWidth: 3, tension: 0.35, fill: false,
         pointRadius: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? 8 : (i === novIdx || i === marCstlIdx ? 9 : 5)),
-        pointBackgroundColor: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? C.warn : (i === novIdx ? '#1d4ed8' : (i === marCstlIdx ? '#ff4998' : '#60a5fa'))),
+        pointBackgroundColor: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? C.green : (i === novIdx ? '#1d4ed8' : (i === marCstlIdx ? '#ff4998' : '#60a5fa'))),
         pointBorderColor: cardAdoption.map((_,i)=> i === novIdx ? '#dffe02' : (i === marCstlIdx ? '#dffe02' : '#fff')),
         pointBorderWidth: cardAdoption.map((_,i)=> (i === novIdx || i === marCstlIdx) ? 3 : 2),
         datalabels: {
           display: true,
-          color: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? C.warn : (ctx.dataIndex === marCstlIdx ? '#ff4998' : '#1d4ed8'),
+          color: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? C.green : (ctx.dataIndex === marCstlIdx ? '#ff4998' : '#1d4ed8'),
           anchor: 'end',
           align: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? 'right' : (ctx.dataIndex === marCstlIdx ? 'bottom' : 'top'),
           offset: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? 8 : ((ctx.dataIndex === novIdx || ctx.dataIndex === marCstlIdx) ? 10 : 6),
@@ -5281,7 +5251,7 @@ new Chart(document.getElementById('chart-card-adoption'), {
             size: ctx.dataIndex === ctx.dataset.data.length-1 ? 13 : ((ctx.dataIndex === novIdx || ctx.dataIndex === marCstlIdx) ? 13 : 10)
           }),
           formatter: (v, ctx) => {
-            if (ctx.dataIndex === ctx.dataset.data.length-1) return [v.toFixed(1) + '%', '16-mo low'];
+            if (ctx.dataIndex === ctx.dataset.data.length-1) return [v.toFixed(1) + '%', 'rebound +2.3pp'];
             if (ctx.dataIndex === novIdx) return [v.toFixed(1) + '%', 'Dels surge'];
             if (ctx.dataIndex === marCstlIdx) return [v.toFixed(1) + '%', 'Costello drag'];
             return v.toFixed(1) + '%';
@@ -5294,12 +5264,12 @@ new Chart(document.getElementById('chart-card-adoption'), {
         borderColor: '#1e3a8a',
         backgroundColor: 'rgba(30,58,138,0.05)',
         borderWidth: 3, tension: 0.35, fill: false,
-        pointRadius: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? 8 : 5),
-        pointBackgroundColor: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? C.warn : '#1e3a8a'),
+        pointRadius: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? 7 : 5),
+        pointBackgroundColor: cardAdoption.map((_,i)=> i === cardAdoption.length-1 ? '#1e3a8a' : '#1e3a8a'),
         pointBorderColor: '#fff', pointBorderWidth: 2,
         datalabels: {
           display: true,
-          color: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? C.warn : '#1e293b',
+          color: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? '#1e293b' : '#1e293b',
           anchor: 'end',
           align: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? 'right' : 'bottom',
           offset: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? 8 : 6,
@@ -5307,7 +5277,7 @@ new Chart(document.getElementById('chart-card-adoption'), {
             weight: ctx.dataIndex === ctx.dataset.data.length-1 ? 800 : 600,
             size: ctx.dataIndex === ctx.dataset.data.length-1 ? 13 : 10
           }),
-          formatter: (v, ctx) => ctx.dataIndex === ctx.dataset.data.length-1 ? [v.toFixed(1) + '%', '12-mo low'] : v.toFixed(1) + '%'
+          formatter: (v) => v.toFixed(1) + '%'
         }
       }
     ]
@@ -5343,11 +5313,11 @@ new Chart(document.getElementById('chart-card-cause'), {
         backgroundColor: 'rgba(96,165,250,0.07)',
         borderWidth: 3, tension: 0.3, fill: false,
         pointRadius: cardByPop.map((_,i)=> i === cardByPop.length-1 ? 8 : 5),
-        pointBackgroundColor: cardByPop.map((_,i)=> i === cardByPop.length-1 ? C.warn : '#60a5fa'),
+        pointBackgroundColor: cardByPop.map((_,i)=> i === cardByPop.length-1 ? C.green : '#60a5fa'),
         pointBorderColor: '#fff', pointBorderWidth: 2,
         datalabels: {
           display: true,
-          color: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? C.warn : '#1d4ed8',
+          color: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? C.green : '#1d4ed8',
           anchor: 'end',
           align: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? 'right' : 'top',
           offset: ctx => ctx.dataIndex === ctx.dataset.data.length-1 ? 8 : 6,
@@ -5355,7 +5325,7 @@ new Chart(document.getElementById('chart-card-cause'), {
             weight: ctx.dataIndex === ctx.dataset.data.length-1 ? 800 : 600,
             size: ctx.dataIndex === ctx.dataset.data.length-1 ? 13 : 10
           }),
-          formatter: (v, ctx) => ctx.dataIndex === ctx.dataset.data.length-1 ? [v.toFixed(1) + '%', '16-mo low'] : v.toFixed(1) + '%'
+          formatter: (v, ctx) => ctx.dataIndex === ctx.dataset.data.length-1 ? [v.toFixed(1) + '%', 'rebound +1.9pp'] : v.toFixed(1) + '%'
         }
       },
       {
@@ -5377,7 +5347,7 @@ new Chart(document.getElementById('chart-card-cause'), {
             weight: ctx.dataIndex === ctx.dataset.data.length-1 ? 800 : 600,
             size: ctx.dataIndex === ctx.dataset.data.length-1 ? 13 : 10
           }),
-          formatter: (v, ctx) => ctx.dataIndex === ctx.dataset.data.length-1 ? [v.toFixed(1) + '%', '13-mo low'] : v.toFixed(1) + '%'
+          formatter: (v, ctx) => ctx.dataIndex === ctx.dataset.data.length-1 ? [v.toFixed(1) + '%', '14-mo low'] : v.toFixed(1) + '%'
         }
       }
     ]
