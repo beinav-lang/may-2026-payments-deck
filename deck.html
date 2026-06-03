@@ -2269,72 +2269,79 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">May's +1.9pp card rebound is <span class="title-accent red">PM-mix noise</span> — not an adoption signal.</h2>
-    <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1000px">
-      Aggregate FT card share is a <strong style="color: var(--text)">portfolio-weighted average</strong>. With Costello-scale PMs swinging it ±1pp on their own, the metric is <strong style="color: var(--text)">unreadable for tenant-behaviour questions at monthly resolution</strong>.
+    <h2 class="section-title">Card decline lives in <span class="title-accent red">new PMs</span> — same-tenure cohort dropped 47% → 37% in 15 months.</h2>
+    <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1050px">
+      Decomposing the 15-month FT card share decline (<strong style="color: var(--text)">47.9% Feb '25 → 44.6% May '26 · −3.3pp</strong>):
+      mix shift was actually <em>favourable</em> (+0.4pp). The entire drag is <strong style="color: var(--text)">within-tenure-bucket adoption erosion</strong>,
+      concentrated in newly-acquired PMs.
     </p>
 
-    <!-- Section 1 · The mechanics of noise -->
-    <div style="display: grid; grid-template-columns: 1.05fr 1fr; gap: 14px; margin-top: 8px">
-      <div style="padding: 14px 18px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 10px">⚠ The mechanics of noise</div>
+    <!-- Driver #1 + Driver #2 side-by-side -->
+    <div style="display: grid; grid-template-columns: 0.95fr 1.1fr; gap: 14px; margin-top: 4px">
+
+      <!-- Driver #1 · decomposition table -->
+      <div style="padding: 14px 18px; background: rgba(49,133,252,0.06); border-left: 4px solid #3185FC; border-radius: 8px">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 10px">① The decomposition · not mix</div>
         <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: var(--text)">
           <thead>
             <tr style="border-bottom: 1px solid var(--border)">
-              <th style="text-align: left; padding: 6px 8px; font-weight: 700; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px">Source of swing</th>
-              <th style="text-align: right; padding: 6px 8px; font-weight: 700; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px">Monthly swing capacity</th>
+              <th style="text-align: left; padding: 6px 8px; font-weight: 700; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px">Effect</th>
+              <th style="text-align: right; padding: 6px 8px; font-weight: 700; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px">Contribution</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style="padding: 8px; line-height: 1.5">One Costello-style PM (~200 FT, 0% card)</td><td style="padding: 8px; text-align: right; font-weight: 800; color: #b91c1c">±1.0pp</td></tr>
-            <tr><td style="padding: 8px; line-height: 1.5">Top-15 onboarders' card-mix variance</td><td style="padding: 8px; text-align: right; font-weight: 800; color: #b91c1c">±0.5–1pp</td></tr>
-            <tr style="border-top: 1px solid var(--border)"><td style="padding: 10px 8px; font-weight: 700">Combined PM-mix noise band, MoM</td><td style="padding: 10px 8px; text-align: right; font-weight: 800; font-size: 14.5px; color: #b91c1c">±1.5–2pp</td></tr>
-            <tr style="background: rgba(220,38,38,0.06)"><td style="padding: 10px 8px; font-weight: 700; color: var(--text)">May actual swing</td><td style="padding: 10px 8px; text-align: right; font-weight: 800; font-size: 14.5px; color: var(--text)">+1.9pp</td></tr>
+            <tr><td style="padding: 8px; line-height: 1.5">PM-tenure mix shift</td><td style="padding: 8px; text-align: right; font-weight: 800; color: #059669">+0.4pp</td></tr>
+            <tr><td style="padding: 8px; line-height: 1.5; color: var(--text); font-weight: 600">Within-bucket adoption erosion</td><td style="padding: 8px; text-align: right; font-weight: 800; color: #b91c1c">−3.7pp</td></tr>
+            <tr style="border-top: 2px solid var(--border); background: rgba(220,38,38,0.05)">
+              <td style="padding: 10px 8px; font-weight: 800">Total FT card decline · 15 mo</td>
+              <td style="padding: 10px 8px; text-align: right; font-weight: 800; font-size: 14.5px; color: #b91c1c">−3.3pp</td>
+            </tr>
           </tbody>
         </table>
-        <div style="margin-top: 10px; font-size: 11.5px; color: var(--muted); line-height: 1.55; font-style: italic">
-          May's swing sits <strong style="color: var(--text); font-style: normal">fully inside the PM-mix noise band</strong>. No tenant-behaviour inference is warranted.
+        <div style="margin-top: 10px; font-size: 11.5px; color: var(--muted); line-height: 1.55">
+          The PM portfolio composition is actually <em>slightly more card-favourable</em> today than 15 months ago — older PMs grew their share. The drag is purely behavioural <em>within</em> each tenure cohort.
         </div>
       </div>
 
-      <!-- The trend chart with rolling median -->
+      <!-- Driver #2 · By PM tenure -->
       <div class="chart-shell">
-        <div class="ch-title">FT card volume share · trend, not spot</div>
-        <div class="ch-sub" style="font-size: 11px; color: var(--muted); margin-bottom: 4px">14 months · spot (blue) vs 6-mo rolling median (navy)</div>
-        <div class="chart-wrap" style="height: 230px"><canvas id="chart-ft-card-trend"></canvas></div>
-        <div style="margin-top: 6px; font-size: 11.5px; color: var(--muted); line-height: 1.5">
-          Spot is bouncy; the <strong style="color: var(--text)">6-mo rolling median is still drifting down</strong>. May lands <em>on</em> the trend line, not above it — the slope hasn't reversed.
+        <div class="ch-title">② FT card adoption by PM tenure · <span style="font-weight: 500; color: var(--muted); font-size: 11px">Feb '25 vs May '26</span></div>
+        <div class="chart-wrap" style="height: 260px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
+        <div style="margin-top: 8px; font-size: 11.5px; color: var(--muted); line-height: 1.55">
+          <strong style="color: var(--text)">The 0–3 mo bucket alone</strong> accounts for ~40% of the total drag — its card adoption fell <strong style="color: #b91c1c">−9.7pp</strong> (46.8 → 37.1%). Mature PMs (24+ mo) basically stable.
         </div>
       </div>
     </div>
 
-    <!-- Section 3 · Three metrics to build -->
-    <div style="margin-top: 14px; padding: 14px 18px; background: rgba(49,133,252,0.06); border-left: 4px solid #3185FC; border-radius: 8px">
-      <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #1e3a8a; margin-bottom: 10px">📐 Metrics we'd need to actually answer "is behaviour changing?"</div>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px">
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 6px">
-          <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">① New-PM card adoption</div>
-          <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 4px">in their first 90 days. <strong>Leading indicator</strong> — sees the Costello wave 1–2 cycles before it hits aggregate.</div>
+    <!-- Driver #3 · Top-50 vs tail -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px">
+      <div style="padding: 14px 18px; background: rgba(5,150,105,0.08); border-left: 4px solid #059669; border-radius: 8px">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #047857; margin-bottom: 6px">③ Top-50 PMs · stable / improving</div>
+        <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px">
+          <span style="font-size: 24px; font-weight: 800; color: #047857">49.2% → 55.8%</span>
+          <span style="font-size: 14.5px; font-weight: 800; color: #047857">▲ +6.6pp</span>
         </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 6px">
-          <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">② Median per-PM card share</div>
-          <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 4px">across top 50 PMs. <strong>Portfolio-neutral</strong> — strips out PM-mix volatility.</div>
+        <div style="font-size: 12.5px; color: var(--text); line-height: 1.55">FT card adoption among the 50 highest-volume PMs. The core base is <strong>more card-leaning today</strong> than 15 months ago (Dels Corp scaling + steady performance from established PMs).</div>
+      </div>
+      <div style="padding: 14px 18px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 6px">③ Long tail · the source of the drag</div>
+        <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px">
+          <span style="font-size: 24px; font-weight: 800; color: #b91c1c">47.8% → 43.7%</span>
+          <span style="font-size: 14.5px; font-weight: 800; color: #b91c1c">▼ −4.1pp</span>
         </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 6px">
-          <div style="font-size: 11px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.6px">③ Within-PM cohort drift</div>
-          <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 4px">same PM, ΔMoM in FT card share. <strong>True behavioural signal</strong> — different tenants, same PM context.</div>
-        </div>
+        <div style="font-size: 12.5px; color: var(--text); line-height: 1.55">Every PM outside the top 50 — overlaps heavily with the 0–3 mo tenure bucket. <strong>The PM-acquisition funnel is producing different PMs</strong> than it was 15 months ago.</div>
       </div>
     </div>
 
-    <!-- Bottom exec strip -->
+    <!-- Action prompt -->
     <div style="margin-top: 14px; padding: 14px 18px; background: rgba(223,254,2,0.20); border-left: 5px solid #162050; border-radius: 8px; font-size: 13.5px; color: var(--text); line-height: 1.6">
-      <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050; margin-bottom: 8px">📣 The exec takeaway</div>
-      Don't celebrate May's +1.9pp. Don't worry about Apr's −1.4pp either. The underlying trend is still drifting down — <strong>the noise just got louder</strong>. <strong>Action:</strong> report aggregate FT card share alongside the 6-mo rolling median (or stop reporting it monthly) until the three portfolio-neutral metrics above are instrumented.
+      <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050; margin-bottom: 8px">📣 Where to investigate next</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px">
+        <div><strong>① PM acquisition source</strong> — has the inbound mix shifted toward larger / multifamily / commercial PMs whose tenants default to ACH?</div>
+        <div><strong>② Onboarding UX</strong> — what default payment method is presented to a newly-onboarded PM's first wave of tenants? Did the FT signup flow change?</div>
+        <div><strong>③ Vertical / geography</strong> — are we acquiring PMs in different segments (rural / commercial / student housing) that bring structurally ACH-heavy tenants?</div>
+      </div>
     </div>
-
-    <!-- Drop the v1 narrative charts — kept their JS containers commented out below in case
-         someone wants to revive them; the canvases are removed so the chart init is a no-op. -->
 
 </section>
 
@@ -2799,6 +2806,73 @@ document.addEventListener('DOMContentLoaded', function() {
         scales: {
           x: { grid: { display: false }, ticks: { font: { size: 10, weight: 600 }, color: '#64748b' } },
           y: { display: false, suggestedMin: 26, suggestedMax: 40 }
+        }
+      }
+    });
+  });
+})();
+
+// Slide 9 v6 · FT card adoption by PM-tenure bucket · Feb '25 vs May '26
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Chart === 'undefined') return;
+    const el = document.getElementById('chart-pm-tenure-decomp');
+    if (!el) return;
+
+    // From sql q2_pm_tenure.sql · Feb '25 vs May '26
+    const tenureData = [
+      { bucket: '0–3 mo · NEW',   feb25: 46.80, may26: 37.11, delta: -9.69 },
+      { bucket: '3–6 mo',          feb25: 43.27, may26: 39.90, delta: -3.37 },
+      { bucket: '6–12 mo',         feb25: 51.04, may26: 47.60, delta: -3.44 },
+      { bucket: '12–24 mo',        feb25: 49.62, may26: 47.50, delta: -2.12 },
+      { bucket: '24+ mo · MATURE', feb25: 48.99, may26: 46.57, delta: -2.42 }
+    ];
+
+    new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: tenureData.map(d => d.bucket),
+        datasets: [
+          {
+            label: 'Feb \'25',
+            data: tenureData.map(d => d.feb25),
+            backgroundColor: '#94a3b8',
+            borderRadius: 4, borderSkipped: false,
+            datalabels: {
+              display: true, anchor: 'end', align: 'top', offset: 3,
+              color: '#475569', font: { weight: 700, size: 10.5 },
+              formatter: v => v.toFixed(1) + '%'
+            }
+          },
+          {
+            label: 'May \'26',
+            data: tenureData.map(d => d.may26),
+            backgroundColor: (ctx) => ctx.dataIndex === 0 ? '#dc2626' : '#3185FC',
+            borderRadius: 4, borderSkipped: false,
+            datalabels: {
+              display: true, anchor: 'end', align: 'top', offset: 3,
+              color: (ctx) => ctx.dataIndex === 0 ? '#b91c1c' : '#1e3a8a',
+              font: { weight: 800, size: 11 },
+              formatter: (v, ctx) => {
+                const d = tenureData[ctx.dataIndex].delta;
+                const sign = d >= 0 ? '+' : '−';
+                return [v.toFixed(1) + '%', '(' + sign + Math.abs(d).toFixed(1) + 'pp)'];
+              }
+            }
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        layout: { padding: { top: 28, right: 8, bottom: 0, left: 4 } },
+        plugins: {
+          legend: { display: true, position: 'top', align: 'start',
+            labels: { boxWidth: 12, boxHeight: 10, font: { size: 11, weight: 700 }, padding: 8, color: '#162050' } },
+          datalabels: { clip: false }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10.5, weight: 700 }, color: '#162050' } },
+          y: { display: false, beginAtZero: true, suggestedMax: 60 }
         }
       }
     });
