@@ -7094,10 +7094,10 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   // A group can contain `slides: [from, to]` and/or `children: [...nested groups]`.
   // Slides outside any group render as ungrouped items at the bottom.
   const tocGroups = [
-    { name: 'Business Overview', from: 1, to: 9 },   // displayed 02–10 (Exec Summary → NSF)
-    { name: 'PM Side', from: 10, to: 12 },           // displayed 11–13 (Churned, PM Research, PM Findings)
-    { name: 'Lease Funnel', from: 13, to: 14 },      // displayed 14–15 (Funnel Methodology, Lease Funnel)
-    // Slide 16 (Action Items) → ungrouped at the bottom
+    { name: 'Business Overview', from: 1, to: 10 },  // 02–11 (Exec Summary → Payment Retention Cohort → NSF)
+    { name: 'PM Side', from: 11, to: 12 },           // 12–13 (Churned, PM Research)
+    { name: 'Lease Funnel', from: 13, to: 14 },      // 14–15 (PM Findings, Funnel Methodology)
+    // Lease Funnel slide (15) + Action Items (16) → ungrouped at the bottom
   ];
 
   function escapeHtml(s) {
