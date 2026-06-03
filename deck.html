@@ -2269,21 +2269,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">Card adoption eroded <span class="title-accent red">across every PM cohort</span> — not just new ones.</h2>
+    <h2 class="section-title">Card adoption has been <span class="title-accent red">drifting down for 15 months</span> — across every PM cohort. Not a May story.</h2>
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1080px">
-      15-month FT card share: <strong style="color: var(--text)">47.9% Feb '25 → 44.6% May '26 · −3.3pp</strong>.
-      The drop spans <strong style="color: var(--text)">every PM-tenure bucket (2–10pp each)</strong>. New PMs fell the steepest,
-      but the cross-bucket uniformity points to a <strong style="color: var(--text)">platform-level driver</strong>
-      (UX, defaults, or transaction-amount mix) more than a PM-acquisition story alone.
+      The full timeline of FT card adoption per PM-tenure bucket. <strong style="color: var(--text)">All five cohorts drift down in parallel</strong> —
+      0–3 mo (new PMs) the steepest, mature 24+ mo the gentlest. The broad uniformity points to a
+      <strong style="color: var(--text)">platform-level driver</strong> (UX, defaults, or transaction-amount mix)
+      more than a PM-acquisition story alone.
     </p>
 
-    <!-- Driver #1 — the chart (the proof of cross-bucket uniformity) -->
+    <!-- Driver #1 — 15-month time-series per PM-tenure cohort -->
     <div class="chart-shell" style="margin-top: 4px">
-      <div class="ch-title">① FT card adoption by PM tenure · <span style="font-weight: 500; color: var(--muted); font-size: 11px">Feb '25 vs May '26 · every bucket fell</span></div>
-      <div class="chart-wrap" style="height: 240px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
+      <div class="ch-title">① FT card adoption by PM tenure · <span style="font-weight: 500; color: var(--muted); font-size: 11px">16 cycles · Feb '25 → May '26 · every cohort drifts down</span></div>
+      <div class="chart-wrap" style="height: 280px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
       <div style="margin-top: 6px; font-size: 11.5px; color: var(--muted); line-height: 1.55">
-        0–3 mo (NEW): −9.7pp · 3–6 mo: −3.4pp · 6–12 mo: −3.4pp · 12–24 mo: −2.1pp · 24+ mo (MATURE): −2.4pp. <strong style="color: var(--text)">No bucket escaped.</strong>
-        The 0–3 mo bucket alone explains ~50% of within-bucket drag, but the broad uniformity is what matters.
+        15-month deltas: 0–3 mo (NEW) <strong style="color: #b91c1c">−9.7pp</strong> · 3–6 mo −3.4pp · 6–12 mo −3.4pp · 12–24 mo −2.1pp · 24+ mo (MATURE) <strong>−2.4pp</strong>.
+        <strong style="color: var(--text)">No bucket escaped.</strong> The 0–3 mo line tracks ~5–10pp below the others throughout — a structural gap that widened over the period.
       </div>
     </div>
 
@@ -2819,67 +2819,67 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 
-// Slide 9 v6 · FT card adoption by PM-tenure bucket · Feb '25 vs May '26
+// Slide 9 v8 · FT card adoption by PM-tenure bucket · 16-cycle time series
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof Chart === 'undefined') return;
     const el = document.getElementById('chart-pm-tenure-decomp');
     if (!el) return;
 
-    // From sql q2_pm_tenure.sql · Feb '25 vs May '26
-    const tenureData = [
-      { bucket: '0–3 mo · NEW',   feb25: 46.80, may26: 37.11, delta: -9.69 },
-      { bucket: '3–6 mo',          feb25: 43.27, may26: 39.90, delta: -3.37 },
-      { bucket: '6–12 mo',         feb25: 51.04, may26: 47.60, delta: -3.44 },
-      { bucket: '12–24 mo',        feb25: 49.62, may26: 47.50, delta: -2.12 },
-      { bucket: '24+ mo · MATURE', feb25: 48.99, may26: 46.57, delta: -2.42 }
-    ];
+    // From sql q2_pm_tenure.sql · 16 cycles Feb '25 → May '26 · card_pct per tenure bucket
+    const labels = ["Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    const a_0_3   = [46.80,50.21,40.85,42.89,37.21,41.21,42.07,39.68,43.09,50.23,38.57,36.51,42.42,42.63,36.61,37.11]; // 0-3 mo · NEW
+    const b_3_6   = [43.27,48.03,44.04,44.17,40.17,38.61,38.60,42.53,45.42,50.32,49.97,42.75,41.11,29.21,35.64,39.90];
+    const c_6_12  = [51.04,56.50,53.61,47.64,47.04,49.13,48.46,47.20,46.36,51.81,47.73,47.50,48.07,50.84,47.94,47.60];
+    const d_12_24 = [49.62,53.07,51.58,53.63,47.71,46.10,48.39,47.54,46.27,51.54,49.84,49.35,49.06,50.51,46.52,47.50];
+    const e_24p   = [48.99,57.46,52.77,52.42,47.73,48.39,46.43,46.05,48.20,49.58,48.98,49.76,46.03,45.35,45.31,46.57]; // 24+ mo · MATURE
+
+    // Visual hierarchy: red NEW + navy MATURE (the two anchor lines, thick)
+    // 3 middle buckets in muted gray (the supporting evidence)
+    const mkSet = (lbl, data, color, width, opts={}) => ({
+      label: lbl,
+      data,
+      borderColor: color,
+      backgroundColor: 'transparent',
+      borderWidth: width,
+      tension: 0.3,
+      pointRadius: (ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === data.length - 1) ? 5 : (opts.thin ? 0 : 3),
+      pointBackgroundColor: color,
+      pointBorderColor: '#fff', pointBorderWidth: 1.5,
+      datalabels: {
+        display: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === ctx.dataset.data.length - 1,
+        color, anchor: 'end', align: ctx => ctx.dataIndex === 0 ? 'left' : 'right', offset: 6,
+        font: { weight: 800, size: 11 },
+        formatter: v => v.toFixed(1) + '%'
+      }
+    });
 
     new Chart(el, {
-      type: 'bar',
-      data: {
-        labels: tenureData.map(d => d.bucket),
-        datasets: [
-          {
-            label: 'Feb \'25',
-            data: tenureData.map(d => d.feb25),
-            backgroundColor: '#94a3b8',
-            borderRadius: 4, borderSkipped: false,
-            datalabels: {
-              display: true, anchor: 'end', align: 'top', offset: 3,
-              color: '#475569', font: { weight: 700, size: 10.5 },
-              formatter: v => v.toFixed(1) + '%'
-            }
-          },
-          {
-            label: 'May \'26',
-            data: tenureData.map(d => d.may26),
-            backgroundColor: (ctx) => ctx.dataIndex === 0 ? '#dc2626' : '#3185FC',
-            borderRadius: 4, borderSkipped: false,
-            datalabels: {
-              display: true, anchor: 'end', align: 'top', offset: 3,
-              color: (ctx) => ctx.dataIndex === 0 ? '#b91c1c' : '#1e3a8a',
-              font: { weight: 800, size: 11 },
-              formatter: (v, ctx) => {
-                const d = tenureData[ctx.dataIndex].delta;
-                const sign = d >= 0 ? '+' : '−';
-                return [v.toFixed(1) + '%', '(' + sign + Math.abs(d).toFixed(1) + 'pp)'];
-              }
-            }
-          }
-        ]
-      },
+      type: 'line',
+      data: { labels, datasets: [
+        mkSet('0–3 mo · NEW',     a_0_3,   '#dc2626', 3.5),
+        mkSet('3–6 mo',           b_3_6,   '#cbd5e1', 1.8, {thin:true}),
+        mkSet('6–12 mo',          c_6_12,  '#94a3b8', 1.8, {thin:true}),
+        mkSet('12–24 mo',         d_12_24, '#64748b', 1.8, {thin:true}),
+        mkSet('24+ mo · MATURE',  e_24p,   '#162050', 3.5)
+      ]},
       options: {
         responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 28, right: 8, bottom: 0, left: 4 } },
+        layout: { padding: { top: 18, right: 70, bottom: 8, left: 50 } },
         plugins: {
           legend: { display: true, position: 'top', align: 'start',
-            labels: { boxWidth: 12, boxHeight: 10, font: { size: 11, weight: 700 }, padding: 8, color: '#162050' } },
-          datalabels: { clip: false }
+            labels: { boxWidth: 14, boxHeight: 2, font: { size: 11, weight: 700 }, padding: 10, color: '#162050' } },
+          datalabels: { clip: false },
+          tooltip: {
+            mode: 'index', intersect: false,
+            callbacks: { label: (ctx) => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' }
+          }
         },
         scales: {
-          x: { grid: { display: false }, ticks: { font: { size: 10.5, weight: 700 }, color: '#162050' } },
-          y: { display: false, beginAtZero: true, suggestedMax: 60 }
+          x: { grid: { display: false }, ticks: { font: { size: 10, weight: 600 }, color: '#64748b', maxRotation: 0, autoSkipPadding: 12 } },
+          y: { display: true, suggestedMin: 28, suggestedMax: 60,
+               grid: { color: 'rgba(22,32,80,0.06)' },
+               ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', callback: v => v + '%' } }
         }
       }
     });
