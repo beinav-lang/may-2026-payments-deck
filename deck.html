@@ -2280,24 +2280,34 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="chart-wrap" style="height: 280px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
     </div>
 
-    <!-- Two driver cards · the only thing besides the chart -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
+    <!-- Two driver cards · Driver 1 wider for the structural-proof chart -->
+    <div style="display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; margin-top: 14px">
 
-      <!-- Driver 1 · Amount drift (platform-wide) -->
+      <!-- Driver 1 · Amount drift (platform-wide) — with mini structural-proof chart -->
       <div style="padding: 16px 20px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
         <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 8px">Driver 1 · Amount drift · platform-wide</div>
-        <div style="font-size: 28px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 6px">$1,050 → <span style="color: #b45309">$1,150</span></div>
+
+        <!-- The structural proof: card share collapses 54% → 10% as amount rises -->
+        <div style="background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 6px; padding: 10px 12px; margin: 4px 0 10px">
+          <div style="font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">Card share by transaction amount · 12 mo</div>
+          <div style="height: 110px"><canvas id="chart-amount-buckets"></canvas></div>
+        </div>
+
         <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          Median FT amount up <strong>+10%</strong>; sweet-spot (&lt;$1,200) share shrank <strong>54.8% → 51.3%</strong>. Higher rents are structurally ACH-heavier. Affects every cohort uniformly.
+          The mechanism: <strong>card share collapses 54% → 10%</strong> as amount climbs $0 → $2,000+.
+          Median FT amount has risen <strong>$1,050 → $1,150 (+10%)</strong>; sweet-spot share (&lt;$1,200) shrank <strong>54.8% → 51.3%</strong>.
+          Every cohort drags down mechanically — no behaviour change required.
         </div>
       </div>
 
       <!-- Driver 2 · New-PM cohort -->
-      <div style="padding: 16px 20px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px">
+      <div style="padding: 16px 20px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px; display: flex; flex-direction: column">
         <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · New-PM cohort · 3× the drop</div>
-        <div style="font-size: 28px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 6px">46.8% → <span style="color: #b91c1c">37.1%</span></div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 8px">46.8% → <span style="color: #b91c1c">37.1%</span></div>
         <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          0–3 mo PMs fell <strong>−9.7pp</strong>. Other cohorts fell 2–3pp. The PM-acquisition funnel is producing tenants that prefer ACH at a higher rate.
+          0–3 mo PMs fell <strong>−9.7pp</strong>. Other cohorts fell 2–3pp.
+          The PM-acquisition funnel is producing tenants that prefer ACH at a higher rate
+          — extra drag <em>beyond</em> the amount-drift mechanism.
         </div>
       </div>
 
@@ -2833,6 +2843,58 @@ document.addEventListener('DOMContentLoaded', function() {
           y: { display: true, suggestedMin: 28, suggestedMax: 60,
                grid: { color: 'rgba(22,32,80,0.06)' },
                ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', callback: v => v + '%' } }
+        }
+      }
+    });
+  });
+})();
+
+// Slide 9 · structural proof for Driver 1 · % card by transaction-amount bucket (12-mo)
+// Source: stripe_payments grouped by amount bucket, all payments May '25 → May '26.
+// Confirms the mechanism: card share collapses 54% → 10% as amount climbs.
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Chart === 'undefined') return;
+    const el = document.getElementById('chart-amount-buckets');
+    if (!el) return;
+
+    const labels  = ['$0–500', '$501–1k', '$1k–2k', '$2k+'];
+    const cardPct = [54.1, 36.5, 21.8, 10.1];
+    const achPct  = cardPct.map(c => 100 - c);
+
+    new Chart(el, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Card', data: cardPct, backgroundColor: '#059669', stack: 'mix',
+            borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false,
+            datalabels: {
+              display: true, anchor: 'center', align: 'center',
+              color: '#fff', font: { weight: 800, size: 12 },
+              formatter: v => v.toFixed(1) + '%'
+            }
+          },
+          {
+            label: 'ACH', data: achPct, backgroundColor: '#3185FC', stack: 'mix',
+            borderSkipped: false,
+            datalabels: { display: false }
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        layout: { padding: { top: 2, right: 4, bottom: 0, left: 4 } },
+        plugins: {
+          legend: { display: false },
+          datalabels: { clip: false },
+          tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false },
+               ticks: { font: { size: 10.5, weight: 700 }, color: '#162050' } },
+          y: { stacked: true, display: false, beginAtZero: true, max: 100 }
         }
       }
     });
