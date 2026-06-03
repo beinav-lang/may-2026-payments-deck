@@ -1759,14 +1759,14 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 06 · WHY % PAID DROPPED                                -->
+<!-- SECTION 06 · WHY % PAID LEASES DROPPED                                -->
 <!-- ============================================================ -->
-<section data-slide-title="Why % Paid Dropped">
+<section data-slide-title="Why % Paid Leases Dropped">
   <div class="wrap">
     <div class="chapter">
       <div class="chapter-num">06</div>
       <div class="chapter-meta">
-        <div class="chapter-name">Why % Paid Dropped MoM</div>
+        <div class="chapter-name">Why % Paid Leases Dropped MoM</div>
       </div>
     </div>
 
@@ -4754,6 +4754,31 @@ new Chart(document.getElementById('chart-breakdown'), {
             return fmtK(total);
           }
         } },
+      // Second invisible dataset — MoM-delta label ABOVE the total label for Apr '26 (idx 13)
+      // and May '26 (idx 14). Green when delta ≥ 0, red otherwise.
+      { label: '__mom_delta__', data: breakdown.map(b => 0), stack: 'all',
+        backgroundColor: 'rgba(0,0,0,0)', borderWidth: 0,
+        datalabels: {
+          display: ctx => ctx.dataIndex >= 13,
+          anchor: 'end', align: 'top', offset: 28,
+          color: ctx => {
+            const i = ctx.dataIndex;
+            if (i === 0) return '#0f172a';
+            const cur  = breakdown[i].existing + breakdown[i].first_time + breakdown[i].reactivated;
+            const prev = breakdown[i-1].existing + breakdown[i-1].first_time + breakdown[i-1].reactivated;
+            return (cur - prev) >= 0 ? '#047857' : '#b91c1c';
+          },
+          font: { weight: 800, size: 12 },
+          formatter: (v, ctx) => {
+            const i = ctx.dataIndex;
+            if (i === 0) return '';
+            const cur  = breakdown[i].existing + breakdown[i].first_time + breakdown[i].reactivated;
+            const prev = breakdown[i-1].existing + breakdown[i-1].first_time + breakdown[i-1].reactivated;
+            const delta = cur - prev;
+            const sign = delta >= 0 ? '+' : '−';
+            return sign + Math.abs(delta).toLocaleString() + ' MoM';
+          }
+        } },
       { label: 'Churned', data: breakdown.map(b => -b.churned),
         backgroundColor: 'rgba(220,38,38,0.90)', stack: 'all',
         borderRadius: { bottomLeft: 5, bottomRight: 5 }, borderSkipped: false, borderWidth: 0,
@@ -4767,16 +4792,16 @@ new Chart(document.getElementById('chart-breakdown'), {
     ]
   },
   options: baseOpts({
-    layout: { padding: { top: 36, right: 32, bottom: 22, left: 8 } },
+    layout: { padding: { top: 56, right: 32, bottom: 22, left: 8 } },
     plugins: {
       legend: {
         display: true, position: 'top', align: 'center',
         labels: {
           boxWidth: 14, boxHeight: 10, font: { size: 12, weight: 700 }, padding: 14,
-          filter: (item) => item.text !== '__total__'
+          filter: (item) => item.text !== '__total__' && item.text !== '__mom_delta__'
         }
       },
-      tooltip: { filter: (item) => item.dataset.label !== '__total__' }
+      tooltip: { filter: (item) => item.dataset.label !== '__total__' && item.dataset.label !== '__mom_delta__' }
     },
     scales: {
       x: { stacked: true, grid: { display: false },
