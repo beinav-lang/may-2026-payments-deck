@@ -2221,44 +2221,44 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <!-- SECTION 10 · PAYMENT COHORT RETENTION                         -->
 <!-- ============================================================ -->
-<section data-slide-title="Payment Cohort Retention">
+<section data-slide-title="Payment Retention Cohort">
   <div class="wrap">
 
     <style>
       /* Slide-mode: fill viewport vertically (mirrors slide 07 sizing logic) */
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] > .wrap {
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] > .wrap {
         min-height: calc(100vh - 130px);
         display: flex;
         flex-direction: column;
       }
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] .chart-shell {
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] .chart-shell {
         flex: 1;
         display: flex;
         flex-direction: column;
       }
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] #payment-cohort-heatmap {
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] #payment-cohort-heatmap {
         flex: 1;
         display: flex;
         flex-direction: column;
       }
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] .heatmap {
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] .heatmap {
         flex: 1;
         height: 100%;
       }
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] .heatmap tbody td.cohort-name,
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] .heatmap tbody td.cohort-size,
-      body.slide-mode section[data-slide-title="Payment Cohort Retention"] .heatmap tbody td.heat {
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] .heatmap tbody td.cohort-name,
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] .heatmap tbody td.cohort-size,
+      body.slide-mode section[data-slide-title="Payment Retention Cohort"] .heatmap tbody td.heat {
         padding-top: 12px;
         padding-bottom: 12px;
       }
       /* Heatmap density tuning for 13 month-columns (cell text smaller than slide 7) */
-      section[data-slide-title="Payment Cohort Retention"] .heatmap tbody td.heat {
+      section[data-slide-title="Payment Retention Cohort"] .heatmap tbody td.heat {
         font-size: 11px;
         min-width: 0;
         padding: 8px 2px;
       }
-      section[data-slide-title="Payment Cohort Retention"] .heatmap tbody td.cohort-name,
-      section[data-slide-title="Payment Cohort Retention"] .heatmap tbody td.cohort-size {
+      section[data-slide-title="Payment Retention Cohort"] .heatmap tbody td.cohort-name,
+      section[data-slide-title="Payment Retention Cohort"] .heatmap tbody td.cohort-size {
         font-size: 11.5px;
       }
     </style>
@@ -2266,18 +2266,18 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="chapter" style="margin-bottom: 10px">
       <div class="chapter-num">10</div>
       <div class="chapter-meta">
-        <div class="chapter-name">Payment Cohort Retention</div>
+        <div class="chapter-name">Payment Retention Cohort</div>
       </div>
     </div>
     <div>
       <h2 class="section-title" style="margin-bottom:0">
-        <span style="color: #059669">ACH-first cohorts retain ~50% at M12</span> · <span style="color: #dc2626">Card-first only ~24%</span> — first-month switch is the cliff.
+        <span style="color: #059669">ACH-first cohorts hold ~80% of eligible at M8</span> · <span style="color: #dc2626">Card-first only ~44%</span> — half-as-sticky even after stripping lease churn.
       </h2>
     </div>
 
     <div class="chart-shell" style="margin-top: 12px">
       <div class="cohort-meta">
-        <div class="ch-title" id="payment-cohort-title" style="margin-bottom:0">% Payment retention by cohort · M0 → M12 · Any first method</div>
+        <div class="ch-title" id="payment-cohort-title" style="margin-bottom:0">% Payment retention by cohort · M1 → M12 · Any first method <span style="font-weight: 500; color: var(--muted); font-size: 11px">· % of <em>eligible</em> tenants (active lease + active dbtenant in target cycle)</span></div>
       </div>
 
       <!-- Toggles: first-method · retention-method · value mode -->
@@ -2313,10 +2313,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Two stacked context cards: ACH stickiness + Card-first as switch funnel -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px">
       <div style="padding: 10px 14px; background: rgba(5,150,105,0.10); border-left: 3px solid #059669; border-radius: 4px; font-size: 11.5px; color: var(--text); line-height: 1.5">
-        <strong style="color: #047857">ACH retention is consistent — and switch-resistant</strong> · <span style="color: var(--muted)">Jan '25 ACH cohort holds <strong style="color: var(--text)">50.6% at M12</strong> (same method) vs <strong>52.8% any-method</strong> — only a 2.2pp switch-to-card delta. Mar '25 holds 54.1% · May '25 53.1%. <strong style="color: var(--text)">Once on ACH, customers stay on ACH.</strong></span>
+        <strong style="color: #047857">ACH retention is consistent — and switch-resistant</strong> · <span style="color: var(--muted)">Sep '25 ACH cohort holds <strong style="color: var(--text)">79.0% at M8</strong> (same method) vs <strong>81.4% any-method</strong> — only 2.4pp switch-to-card. Of eligible ACH-first tenants, <strong style="color: var(--text)">18.6% voluntarily didn't pay</strong>. Once on ACH, customers stay on ACH.</span>
       </div>
       <div style="padding: 10px 14px; background: rgba(220,38,38,0.08); border-left: 3px solid #dc2626; border-radius: 4px; font-size: 11.5px; color: var(--text); line-height: 1.5">
-        <strong style="color: #b91c1c">Card-first cohorts: ~50% of the M12 "churn" is actually a switch to ACH</strong> · <span style="color: var(--muted)">Jan '25 card cohort: <strong style="color: var(--text)">24.3% at M12</strong> on card-only retention vs <strong style="color: var(--text)">38.0% on any-method</strong> (toggle ⇧). The 14pp gap = customers who moved card→ACH, not real churn. <strong style="color: var(--text)">Card retention is half switch-funnel, half churn-funnel.</strong></span>
+        <strong style="color: #b91c1c">Card-first churn is ~half switching, ~half voluntary non-payment</strong> · <span style="color: var(--muted)">Sep '25 card cohort: <strong style="color: var(--text)">44.0% at M8</strong> card-only vs <strong style="color: var(--text)">67.8% any-method</strong> (toggle ⇧). The 23.8pp gap = card→ACH switchers. Even after stripping forced churn (eligibility filter), <strong style="color: var(--text)">32.2% of eligible card-first tenants voluntarily didn't pay</strong> — 1.7× the ACH rate.</span>
       </div>
     </div>
 
@@ -2327,16 +2327,18 @@ document.addEventListener('DOMContentLoaded', function() {
         Methodology · cohort definition + caveats
       </summary>
       <div style="margin-top: 6px; color: var(--text)">
-        <strong>Cohort:</strong> customers whose first-EVER payment occurred in the cohort month (excludes returning payers and pre-2025 history). <strong>Card / ACH cohorts:</strong> filter to customers whose first-ever payment was by that method <em>and</em> count retention only on that same method (so a card→ACH switcher reads as "lost" in the Card view but "retained" in the Any view).
+        <strong>Cohort:</strong> customers whose first-EVER payment landed in cohort_cycle (<em>payments_month</em> basis — 25-of-prior → 24-of-this, matches the rest of the deck). Window: Sep '25 → May '26 (mirrors slide 7's cohort window). Lease-frequency filter: Weekly/Daily/Monthly/Every2Weeks.
         <br>
-        <strong>Caveats:</strong> Card and ACH cohorts can overlap (~3%) when a customer paid with both methods in their first month. M0 = 100% by construction. Late-cohort cells trailing into Jun '26+ are null (out of window).
+        <strong>Eligibility-adjusted denominator:</strong> % = paid / eligible, where <em>eligible</em> = the cohort-defining lease has <code style="font-style:normal;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">status='ACTIVE'</code> on STG_LEASE_DAILY during target_cycle. This strips out forced churn (lease ended, eviction, PM gone) — what's left measures <em>voluntary</em> payment behavior. When the lease is ACTIVE its dbtenant is by definition still on platform, so the dbtenant-active condition is implied.
         <br>
-        <strong>Lease filter:</strong> recurring rent frequency in {Weekly, Daily, Monthly, Every2Weeks} to exclude one-off / quarterly leases.
+        <strong>Method filters:</strong> Card/ACH views restrict the cohort to customers whose first-ever payment was by that method. The Retention toggle controls the numerator — same-method-only vs any subsequent payment (the gap = switchers).
+        <br>
+        <strong>Caveats:</strong> Card and ACH first-method cohorts can overlap (~3%) when a customer paid with both methods in their first month. Trailing nulls = cohort+offset past May '26 (out of window). M0 ≈ 100% by construction.
       </div>
     </details>
     <style>
-      section[data-slide-title="Payment Cohort Retention"] details > summary::-webkit-details-marker { display: none; }
-      section[data-slide-title="Payment Cohort Retention"] details[open] > summary .pc-caret { transform: rotate(90deg); }
+      section[data-slide-title="Payment Retention Cohort"] details > summary::-webkit-details-marker { display: none; }
+      section[data-slide-title="Payment Retention Cohort"] details[open] > summary .pc-caret { transform: rotate(90deg); }
     </style>
 
   </div>
@@ -4461,115 +4463,84 @@ const cohortDataAll = {
 };
 
 // =======================================================
-// Payment-cohort retention (payments_cohort_*.sql)
-//   Cohort = customers whose FIRST-EVER payment landed in the cohort month
-//     (Any = no method filter; Card = first-ever was a card payment;
-//      ACH = first-ever was an ACH payment)
-//   Cell M{n} = % of cohort who paid in month {cohort+n}, by the same
-//     method for Card/ACH (method-specific retention), any method for Any.
-//   Note: Card and ACH cohorts can overlap by ~3% when a customer used
-//     both methods in their first month (e.g. ACH on day 1, card on day 5).
-//   M0 = 100% by construction. Trailing nulls are months past May '26.
+// Payment Retention Cohort · v2 — eligibility-adjusted (payments_retention_cohort_v2.sql)
+//   Cohort  = customers whose FIRST-EVER payment landed in cohort_cycle
+//             on payments_month basis (25-of-prior → 24-of-this).
+//             Window: Sep '25 → May '26 (matches slide 7's cohort window).
+//             Lease-frequency filter: Weekly/Daily/Monthly/Every2Weeks.
+//   Denom   = "eligible" customers in target_cycle = customers whose
+//             COHORT-DEFINING LEASE is still status='ACTIVE' on
+//             STG_LEASE_DAILY during target_cycle (lease still alive
+//             ⇒ its dbtenant is by definition still on platform, so
+//             the dbtenant-active condition is implied).
+//   Numer   = eligible customers who paid in target_cycle (method
+//             filter per view).
+//   Views:
+//     Any     = both first-methods, paid-any-method retention
+//     Card    = first-ever card,    paid-by-card retention
+//     ACH     = first-ever ACH,     paid-by-ACH retention
+//     CardAny = first-ever card,    paid-by-any-method retention
+//     ACHAny  = first-ever ACH,     paid-by-any-method retention
+//   counts[i]   = numerator at offset i
+//   eligible[i] = denominator at offset i
+//   pct[i]      = counts/eligible × 100 (NOT counts/cohort-size)
+//   M0 ≈ 100% by construction (eligible at M0 = paid at M0).
 // =======================================================
 const paymentCohortData = {
   Any: [
-    { cohort: "Jan '25", size:  12095, counts: [12095, 9024, 9075, 8504, 8157, 7827, 7464, 6859, 6882, 6420, 6106, 5837, 5577], pct: [100.00, 74.61, 75.03, 70.31, 67.44, 64.71, 61.71, 56.71, 56.90, 53.08, 50.48, 48.26, 46.11] },
-    { cohort: "Feb '25", size:  10881, counts: [10881, 7751, 7591, 7342, 7103, 6756, 6281, 6239, 5926, 5659, 5408, 5147, 4875], pct: [100.00, 71.23, 69.76, 67.48, 65.28, 62.09, 57.72, 57.34, 54.46, 52.01, 49.70, 47.30, 44.80] },
-    { cohort: "Mar '25", size:  11873, counts: [11873, 8333, 8412, 8115, 7767, 7121, 7223, 6765, 6508, 6236, 5962, 5707, 5606], pct: [100.00, 70.18, 70.85, 68.35, 65.42, 59.98, 60.84, 56.98, 54.81, 52.52, 50.21, 48.07, 47.22] },
-    { cohort: "Apr '25", size:  11690, counts: [11690, 8320, 8368, 8099, 7364, 7485, 7066, 6837, 6586, 6252, 6006, 5914, 5399], pct: [100.00, 71.17, 71.58, 69.28, 62.99, 64.03, 60.44, 58.49, 56.34, 53.48, 51.38, 50.59, 46.18] },
-    { cohort: "May '25", size:  12100, counts: [12100, 8577, 8760, 8016, 8144, 7730, 7327, 7050, 6725, 6356, 6387, 5955, 5646], pct: [100.00, 70.88, 72.40, 66.25, 67.31, 63.88, 60.55, 58.26, 55.58, 52.53, 52.79, 49.21, 46.66] },
-    { cohort: "Jun '25", size:  12741, counts: [12741, 9384, 9023, 9325, 8752, 8418, 7973, 7444, 7098, 7132, 6625, 6341, null], pct: [100.00, 73.65, 70.82, 73.19, 68.69, 66.07, 62.58, 58.43, 55.71, 55.98, 52.00, 49.77, null] },
-    { cohort: "Jul '25", size:  13595, counts: [13595, 9397, 10196, 9619, 9293, 8947, 8498, 8090, 8080, 7563, 7189, null, null], pct: [100.00, 69.12, 75.00, 70.75, 68.36, 65.81, 62.51, 59.51, 59.43, 55.63, 52.88, null, null] },
-    { cohort: "Aug '25", size:  12850, counts: [12850, 9726, 9576, 9166, 8780, 8355, 7996, 7949, 7396, 7092, null, null, null], pct: [100.00, 75.69, 74.52, 71.33, 68.33, 65.02, 62.23, 61.86, 57.56, 55.19, null, null, null] },
-    { cohort: "Sep '25", size:  13023, counts: [13023, 9735, 9674, 9242, 8809, 8504, 8551, 7852, 7594, null, null, null, null], pct: [100.00, 74.75, 74.28, 70.97, 67.64, 65.30, 65.66, 60.29, 58.31, null, null, null, null] },
-    { cohort: "Oct '25", size:  13208, counts: [13208, 9416, 9521, 9037, 8602, 8540, 7929, 7660, null, null, null, null, null], pct: [100.00, 71.29, 72.09, 68.42, 65.13, 64.66, 60.03, 58.00, null, null, null, null, null] },
-    { cohort: "Nov '25", size:  12071, counts: [12071, 8859, 8657, 8361, 8219, 7599, 7303, null, null, null, null, null, null], pct: [100.00, 73.39, 71.72, 69.27, 68.09, 62.95, 60.50, null, null, null, null, null, null] },
-    { cohort: "Dec '25", size:  11301, counts: [11301, 8003, 8111, 8004, 7484, 7177, null, null, null, null, null, null, null], pct: [100.00, 70.82, 71.77, 70.83, 66.22, 63.51, null, null, null, null, null, null, null] },
-    { cohort: "Jan '26", size:  14482, counts: [14482, 10564, 10852, 10125, 9702, null, null, null, null, null, null, null, null], pct: [100.00, 72.95, 74.93, 69.91, 66.99, null, null, null, null, null, null, null, null] },
-    { cohort: "Feb '26", size:  13410, counts: [13410, 9593, 9426, 9172, null, null, null, null, null, null, null, null, null], pct: [100.00, 71.54, 70.29, 68.40, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Mar '26", size:  14638, counts: [14638, 10214, 10593, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 69.78, 72.37, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size:  14470, counts: [14470, 10344, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 71.49, null, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "May '26", size:  14688, counts: [14688, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size:  13099, counts: [12923, 10397, 10127, 9600, 9138, 8870, 8388, 8072, 7627, null, null, null, null], pct: [100.00, 81.55, 81.06, 80.03, 78.34, 78.70, 76.94, 76.85, 75.73, null, null, null, null], eligible: [12923, 12750, 12493, 11996, 11664, 11271, 10902, 10503, 10071, null, null, null, null] },
+    { cohort: "Oct '25", size:  12619, counts: [12461, 9715, 9350, 8937, 8633, 8097, 7869, 7363, null, null, null, null, null], pct: [100.00, 78.73, 78.31, 77.18, 77.11, 74.79, 75.64, 73.56, null, null, null, null, null], eligible: [12461, 12340, 11939, 11579, 11196, 10827, 10403, 10010, null, null, null, null, null] },
+    { cohort: "Nov '25", size:  13148, counts: [13020, 10108, 9704, 9513, 8834, 8542, 8004, null, null, null, null, null, null], pct: [100.00, 78.66, 78.00, 79.06, 75.91, 76.36, 74.53, null, null, null, null, null, null], eligible: [13020, 12851, 12441, 12033, 11638, 11186, 10739, null, null, null, null, null, null] },
+    { cohort: "Dec '25", size:  10741, counts: [10657, 8237, 8156, 7591, 7308, 6826, null, null, null, null, null, null, null], pct: [100.00, 78.28, 79.49, 76.31, 76.35, 74.22, null, null, null, null, null, null, null], eligible: [10657, 10523, 10261, 9947, 9572, 9197, null, null, null, null, null, null, null] },
+    { cohort: "Jan '26", size:  14183, counts: [14125, 11393, 10821, 10331, 9715, null, null, null, null, null, null, null, null], pct: [100.00, 81.55, 79.18, 78.55, 76.74, null, null, null, null, null, null, null, null], eligible: [14125, 13970, 13666, 13152, 12659, null, null, null, null, null, null, null, null] },
+    { cohort: "Feb '26", size:  14070, counts: [13955, 10372, 10375, 9723, null, null, null, null, null, null, null, null, null], pct: [100.00, 75.19, 77.64, 75.16, null, null, null, null, null, null, null, null, null], eligible: [13955, 13795, 13363, 12937, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Mar '26", size:  13547, counts: [13493, 10226, 9980, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 76.74, 76.71, null, null, null, null, null, null, null, null, null, null], eligible: [13493, 13326, 13010, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Apr '26", size:  14821, counts: [14780, 11195, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 76.57, null, null, null, null, null, null, null, null, null, null, null], eligible: [14780, 14621, null, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "May '26", size:  14141, counts: [14129, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null], eligible: [14129, null, null, null, null, null, null, null, null, null, null, null, null] }
   ],
   Card: [
-    { cohort: "Jan '25", size:   5530, counts: [5530, 3105, 2839, 2582, 2421, 2134, 2044, 1869, 1729, 1643, 1481, 1405, 1341], pct: [100.00, 56.15, 51.34, 46.69, 43.78, 38.59, 36.96, 33.80, 31.27, 29.71, 26.78, 25.41, 24.25] },
-    { cohort: "Feb '25", size:   5691, counts: [5691, 2917, 2700, 2555, 2240, 2110, 1972, 1769, 1721, 1568, 1505, 1430, 1311], pct: [100.00, 51.26, 47.44, 44.90, 39.36, 37.08, 34.65, 31.08, 30.24, 27.55, 26.45, 25.13, 23.04] },
-    { cohort: "Mar '25", size:   5937, counts: [5937, 3232, 3064, 2624, 2479, 2295, 2114, 2027, 1821, 1740, 1673, 1541, 1442], pct: [100.00, 54.44, 51.61, 44.20, 41.76, 38.66, 35.61, 34.14, 30.67, 29.31, 28.18, 25.96, 24.29] },
-    { cohort: "Apr '25", size:   5700, counts: [5700, 3159, 2745, 2579, 2331, 2084, 1970, 1832, 1739, 1673, 1561, 1443, 1322], pct: [100.00, 55.42, 48.16, 45.25, 40.89, 36.56, 34.56, 32.14, 30.51, 29.35, 27.39, 25.32, 23.19] },
-    { cohort: "May '25", size:   6050, counts: [6050, 3126, 3007, 2669, 2362, 2265, 2021, 1948, 1812, 1696, 1552, 1473, 1387], pct: [100.00, 51.67, 49.70, 44.12, 39.04, 37.44, 33.40, 32.20, 29.95, 28.03, 25.65, 24.35, 22.93] },
-    { cohort: "Jun '25", size:   5515, counts: [5515, 2983, 2717, 2387, 2235, 2034, 1885, 1764, 1648, 1503, 1419, 1343, null], pct: [100.00, 54.09, 49.27, 43.28, 40.53, 36.88, 34.18, 31.99, 29.88, 27.25, 25.73, 24.35, null] },
-    { cohort: "Jul '25", size:   6126, counts: [6126, 3318, 2952, 2724, 2453, 2324, 2154, 2016, 1845, 1746, 1594, null, null], pct: [100.00, 54.16, 48.19, 44.47, 40.04, 37.94, 35.16, 32.91, 30.12, 28.50, 26.02, null, null] },
-    { cohort: "Aug '25", size:   6315, counts: [6315, 3469, 3242, 2934, 2745, 2537, 2397, 2171, 2060, 1918, null, null, null], pct: [100.00, 54.93, 51.34, 46.46, 43.47, 40.17, 37.96, 34.38, 32.62, 30.37, null, null, null] },
-    { cohort: "Sep '25", size:   5511, counts: [5511, 3123, 2740, 2548, 2360, 2171, 1987, 1862, 1732, null, null, null, null], pct: [100.00, 56.67, 49.72, 46.23, 42.82, 39.39, 36.06, 33.79, 31.43, null, null, null, null] },
-    { cohort: "Oct '25", size:   6541, counts: [6541, 3562, 3372, 3064, 2757, 2519, 2346, 2178, null, null, null, null, null], pct: [100.00, 54.46, 51.55, 46.84, 42.15, 38.51, 35.87, 33.30, null, null, null, null, null] },
-    { cohort: "Nov '25", size:   5952, counts: [5952, 3412, 3045, 2773, 2506, 2321, 2177, null, null, null, null, null, null], pct: [100.00, 57.33, 51.16, 46.59, 42.10, 39.00, 36.58, null, null, null, null, null, null] },
-    { cohort: "Dec '25", size:   5425, counts: [5425, 3081, 2774, 2450, 2331, 2151, null, null, null, null, null, null, null], pct: [100.00, 56.79, 51.13, 45.16, 42.97, 39.65, null, null, null, null, null, null, null] },
-    { cohort: "Jan '26", size:   6721, counts: [6721, 3806, 3406, 3120, 2873, null, null, null, null, null, null, null, null], pct: [100.00, 56.63, 50.68, 46.42, 42.75, null, null, null, null, null, null, null, null] },
-    { cohort: "Feb '26", size:   6358, counts: [6358, 3343, 3196, 2896, null, null, null, null, null, null, null, null, null], pct: [100.00, 52.58, 50.27, 45.55, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Mar '26", size:   6050, counts: [6050, 3238, 3039, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 53.52, 50.23, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size:   6279, counts: [6279, 3479, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 55.41, null, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "May '26", size:   6613, counts: [6613, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size:   5886, counts: [5785, 3452, 3111, 2736, 2537, 2356, 2161, 1988, 1852, null, null, null, null], pct: [100.00, 60.77, 56.30, 52.21, 50.19, 48.70, 46.46, 44.87, 44.00, null, null, null, null], eligible: [5785, 5680, 5526, 5240, 5055, 4838, 4651, 4431, 4209, null, null, null, null] },
+    { cohort: "Oct '25", size:   5818, counts: [5746, 3434, 2981, 2703, 2486, 2221, 2106, 1924, null, null, null, null, null], pct: [100.00, 60.68, 55.29, 52.26, 50.01, 46.73, 46.52, 44.65, null, null, null, null, null], eligible: [5746, 5659, 5392, 5172, 4971, 4753, 4527, 4309, null, null, null, null, null] },
+    { cohort: "Nov '25", size:   6648, counts: [6571, 3957, 3419, 3217, 2831, 2626, 2393, null, null, null, null, null, null], pct: [100.00, 61.35, 55.33, 54.22, 49.74, 48.36, 46.57, null, null, null, null, null, null], eligible: [6571, 6450, 6179, 5933, 5692, 5430, 5139, null, null, null, null, null, null] },
+    { cohort: "Dec '25", size:   5105, counts: [5069, 3105, 2747, 2412, 2215, 1998, null, null, null, null, null, null, null], pct: [100.00, 62.32, 57.37, 52.33, 50.55, 48.09, null, null, null, null, null, null, null], eligible: [5069, 4982, 4788, 4609, 4382, 4155, null, null, null, null, null, null, null] },
+    { cohort: "Jan '26", size:   6417, counts: [6378, 3919, 3413, 3095, 2811, null, null, null, null, null, null, null, null], pct: [100.00, 62.55, 56.27, 53.34, 50.81, null, null, null, null, null, null, null, null], eligible: [6378, 6265, 6065, 5802, 5532, null, null, null, null, null, null, null, null] },
+    { cohort: "Feb '26", size:   6386, counts: [6323, 3655, 3330, 2896, null, null, null, null, null, null, null, null, null], pct: [100.00, 58.76, 55.97, 50.81, null, null, null, null, null, null, null, null, null], eligible: [6323, 6220, 5950, 5700, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Mar '26", size:   5952, counts: [5923, 3462, 3019, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 59.57, 53.67, null, null, null, null, null, null, null, null, null, null], eligible: [5923, 5812, 5625, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Apr '26", size:   6392, counts: [6366, 3760, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 59.94, null, null, null, null, null, null, null, null, null, null, null], eligible: [6366, 6273, null, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "May '26", size:   6308, counts: [6301, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null], eligible: [6301, null, null, null, null, null, null, null, null, null, null, null, null] }
   ],
   ACH: [
-    { cohort: "Jan '25", size:   6823, counts: [6823, 5289, 5471, 5138, 4897, 4834, 4602, 4189, 4307, 3955, 3810, 3648, 3453], pct: [100.00, 77.52, 80.18, 75.30, 71.77, 70.85, 67.45, 61.40, 63.12, 57.97, 55.84, 53.47, 50.61] },
-    { cohort: "Feb '25", size:   5454, counts: [5454, 4217, 4097, 3929, 3931, 3731, 3398, 3554, 3316, 3205, 3042, 2903, 2759], pct: [100.00, 77.32, 75.12, 72.04, 72.08, 68.41, 62.30, 65.16, 60.80, 58.76, 55.78, 53.23, 50.59] },
-    { cohort: "Mar '25", size:   6232, counts: [6232, 4543, 4588, 4663, 4421, 3996, 4231, 3908, 3841, 3625, 3493, 3353, 3372], pct: [100.00, 72.90, 73.62, 74.82, 70.94, 64.12, 67.89, 62.71, 61.63, 58.17, 56.05, 53.80, 54.11] },
-    { cohort: "Apr '25", size:   6281, counts: [6281, 4545, 4829, 4679, 4217, 4506, 4196, 4096, 3940, 3715, 3570, 3586, 3255], pct: [100.00, 72.36, 76.88, 74.49, 67.14, 71.74, 66.80, 65.21, 62.73, 59.15, 56.84, 57.09, 51.82] },
-    { cohort: "May '25", size:   6364, counts: [6364, 4784, 4892, 4432, 4735, 4457, 4288, 4120, 3926, 3730, 3847, 3560, 3378], pct: [100.00, 75.17, 76.87, 69.64, 74.40, 70.03, 67.38, 64.74, 61.69, 58.61, 60.45, 55.94, 53.08] },
-    { cohort: "Jun '25", size:   7516, counts: [7516, 5757, 5510, 5978, 5539, 5373, 5114, 4737, 4533, 4667, 4302, 4138, null], pct: [100.00, 76.60, 73.31, 79.54, 73.70, 71.49, 68.04, 63.03, 60.31, 62.09, 57.24, 55.06, null] },
-    { cohort: "Jul '25", size:   7864, counts: [7864, 5405, 6339, 5916, 5810, 5575, 5281, 5039, 5160, 4796, 4601, null, null], pct: [100.00, 68.73, 80.61, 75.23, 73.88, 70.89, 67.15, 64.08, 65.62, 60.99, 58.51, null, null] },
-    { cohort: "Aug '25", size:   6834, counts: [6834, 5469, 5364, 5197, 4966, 4777, 4517, 4674, 4324, 4182, null, null, null], pct: [100.00, 80.03, 78.49, 76.05, 72.67, 69.90, 66.10, 68.39, 63.27, 61.19, null, null, null] },
-    { cohort: "Sep '25", size:   7813, counts: [7813, 6003, 6117, 5836, 5538, 5425, 5607, 5095, 4953, null, null, null, null], pct: [100.00, 76.83, 78.29, 74.70, 70.88, 69.44, 71.77, 65.21, 63.39, null, null, null, null] },
-    { cohort: "Oct '25", size:   7006, counts: [7006, 5215, 5329, 5089, 4893, 5053, 4660, 4565, null, null, null, null, null], pct: [100.00, 74.44, 76.06, 72.64, 69.84, 72.12, 66.51, 65.16, null, null, null, null, null] },
-    { cohort: "Nov '25", size:   6449, counts: [6449, 4871, 4837, 4754, 4804, 4388, 4218, null, null, null, null, null, null], pct: [100.00, 75.53, 75.00, 73.72, 74.49, 68.04, 65.41, null, null, null, null, null, null] },
-    { cohort: "Dec '25", size:   6148, counts: [6148, 4427, 4626, 4763, 4359, 4254, null, null, null, null, null, null, null], pct: [100.00, 72.01, 75.24, 77.47, 70.90, 69.19, null, null, null, null, null, null, null] },
-    { cohort: "Jan '26", size:   8087, counts: [8087, 6102, 6534, 6000, 5810, null, null, null, null, null, null, null, null], pct: [100.00, 75.45, 80.80, 74.19, 71.84, null, null, null, null, null, null, null, null] },
-    { cohort: "Feb '26", size:   7318, counts: [7318, 5630, 5469, 5395, null, null, null, null, null, null, null, null, null], pct: [100.00, 76.93, 74.73, 73.72, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Mar '26", size:   8887, counts: [8887, 6390, 6744, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 71.90, 75.89, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size:   8494, counts: [8494, 6219, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 73.22, null, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "May '26", size:   8422, counts: [8422, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size:   7213, counts: [7138, 6024, 5899, 5682, 5391, 5289, 5029, 4916, 4630, null, null, null, null], pct: [100.00, 85.21, 84.67, 84.10, 81.57, 82.22, 80.45, 80.96, 78.98, null, null, null, null], eligible: [7138, 7070, 6967, 6756, 6609, 6433, 6251, 6072, 5862, null, null, null, null] },
+    { cohort: "Oct '25", size:   6801, counts: [6715, 5466, 5379, 5178, 5055, 4813, 4708, 4431, null, null, null, null, null], pct: [100.00, 81.81, 82.16, 80.82, 81.20, 79.24, 80.12, 77.72, null, null, null, null, null], eligible: [6715, 6681, 6547, 6407, 6225, 6074, 5876, 5701, null, null, null, null, null] },
+    { cohort: "Nov '25", size:   6500, counts: [6449, 5180, 5118, 5030, 4742, 4648, 4349, null, null, null, null, null, null], pct: [100.00, 80.92, 81.73, 82.46, 79.75, 80.75, 77.66, null, null, null, null, null, null], eligible: [6449, 6401, 6262, 6100, 5946, 5756, 5600, null, null, null, null, null, null] },
+    { cohort: "Dec '25", size:   5636, counts: [5588, 4479, 4557, 4290, 4202, 3965, null, null, null, null, null, null, null], pct: [100.00, 80.83, 83.26, 80.37, 80.96, 78.64, null, null, null, null, null, null, null], eligible: [5588, 5541, 5473, 5338, 5190, 5042, null, null, null, null, null, null, null] },
+    { cohort: "Jan '26", size:   7766, counts: [7747, 6522, 6281, 6024, 5725, null, null, null, null, null, null, null, null], pct: [100.00, 84.65, 82.63, 81.96, 80.33, null, null, null, null, null, null, null, null], eligible: [7747, 7705, 7601, 7350, 7127, null, null, null, null, null, null, null, null] },
+    { cohort: "Feb '26", size:   7684, counts: [7632, 5904, 6018, 5713, null, null, null, null, null, null, null, null, null], pct: [100.00, 77.94, 81.18, 78.94, null, null, null, null, null, null, null, null, null], eligible: [7632, 7575, 7413, 7237, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Mar '26", size:   7595, counts: [7570, 5958, 5951, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 79.29, 80.58, null, null, null, null, null, null, null, null, null, null], eligible: [7570, 7514, 7385, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Apr '26", size:   8429, counts: [8414, 6558, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 78.56, null, null, null, null, null, null, null, null, null, null, null], eligible: [8414, 8348, null, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "May '26", size:   7833, counts: [7828, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null], eligible: [7828, null, null, null, null, null, null, null, null, null, null, null, null] }
   ],
-  // Card-first cohort, ANY-method retention (subsequent payments by any method
-  // count as retained — gap vs Card key = customers who switched card→ACH).
   CardAny: [
-    { cohort: "Jan '25", size:   5530, counts: [5530, 3757, 3661, 3390, 3264, 3008, 2874, 2663, 2566, 2452, 2284, 2172, 2100], pct: [100.00, 67.94, 66.20, 61.30, 59.02, 54.39, 51.97, 48.16, 46.40, 44.34, 41.30, 39.28, 37.97] },
-    { cohort: "Feb '25", size:   5691, counts: [5691, 3608, 3570, 3451, 3197, 3038, 2888, 2703, 2631, 2467, 2381, 2242, 2124], pct: [100.00, 63.40, 62.73, 60.64, 56.18, 53.38, 50.75, 47.50, 46.23, 43.35, 41.84, 39.40, 37.32] },
-    { cohort: "Mar '25", size:   5937, counts: [5937, 3867, 3893, 3526, 3396, 3161, 3048, 2897, 2707, 2616, 2494, 2358, 2236], pct: [100.00, 65.13, 65.57, 59.39, 57.20, 53.24, 51.34, 48.80, 45.60, 44.06, 42.01, 39.72, 37.66] },
-    { cohort: "Apr '25", size:   5700, counts: [5700, 3842, 3611, 3490, 3203, 3068, 2925, 2803, 2694, 2578, 2469, 2357, 2163], pct: [100.00, 67.40, 63.35, 61.23, 56.19, 53.82, 51.32, 49.18, 47.26, 45.23, 43.32, 41.35, 37.95] },
-    { cohort: "May '25", size:   6050, counts: [6050, 3903, 3991, 3650, 3507, 3369, 3109, 2982, 2857, 2675, 2607, 2451, 2303], pct: [100.00, 64.51, 65.97, 60.33, 57.97, 55.69, 51.39, 49.29, 47.22, 44.21, 43.09, 40.51, 38.07] },
-    { cohort: "Jun '25", size:   5515, counts: [5515, 3701, 3586, 3435, 3276, 3083, 2897, 2734, 2588, 2520, 2354, 2240, null], pct: [100.00, 67.11, 65.02, 62.28, 59.40, 55.90, 52.53, 49.57, 46.93, 45.69, 42.68, 40.62, null] },
-    { cohort: "Jul '25", size:   6126, counts: [6126, 4078, 4043, 3850, 3606, 3471, 3291, 3126, 3003, 2843, 2667, null, null], pct: [100.00, 66.57, 66.00, 62.85, 58.86, 56.66, 53.72, 51.03, 49.02, 46.41, 43.54, null, null] },
-    { cohort: "Aug '25", size:   6315, counts: [6315, 4342, 4295, 4041, 3846, 3624, 3501, 3327, 3118, 2959, null, null, null], pct: [100.00, 68.76, 68.01, 63.99, 60.90, 57.39, 55.44, 52.68, 49.37, 46.86, null, null, null] },
-    { cohort: "Sep '25", size:   5511, counts: [5511, 3790, 3574, 3427, 3257, 3111, 2986, 2783, 2671, null, null, null, null], pct: [100.00, 68.77, 64.85, 62.18, 59.10, 56.45, 54.18, 50.50, 48.47, null, null, null, null] },
-    { cohort: "Oct '25", size:   6541, counts: [6541, 4288, 4298, 4039, 3799, 3588, 3351, 3167, null, null, null, null, null], pct: [100.00, 65.56, 65.71, 61.75, 58.08, 54.85, 51.23, 48.42, null, null, null, null, null] },
-    { cohort: "Nov '25", size:   5952, counts: [5952, 4097, 3910, 3696, 3507, 3279, 3135, null, null, null, null, null, null], pct: [100.00, 68.83, 65.69, 62.10, 58.92, 55.09, 52.67, null, null, null, null, null, null] },
-    { cohort: "Dec '25", size:   5425, counts: [5425, 3647, 3532, 3307, 3171, 2965, null, null, null, null, null, null, null], pct: [100.00, 67.23, 65.11, 60.96, 58.45, 54.65, null, null, null, null, null, null, null] },
-    { cohort: "Jan '26", size:   6721, counts: [6721, 4552, 4414, 4168, 3949, null, null, null, null, null, null, null, null], pct: [100.00, 67.73, 65.67, 62.01, 58.76, null, null, null, null, null, null, null, null] },
-    { cohort: "Feb '26", size:   6358, counts: [6358, 4037, 4005, 3816, null, null, null, null, null, null, null, null, null], pct: [100.00, 63.49, 62.99, 60.02, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Mar '26", size:   6050, counts: [6050, 3921, 3910, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 64.81, 64.63, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size:   6279, counts: [6279, 4183, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 66.62, null, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "May '26", size:   6613, counts: [6613, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size:   5886, counts: [5785, 4264, 4047, 3753, 3563, 3411, 3186, 3014, 2853, null, null, null, null], pct: [100.00, 75.07, 73.24, 71.62, 70.48, 70.50, 68.50, 68.02, 67.78, null, null, null, null], eligible: [5785, 5680, 5526, 5240, 5055, 4838, 4651, 4431, 4209, null, null, null, null] },
+    { cohort: "Oct '25", size:   5818, counts: [5746, 4097, 3806, 3586, 3416, 3130, 3009, 2790, null, null, null, null, null], pct: [100.00, 72.40, 70.59, 69.33, 68.72, 65.85, 66.47, 64.75, null, null, null, null, null], eligible: [5746, 5659, 5392, 5172, 4971, 4753, 4527, 4309, null, null, null, null, null] },
+    { cohort: "Nov '25", size:   6648, counts: [6571, 4800, 4446, 4330, 3940, 3750, 3493, null, null, null, null, null, null], pct: [100.00, 74.42, 71.95, 72.98, 69.22, 69.06, 67.97, null, null, null, null, null, null], eligible: [6571, 6450, 6179, 5933, 5692, 5430, 5139, null, null, null, null, null, null] },
+    { cohort: "Dec '25", size:   5105, counts: [5069, 3660, 3476, 3172, 2971, 2739, null, null, null, null, null, null, null], pct: [100.00, 73.46, 72.60, 68.82, 67.80, 65.92, null, null, null, null, null, null, null], eligible: [5069, 4982, 4788, 4609, 4382, 4155, null, null, null, null, null, null, null] },
+    { cohort: "Jan '26", size:   6417, counts: [6378, 4734, 4374, 4126, 3830, null, null, null, null, null, null, null, null], pct: [100.00, 75.56, 72.12, 71.11, 69.23, null, null, null, null, null, null, null, null], eligible: [6378, 6265, 6065, 5802, 5532, null, null, null, null, null, null, null, null] },
+    { cohort: "Feb '26", size:   6386, counts: [6323, 4332, 4195, 3830, null, null, null, null, null, null, null, null, null], pct: [100.00, 69.65, 70.50, 67.19, null, null, null, null, null, null, null, null, null], eligible: [6323, 6220, 5950, 5700, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Mar '26", size:   5952, counts: [5923, 4157, 3893, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 71.52, 69.21, null, null, null, null, null, null, null, null, null, null], eligible: [5923, 5812, 5625, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Apr '26", size:   6392, counts: [6366, 4499, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 71.72, null, null, null, null, null, null, null, null, null, null, null], eligible: [6366, 6273, null, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "May '26", size:   6308, counts: [6301, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null], eligible: [6301, null, null, null, null, null, null, null, null, null, null, null, null] }
   ],
-  // ACH-first cohort, ANY-method retention. Gap vs ACH key = customers who
-  // switched ACH→card (very small — ACH is sticky).
   ACHAny: [
-    { cohort: "Jan '25", size:   6823, counts: [6823, 5459, 5624, 5308, 5081, 5004, 4768, 4358, 4479, 4125, 3969, 3800, 3606], pct: [100.00, 80.01, 82.43, 77.80, 74.47, 73.34, 69.88, 63.87, 65.65, 60.46, 58.17, 55.69, 52.85] },
-    { cohort: "Feb '25", size:   5454, counts: [5454, 4337, 4233, 4094, 4097, 3895, 3557, 3695, 3454, 3345, 3174, 3038, 2881], pct: [100.00, 79.52, 77.61, 75.06, 75.12, 71.42, 65.22, 67.75, 63.33, 61.33, 58.20, 55.70, 52.82] },
-    { cohort: "Mar '25", size:   6232, counts: [6232, 4681, 4755, 4809, 4587, 4153, 4379, 4052, 3980, 3783, 3635, 3508, 3520], pct: [100.00, 75.11, 76.30, 77.17, 73.60, 66.64, 70.27, 65.02, 63.86, 60.70, 58.33, 56.29, 56.48] },
-    { cohort: "Apr '25", size:   6281, counts: [6281, 4670, 4985, 4828, 4354, 4623, 4325, 4215, 4054, 3823, 3687, 3704, 3362], pct: [100.00, 74.35, 79.37, 76.87, 69.32, 73.60, 68.86, 67.11, 64.54, 60.87, 58.70, 58.97, 53.53] },
-    { cohort: "May '25", size:   6364, counts: [6364, 4901, 5028, 4580, 4875, 4584, 4435, 4263, 4064, 3854, 3957, 3676, 3495], pct: [100.00, 77.01, 79.01, 71.97, 76.60, 72.03, 69.69, 66.99, 63.86, 60.56, 62.18, 57.76, 54.92] },
-    { cohort: "Jun '25", size:   7516, counts: [7516, 5894, 5651, 6119, 5690, 5544, 5274, 4890, 4677, 4791, 4426, 4260, null], pct: [100.00, 78.42, 75.19, 81.41, 75.71, 73.76, 70.17, 65.06, 62.23, 63.74, 58.89, 56.68, null] },
-    { cohort: "Jul '25", size:   7864, counts: [7864, 5561, 6488, 6073, 5971, 5746, 5458, 5198, 5317, 4941, 4741, null, null], pct: [100.00, 70.71, 82.50, 77.23, 75.93, 73.07, 69.40, 66.10, 67.61, 62.83, 60.29, null, null] },
-    { cohort: "Aug '25", size:   6834, counts: [6834, 5602, 5525, 5359, 5138, 4932, 4683, 4814, 4453, 4309, null, null, null], pct: [100.00, 81.97, 80.85, 78.42, 75.18, 72.17, 68.53, 70.44, 65.16, 63.05, null, null, null] },
-    { cohort: "Sep '25", size:   7813, counts: [7813, 6150, 6340, 6041, 5766, 5620, 5790, 5269, 5119, null, null, null, null], pct: [100.00, 78.71, 81.15, 77.32, 73.80, 71.93, 74.11, 67.44, 65.52, null, null, null, null] },
-    { cohort: "Oct '25", size:   7006, counts: [7006, 5367, 5506, 5263, 5059, 5206, 4815, 4706, null, null, null, null, null], pct: [100.00, 76.61, 78.59, 75.12, 72.21, 74.31, 68.73, 67.17, null, null, null, null, null] },
-    { cohort: "Nov '25", size:   6449, counts: [6449, 4992, 4991, 4915, 4965, 4549, 4385, null, null, null, null, null, null], pct: [100.00, 77.41, 77.39, 76.21, 76.99, 70.54, 68.00, null, null, null, null, null, null] },
-    { cohort: "Dec '25", size:   6148, counts: [6148, 4540, 4775, 4905, 4511, 4406, null, null, null, null, null, null, null], pct: [100.00, 73.85, 77.67, 79.78, 73.37, 71.67, null, null, null, null, null, null, null] },
-    { cohort: "Jan '26", size:   8087, counts: [8087, 6241, 6709, 6200, 5986, null, null, null, null, null, null, null, null], pct: [100.00, 77.17, 82.96, 76.67, 74.02, null, null, null, null, null, null, null, null] },
-    { cohort: "Feb '26", size:   7318, counts: [7318, 5750, 5626, 5563, null, null, null, null, null, null, null, null, null], pct: [100.00, 78.57, 76.88, 76.02, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Mar '26", size:   8887, counts: [8887, 6507, 6907, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 73.22, 77.72, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "Apr '26", size:   8494, counts: [8494, 6375, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 75.05, null, null, null, null, null, null, null, null, null, null, null] },
-    { cohort: "May '26", size:   8422, counts: [8422, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size:   7213, counts: [7138, 6133, 6080, 5847, 5575, 5459, 5202, 5058, 4774, null, null, null, null], pct: [100.00, 86.75, 87.27, 86.55, 84.35, 84.86, 83.22, 83.30, 81.44, null, null, null, null], eligible: [7138, 7070, 6967, 6756, 6609, 6433, 6251, 6072, 5862, null, null, null, null] },
+    { cohort: "Oct '25", size:   6801, counts: [6715, 5618, 5544, 5351, 5217, 4967, 4860, 4573, null, null, null, null, null], pct: [100.00, 84.09, 84.68, 83.52, 83.81, 81.77, 82.71, 80.21, null, null, null, null, null], eligible: [6715, 6681, 6547, 6407, 6225, 6074, 5876, 5701, null, null, null, null, null] },
+    { cohort: "Nov '25", size:   6500, counts: [6449, 5308, 5258, 5183, 4894, 4792, 4511, null, null, null, null, null, null], pct: [100.00, 82.92, 83.97, 84.97, 82.31, 83.25, 80.55, null, null, null, null, null, null], eligible: [6449, 6401, 6262, 6100, 5946, 5756, 5600, null, null, null, null, null, null] },
+    { cohort: "Dec '25", size:   5636, counts: [5588, 4577, 4680, 4419, 4337, 4087, null, null, null, null, null, null, null], pct: [100.00, 82.60, 85.51, 82.78, 83.56, 81.06, null, null, null, null, null, null, null], eligible: [5588, 5541, 5473, 5338, 5190, 5042, null, null, null, null, null, null, null] },
+    { cohort: "Jan '26", size:   7766, counts: [7747, 6659, 6447, 6205, 5885, null, null, null, null, null, null, null, null], pct: [100.00, 86.42, 84.82, 84.42, 82.57, null, null, null, null, null, null, null, null], eligible: [7747, 7705, 7601, 7350, 7127, null, null, null, null, null, null, null, null] },
+    { cohort: "Feb '26", size:   7684, counts: [7632, 6040, 6180, 5893, null, null, null, null, null, null, null, null, null], pct: [100.00, 79.74, 83.37, 81.43, null, null, null, null, null, null, null, null, null], eligible: [7632, 7575, 7413, 7237, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Mar '26", size:   7595, counts: [7570, 6069, 6087, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 80.77, 82.42, null, null, null, null, null, null, null, null, null, null], eligible: [7570, 7514, 7385, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "Apr '26", size:   8429, counts: [8414, 6696, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, 80.21, null, null, null, null, null, null, null, null, null, null, null], eligible: [8414, 8348, null, null, null, null, null, null, null, null, null, null, null] },
+    { cohort: "May '26", size:   7833, counts: [7828, null, null, null, null, null, null, null, null, null, null, null, null], pct: [100.00, null, null, null, null, null, null, null, null, null, null, null, null], eligible: [7828, null, null, null, null, null, null, null, null, null, null, null, null] }
   ]
 };
 
@@ -6368,18 +6339,24 @@ function renderPaymentCohortHeatmap() {
     html += `<td class="cohort-size">${c.size.toLocaleString()}</td>`;
 
     offsets.forEach((off, vi) => {
+      const elig = c.eligible ? c.eligible[off] : null;
+      const num  = c.counts[off];
+      // hover tooltip: numerator/denominator + cohort size
+      const tip = (elig != null && num != null)
+        ? `${num.toLocaleString()} paid / ${elig.toLocaleString()} eligible · cohort ${c.size.toLocaleString()}`
+        : '';
       if (mode === 'pct') {
         const v = c.pct[off];
         if (v == null) { html += `<td class="heat empty">—</td>`; return; }
         const t = normInCol(v, vi);
-        html += `<td class="heat" style="background:${heatColorByT(t)}; color:${textColorForT(t)}">${v.toFixed(1)}%</td>`;
+        html += `<td class="heat" style="background:${heatColorByT(t)}; color:${textColorForT(t)}" title="${tip}">${v.toFixed(1)}%</td>`;
       } else if (mode === 'count') {
         const v = c.counts[off];
         if (v == null) { html += `<td class="heat empty">—</td>`; return; }
         const s = colScales[vi];
         const t = (s && s.max) ? v / s.max : 0;
         const display = v >= 1000 ? (v/1000).toFixed(1) + 'k' : v.toLocaleString();
-        html += `<td class="heat" style="background:${heatColorByT(t)}; color:${textColorForT(t)}">${display}</td>`;
+        html += `<td class="heat" style="background:${heatColorByT(t)}; color:${textColorForT(t)}" title="${tip}">${display}</td>`;
       } else {
         if (vi === 0) { html += `<td class="heat empty">—</td>`; return; }
         const prevOff = offsets[vi - 1];
@@ -6390,7 +6367,7 @@ function renderPaymentCohortHeatmap() {
         const norm = (s && s.maxAbs) ? delta / s.maxAbs : 0;
         const sign = delta > 0 ? '+' : (delta < 0 ? '−' : '');
         const fmt = sign + Math.abs(delta).toFixed(1);
-        html += `<td class="heat" style="background:${divergingColor(norm)}; color:${divergingTextColor(norm)}">${fmt}</td>`;
+        html += `<td class="heat" style="background:${divergingColor(norm)}; color:${divergingTextColor(norm)}" title="${tip}">${fmt}</td>`;
       }
     });
     html += `</tr>`;
@@ -6398,15 +6375,16 @@ function renderPaymentCohortHeatmap() {
   html += '</tbody></table>';
   document.getElementById('payment-cohort-heatmap').innerHTML = html;
 
-  // Title — surface the effective view × retention combo
+  // Title — surface the effective view × retention combo + eligibility caveat
   const viewLabel = {
     Any:  'Any first method',
     Card: paymentCohortRet === 'Any' ? 'Card-first cohort · any-method retention' : 'Card-first cohort · card-only retention',
     ACH:  paymentCohortRet === 'Any' ? 'ACH-first cohort · any-method retention'  : 'ACH-first cohort · ACH-only retention'
   }[paymentCohortView];
   const valLabel = { pct: '% Retention', count: '# Customers', delta: 'Δ MoM (pp change vs prior month)' }[mode];
+  const elig = mode === 'pct' ? ' <span style="font-weight: 500; color: var(--muted); font-size: 11px">· % of <em>eligible</em> tenants (active lease + active dbtenant in target cycle)</span>' : '';
   const t = document.getElementById('payment-cohort-title');
-  if (t) t.textContent = `${valLabel} by cohort · M1 → M12 · ${viewLabel}`;
+  if (t) t.innerHTML = `${valLabel} by cohort · M1 → M12 · ${viewLabel}${elig}`;
 
   // Hide retention toggle for Any cohort (no meaningful "same-method" subset)
   const retWrap = document.getElementById('payment-cohort-ret-wrap');
