@@ -2269,14 +2269,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">Two real drivers: <span class="title-accent red">amount drift</span> + <span class="title-accent red">new-PM cohort</span>. Mix shift was neutral.</h2>
-    <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1080px">
-      17-month FT card share: <strong style="color: var(--text)">47.9% → 44.6%</strong> (−3.3pp). Both onboarding (0–3 mo) and mature (3+ mo) cohorts drift down in parallel — the drop is behavioural, not portfolio recomposition.
+    <h2 class="section-title">Two drivers behind the card drop: <span class="title-accent red">amount drift</span> + <span class="title-accent red">Onboarding gap</span>.</h2>
+    <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1100px">
+      17 cycles · Jan '25 → May '26. Both cohorts drifted down from their <strong style="color: var(--text)">Mar '25 peak</strong>
+      — Onboarding <strong style="color: var(--text)">−13pp</strong>, Mature <strong style="color: var(--text)">−8pp</strong>.
+      The Onboarding cohort sits structurally <strong style="color: var(--text)">6–9pp below Mature every month</strong> — new PMs onboard with ACH-leaning tenants.
+      Mix shift was neutral · existing-tenant switching ruled out.
     </p>
 
     <!-- The chart — proof of cross-cohort drift -->
     <div class="chart-shell">
-      <div class="ch-title">FT card adoption by PM tenure</div>
+      <div class="ch-title">First-time paying tenants · card adoption by PM age</div>
       <div class="chart-wrap" style="height: 320px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
     </div>
 
@@ -2300,14 +2303,17 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
-      <!-- Driver 2 · New-PM cohort -->
+      <!-- Driver 2 · Onboarding gap (structural) -->
       <div style="padding: 16px 20px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px; display: flex; flex-direction: column">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · New-PM cohort · 3× the drop</div>
-        <div style="font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 8px">46.8% → <span style="color: #b91c1c">37.1%</span></div>
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · Onboarding gap · structural</div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 6px">
+          <span style="color: #b91c1c">37.1%</span> vs <span style="color: #162050">45.9%</span>
+        </div>
+        <div style="font-size: 11.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.4">May '26 · Onboarding (0–3 mo) vs Mature (3+ mo)</div>
         <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          0–3 mo PMs fell <strong>−9.7pp</strong>. Other cohorts fell 2–3pp.
-          The PM-acquisition funnel is producing tenants that prefer ACH at a higher rate
-          — extra drag <em>beyond</em> the amount-drift mechanism.
+          Onboarding cohort sits <strong>6–9pp below Mature every cycle</strong> — persistent structural gap.
+          New PMs onboard with ACH-leaning tenants from day one.
+          Both cohorts off their Mar '25 peaks (Onb −13pp · Mat −8pp).
         </div>
       </div>
 
