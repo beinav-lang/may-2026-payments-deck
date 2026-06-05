@@ -2269,12 +2269,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">Two drivers behind the card drop: <span class="title-accent red">amount drift</span> + <span class="title-accent red">Onboarding gap</span>.</h2>
+    <h2 class="section-title">The card drop wasn't gradual — it was a <span class="title-accent red">Spring 2025 step-down</span>. Both cohorts. Same months.</h2>
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1100px">
-      17 cycles · Jan '25 → May '26. Both cohorts drifted down from their <strong style="color: var(--text)">Mar '25 peak</strong>
-      — Onboarding <strong style="color: var(--text)">−13pp</strong>, Mature <strong style="color: var(--text)">−8pp</strong>.
-      The Onboarding cohort sits structurally <strong style="color: var(--text)">6–9pp below Mature every month</strong> — new PMs onboard with ACH-leaning tenants.
-      Mix shift was neutral · existing-tenant switching ruled out.
+      Mar–Aug '25 both cohorts crashed in lockstep: <strong style="color: var(--text)">Onboarding 50% → 41%</strong>, <strong style="color: var(--text)">Mature 54% → 46%</strong> (~8–10pp each, in 4–5 months).
+      Since Aug '25 they've bounced in a low band with no clear trend.
+      Mix neutral · existing-tenant switching ruled out · amount drift explains &lt;1pp.
+      <strong style="color: var(--text)">The Spring '25 event is a platform-level shift in how tenants pick payment method at first signup</strong> — needs product audit.
     </p>
 
     <!-- The chart — proof of cross-cohort drift -->
@@ -2303,17 +2303,18 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
-      <!-- Driver 2 · Onboarding gap (structural) -->
+      <!-- Driver 2 · Spring '25 step-drop (platform-level event) -->
       <div style="padding: 16px 20px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px; display: flex; flex-direction: column">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · Onboarding gap · structural</div>
-        <div style="font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 6px">
-          <span style="color: #b91c1c">37.1%</span> vs <span style="color: #162050">45.9%</span>
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · Spring '25 step-down · platform event</div>
+        <div style="font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.15; margin-bottom: 6px">
+          Onb <span style="color: #b91c1c">50% → 41%</span><br>
+          Mat <span style="color: #b91c1c">54% → 46%</span>
         </div>
-        <div style="font-size: 11.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.4">May '26 · Onboarding (0–3 mo) vs Mature (3+ mo)</div>
+        <div style="font-size: 11.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.4">Mar–Aug '25 · both cohorts dropped in lockstep</div>
         <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          Onboarding cohort sits <strong>6–9pp below Mature every cycle</strong> — persistent structural gap.
-          New PMs onboard with ACH-leaning tenants from day one.
-          Both cohorts off their Mar '25 peaks (Onb −13pp · Mat −8pp).
+          Same months, same magnitude, both cohorts. That rules out PM-mix and amount drift —
+          something happened at the <strong>FT signup-flow product layer</strong> (default method, Plaid surface, fee disclosure, or auto-pay opt-in).
+          <strong>Audit product changes Mar–Aug '25.</strong>
         </div>
       </div>
 
