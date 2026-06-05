@@ -191,6 +191,14 @@
   .metric.up   .metric-num { color: #fff; }
   .metric.down .metric-num { color: #fca5a5; }
   .metric.flag .metric-num { color: #fcd34d; }
+  /* First-Time Paying Tenants reuses the .metric tile component on a LIGHT background;
+     override the dark-band colors so the tiles read. Keyed on data-slide-title so it
+     survives slide reordering/renumbering. */
+  section[data-slide-title="First Time Paying Tenants"] .metric { border-right-color: rgba(0,0,0,0.08); }
+  section[data-slide-title="First Time Paying Tenants"] .metric.up .metric-num { color: var(--text); }
+  section[data-slide-title="First Time Paying Tenants"] .metric-label { color: var(--muted); }
+  section[data-slide-title="First Time Paying Tenants"] .metric-tag { color: var(--muted); }
+  section[data-slide-title="First Time Paying Tenants"] .metric-tag .pos { color: var(--green); }
 
   /* SECTION SHELL */
   section { padding: 48px 0; }
@@ -2273,7 +2281,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1100px">
       Mar–Aug '25 both cohorts crashed in lockstep: <strong style="color: var(--text)">Onboarding 50% → 41%</strong>, <strong style="color: var(--text)">Mature 54% → 46%</strong> (~8–10pp each, in 4–5 months).
       Since Aug '25 they've bounced in a low band with no clear trend.
-      Mix neutral · existing-tenant switching ruled out · amount drift explains &lt;1pp.
+      Mix neutral · existing-tenant switching ruled out · amount drift explains &lt;1pp · <strong style="color: var(--text)">every PM segment fell 8–11pp from the Mar '25 peak — the step-down is segment-agnostic</strong>.
       <strong style="color: var(--text)">The Spring '25 event is a platform-level shift in how tenants pick payment method at first signup</strong> — needs product audit.
     </p>
 
@@ -2953,111 +2961,10 @@ document.addEventListener('DOMContentLoaded', function() {
   .nsf-insight-block .nsf-insight-text strong { font-weight: 700; }
 </style>
 
-<section class="paper" data-slide-title="NSF">
-  <div class="wrap">
-    <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow">NSF</div></div>
-    <h2 class="section-title">NSF ARR <span class="title-accent">doubled YoY</span> — rate ticked up to 3.69%.</h2>
-
-    <!-- May headline summary card -->
-    <div style="margin-top: 14px; padding: 14px 18px; background: linear-gradient(135deg, rgba(14,116,144,0.08) 0%, rgba(49,133,252,0.06) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; line-height: 1.6; color: var(--text)">
-      <strong style="color: #0e7490">May 2026:</strong> NSF ARR <strong style="color: #0e7490">$2.04M ATH</strong> (<strong>+100% YoY</strong> · May '25 $1.02M, +12.4% MoM) tracks ACH growth. <strong>NSF rate ticked up to 3.69%</strong> (Apr 3.20%, +0.49pp MoM) — still inside the 12-month band (3.09%–4.00%) but trending toward the top.
-    </div>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
-      <div class="chart-shell">
-        <div class="ch-title">NSF ARR</div>
-        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
-        <div class="chart-wrap" style="height: 320px"><canvas id="chart-nsf-arr"></canvas></div>
-      </div>
-      <div class="chart-shell">
-        <div class="ch-title">NSF transactions &amp; % of ACH</div>
-        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
-        <div class="chart-wrap" style="height: 320px"><canvas id="chart-nsf-txns"></canvas></div>
-      </div>
-    </div>
-
-    <!-- Action plan card · NSF fee uplift -->
-    <div style="margin-top: 16px; padding: 14px 18px; background: linear-gradient(135deg, rgba(223,254,2,0.18) 0%, rgba(223,254,2,0.06) 100%); border-left: 4px solid #162050; border-radius: 8px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center">
-      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050">Action plan</div>
-      <div style="font-size: 13px; line-height: 1.55; color: var(--text)">
-        <strong>Move legacy NSF-fee accounts ($25) to current schedule ($40).</strong> 1,480 legacy accounts (≈61% of fee-paying base, joined pre-Nov '24) still bill at the old $25 rate; 946 newer accounts already pay $40. Pure schedule update — <em>no behavioral change required from PMs</em>.
-      </div>
-      <div style="text-align: right; padding-left: 8px; border-left: 1px solid rgba(22,32,80,0.15)">
-        <div style="font-size: 10px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--muted)">Fully rolled out</div>
-        <div style="font-size: 22px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 2px">+$573K ARR</div>
-        <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">$1.85M → <strong style="color: #162050">$2.42M</strong> (+31%)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================ -->
-<!-- ============================================================ -->
-<!-- SECTION 06 · PM SIDE — Churned Accounts                       -->
-<!-- ============================================================ -->
-
-
-
-
-<section data-slide-title="Churned Accounts">
-  <style>
-    /* ===== Slide-mode: fill viewport vertically ===== */
-    body.slide-mode section[data-slide-title="Churned Accounts"] > .wrap {
-      min-height: calc(100vh - 130px);
-      display: flex;
-      flex-direction: column;
-    }
-    body.slide-mode section[data-slide-title="Churned Accounts"] .chart-shell {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    body.slide-mode section[data-slide-title="Churned Accounts"] .chart-shell .chart-wrap {
-      flex: 1;
-      height: auto !important;
-      min-height: 0;
-    }
-  </style>
-  <div class="wrap">
-    <div style="margin-bottom: 14px">
-      <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">Churned Accounts</div></div>
-      <h2 class="section-title" style="margin-bottom: 0">Lost ARR re-accelerated <span class="title-accent red">+23% MoM</span> — count holds the plateau.</h2>
-
-      <div style="margin-top: 12px; padding:16px 22px; background:#fff; border:1px solid var(--border); border-left:5px solid var(--orange); border-radius:12px">
-        <div style="font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:1.3px; color:var(--orange); margin-bottom:8px">⚠ The story</div>
-        <p style="font-size:14px; line-height:1.65; color:var(--muted); margin:0">
-          May churn count holds the 6-month plateau (130 vs Apr 128, Mar 128) — <strong style="color:var(--text)">but lost ARR re-accelerated $188K → $232K (+23% MoM)</strong>. $/account climbed back to <strong style="color:var(--text)">$1.78K</strong> (Apr was the unusually low $/account month at $1.47K). <strong style="color:var(--text)">YoY +28%</strong> on count, <strong style="color:var(--text)">+42% on ARR</strong> — the elevated churn baseline is sticky, not transient.
-        </p>
-      </div>
-
-      <details class="methodology-collapse" style="margin-top: 10px">
-        <summary>
-          <span class="meth-eyebrow">Scope &amp; method</span>
-          <span class="meth-summary">How churn is measured <span class="meth-chev">▾</span></span>
-        </summary>
-        <div style="margin-top: 8px; padding:12px 16px; background:#fff7ed; border-left:3px solid var(--orange); border-radius:6px; font-size:12.5px; color:var(--muted); line-height:1.6">
-          Only accounts with payments ARR &gt; 0 before churning (paid-account churn, not total). <strong style="color:var(--text)">Lost Payments ARR</strong> = max monthly payments ARR in the 6 months before churn, summed across accounts that churned in the month. Tracked on subscription cancellation date.
-        </div>
-      </details>
-    </div>
-
-    <div class="chart-shell">
-      <div class="ch-title">Churned accounts and lost ARR · 16 months</div>
-      <div class="ch-sub">Bars: lost ARR ($K). Line: # accounts churned. Accounts that received payments only.</div>
-      <div class="chart-wrap h340"><canvas id="chart-churned-accounts"></canvas></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SECTION 13 · FIRST-TIME PAYING TENANTS (placeholder)         -->
-<!-- ============================================================ -->
 <section data-slide-title="First Time Paying Tenants">
   <div class="wrap">
     <div style="margin-top: 18px">
-      <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
+      <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
       <h2 class="section-title">First-time payers — the funnel's leading edge — grew <span class="title-accent">+22% YoY</span> to 14.4K, almost entirely from existing accounts expanding.</h2>
     </div>
 
@@ -3134,7 +3041,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <script>
-// Slide 13 · Hero — first-time paying tenants per month, new vs existing accounts.
+// First-Time Paying Tenants · Hero — first-time paying tenants per month, new vs existing accounts.
 // Source: window.DATA.ft_by_account_type. Excludes partial current month via CYCLE_MONTH.
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
@@ -3207,7 +3114,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 
-// Slide 13 · Card 2 mini — account-age composition of latest-month FT volume.
+// First-Time Paying Tenants · Card 2 mini — account-age composition of latest-month FT volume.
 // Source: window.DATA.ft_by_account_age (CYCLE_MONTH only, excl. 'Unknown').
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
@@ -3256,6 +3163,109 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 </script>
+
+<section class="paper" data-slide-title="NSF">
+  <div class="wrap">
+    <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">NSF</div></div>
+    <h2 class="section-title">NSF ARR <span class="title-accent">doubled YoY</span> — rate ticked up to 3.69%.</h2>
+
+    <!-- May headline summary card -->
+    <div style="margin-top: 14px; padding: 14px 18px; background: linear-gradient(135deg, rgba(14,116,144,0.08) 0%, rgba(49,133,252,0.06) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; line-height: 1.6; color: var(--text)">
+      <strong style="color: #0e7490">May 2026:</strong> NSF ARR <strong style="color: #0e7490">$2.04M ATH</strong> (<strong>+100% YoY</strong> · May '25 $1.02M, +12.4% MoM) tracks ACH growth. <strong>NSF rate ticked up to 3.69%</strong> (Apr 3.20%, +0.49pp MoM) — still inside the 12-month band (3.09%–4.00%) but trending toward the top.
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
+      <div class="chart-shell">
+        <div class="ch-title">NSF ARR</div>
+        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
+        <div class="chart-wrap" style="height: 320px"><canvas id="chart-nsf-arr"></canvas></div>
+      </div>
+      <div class="chart-shell">
+        <div class="ch-title">NSF transactions &amp; % of ACH</div>
+        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
+        <div class="chart-wrap" style="height: 320px"><canvas id="chart-nsf-txns"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Action plan card · NSF fee uplift -->
+    <div style="margin-top: 16px; padding: 14px 18px; background: linear-gradient(135deg, rgba(223,254,2,0.18) 0%, rgba(223,254,2,0.06) 100%); border-left: 4px solid #162050; border-radius: 8px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center">
+      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050">Action plan</div>
+      <div style="font-size: 13px; line-height: 1.55; color: var(--text)">
+        <strong>Move legacy NSF-fee accounts ($25) to current schedule ($40).</strong> 1,480 legacy accounts (≈61% of fee-paying base, joined pre-Nov '24) still bill at the old $25 rate; 946 newer accounts already pay $40. Pure schedule update — <em>no behavioral change required from PMs</em>.
+      </div>
+      <div style="text-align: right; padding-left: 8px; border-left: 1px solid rgba(22,32,80,0.15)">
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--muted)">Fully rolled out</div>
+        <div style="font-size: 22px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 2px">+$573K ARR</div>
+        <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">$1.85M → <strong style="color: #162050">$2.42M</strong> (+31%)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- SECTION 06 · PM SIDE — Churned Accounts                       -->
+<!-- ============================================================ -->
+
+
+
+
+<section data-slide-title="Churned Accounts">
+  <style>
+    /* ===== Slide-mode: fill viewport vertically ===== */
+    body.slide-mode section[data-slide-title="Churned Accounts"] > .wrap {
+      min-height: calc(100vh - 130px);
+      display: flex;
+      flex-direction: column;
+    }
+    body.slide-mode section[data-slide-title="Churned Accounts"] .chart-shell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    body.slide-mode section[data-slide-title="Churned Accounts"] .chart-shell .chart-wrap {
+      flex: 1;
+      height: auto !important;
+      min-height: 0;
+    }
+  </style>
+  <div class="wrap">
+    <div style="margin-bottom: 14px">
+      <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow">Churned Accounts</div></div>
+      <h2 class="section-title" style="margin-bottom: 0">Lost ARR re-accelerated <span class="title-accent red">+23% MoM</span> — count holds the plateau.</h2>
+
+      <div style="margin-top: 12px; padding:16px 22px; background:#fff; border:1px solid var(--border); border-left:5px solid var(--orange); border-radius:12px">
+        <div style="font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:1.3px; color:var(--orange); margin-bottom:8px">⚠ The story</div>
+        <p style="font-size:14px; line-height:1.65; color:var(--muted); margin:0">
+          May churn count holds the 6-month plateau (130 vs Apr 128, Mar 128) — <strong style="color:var(--text)">but lost ARR re-accelerated $188K → $232K (+23% MoM)</strong>. $/account climbed back to <strong style="color:var(--text)">$1.78K</strong> (Apr was the unusually low $/account month at $1.47K). <strong style="color:var(--text)">YoY +28%</strong> on count, <strong style="color:var(--text)">+42% on ARR</strong> — the elevated churn baseline is sticky, not transient.
+        </p>
+      </div>
+
+      <details class="methodology-collapse" style="margin-top: 10px">
+        <summary>
+          <span class="meth-eyebrow">Scope &amp; method</span>
+          <span class="meth-summary">How churn is measured <span class="meth-chev">▾</span></span>
+        </summary>
+        <div style="margin-top: 8px; padding:12px 16px; background:#fff7ed; border-left:3px solid var(--orange); border-radius:6px; font-size:12.5px; color:var(--muted); line-height:1.6">
+          Only accounts with payments ARR &gt; 0 before churning (paid-account churn, not total). <strong style="color:var(--text)">Lost Payments ARR</strong> = max monthly payments ARR in the 6 months before churn, summed across accounts that churned in the month. Tracked on subscription cancellation date.
+        </div>
+      </details>
+    </div>
+
+    <div class="chart-shell">
+      <div class="ch-title">Churned accounts and lost ARR · 16 months</div>
+      <div class="ch-sub">Bars: lost ARR ($K). Line: # accounts churned. Accounts that received payments only.</div>
+      <div class="chart-wrap h340"><canvas id="chart-churned-accounts"></canvas></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 13 · FIRST-TIME PAYING TENANTS (placeholder)         -->
+<!-- ============================================================ -->
+
 
 
 
@@ -3912,282 +3922,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <!-- APPENDIX · PM ADOPTION HEADLINE (data track 2)                -->
 <!-- ============================================================ -->
-<section class="paper">
-  <div class="wrap">
-    <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">PM Adoption · Data Findings</div></div>
-    <h2 class="section-title">Adoption is a <span class="title-accent">setup problem</span>, not a size problem — 0.94-AUC risk score.</h2>
 
-    <details class="methodology-collapse">
-      <summary>
-        <span class="meth-eyebrow">Methodology</span>
-        <span class="meth-summary">Cohort · Outcome · Split <span class="meth-chev">▾</span></span>
-      </summary>
-      <div class="kpi-def" style="margin-top: 8px">
-        <div class="kpi-def-key">Cohort</div><div class="kpi-def-val">9,347 PM accounts active ≥90 days before Feb '26 (excl. test, excl. HOA, active Stripe sub).</div>
-        <div class="kpi-def-key">Outcome</div><div class="kpi-def-val">Avg of monthly <code>paid leases ÷ active leases</code> across Feb / Mar / Apr '26. <strong>High</strong> &gt;60%, <strong>Low</strong> &lt;20%, Mid in between.</div>
-        <div class="kpi-def-key">Split</div><div class="kpi-def-val">Low <strong>20%</strong> · Mid <strong>34%</strong> · High <strong>46%</strong>. Per-month adoption barely moves Feb→Apr (within 1pp per group) — <em>structural, not seasonal</em>. Highs are actually slightly <em>smaller</em> on average (30 vs 35 active leases).</div>
-      </div>
-    </details>
-
-    <h3 style="font-size: 18px; font-weight: 700; color: var(--text); margin: 22px 0 2px; line-height: 1.3">Five levers, ranked by impact</h3>
-    <div style="font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 12px">how many Lows have the issue × how big the High–Low gap</div>
-    <style>
-      .lever-tile { display: flex; flex-direction: column; padding: 16px 14px; border-radius: 10px; background: var(--paper); border-left: 4px solid var(--warn); box-shadow: 0 1px 2px rgba(22, 32, 80, 0.04); }
-      .lever-tile.t-orange { border-left-color: var(--orange); }
-      .lever-tile.t-purple { border-left-color: var(--purple); }
-      .lever-tile.t-blue   { border-left-color: var(--blue); }
-      .lever-tile.t-green  { border-left-color: var(--green); }
-      .lever-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--warn); color: #fff; font-size: 11px; font-weight: 700; margin-right: 8px; }
-      .lever-tile.t-orange .lever-num { background: var(--orange); }
-      .lever-tile.t-purple .lever-num { background: var(--purple); }
-      .lever-tile.t-blue   .lever-num { background: var(--blue); }
-      .lever-tile.t-green  .lever-num { background: var(--green); }
-      .lever-title { font-size: 12px; font-weight: 600; color: var(--text); display: flex; align-items: center; line-height: 1.3; min-height: 44px; }
-      .lever-stat  { font-size: 18px; font-weight: 700; margin: 10px 0 4px; line-height: 1.15; color: var(--warn); }
-      .lever-tile.t-orange .lever-stat { color: var(--orange); }
-      .lever-tile.t-purple .lever-stat { color: var(--purple); }
-      .lever-tile.t-blue   .lever-stat { color: var(--blue); }
-      .lever-tile.t-green  .lever-stat { color: var(--green); }
-      .lever-stat .stat-low  { color: inherit; }
-      .lever-stat .stat-sep  { color: var(--subtle); margin: 0 6px; font-weight: 500; }
-      .lever-stat .stat-high { color: inherit; }
-      .lever-meta { font-size: 9.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.02em; text-transform: uppercase; }
-      .lever-line { font-size: 11px; line-height: 1.45; color: var(--muted); margin-top: 6px; }
-      .lever-line .lever-tag { display: inline-block; min-width: 38px; font-weight: 700; font-size: 9.5px; letter-spacing: 0.04em; color: var(--text); text-transform: uppercase; }
-      .lever-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-    </style>
-    <div class="lever-row">
-      <div class="lever-tile">
-        <div class="lever-title"><span class="lever-num">1</span>Online payments fully enabled</div>
-        <div class="lever-stat"><span class="stat-low">53% Low</span><span class="stat-sep">→</span><span class="stat-high">100% High</span></div>
-        <div class="lever-meta">% of accounts</div>
-        <div class="lever-line"><span class="lever-tag">What</span> Tenant portal on AND online-payments toggle on AND merchant account exists — all three.</div>
-        <div class="lever-line"><span class="lever-tag">Read</span> 47% of Lows fail this prerequisite. Foundational gate — none of the other levers can work without this.</div>
-      </div>
-      <div class="lever-tile t-orange">
-        <div class="lever-title"><span class="lever-num">2</span>Leases invited within 30d</div>
-        <div class="lever-stat"><span class="stat-low">30% Low</span><span class="stat-sep">→</span><span class="stat-high">87% High</span></div>
-        <div class="lever-meta">median % per account</div>
-        <div class="lever-line"><span class="lever-tag">What</span> Median % of an account's leases sent a portal invite within 30 days of activation.</div>
-        <div class="lever-line"><span class="lever-tag">Read</span> Lows wait or never invite; 89% of Lows fall short of 80% coverage. 43% of Lows sent zero invites in the last 6 months.</div>
-      </div>
-      <div class="lever-tile t-purple">
-        <div class="lever-title"><span class="lever-num">3</span>Leases on autopay</div>
-        <div class="lever-stat"><span class="stat-low">0% Low</span><span class="stat-sep">→</span><span class="stat-high">20% High</span></div>
-        <div class="lever-meta">median % per account</div>
-        <div class="lever-line"><span class="lever-tag">What</span> Median % of an account's leases enrolled in autopay.</div>
-        <div class="lever-line"><span class="lever-tag">Read</span> 52% of Lows have zero autopay; even 10–25% penetration flips a PM to High (57% probability). Strongest gradient of all five.</div>
-      </div>
-      <div class="lever-tile t-blue">
-        <div class="lever-title"><span class="lever-num">4</span>Legacy / imported leases <span style="font-size: 9px; color: var(--muted); font-weight: 600; margin-left: 4px">(lower better)</span></div>
-        <div class="lever-stat"><span class="stat-low">79% Low</span><span class="stat-sep">→</span><span class="stat-high">45% High</span></div>
-        <div class="lever-meta">median % per account</div>
-        <div class="lever-line"><span class="lever-tag">What</span> Median % of an account's leases imported from another system rather than created in DoorLoop.</div>
-        <div class="lever-line"><span class="lever-tag">Read</span> Highs run fresher libraries. Context lever — not actionable on existing leases, but should segment the risk score.</div>
-      </div>
-      <div class="lever-tile t-green">
-        <div class="lever-title"><span class="lever-num">5</span>Rent reminders turned on</div>
-        <div class="lever-stat"><span class="stat-low">60% Low</span><span class="stat-sep">→</span><span class="stat-high">86% High</span></div>
-        <div class="lever-meta">single account-level setting</div>
-        <div class="lever-line"><span class="lever-tag">What</span> Account-wide on/off toggle that sends a pre-due nudge to every tenant; default off.</div>
-        <div class="lever-line"><span class="lever-tag">Read</span> 40% of Lows never flip it on; Highs flip it on and default to a ~5-day pre-due nudge.</div>
-      </div>
-    </div>
-
-    <h3 style="font-size: 18px; font-weight: 700; color: var(--text); margin: 26px 0 2px; line-height: 1.3">Early warning: we can flag risk by day 90</h3>
-    <div style="font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 12px">transition matrix — starting tier (% paid at 90d post first invoice) → current tier (avg Feb–Apr '26).</div>
-
-    <div style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 18px; align-items: start">
-      <div>
-        <table style="width:100%;border-collapse:separate;border-spacing:4px;font-size:12px;font-family:'Poppins',sans-serif">
-          <tr>
-            <th style="background:#162050;color:#fff;padding:10px 12px;border-radius:4px;text-align:left;font-weight:600;font-size:10px;letter-spacing:.04em;text-transform:uppercase">After ONB ↓ / Current →</th>
-            <th style="background:#162050;color:#fff;padding:10px 12px;border-radius:4px;text-align:center;font-weight:700">Low (&lt;20%)</th>
-            <th style="background:#162050;color:#fff;padding:10px 12px;border-radius:4px;text-align:center;font-weight:700">Mid (20–60%)</th>
-            <th style="background:#162050;color:#fff;padding:10px 12px;border-radius:4px;text-align:center;font-weight:700">High (&gt;60%)</th>
-          </tr>
-          <tr>
-            <td style="padding:14px 12px;background:#fff;border-radius:4px;font-weight:600;color:#162050;white-space:nowrap">Started Low <span style="color:#94a3b8;font-weight:500;font-size:10px">(n=2,303)</span></td>
-            <td style="padding:14px 12px;background:#dc2626;color:#fff;text-align:center;font-weight:800;font-size:18px;border-radius:4px;border:2px solid #162050">50%</td>
-            <td style="padding:14px 12px;background:#fde68a;color:#3f2a00;text-align:center;font-weight:700;font-size:15px;border-radius:4px">30%</td>
-            <td style="padding:14px 12px;background:#fef3c7;color:#3f2a00;text-align:center;font-weight:700;font-size:15px;border-radius:4px">20%</td>
-          </tr>
-          <tr>
-            <td style="padding:14px 12px;background:#fff;border-radius:4px;font-weight:600;color:#162050;white-space:nowrap">Started Mid <span style="color:#94a3b8;font-weight:500;font-size:10px">(n=2,202)</span></td>
-            <td style="padding:14px 12px;background:#fee2e2;color:#7f1d1d;text-align:center;font-weight:700;font-size:15px;border-radius:4px">7%</td>
-            <td style="padding:14px 12px;background:#86efac;color:#0f3a1a;text-align:center;font-weight:800;font-size:18px;border-radius:4px;border:2px solid #162050">57%</td>
-            <td style="padding:14px 12px;background:#86efac;color:#0f3a1a;text-align:center;font-weight:700;font-size:15px;border-radius:4px">36%</td>
-          </tr>
-          <tr>
-            <td style="padding:14px 12px;background:#fff;border-radius:4px;font-weight:600;color:#162050;white-space:nowrap">Started High <span style="color:#94a3b8;font-weight:500;font-size:10px">(n=2,334)</span></td>
-            <td style="padding:14px 12px;background:#fee2e2;color:#9f9f9f;text-align:center;font-weight:700;font-size:15px;border-radius:4px">2%</td>
-            <td style="padding:14px 12px;background:#fef3c7;color:#3f2a00;text-align:center;font-weight:700;font-size:15px;border-radius:4px">16%</td>
-            <td style="padding:14px 12px;background:#22c55e;color:#fff;text-align:center;font-weight:800;font-size:18px;border-radius:4px;border:2px solid #162050">82%</td>
-          </tr>
-        </table>
-      </div>
-
-      <div style="background: #f8fafc; border-radius: 10px; padding: 14px 16px; border-left: 3px solid var(--text)">
-        <div style="font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--text); text-transform: uppercase; margin-bottom: 6px">How to read</div>
-        <div style="font-size: 11.5px; line-height: 1.5; color: var(--muted); margin-bottom: 10px">
-          Rows = where each PM landed at <strong style="color:var(--text)">day 90</strong>. Columns = where they sit <strong style="color:var(--text)">today</strong>. Cells = % of the row.
-          <span style="display: inline-block; margin-top: 4px"><strong style="color:var(--text)">Boxed diagonal</strong> = persistence (start = end).</span>
-        </div>
-        <div style="font-size: 11px; line-height: 1.5; color: var(--text); padding-top: 10px; border-top: 1px solid #e2e8f0">
-          <div style="margin-bottom: 6px"><strong style="color:var(--warn)">Lows are sticky</strong> — half stay Low, only 20% climb to High. Biggest CSM target.</div>
-          <div style="margin-bottom: 6px"><strong style="color:var(--orange)">Mids split</strong> — 36% climb to High, 7% slide to Low. The most movable cohort.</div>
-          <div><strong style="color:var(--green)">Highs are durable</strong> — 82% stay High; only 2% fall to Low. Low-touch.</div>
-        </div>
-      </div>
-    </div>
-
-    <details class="rs-collapse">
-      <summary>
-        <span class="rs-collapse-title">Risk score — why and how</span>
-        <span class="rs-collapse-sub">turning the levers + leading indicators into one CSM-ready signal</span>
-        <span class="rs-collapse-chev">▾</span>
-      </summary>
-
-    <style>
-      .rs-collapse { margin: 28px 0 0; }
-      .rs-collapse > summary {
-        list-style: none;
-        cursor: pointer;
-        display: flex; align-items: baseline; gap: 14px;
-        padding: 12px 18px;
-        background: #f1f5f9;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        user-select: none;
-        transition: background 0.15s;
-      }
-      .rs-collapse > summary::-webkit-details-marker { display: none }
-      .rs-collapse > summary:hover { background: #e2e8f0; }
-      .rs-collapse[open] > summary { background: #e2e8f0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; margin-bottom: 0; }
-      .rs-collapse-title { font-size: 18px; font-weight: 700; color: var(--text); line-height: 1.3; }
-      .rs-collapse-sub   { flex: 1; font-size: 11.5px; color: var(--muted); font-weight: 500; }
-      .rs-collapse-chev  { font-size: 14px; color: var(--muted); transition: transform 0.2s; line-height: 1; }
-      .rs-collapse[open] .rs-collapse-chev { transform: rotate(180deg); }
-      .rs-collapse-body { padding: 14px 18px 16px; border: 1px solid var(--border); border-top: none; border-radius: 0 0 10px 10px; background: #fff; }
-      .rs-why { background: #f8fafc; border-left: 3px solid var(--text); padding: 12px 14px; border-radius: 6px; font-size: 12px; line-height: 1.5; color: var(--text); margin-bottom: 14px; }
-      .rs-why em { color: var(--warn); font-style: normal; font-weight: 700; }
-      .rs-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
-      .rs-step { background: var(--paper); border-radius: 8px; padding: 12px 12px 14px; border-top: 3px solid var(--blue); box-shadow: 0 1px 2px rgba(22,32,80,0.04); }
-      .rs-step.s-d30  { border-top-color: var(--orange); }
-      .rs-step.s-d60  { border-top-color: var(--purple); }
-      .rs-step.s-d90  { border-top-color: var(--warn); }
-      .rs-day  { font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--blue); text-transform: uppercase; }
-      .rs-step.s-d30 .rs-day { color: var(--orange); }
-      .rs-step.s-d60 .rs-day { color: var(--purple); }
-      .rs-step.s-d90 .rs-day { color: var(--warn); }
-      .rs-head { font-size: 13px; font-weight: 700; color: var(--text); margin: 4px 0 8px; line-height: 1.25; }
-      .rs-list { font-size: 11px; line-height: 1.45; color: var(--muted); padding-left: 14px; margin: 0; }
-      .rs-list li { margin: 3px 0; }
-      .rs-list li strong { color: var(--text); font-weight: 600; }
-      .rs-capstone { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; background: var(--text); color: #fff; border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
-      .rs-cap-arrow { font-size: 22px; color: #94a3b8; font-weight: 300; }
-      .rs-cap-stat { font-size: 22px; font-weight: 800; color: #fff; line-height: 1.1; }
-      .rs-cap-stat span { display: block; font-size: 10px; font-weight: 600; color: #94a3b8; letter-spacing: .04em; text-transform: uppercase; margin-top: 4px; }
-      .rs-cap-text { font-size: 11.5px; line-height: 1.5; color: #e2e8f0; }
-      .rs-cap-text strong { color: #fff; font-weight: 600; }
-      .rs-deliver { font-size: 11px; color: var(--muted); line-height: 1.5; padding: 10px 14px; background: #f8fafc; border-radius: 6px; }
-      .rs-deliver strong { color: var(--text); font-weight: 600; }
-    </style>
-
-      <div class="rs-collapse-body">
-
-    <div class="rs-why">
-      <strong>Why.</strong> The matrix above shows adoption is sticky — <em>half of Lows at day 90 stay stuck</em>. By the time outcome data is conclusive, the window to intervene has already closed. We need to detect risk earlier and direct CSM action to the specific lever that's broken, not "this account is in trouble" generically.
-    </div>
-
-    <div class="rs-timeline">
-      <div class="rs-step">
-        <div class="rs-day">Day 1 — Setup audit</div>
-        <div class="rs-head">Settings observable from the moment onboarding ends</div>
-        <ul class="rs-list">
-          <li><strong>Online payments fully enabled</strong> (lever #1)</li>
-          <li><strong>ACH / CC not blocked</strong> in tenant portal</li>
-          <li><strong>Rent reminders</strong> turned on (lever #5)</li>
-          <li><strong>Bank Connect</strong> + receive-payments feature on</li>
-        </ul>
-      </div>
-      <div class="rs-step s-d30">
-        <div class="rs-day">Day 30 — Process snapshot</div>
-        <div class="rs-head">First behavioral signals</div>
-        <ul class="rs-list">
-          <li><strong>First online payment received</strong> — Highs hit it by Day 46 median; <em style="font-style:normal;color:var(--warn);font-weight:700">50% of Lows never receive one</em>. The cleanest binary "no/yes" early-warning flag — confirms lever #1 is wired correctly.</li>
-          <li><strong>First invite events sent</strong> — 43% of Lows sent zero invites in their first 6 months (lever #2)</li>
-          <li><strong>Lease → invite lag</strong> trending below 30d? (lever #2)</li>
-        </ul>
-      </div>
-      <div class="rs-step s-d60">
-        <div class="rs-day">Day 60 — Cumulative behavior</div>
-        <div class="rs-head">Patterns starting to crystallize</div>
-        <ul class="rs-list">
-          <li><strong>% of leases invited</strong> ≥ 80% (lever #2)</li>
-          <li><strong>Autopay enrollment</strong> starting (lever #3) — even 10–25% flips outcome</li>
-          <li><strong>Bulk-invite workflow</strong> in use? (Lows median 0%; Highs 80%)</li>
-        </ul>
-      </div>
-      <div class="rs-step s-d90">
-        <div class="rs-day">Day 90 — Outcome flag</div>
-        <div class="rs-head">First closed-data read</div>
-        <ul class="rs-list">
-          <li><strong>% paid leases this month</strong> — the matrix predictor</li>
-          <li><strong>Tier @ day 90</strong> determines stickiness — 50% of 0–20% stay stuck</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="rs-capstone">
-      <div class="rs-cap-stat">AUC 0.94<span>12-flag risk score</span></div>
-      <div class="rs-cap-text"><strong>How:</strong> each leading indicator becomes a 1/0 flag with weights from a logistic regression (target = "is Low adopter"). Sum to a single 0–25 score. <strong>Score ≥ 7 catches 23% of the cohort and is dominated by future Lows</strong> (49% Low / 14% High).</div>
-      <div class="rs-cap-arrow">→</div>
-    </div>
-
-    <div class="rs-deliver"><strong>Delivery (pipeline).</strong> Daily snapshot of (a) account settings, (b) leases / invite events / payments, (c) SF engagement timestamps. Score + per-flag detail surface as a Salesforce field on each account, plus a CSM dashboard view sorted by score.</div>
-
-    <details class="methodology-collapse" style="margin-top: 12px">
-      <summary>
-        <span class="meth-eyebrow">Methodology</span>
-        <span class="meth-summary">How the score is calculated <span class="meth-chev">▾</span></span>
-      </summary>
-      <div style="margin-top: 8px; font-size: 11.5px; line-height: 1.55; color: var(--text)">
-        <div style="margin-bottom: 8px"><strong>1. Define 12 binary flags</strong> per account — each fires (= 1) if the bad condition is true.</div>
-        <div style="margin-bottom: 8px"><strong>2. Train a logistic regression</strong> with the 12 flags as predictors and "is this account a future Low adopter?" as target. The model learns each flag's marginal predictive weight.</div>
-        <div style="margin-bottom: 10px"><strong>3. Convert coefficients to integer points</strong> (round of LR coef × 2). The scorecard:</div>
-        <table style="width:100%;border-collapse:separate;border-spacing:0 3px;font-size:11px;margin-bottom:10px">
-          <tr><th style="text-align:left;padding:4px 8px;background:#f1f5f9;border-radius:4px;font-weight:600;color:var(--muted);font-size:10px;letter-spacing:.04em;text-transform:uppercase">Flag</th><th style="text-align:right;padding:4px 8px;background:#f1f5f9;border-radius:4px;font-weight:600;color:var(--muted);font-size:10px;letter-spacing:.04em;text-transform:uppercase">Points</th></tr>
-          <tr><td style="padding:4px 8px;background:#fff">no_merchant_account</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--warn)">8</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">online_payments_not_engaged</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--warn)">7</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">portal_online_pmts_off</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--orange)">5</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">receive_payments_feat_off</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--orange)">5</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">portal_disabled</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--orange)">4</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">slow_invite_lag (avg &gt; 30d)</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--purple)">3</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">low_invite_coverage (&lt; 90%)</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--purple)">3</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">reminder_days_misconfigured (&gt; 14d)</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--blue)">1</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff">no_bank_connect</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:700;color:var(--blue)">1</td></tr>
-          <tr><td style="padding:4px 8px;background:#fff;color:var(--muted)">ach_disabled / cc_disabled / rent_reminders_off</td><td style="padding:4px 8px;background:#fff;text-align:right;font-weight:600;color:var(--muted)">0*</td></tr>
-        </table>
-        <div style="margin-bottom: 8px"><strong>4. Risk score = sum of points</strong> across all firing flags. Range in practice: 0–25.</div>
-        <div style="margin-bottom: 8px"><strong>Example:</strong> a PM with no merchant account (+8), online payments not engaged (+7), and slow invite lag (+3) scores <strong>18</strong> — very high risk. A PM with only no-bank-connect firing scores <strong>1</strong> — clean.</div>
-        <div style="font-size: 10.5px; color: var(--muted); line-height: 1.5">* These three are real signals univariately (lift 2.5–5×) but collinear with the higher-weighted flags. The regression assigns them no marginal weight; keep them as <em>secondary warnings</em> in the dashboard. <strong>AUC = 0.94</strong> in-sample (target: predict Low adopter); out-of-time validation is a step on the v2 roadmap.</div>
-      </div>
-    </details>
-
-      </div>
-    </details>
-
-    <p class="lede" style="margin-top: 22px">
-      <strong>So what (next moves).</strong> Three things, in order: <strong>(1) Pilot now</strong> — the ~2,150 accounts already at score ≥ 7 are a ready-made CSM list; the action follows the flag (e.g. "ACH disabled" → settings fix; "no first payment by day 30" → onboarding call). <strong>(2) Productize</strong> the score as a SF field, refreshed at day-30 / 60 / 90. <strong>(3) Validate</strong> with a controlled rollout — measure lift on the at-risk cohort vs. a hold-out so we know intervention is causal, not just correlated.
-    </p>
-
-  </div>
-</section>
 
 <section data-slide-title="Funnel Methodology">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Funnel Methodology</div></div>
+    <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">Funnel Methodology</div></div>
     <h2 class="section-title">From lease activation to <span class="title-accent">payment retention</span>.</h2>
 
     <style>
@@ -4365,7 +4104,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap">
       <div>
-        <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Lease Funnel</div></div>
+        <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Lease Funnel</div></div>
         <h2 class="section-title" style="margin: 0">Where leases <span class="title-accent red">drop off</span> — invite, activation, payment, retention.</h2>
         <div style="font-size: 11px; color: var(--muted); margin-top: 4px; font-style: italic">
           Refreshed May 10, 2026 from <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">kpi_dashboard_v2.sql</code> · <strong style="color: var(--text); font-style: normal">Ex-re-tenants</strong> (re-tenant leases stripped from all months &amp; stages).
@@ -4579,7 +4318,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section>
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Action Items</div></div>
+    <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Action Items</div></div>
     <div class="q2-frame">
       <div class="q2-frame-header">
         <h2>Four Q2 levers to lift payments revenue</h2>
@@ -7491,10 +7230,10 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   // A group can contain `slides: [from, to]` and/or `children: [...nested groups]`.
   // Slides outside any group render as ungrouped items at the bottom.
   const tocGroups = [
-    { name: 'Business Overview', from: 1, to: 10 },  // 02–11 (Exec Summary → Payment Retention Cohort → NSF)
-    { name: 'PM Side', from: 11, to: 12 },           // 12–13 (Churned, PM Research)
-    { name: 'Lease Funnel', from: 13, to: 14 },      // 14–15 (PM Findings, Funnel Methodology)
-    // Lease Funnel slide (15) + Action Items (16) → ungrouped at the bottom
+    { name: 'Business Overview', from: 1, to: 11 },  // 02–12 (Exec Summary → First-Time Paying Tenants → NSF)
+    { name: 'PM Side', from: 12, to: 12 },           // 13 (Churned Accounts)
+    { name: 'Lease Funnel', from: 13, to: 14 },      // 14–15 (Funnel Methodology, Lease Funnel)
+    // Action Items (16) → ungrouped at the bottom
   ];
 
   function escapeHtml(s) {
