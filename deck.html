@@ -2968,12 +2968,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <h2 class="section-title">First-time payers — the funnel's leading edge — grew <span class="title-accent">+22% YoY</span> to 14.4K, almost entirely from existing accounts expanding.</h2>
     </div>
 
-    <p style="font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 900px; margin: 4px 0 18px">
-      First-time payers are the new tenants entering the paying base each month — the leading indicator of future volume. Intake is healthy and compounding YoY, and the engine is the installed base deepening (existing accounts adding more paying tenants), not net-new logos.
-    </p>
-
     <!-- KPI tile strip -->
-    <div class="metrics-grid">
+    <div class="metrics-grid" style="margin-top: 18px">
       <div class="metric up">
         <div class="metric-label">First-time Payers · May '26</div>
         <div class="metric-num">14,369</div>
@@ -2999,36 +2995,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Hero chart -->
     <div class="chart-shell" style="margin-top: 16px">
       <div class="ch-title">First-time paying tenants per month · new vs existing accounts <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
-      <div class="ch-sub">Stacked bars: navy = existing accounts expanding · pink = newly-paying accounts. Datalabel = monthly total.</div>
+      <div class="ch-sub">Stacked bars: pink = newly-paying accounts (base) · navy = existing accounts expanding. Labels show tenants per segment.</div>
       <div class="chart-wrap h340"><canvas id="chart-ft-newvexisting"></canvas></div>
-    </div>
-
-    <!-- Two insight cards -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
-
-      <!-- Card 1 · Land-and-expand -->
-      <div style="padding: 16px 20px; background: rgba(22,32,80,0.06); border-left: 4px solid #162050; border-radius: 8px">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #162050; margin-bottom: 8px">Land-and-expand · 89% from the installed base</div>
-        <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          <strong>12,744 of 14,369</strong> May payers came from accounts that had paid before — existing accounts add <strong>~3.3 tenants each</strong>, steady all year.
-          Net-new-account intake (<strong>1,625 · 11%</strong>) spikes every January (<strong>~22%</strong>: Jan '25 23.1%, Jan '26 22.2% — the new-year onboarding wave) then settles to ~11%.
-          The read: durable, base-driven growth.
-        </div>
-      </div>
-
-      <!-- Card 2 · Where intake concentrates -->
-      <div style="padding: 16px 20px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 8px">Where intake concentrates</div>
-        <div style="background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 6px; padding: 10px 12px; margin: 4px 0 10px">
-          <div style="font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">Account-age mix of May FT volume</div>
-          <div style="height: 96px"><canvas id="chart-ft-age-comp"></canvas></div>
-        </div>
-        <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          <strong>Mature (13+ mo) accounts = 54.5%</strong> of FT volume on sheer count — but per-account expansion runs hottest in <em>young</em> accounts:
-          <strong>Onboarding 8.2</strong> and <strong>Growth 5.2</strong> tenants/acct vs Mature 2.8. New accounts land in bulk; mature accounts dominate by mass.
-        </div>
-      </div>
-
     </div>
 
     <!-- Takeaway strip -->
@@ -3064,7 +3032,10 @@ document.addEventListener('DOMContentLoaded', function() {
           .reduce((a, r) => a + r.TENANTS, 0));
     const existing = sumBy('Existing account (paid before)');
     const newAcct  = sumBy('Account first-time paid this month');
-    const totals   = months.map((_, i) => existing[i] + newAcct[i]);
+
+    const segLabel = { display: true, anchor: 'center', align: 'center', clamp: true,
+                       font: { weight: 800, size: 10 },
+                       formatter: v => (v / 1000).toFixed(1) + 'K' };
 
     new Chart(el, {
       type: 'bar',
@@ -3072,25 +3043,21 @@ document.addEventListener('DOMContentLoaded', function() {
         labels,
         datasets: [
           {
-            label: 'Existing accounts (paid before)',
-            data: existing, backgroundColor: '#162050', stack: 'ft',
-            datalabels: { display: false }
-          },
-          {
             label: 'New-paying accounts',
             data: newAcct, backgroundColor: '#ff4998', stack: 'ft',
+            datalabels: { ...segLabel, color: '#162050' }
+          },
+          {
+            label: 'Existing accounts (paid before)',
+            data: existing, backgroundColor: '#162050', stack: 'ft',
             borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false,
-            datalabels: {
-              display: true, anchor: 'end', align: 'end', offset: 2,
-              color: '#162050', font: { weight: 800, size: 10 },
-              formatter: (v, ctx) => (totals[ctx.dataIndex] / 1000).toFixed(1) + 'K'
-            }
+            datalabels: { ...segLabel, color: '#fff' }
           }
         ]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 24, right: 12, bottom: 4, left: 8 } },
+        layout: { padding: { top: 8, right: 12, bottom: 4, left: 8 } },
         plugins: {
           legend: { display: true, position: 'top', align: 'start',
             labels: { boxWidth: 14, boxHeight: 12, font: { size: 12, weight: 700 }, padding: 12, color: '#162050' } },
@@ -3108,55 +3075,6 @@ document.addEventListener('DOMContentLoaded', function() {
                ticks: { font: { size: 10, weight: 600 }, color: '#64748b', maxRotation: 0, autoSkipPadding: 4 } },
           y: { stacked: true, beginAtZero: true, grid: { color: 'rgba(22,32,80,0.06)' },
                ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', callback: v => (v / 1000) + 'K' } }
-        }
-      }
-    });
-  });
-})();
-
-// First-Time Paying Tenants · Card 2 mini — account-age composition of latest-month FT volume.
-// Source: window.DATA.ft_by_account_age (CYCLE_MONTH only, excl. 'Unknown').
-(function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Chart === 'undefined') return;
-    const el = document.getElementById('chart-ft-age-comp');
-    if (!el || !window.DATA || !window.DATA.ft_by_account_age) return;
-
-    const CYCLE_MONTH = '2026-05-01';
-    const order  = ['Mature (13+)', 'Growth (3–6)', 'Onboarding (0–2)', 'Developed (7–12)'];
-    const colors = { 'Mature (13+)': '#162050', 'Growth (3–6)': '#3185FC', 'Onboarding (0–2)': '#ff4998', 'Developed (7–12)': '#94a3b8' };
-
-    const rows  = window.DATA.ft_by_account_age.filter(r => r.MONTH === CYCLE_MONTH && r.ACCOUNT_AGE_BUCKET !== 'Unknown');
-    const total = rows.reduce((a, r) => a + r.FIRST_TIME_PAYING_TENANTS, 0);
-    const valOf = b => { const r = rows.find(x => x.ACCOUNT_AGE_BUCKET === b); return r ? r.FIRST_TIME_PAYING_TENANTS : 0; };
-
-    const datasets = order.map(b => ({
-      label: b.replace(/\s*\(.*\)/, ''),
-      data: [valOf(b)],
-      backgroundColor: colors[b], stack: 'age', borderSkipped: false,
-      datalabels: {
-        display: () => (valOf(b) / total) > 0.10,
-        color: '#fff', font: { weight: 800, size: 11 },
-        formatter: () => Math.round(100 * valOf(b) / total) + '%'
-      }
-    }));
-
-    new Chart(el, {
-      type: 'bar',
-      data: { labels: [''], datasets },
-      options: {
-        indexAxis: 'y',
-        responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 2, right: 6, bottom: 0, left: 6 } },
-        plugins: {
-          legend: { display: true, position: 'bottom', align: 'start',
-            labels: { boxWidth: 10, boxHeight: 10, font: { size: 10, weight: 700 }, padding: 8, color: '#162050' } },
-          datalabels: { clip: false },
-          tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.x.toLocaleString() + ' (' + Math.round(100 * ctx.parsed.x / total) + '%)' } }
-        },
-        scales: {
-          x: { stacked: true, display: false, beginAtZero: true, max: total },
-          y: { stacked: true, display: false }
         }
       }
     });
