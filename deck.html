@@ -2271,13 +2271,13 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
     <h2 class="section-title">Two real drivers: <span class="title-accent red">amount drift</span> + <span class="title-accent red">new-PM cohort</span>. Mix shift was neutral.</h2>
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1080px">
-      15-month FT card share: <strong style="color: var(--text)">47.9% → 44.6%</strong> (−3.3pp). All five PM-tenure cohorts fell in parallel — the drop is behavioural, not portfolio recomposition.
+      17-month FT card share: <strong style="color: var(--text)">47.9% → 44.6%</strong> (−3.3pp). Both onboarding (0–3 mo) and mature (3+ mo) cohorts drift down in parallel — the drop is behavioural, not portfolio recomposition.
     </p>
 
     <!-- The chart — proof of cross-cohort drift -->
     <div class="chart-shell">
-      <div class="ch-title">FT card adoption by PM tenure · <span style="font-weight: 500; color: var(--muted); font-size: 11px">16 cycles · Feb '25 → May '26</span></div>
-      <div class="chart-wrap" style="height: 280px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
+      <div class="ch-title">FT card adoption by PM tenure</div>
+      <div class="chart-wrap" style="height: 320px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
     </div>
 
     <!-- Two driver cards · Driver 1 wider for the structural-proof chart -->
@@ -2790,37 +2790,35 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 
-// Slide 9 v8 · FT card adoption by PM-tenure bucket · 16-cycle time series
+// Slide 9 v10 · FT card adoption · Onboarding vs Mature · 17 cycles Jan '25 → May '26
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof Chart === 'undefined') return;
     const el = document.getElementById('chart-pm-tenure-decomp');
     if (!el) return;
 
-    // From sql q2_pm_tenure.sql · 16 cycles Feb '25 → May '26 · card_pct per tenure bucket
-    const labels = ["Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
-    const a_0_3   = [46.80,50.21,40.85,42.89,37.21,41.21,42.07,39.68,43.09,50.23,38.57,36.51,42.42,42.63,36.61,37.11]; // 0-3 mo · NEW
-    const b_3_6   = [43.27,48.03,44.04,44.17,40.17,38.61,38.60,42.53,45.42,50.32,49.97,42.75,41.11,29.21,35.64,39.90];
-    const c_6_12  = [51.04,56.50,53.61,47.64,47.04,49.13,48.46,47.20,46.36,51.81,47.73,47.50,48.07,50.84,47.94,47.60];
-    const d_12_24 = [49.62,53.07,51.58,53.63,47.71,46.10,48.39,47.54,46.27,51.54,49.84,49.35,49.06,50.51,46.52,47.50];
-    const e_24p   = [48.99,57.46,52.77,52.42,47.73,48.39,46.43,46.05,48.20,49.58,48.98,49.76,46.03,45.35,45.31,46.57]; // 24+ mo · MATURE
+    // Onboarding (0-3 mo) and Mature (3+ mo) consolidated from q2_pm_tenure.sql + q2_jan25.csv
+    const labels   = ["Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    const onboard  = [38.44, 46.80, 50.21, 40.85, 42.89, 37.21, 41.21, 42.07, 39.68, 43.09, 50.23, 38.57, 36.51, 42.42, 42.63, 36.61, 37.11];
+    const mature   = [46.37, 48.16, 53.91, 50.52, 50.04, 45.93, 46.07, 45.87, 46.00, 46.73, 50.71, 49.15, 47.56, 46.02, 44.20, 44.12, 45.88];
 
-    // Visual hierarchy: red NEW + navy MATURE (the two anchor lines, thick)
-    // 3 middle buckets in muted gray (the supporting evidence)
-    const mkSet = (lbl, data, color, width, opts={}) => ({
+    const mkSet = (lbl, data, color, labelAlign) => ({
       label: lbl,
       data,
       borderColor: color,
       backgroundColor: 'transparent',
-      borderWidth: width,
+      borderWidth: 3.5,
       tension: 0.3,
-      pointRadius: (ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === data.length - 1) ? 5 : (opts.thin ? 0 : 3),
+      pointRadius: 4,
       pointBackgroundColor: color,
       pointBorderColor: '#fff', pointBorderWidth: 1.5,
       datalabels: {
-        display: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === ctx.dataset.data.length - 1,
-        color, anchor: 'end', align: ctx => ctx.dataIndex === 0 ? 'left' : 'right', offset: 6,
-        font: { weight: 800, size: 11 },
+        display: true,
+        color,
+        anchor: 'center',
+        align: labelAlign,
+        offset: 10,
+        font: { weight: 700, size: 9.5 },
         formatter: v => v.toFixed(1) + '%'
       }
     });
@@ -2828,18 +2826,15 @@ document.addEventListener('DOMContentLoaded', function() {
     new Chart(el, {
       type: 'line',
       data: { labels, datasets: [
-        mkSet('0–3 mo · NEW',     a_0_3,   '#dc2626', 3.5),
-        mkSet('3–6 mo',           b_3_6,   '#cbd5e1', 1.8, {thin:true}),
-        mkSet('6–12 mo',          c_6_12,  '#94a3b8', 1.8, {thin:true}),
-        mkSet('12–24 mo',         d_12_24, '#64748b', 1.8, {thin:true}),
-        mkSet('24+ mo · MATURE',  e_24p,   '#162050', 3.5)
+        mkSet('Onboarding · 0–3 mo', onboard, '#dc2626', 'bottom'),
+        mkSet('Mature · 3+ mo',       mature,  '#162050', 'top')
       ]},
       options: {
         responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 18, right: 70, bottom: 8, left: 50 } },
+        layout: { padding: { top: 24, right: 16, bottom: 8, left: 50 } },
         plugins: {
           legend: { display: true, position: 'top', align: 'start',
-            labels: { boxWidth: 14, boxHeight: 2, font: { size: 11, weight: 700 }, padding: 10, color: '#162050' } },
+            labels: { boxWidth: 14, boxHeight: 2, font: { size: 12, weight: 700 }, padding: 10, color: '#162050' } },
           datalabels: { clip: false },
           tooltip: {
             mode: 'index', intersect: false,
@@ -2847,8 +2842,8 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         },
         scales: {
-          x: { grid: { display: false }, ticks: { font: { size: 10, weight: 600 }, color: '#64748b', maxRotation: 0, autoSkipPadding: 12 } },
-          y: { display: true, suggestedMin: 28, suggestedMax: 60,
+          x: { grid: { display: false }, ticks: { font: { size: 10, weight: 600 }, color: '#64748b', maxRotation: 0, autoSkipPadding: 4 } },
+          y: { display: true, suggestedMin: 32, suggestedMax: 58,
                grid: { color: 'rgba(22,32,80,0.06)' },
                ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', callback: v => v + '%' } }
         }
