@@ -205,6 +205,35 @@
   section[data-slide-title="First Time Paying Tenants"] .metric-tag { color: var(--muted); }
   section[data-slide-title="First Time Paying Tenants"] .metric-tag .pos { color: var(--green); }
 
+  /* ===== Slide 2 · Executive Summary — unified dark command-center ===== */
+  header.cover[data-slide-title="Executive Summary"] { background: var(--ink); border-bottom: none; }
+  body.slide-mode > header.cover[data-slide-title="Executive Summary"] { background: var(--ink); color: #fff; padding-bottom: 14px; }
+  body.slide-mode header.cover[data-slide-title="Executive Summary"] .slide-num { color: var(--accent); }
+  body.slide-mode header.cover[data-slide-title="Executive Summary"] .title-eyebrow { color: rgba(255,255,255,0.6); }
+  body.slide-mode header.cover[data-slide-title="Executive Summary"] h1 { color: #fff; }
+  body.slide-mode header.cover[data-slide-title="Executive Summary"] h1 em { color: #fcd34d; font-style: normal; }
+  header.cover[data-slide-title="Executive Summary"] h1 { color: #fff; }
+  header.cover[data-slide-title="Executive Summary"] h1 em { color: #fcd34d; font-style: normal; }
+  body.slide-mode > section.metrics-band[data-slide-merge="prev"] { padding-top: 18px; }
+  .metrics-band .metrics-grid { gap: 14px; }
+  .metrics-band .metrics-grid .metric {
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .metrics-band .metrics-grid .metric:nth-child(n+5) { padding-top: 16px; margin-top: 0; border-top: 1px solid rgba(255,255,255,0.09); }
+  .exec-narrative {
+    margin-top: 30px; padding: 18px 24px;
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px; max-width: 1180px;
+  }
+  .exec-narrative .lbl { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; }
+  .exec-narrative p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.86); margin: 0; }
+  .exec-narrative p strong { color: #fff; font-weight: 700; }
+  .exec-narrative p .red { color: #fca5a5; font-weight: 700; }
+
   /* SECTION SHELL */
   section { padding: 48px 0; }
   section.tight { padding: 28px 0; }
@@ -1188,13 +1217,6 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">02</div><div class="title-eyebrow">Executive Summary</div></div>
     <h1>May gave back April's gain — <em>paid % fell 1.18pp to 46.88%</em>: active jumped +10K but paid count barely moved (+252).</h1>
-    <div class="tldr">
-      <div class="tldr-label">TL;DR</div>
-      <p>
-        But the miss is softer than the headline: <strong>~half the churn spike is a partial-cycle artifact</strong> (true ≈14.2K vs April's 17.7K), and reactivations simply unwound April's calendar tailwind — more optics than engine. Where it bites for real: ARR came in at <strong>$15.59M, 96% of plan</strong>, and overall card-volume share hit a <span class="red">new 12-month low (17.69%)</span>.
-      </p>
-      <div class="tldr-foot">May is a partial snapshot (through May 24); ARR-vs-plan, card share, NSF &amp; churned-$ use the last fully-settled month (April).</div>
-    </div>
   </div>
 </header>
 
@@ -1245,6 +1267,10 @@
         <div class="metric-num">26.2%</div>
         <div class="metric-tag"><span class="neg">▼ −1.4pp MoM</span> (27.6% Apr) · same-month conversion softer</div>
       </div>
+    </div>
+    <div class="exec-narrative">
+      <div class="lbl">TL;DR</div>
+      <p>But the miss is softer than the headline: <strong>~half the churn spike is a partial-cycle artifact</strong> (true ≈14.2K vs April's 17.7K), and reactivations simply unwound April's calendar tailwind — more optics than engine. Where it bites for real: ARR came in at <strong>$15.59M, 96% of plan</strong>, and overall card-volume share hit a <span class="red">new 12-month low (17.69%)</span>.</p>
     </div>
     <div style="font-size: 10.5px; color: rgba(255,255,255,0.55); margin-top: 12px; letter-spacing: 0.3px">
       Snapshot date: 2026-05-25 (cycle Apr 25 → May 24). ARR vs plan, card share, NSF, and churned-account ARR metrics shown on later slides reference the most recent fully-settled month (April 2026).
