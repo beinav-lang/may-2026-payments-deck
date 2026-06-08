@@ -317,23 +317,22 @@
   h2.section-title .title-accent {
     display: inline-block;
     position: relative;
-    padding-bottom: 2px;
+    padding-bottom: 7px;
   }
   h2.section-title .title-accent::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 14px;
+    right: 0;
+    bottom: 0;
+    height: 7px;
     background: #DFFE02;
     border-radius: 2px;
-    z-index: -1;
-    box-shadow: 0 0 14px rgba(223, 254, 2, 0.55);
+    box-shadow: 0 0 12px rgba(223, 254, 2, 0.5);
   }
   /* Pink variant for negative accents */
-  h2.section-title .title-accent.pink::after { background: #FF4998; opacity: 0.85; box-shadow: 0 0 14px rgba(255,73,152,0.55); }
-  h2.section-title .title-accent.red::after  { background: rgba(220,38,38,0.55); box-shadow: 0 0 14px rgba(220,38,38,0.45); }
+  h2.section-title .title-accent.pink::after { background: #FF4998; box-shadow: 0 0 12px rgba(255,73,152,0.55); }
+  h2.section-title .title-accent.red::after  { background: rgba(220,38,38,0.85); box-shadow: 0 0 12px rgba(220,38,38,0.5); }
   .lede {
     font-size: 15px;
     color: var(--muted);
@@ -1144,7 +1143,7 @@
     opacity: 0.82;
     max-width: 760px;
     text-align: center;
-    margin-top: clamp(20px, 3vh, 32px);
+    margin-top: clamp(44px, 7vh, 80px);
     color: #ffffff;
   }
 
@@ -1186,7 +1185,6 @@
 <header class="title-slide title-slide-v2" data-slide-title="Cover">
   <div class="grid-bg"></div>
   <div class="floating-blob blob-1"></div>
-  <div class="floating-blob blob-2"></div>
   <div class="v2-inner">
     <img src="https://cdn.prod.website-files.com/5f073e32d304276cc8b4ff30/69d3ea8e32f87c703096f6cd_doorloop-white-logo-transparent.svg"
          alt="DoorLoop"
@@ -1194,7 +1192,6 @@
     <div class="v2-eyebrow fade-up">Tenant Payments · Monthly Review</div>
     <h1 class="v2-headline fade-up delay-1">May 2026<br><span class="accent-neon">Payments.</span></h1>
     <div class="v2-subtitle fade-up delay-2">Cycle Apr 25 → May 24</div>
-    <div class="v2-meta fade-up delay-3">Snapshot · <strong>2026-05-25</strong></div>
   </div>
   <script>
     // Trigger fade-up animation on page load (independent of slide-mode)
@@ -1556,7 +1553,7 @@
 <section class="tight" data-slide-title="Planned vs Actual">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">Planned vs Actual</div></div>
-    <h2 class="section-title">ARR missed plan by <span class="title-accent red">$649K</span> — the <span class="title-accent">top of the funnel</span>, not take&nbsp;rate.</h2>
+    <h2 class="section-title">ARR missed plan by <span class="title-accent red">$649K</span> — the <span class="title-accent">top of the funnel</span> led the miss, not take&nbsp;rate.</h2>
 
     <!-- Headline plan-vs-actual stats · 5 metrics -->
     <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0 18px">
