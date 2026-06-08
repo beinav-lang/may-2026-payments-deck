@@ -4031,9 +4031,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div>
         <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Lease Funnel</div></div>
         <h2 class="section-title" style="margin: 0">Where leases <span class="title-accent red">drop off</span> — invite, page-view, registration, payment, retention.</h2>
-        <div style="font-size: 11px; color: var(--muted); margin-top: 4px; font-style: italic">
-          Refreshed Jun 7, 2026 · leases_daily_snapshot + Stripe + PostHog invite/page-view events · <strong style="color: var(--text); font-style: normal">Ex-re-tenants</strong> (re-tenant leases stripped from all months &amp; stages).
-        </div>
       </div>
       <details class="methodology-collapse" style="margin: 0">
         <summary>
@@ -5952,7 +5949,7 @@ function renderFcWaterfall() {
   ];
   if (hasPV) {
     stages.push({ id: 'pageview', name: '③ Invite page-view', sub: k.pageview_step.toFixed(1) + '% step conversion', count: k.pageview,      metric: 'pageview_step' });
-    stages.push({ id: 'portal',   name: '④ Registered',       sub: (k.register_step <= 100 ? k.register_step.toFixed(1) + '% step conversion' : 'registered &gt; page-view · page-view partial'), count: k.portal_active, metric: 'activation' });
+    stages.push({ id: 'portal',   name: '④ Registered',       sub: k.register_step.toFixed(1) + '% step conversion', count: k.portal_active, metric: 'register_step' });
   } else {
     stages.push({ id: 'portal',   name: '③ Registered',       sub: k.activation.toFixed(1) + '% step conversion · page-view still filling', count: k.portal_active, metric: 'activation' });
   }
