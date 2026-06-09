@@ -4884,7 +4884,7 @@ new Chart(document.getElementById('chart-arr'), {
         tension: 0.3, fill: false, spanGaps: false,
         datalabels: {
           display: ctx => ctx.dataIndex === MAY_IDX + 1,
-          anchor: 'end', align: 'top', offset: 7, color: '#be2a6e',
+          anchor: 'end', align: 'top', offset: 26, color: '#be2a6e',
           font: { weight: 800, size: 11 }, formatter: v => '$' + v + 'M'
         }
       },
@@ -4895,14 +4895,14 @@ new Chart(document.getElementById('chart-arr'), {
         tension: 0, fill: false, spanGaps: true,
         datalabels: {
           display: ctx => ctx.dataIndex === MAY_IDX + 1,
-          anchor: 'end', align: 'bottom', offset: 7, color: '#b45309',
+          anchor: 'end', align: 'top', offset: 6, color: '#b45309',
           font: { weight: 800, size: 12 }, formatter: v => '$' + v + 'M'
         }
       }
     ]
   },
   options: baseOpts({
-    layout: { padding: { top: 26, right: 46, bottom: 16, left: 8 } },
+    layout: { padding: { top: 46, right: 46, bottom: 16, left: 8 } },
     plugins: { legend: { display: true, position: 'top', align: 'center', labels: { boxWidth: 16, boxHeight: 2, font: { size: 11, weight: 600 } } } },
     scales: {
       x: {
