@@ -1554,6 +1554,7 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">Planned vs Actual</div></div>
     <h2 class="section-title">ARR missed plan by $649K — the <span class="title-accent">top of the funnel</span> led the miss, not conversion.</h2>
+    <div style="margin: 2px 0 16px; display: flex; align-items: center; gap: 11px; font-size: 13px; color: var(--muted);"><span style="display:inline-block; background:#fef3cd; color:#8a5a00; border:1px solid #fcd34d; border-radius:999px; padding:3px 12px; font-size:11px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; white-space:nowrap;">⟳ Targets to be reforecast</span><span>Plan was set before the Q1 acquisition shortfall — unit economics remain ahead.</span></div>
 
     <!-- Headline plan-vs-actual stats · 5 metrics -->
     <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0 18px">
@@ -4254,8 +4255,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   .q2-levers-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
     padding: 18px 28px 28px;
     background: #fff;
   }
@@ -4359,17 +4360,22 @@ document.addEventListener('DOMContentLoaded', function() {
   .q2-lever.adoption .q2-launch-pill  { background: #7c3aed; }
   .q2-lever.adoption .q2-lever-sub    { color: #7c3aed; }
   .q2-lever.adoption .q2-lever-stat .num { color: #7c3aed; }
+
+  .q2-lever.incentive .q2-lever-stripe { background: #0d9488; }
+  .q2-lever.incentive .q2-launch-pill  { background: #0d9488; }
+  .q2-lever.incentive .q2-lever-sub    { color: #0d9488; }
+  .q2-lever.incentive .q2-lever-stat .num { color: #0d9488; }
 </style>
 
-<section data-slide-title="Q2 Action Plan">
+<section data-slide-title="Planned Initiatives">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Q2 Action Plan</div></div>
+    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Planned Initiatives</div></div>
     <div class="q2-frame">
       <div class="q2-frame-header">
-        <h2>Four Q2 levers to lift payments revenue</h2>
+        <h2>Five initiatives to lift payments revenue</h2>
       </div>
       <div class="q2-frame-subhead">
-        Each targets a different driver — cost reduction, NSF legacy-accounts repricing, card-share lift, and payment conversion.
+        Each targets a different driver — cost, NSF repricing, card-share lift, payment conversion, and PM adoption.
       </div>
 
       <div class="q2-levers-grid">
@@ -4380,7 +4386,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="q2-lever-body">
             <div class="q2-lever-top">
               <div class="q2-lever-eyebrow">Cost lever</div>
-              <div class="q2-launch-pill">Q2 status TBD</div>
+              <div class="q2-launch-pill" style="background:#16a34a">✓ Done</div>
             </div>
             <div class="q2-lever-title">Reduce Stripe fees</div>
             <div class="q2-lever-sub">Lower the cost-of-revenue on every transaction</div>
@@ -4397,7 +4403,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="q2-lever-body">
             <div class="q2-lever-top">
               <div class="q2-lever-eyebrow">Pricing lever</div>
-              <div class="q2-launch-pill">Q2 status TBD</div>
+              <div class="q2-launch-pill" style="background:#64748b">ETA · Q3</div>
             </div>
             <div class="q2-lever-title">NSF pricing — legacy accounts</div>
             <div class="q2-lever-sub">Migrate older accounts to the new NSF pricing</div>
@@ -4414,7 +4420,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="q2-lever-body">
             <div class="q2-lever-top">
               <div class="q2-lever-eyebrow">Revenue lever</div>
-              <div class="q2-launch-pill">Q2 status TBD</div>
+              <div class="q2-launch-pill" style="background:#2563eb">In progress · Q2</div>
             </div>
             <div class="q2-lever-title">Card pricing</div>
             <div class="q2-lever-sub">Increasing card adoption</div>
@@ -4432,7 +4438,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="q2-lever-body">
             <div class="q2-lever-top">
               <div class="q2-lever-eyebrow">Adoption lever</div>
-              <div class="q2-launch-pill">Q2 status TBD</div>
+              <div class="q2-launch-pill" style="background:#2563eb">In progress · Q2</div>
             </div>
             <div class="q2-lever-title">Smoother tenant portal experience</div>
             <div class="q2-lever-sub">Reduce friction to make payment</div>
@@ -4441,6 +4447,24 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="caption">target payment conversion uplift</div>
             </div>
             <div class="q2-lever-note">Saved card / OTP login / one-click checkout.</div>
+          </div>
+        </div>
+
+        <!-- 5 · Incentive lever -->
+        <div class="q2-lever incentive">
+          <div class="q2-lever-stripe"></div>
+          <div class="q2-lever-body">
+            <div class="q2-lever-top">
+              <div class="q2-lever-eyebrow">Incentive lever</div>
+              <div class="q2-launch-pill" style="background:#64748b">Planned</div>
+            </div>
+            <div class="q2-lever-title">PM adoption campaign</div>
+            <div class="q2-lever-sub">Increasing % paid leases</div>
+            <div class="q2-lever-stat">
+              <div class="num">TBD</div>
+              <div class="caption">estimated ARR impact</div>
+            </div>
+            <div class="q2-lever-note">Offer incentives to PMs who increase their paid-leases rate.</div>
           </div>
         </div>
 
