@@ -209,7 +209,7 @@
   header.cover[data-slide-title="Executive Summary"] { border-bottom: none; }
   body.slide-mode > header.cover[data-slide-title="Executive Summary"] { padding-bottom: 8px; }
   /* band shares the standard grey slide bg; KPI tiles + narrative become solid navy cards that pop */
-  body.slide-mode > section.metrics-band[data-slide-merge="prev"] { background: #EEF1F6; color: var(--text); padding-top: 6px; }
+  body.slide-mode > section.metrics-band[data-slide-merge="prev"] { background: #FFFFFF; color: var(--text); padding-top: 6px; }
   .metrics-band[data-slide-merge="prev"] .metrics-band-title { color: var(--blue); }
   .metrics-band .metrics-grid { gap: 16px; }
   .metrics-band .metrics-grid .metric {
@@ -468,10 +468,10 @@
   /* CHART SHELL */
   .chart-shell {
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 1px solid #e4e8f2;
     border-radius: 18px;
     padding: 22px 26px 18px;
-    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 20px rgba(22,32,80,0.08);
   }
   .chart-shell .ch-title {
     font-size: 17px;
@@ -6888,10 +6888,10 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   /* SLIDE THEME — light grey for content slides; dark navy ONLY on   */
   /* the cover (title slide) and the "April Numbers" metrics band.    */
   /* =============================================================== */
-  body.slide-mode { background: #EEF1F6; }
+  body.slide-mode { background: #FFFFFF; }
   body.slide-mode > section,
   body.slide-mode > header.cover {
-    background: #EEF1F6;
+    background: #FFFFFF;
     color: var(--text);
   }
   /* "The April Numbers" metrics-band slide — keep native dark navy bg */
