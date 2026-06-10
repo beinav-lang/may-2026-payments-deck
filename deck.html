@@ -3060,41 +3060,47 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="chart-wrap h340"><canvas id="chart-ft-newvexisting"></canvas></div>
     </div>
 
-    <!-- Second angle: first-time payers by lease-activation timing (M0 vs earlier cycles) -->
+    <!-- Second angle: first-time payers by lease-activation lag (M0 / M-1 / M-2 / M-3 / before) -->
     <div class="chart-shell" style="margin-top: 14px">
-      <div class="ch-title">First-time payers by when their lease activated <span style="font-weight:500;color:var(--muted);font-size:11px">· same cycle (M0) vs earlier · Sep '25 → May '26</span></div>
-      <div class="ch-sub">Stacked by activation lag: green = lease activated the same cycle they first paid (M0) · blue = activated an earlier cycle · grey = unknown. Label above each bar = total first-time payers.</div>
-      <div class="chart-wrap" style="height: 248px"><canvas id="chart-ft-activation-lag"></canvas></div>
+      <div class="ch-title">First-time payers by when their lease activated <span style="font-weight:500;color:var(--muted);font-size:11px">· months from activation to first payment · Dec '25 → May '26</span></div>
+      <div class="ch-sub">M0 = lease activated the <em>same</em> cycle they first paid · M-1 / M-2 / M-3 = one / two / three cycles earlier · &ldquo;before&rdquo; = 4+ cycles earlier. Label above each bar = total first-time payers. <span style="color:var(--subtle)">(window starts Dec &rsquo;25 — lease-snapshot history begins Aug &rsquo;25, so earlier cycles can&rsquo;t resolve the full lag.)</span></div>
+      <div class="chart-wrap" style="height: 250px"><canvas id="chart-ft-activation-lag"></canvas></div>
     </div>
     <script>
     (function(){
       document.addEventListener('DOMContentLoaded', function(){
         if (typeof Chart === 'undefined') return;
         var el = document.getElementById('chart-ft-activation-lag');
-        if (!el || !window.DATA || !window.DATA.ft_paths_by_cohort_v2) return;
-        var rows = window.DATA.ft_paths_by_cohort_v2;
-        var cycles = Array.from(new Set(rows.map(function(r){return r.CYCLE;}))).sort();
-        var agg = {}; cycles.forEach(function(c){ agg[c]={m0:0,earlier:0,unk:0,tot:0}; });
-        rows.forEach(function(r){ var a=agg[r.CYCLE]; a.m0+=r.SAME_CYCLE_FT; a.earlier+=r.EARLIER_FT; a.unk+=r.UNKNOWN_FT; a.tot+=r.TOTAL_FT; });
-        var fmtMo = function(m){ var pp=m.split('-'); return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2); };
-        var labels = cycles.map(fmtMo);
-        var m0 = cycles.map(function(c){return agg[c].m0;});
-        var earlier = cycles.map(function(c){return agg[c].earlier;});
-        var unk = cycles.map(function(c){return agg[c].unk;});
-        var tot = cycles.map(function(c){return agg[c].tot;});
-        var segLbl = { display:function(ctx){return ctx.dataset.data[ctx.dataIndex] > 1100;}, anchor:'center', align:'center', color:'#fff', font:{weight:700,size:10}, formatter:function(v){return (v/1000).toFixed(1)+'k';} };
-        new Chart(el, {
-          type:'bar',
-          data:{ labels:labels, datasets:[
-            { label:'Activated same cycle (M0)', data:m0, backgroundColor:'#16a34a', stack:'s', datalabels:segLbl },
-            { label:'Activated an earlier cycle', data:earlier, backgroundColor:'#3185FC', stack:'s', datalabels:segLbl },
-            { label:'Unknown', data:unk, backgroundColor:'#cbd5e1', stack:'s',
-              datalabels:{ display:true, anchor:'end', align:'end', offset:3, color:'#162050', font:{weight:800,size:11.5}, formatter:function(v,ctx){ return tot[ctx.dataIndex].toLocaleString(); } } }
-          ]},
+        if (!el) return;
+        // Source: Snowflake ft_activation_lag.sql — first-time payers bucketed by cycles between
+        // lease activation and first payment. Window Dec '25 -> May '26 (snapshot starts Aug '25).
+        var rows = [
+          { c:'2025-12', M0:3466, M1:4070, M2:1406, M3:469, before:1327 },
+          { c:'2026-01', M0:4643, M1:4983, M2:2039, M3:746, before:1763 },
+          { c:'2026-02', M0:5177, M1:4591, M2:1851, M3:706, before:1732 },
+          { c:'2026-03', M0:4733, M1:5373, M2:1384, M3:517, before:1529 },
+          { c:'2026-04', M0:5744, M1:5041, M2:2063, M3:566, before:1386 },
+          { c:'2026-05', M0:5358, M1:5332, M2:1599, M3:530, before:1314 }
+        ];
+        var fmtMo=function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
+        var labels=rows.map(function(r){return fmtMo(r.c);});
+        var tot=rows.map(function(r){return r.M0+r.M1+r.M2+r.M3+r.before;});
+        var segLbl=function(ctx){return ctx.dataset.data[ctx.dataIndex]>1150;};
+        var seg=function(key,label,color){return {label:label,data:rows.map(function(r){return r[key];}),backgroundColor:color,stack:'s',
+          datalabels:{display:segLbl,anchor:'center',align:'center',color:'#fff',font:{weight:700,size:9.5},formatter:function(v){return (v/1000).toFixed(1)+'k';}}};};
+        var datasets=[
+          seg('M0','M0 · same cycle','#16a34a'),
+          seg('M1','M-1','#2563eb'),
+          seg('M2','M-2','#60a5fa'),
+          seg('M3','M-3','#a5b4fc'),
+          {label:'before (4+ cycles)',data:rows.map(function(r){return r.before;}),backgroundColor:'#cbd5e1',stack:'s',
+            datalabels:{display:true,anchor:'end',align:'end',offset:3,color:'#162050',font:{weight:800,size:11.5},formatter:function(v,ctx){return tot[ctx.dataIndex].toLocaleString();}}}
+        ];
+        new Chart(el,{type:'bar',data:{labels:labels,datasets:datasets},
           options: baseOpts({
-            layout:{ padding:{ top:22, right:8, bottom:0, left:4 } },
-            plugins:{ legend:{ display:true, position:'top', align:'center', labels:{ boxWidth:12, boxHeight:12, padding:14, font:{size:11,weight:600} } } },
-            scales:{ x:{ stacked:true, grid:{display:false}, ticks:{ font:{size:11,weight:600} } }, y:{ stacked:true, display:false } }
+            layout:{padding:{top:22,right:8,bottom:0,left:4}},
+            plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:12,boxHeight:12,padding:11,font:{size:10.5,weight:600}}}},
+            scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:600}}},y:{stacked:true,display:false}}
           })
         });
       });
