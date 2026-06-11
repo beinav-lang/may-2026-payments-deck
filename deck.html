@@ -2532,7 +2532,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div>
       <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow">Payment Retention Cohort</div></div>
-      <h2 class="section-title" style="margin-bottom:0">Card-first cohorts churn <span class="title-accent red">2× faster</span> than ACH — even after stripping lease churn.</h2>
+      <h2 class="section-title" style="margin-bottom:0">Card→card (no switching) M1 retention <span class="title-accent red">stepped down in 2026</span>.</h2>
     <div class="slide-insight">Retention is switch-resistant overall, but card is weakening on two fronts: <strong>card-first cohorts churn ~2× faster than ACH</strong>, and <strong>card M1 retention stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr). Each 2026 FT cohort thus graduates into “returning” holding card at a lower rate — dragging returning card share down.</div>
     </div>
 
@@ -3160,8 +3160,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="chart-shell" style="margin-top: 14px">
       <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap">
         <div>
-          <div class="ch-title" style="margin-bottom:2px">First-time payers · by account age at first payment <span style="font-weight:500;color:var(--muted);font-size:11px">· Sep '25 → May '26</span></div>
-          <div class="ch-sub">Each cycle&rsquo;s first-time payers split by how old their <strong>PM account</strong> was when they first paid · <strong style="color:#3185FC">Onboarding</strong> = account &lt;90 days old · <strong style="color:#162050">Mature</strong> = 90+ days. <em>n</em> above each bar = total first-time payers.</div>
+          <div class="ch-title" style="margin-bottom:2px">First-time payers · by account age at first payment <span style="font-weight:500;color:var(--muted);font-size:11px">· Jan '25 → May '26</span></div>
+          <div class="ch-sub">Each cycle&rsquo;s first-time payers split by how old their <strong>PM account</strong> was when they first paid · <strong style="color:#3185FC">Onboarding</strong> = account &lt;90 days old · <strong style="color:#162050">Mature</strong> = 90+ days. <em>n</em> above each bar = total first-time payers. <span style="color:var(--subtle)">(Jan–Jul &rsquo;25 excludes FT payers whose lease predates the Aug &rsquo;25 snapshot — ≤23% of those months.)</span></div>
         </div>
         <div class="ftacct-toggle" style="display:flex; gap:5px; flex-shrink:0; margin-top:2px">
           <button class="active" data-ftmode="pct" onclick="setFtAcctMode('pct')">% share</button>
@@ -3179,6 +3179,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Source: Snowflake ft_acctage.sql — first-time payers split by PM-account age at first payment
         // (Onboarding = account <90 days old; Mature = 90+ days). Cycle Sep '25 -> May '26.
         var rows = [
+          { c:'2025-01', onb:3379, mat:5678  },
+          { c:'2025-02', onb:2638, mat:6229  },
+          { c:'2025-03', onb:3128, mat:6489  },
+          { c:'2025-04', onb:3185, mat:7423  },
+          { c:'2025-05', onb:2512, mat:7777  },
+          { c:'2025-06', onb:3294, mat:8867  },
+          { c:'2025-07', onb:3327, mat:9413  },
+          { c:'2025-08', onb:3086, mat:10381 },
           { c:'2025-09', onb:3047, mat:10044 },
           { c:'2025-10', onb:3257, mat:9356  },
           { c:'2025-11', onb:3847, mat:9288  },
