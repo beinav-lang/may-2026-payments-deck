@@ -1217,7 +1217,7 @@
 <header class="cover" data-slide-title="Executive Summary">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">02</div><div class="title-eyebrow">Executive Summary</div></div>
-    <h1>May gave back April’s gain — <span class="title-accent">paid leases % normalized to 46.88%</span> after April’s seasonal peak, with card share at a 16-month low.</h1>
+    <h1>May gave back April’s gain — <span class="title-accent">paid leases % normalized to 46.88%</span> after April’s seasonal peak, with <span class="title-accent red">card share at a 16-month low</span>.</h1>
   </div>
 </header>
 
@@ -7175,6 +7175,7 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   }
   body.slide-mode .cover h1 .title-accent { display: inline-block; position: relative; padding-bottom: 5px; }
   body.slide-mode .cover h1 .title-accent::after { content:''; position:absolute; left:0; right:0; bottom:0; height:7px; background:#DFFE02; border-radius:2px; box-shadow:0 0 12px rgba(223,254,2,0.55); }
+  body.slide-mode .cover h1 .title-accent.red::after { background:#dc2626; box-shadow:0 0 12px rgba(220,38,38,0.5); }
   body.slide-mode .tldr {
     background: #fff;
     border-left: 4px solid var(--blue);
@@ -7499,7 +7500,7 @@ new Chart(document.getElementById('chart-churned-accounts'), {
     { name: 'Business Overview', from: 1, to: 12 },  // 02–13 (Exec Summary → ARR by Tenant Type → … → NSF)
     { name: 'PM Side', from: 13, to: 14 },           // 14-15 (Churned Accounts, PM Invite Rate)
     { name: 'Lease Funnel', from: 15, to: 16 },      // 16–17 (Funnel Methodology, Lease Funnel)
-    // Planned Initiatives (17) → ungrouped at the bottom
+    { name: 'Appendix', from: 17, to: 18 },          // 18–19 (Planned Initiatives, May Action Items)
   ];
 
   function escapeHtml(s) {
