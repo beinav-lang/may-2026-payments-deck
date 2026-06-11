@@ -1271,7 +1271,7 @@
     </div>
     <div class="exec-narrative">
       <div class="lbl">TL;DR</div>
-      <p>But the miss is softer than the headline: <strong>~half the churn spike is a partial-cycle artifact</strong> (true ≈14.2K vs April's 17.7K), and reactivations simply unwound April's calendar tailwind — more optics than engine. Where it bites for real: ARR came in at <strong>$15.59M, 96% of plan</strong>, and overall card-volume share hit a <span class="red">new 16-month low (17.69%)</span>.</p>
+      <p>The paid-leases dip is mostly seasonal: reactivations simply unwound April’s calendar tailwind (−27% off the peak) — more optics than engine. The one real watch-item is <strong>churn — a series-high ~21K (+19% MoM)</strong>, a genuine step-up rather than a partial-cycle artifact. Where it also bites: ARR landed at <strong>$15.59M, 96% of plan</strong>, and card-volume share hit a <span class="red">new 16-month low (17.69%)</span>.</p>
     </div>
   </div>
 </section>
@@ -1599,7 +1599,8 @@
 
     <!-- ARR trend folded in from former slide 04 — Feb peak → Mar dip → Apr recovery -->
     <div class="chart-shell" style="margin-bottom: 24px">
-      <div class="ch-title" style="text-align: center">Total Payments ARR</div>
+      <div class="ch-title" style="text-align: center">Payments ARR · plan vs actual + next-month projection</div>
+      <div class="ch-sub" style="text-align: center">Beat plan Jan–Mar, then landed −$649K under the May plan · June projected $16.74M vs $16.84M target</div>
       <div class="chart-wrap" style="height: 260px"><canvas id="chart-arr"></canvas></div>
     </div>
 
@@ -1945,7 +1946,7 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Paid Leases Breakdown</div></div>
     <h2 class="section-title">Paid leases held <span class="title-accent">flat</span> — +252 net MoM, churn at a series high.</h2>
-    <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were almost fully offset by a <strong>series-high 21K churn</strong> — roughly half of it a partial-cycle artifact. <strong>Numerator barely moved · denominator grew +10K</strong> → % paid fell 1.18pp.</div>
+    <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were offset by a <strong>series-high 21K churn (+19% MoM)</strong> — a genuine step-up, not a measurement artifact. <strong>Numerator barely moved · denominator grew +10K</strong> → % paid fell 1.18pp.</div>
 
     <!-- May paid-lease summary card -->
     <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
@@ -1997,7 +1998,7 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">06</div><div class="title-eyebrow">Why % Paid Leases Dropped</div></div>
     <h2 class="section-title">Two drivers: reactivation reverted after April’s seasonal peak · churn <span class="title-accent red">+19%</span>.</h2>
-    <div class="slide-insight">The 1.18pp paid-% dip is two calendar effects, not engine weakness: reactivations reverted <strong>−27%</strong> off April’s seasonal peak and churn rose <strong>+19%</strong> (≈half a partial-cycle artifact). <strong>Normalization, not weakness.</strong></div>
+    <div class="slide-insight">The 1.18pp paid-% dip is mostly seasonal: reactivations reverted <strong>−27%</strong> off April’s seasonal peak. But churn rose <strong>+19% to a series high</strong> — a genuine step-up, not a calendar artifact — the one real watch-item.</div>
 
     <!-- DRIVER #1 · Reactivation -->
     <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
@@ -3273,7 +3274,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow">Churned Accounts</div></div>
       <h2 class="section-title" style="margin-bottom: 0">Lost ARR re-accelerated <span class="title-accent red">+23% MoM</span> — count holds the plateau.</h2>
 
-      <div class="slide-insight">Churned-account count holds its plateau (<strong>130 vs 128 Apr</strong>), but <strong>lost ARR re-accelerated +23% MoM to $232K</strong> as $/account rebounded to $1.78K (April was unusually low). The elevated churn baseline is sticky — <strong>+42% YoY on ARR</strong> — not transient.</div>
+      <div class="slide-insight">Churned-account count holds its plateau (<strong>130 vs 128 Apr</strong>), but <strong>lost ARR re-accelerated +23% MoM to $232K</strong> as $/account rebounded to $1.78K (April was unusually low). The elevated churn baseline is sticky — <strong>+42% YoY on ARR</strong>.</div>
 
       <details class="methodology-collapse" style="margin-top: 10px">
         <summary>
@@ -3287,13 +3288,72 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <div class="chart-shell">
-      <div class="ch-title">Churned accounts and lost ARR · 16 months</div>
-      <div class="ch-sub">Bars: lost ARR ($K). Line: # accounts churned. Accounts that received payments only.</div>
+      <div class="ch-title">Churned accounts and lost ARR</div>
+      <div class="ch-sub">Accounts that received payments only.</div>
       <div class="chart-wrap h340"><canvas id="chart-churned-accounts"></canvas></div>
     </div>
 
   </div>
 </section>
+
+<!-- ============================================================ -->
+<!-- SECTION · PM INVITE RATE (invited within 45 days of activation) -->
+<!-- ============================================================ -->
+<section data-slide-title="PM Invite Rate">
+  <div class="wrap">
+    <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">PM Invite Rate</div></div>
+    <h2 class="section-title">Invites within 45 days of activation — <span class="title-accent">mature is strong, onboarding slipped</span>.</h2>
+    <div class="slide-insight">Of leases activated each cycle, <strong>84.8% on mature PMs</strong> got an invite within ±45 days in May — but only <strong>55.6% on onboarding PMs</strong>, down ~15pp from the Feb–Mar ~70%. The ~29pp gap is the clearest top-of-funnel lever: onboarding-PM invite discipline.</div>
+
+    <div class="chart-shell" style="margin-top: 16px">
+      <div class="ch-title">PM invite rate — invited within ±45 days of lease activation</div>
+      <div class="ch-sub">% of each cycle&rsquo;s newly-activated leases invited within ±45 days · <strong style="color:#3185FC">Mature</strong> = lease on a PM ≥90 days past its first invoice · <strong style="color:#FF4998">Onboarding</strong> = within 90 days · <strong style="color:#94a3b8">All</strong> = blended · Sep &rsquo;25 → May &rsquo;26</div>
+      <div class="chart-wrap" style="height: 380px"><canvas id="chart-pm-invite-rate"></canvas></div>
+    </div>
+
+    <div style="margin-top:12px; padding:10px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--muted); line-height:1.6">
+      <strong style="color:var(--text)">Why it matters →</strong> the invite is the first step of the payments funnel — a lease that&rsquo;s never invited can&rsquo;t register, convert, or pay. Mature PMs invite reliably; onboarding PMs (newest to DoorLoop) are the gap — and carry the most upside as they ramp.
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    if (typeof Chart === 'undefined' || typeof kpi === 'undefined') return;
+    var el = document.getElementById('chart-pm-invite-rate');
+    if (!el) return;
+    // Source: deck `kpi` object — invite stage = leases invited within ±45 days of activation / cohort total.
+    var months = kpiMonths.slice();
+    var fmtMo = function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
+    var labels = months.map(fmtMo);
+    var ser = function(c){return months.map(function(m){return kpi[m][c].invite;});};
+    var endLabel = function(color){return {display:function(ctx){return ctx.dataIndex===months.length-1;},
+      anchor:'end',align:'right',offset:6,color:color,font:{weight:800,size:12},
+      formatter:function(v){return v.toFixed(1)+'%';}};};
+    var line = function(label,c,color,dash){return {label:label,data:ser(c),borderColor:color,
+      backgroundColor:color,borderWidth: dash?2:3,borderDash:dash||[],tension:0.3,fill:false,
+      pointRadius:function(ctx){return ctx.dataIndex===months.length-1?5:3;},
+      pointBackgroundColor:color,pointBorderColor:'#fff',pointBorderWidth:1.5,
+      datalabels:endLabel(color)};};
+    var datasets=[
+      line('Mature','Mature','#3185FC',null),
+      line('Onboarding','Onboarding','#FF4998',null),
+      line('All (blended)','All','#94a3b8',[6,4])
+    ];
+    new Chart(el,{type:'line',data:{labels:labels,datasets:datasets},
+      options: baseOpts({
+        layout:{padding:{top:18,right:56,bottom:6,left:8}},
+        plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:16,boxHeight:2,padding:14,font:{size:11,weight:600}}}},
+        scales:{
+          x:{grid:{display:false},ticks:{font:{size:11,weight:600}}},
+          y:{display:true,suggestedMin:40,suggestedMax:95,grid:{color:'rgba(22,32,80,0.06)'},ticks:{font:{size:10},callback:function(v){return v+'%';}}}
+        }
+      })
+    });
+  });
+})();
+</script>
+
 
 <!-- ============================================================ -->
 <!-- SECTION 13 · FIRST-TIME PAYING TENANTS (placeholder)         -->
@@ -3959,7 +4019,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Funnel Methodology">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">Funnel Methodology</div></div>
+    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Funnel Methodology</div></div>
     <h2 class="section-title">From lease activation to <span class="title-accent">payment retention</span>.</h2>
 
     <style>
@@ -4137,7 +4197,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap">
       <div>
-        <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Lease Funnel</div></div>
+        <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Lease Funnel</div></div>
         <h2 class="section-title" style="margin: 0">Where leases <span class="title-accent red">drop off</span> — invite, page-view, registration, payment, retention.</h2>
       </div>
       <details class="methodology-collapse" style="margin: 0">
@@ -4349,7 +4409,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Planned Initiatives">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Planned Initiatives</div></div>
+    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Planned Initiatives</div></div>
     <div class="q2-frame">
       <div class="q2-frame-header">
         <h2>Five initiatives to lift payments revenue</h2>
@@ -4826,70 +4886,63 @@ const monthLabels = arr => arr.map(x => fmtMonth(x.month || x));
 
 // ---------- charts ----------
 // 1. ARR vs Plan
-// ---- June 2026 forecast appended to the ARR chart (actual stops at May) ----
-const arrDataJ   = [...trendForArr, { month: '2026-06' }];   // labels + x-axis ticks
-const MAY_IDX    = arrSeries.length - 1;                     // index of May '26 (last actual)
-const arrSeriesJ = [...arrSeries, null];                     // actual line ends at May
-const arrPlanJ   = [...arrPlan, 16.84];                      // target extended to June (16.84)
-const arrProjJ   = arrSeriesJ.map(() => null);               // dashed projection segment
-arrProjJ[MAY_IDX]     = arrSeries[MAY_IDX];                  // anchor at May actual (15.59)
-arrProjJ[MAY_IDX + 1] = 16.74;                               // June projection (16.74)
+// ---- Slide 3 ARR · focused 2026 plan-vs-actual + June projection ----
+const arr26    = trendForArr.filter(t => t.month >= '2026-01');     // Jan..May '26 actual
+const arrFocus = [...arr26, { month: '2026-06' }];                  // + June (target / projection)
+const F_MAY    = arr26.length - 1;                                  // May '26 index (last actual)
+const actualF  = [...arr26.map(t => t.arr), null];
+const planF    = [...arr26.map(t => arrPlanByMonth[t.month] ?? null), 16.84];
+const projF    = actualF.map(() => null);
+projF[F_MAY]   = arr26[F_MAY].arr;                                  // anchor at May actual
+projF[F_MAY+1] = 16.74;                                             // June projection
 
 new Chart(document.getElementById('chart-arr'), {
   type: 'line',
   data: {
-    labels: monthLabels(arrDataJ),
+    labels: monthLabels(arrFocus),
     datasets: [
-      { label: 'Actual ARR', data: arrSeriesJ, borderColor: C.blue,
-        backgroundColor: 'rgba(37,99,235,0.06)', borderWidth: 2.5, fill: true,
-        pointRadius: ctx => ctx.dataIndex === MAY_IDX ? 7 : (arrSeriesJ[ctx.dataIndex] == null ? 0 : 5),
-        pointBackgroundColor: ctx => ctx.dataIndex === MAY_IDX ? '#1d4ed8' : C.blue,
+      { label: 'Actual', data: actualF, borderColor: C.blue, order: 1,
+        backgroundColor: 'rgba(49,133,252,0.08)', borderWidth: 3, fill: true, tension: 0.3,
+        pointRadius: ctx => actualF[ctx.dataIndex] == null ? 0 : (ctx.dataIndex === F_MAY ? 7 : 4.5),
+        pointBackgroundColor: ctx => ctx.dataIndex === F_MAY ? '#1d4ed8' : C.blue,
         pointBorderColor: '#fff', pointBorderWidth: 1.5,
-        tension: 0.3,
         datalabels: {
-          display: ctx => arrSeriesJ[ctx.dataIndex] != null,
-          anchor: 'end', align: 'top', offset: 6,
-          color: ctx => ctx.dataIndex === MAY_IDX ? '#1d4ed8' : '#475569',
-          font: ctx => ({
-            weight: ctx.dataIndex === MAY_IDX ? 800 : 600,
-            size: ctx.dataIndex === MAY_IDX ? 13 : 10
-          }),
-          formatter: v => '$' + v + 'M'
+          display: ctx => actualF[ctx.dataIndex] != null,
+          anchor: 'end', align: 'top', offset: 7,
+          color: ctx => ctx.dataIndex === F_MAY ? '#1d4ed8' : '#64748b',
+          font: ctx => ({ weight: ctx.dataIndex === F_MAY ? 800 : 600, size: ctx.dataIndex === F_MAY ? 13 : 10 }),
+          formatter: v => '$' + v.toFixed(2) + 'M'
         }
       },
-      { label: '2026 plan / target', data: arrPlanJ, borderColor: '#ff4998',
-        borderWidth: 2, borderDash: [5,4],
-        pointRadius: ctx => arrPlanJ[ctx.dataIndex] == null ? 0 : 5,
+      { label: 'Plan / target', data: planF, borderColor: '#ff4998', order: 2,
+        borderWidth: 2, borderDash: [6,4], tension: 0.3, fill: false,
+        pointRadius: ctx => planF[ctx.dataIndex] == null ? 0 : (ctx.dataIndex === F_MAY+1 ? 6 : 4),
         pointBackgroundColor: '#ff4998', pointBorderColor: '#fff', pointBorderWidth: 1.5,
-        tension: 0.3, fill: false, spanGaps: false,
         datalabels: {
-          display: ctx => ctx.dataIndex === MAY_IDX + 1,
-          anchor: 'end', align: 'top', offset: 26, color: '#be2a6e',
-          font: { weight: 800, size: 11 }, formatter: v => '$' + v + 'M'
+          display: ctx => ctx.dataIndex === F_MAY || ctx.dataIndex === F_MAY+1,
+          anchor: 'end', align: 'top', offset: 7, color: '#be2a6e', font: { weight: 800, size: 11 },
+          formatter: v => '$' + v.toFixed(2) + 'M'
         }
       },
-      { label: 'Jun projection', data: arrProjJ, borderColor: '#f59e0b',
-        borderWidth: 2.5, borderDash: [2,3],
-        pointRadius: ctx => ctx.dataIndex === MAY_IDX + 1 ? 7 : 0,
+      { label: 'June projection', data: projF, borderColor: '#f59e0b', order: 0,
+        borderWidth: 2.5, borderDash: [2,3], tension: 0, fill: false, spanGaps: true,
+        pointRadius: ctx => ctx.dataIndex === F_MAY+1 ? 7 : 0,
         pointBackgroundColor: '#f59e0b', pointBorderColor: '#fff', pointBorderWidth: 1.5,
-        tension: 0, fill: false, spanGaps: true,
         datalabels: {
-          display: ctx => ctx.dataIndex === MAY_IDX + 1,
-          anchor: 'end', align: 'top', offset: 6, color: '#b45309',
-          font: { weight: 800, size: 12 }, formatter: v => '$' + v + 'M'
+          display: ctx => ctx.dataIndex === F_MAY+1,
+          anchor: 'end', align: 'bottom', offset: 9, color: '#b45309', font: { weight: 800, size: 12 },
+          formatter: v => '$' + v.toFixed(2) + 'M'
         }
       }
     ]
   },
   options: baseOpts({
-    layout: { padding: { top: 46, right: 46, bottom: 16, left: 8 } },
-    plugins: { legend: { display: true, position: 'top', align: 'center', labels: { boxWidth: 16, boxHeight: 2, font: { size: 11, weight: 600 } } } },
+    layout: { padding: { top: 40, right: 56, bottom: 12, left: 10 } },
+    plugins: { legend: { display: true, position: 'top', align: 'center', labels: { boxWidth: 16, boxHeight: 2, padding: 14, font: { size: 11, weight: 600 } } } },
     scales: {
-      x: {
-        grid: { color: C.grid, drawBorder: false },
-        ticks: { ...monthAxisTicks(arrDataJ), callback: (v, i) => fmtMonthShort(arrDataJ[i].month) }
-      },
-      y: { display: false }
+      x: { grid: { color: C.grid, drawBorder: false },
+           ticks: { ...monthAxisTicks(arrFocus), callback: (v, i) => fmtMonthShort(arrFocus[i].month) } },
+      y: { display: false, suggestedMin: 13.4, suggestedMax: 17.4 }
     }
   })
 });
@@ -7321,9 +7374,9 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   // Slides outside any group render as ungrouped items at the bottom.
   const tocGroups = [
     { name: 'Business Overview', from: 1, to: 11 },  // 02–12 (Exec Summary → First-Time Paying Tenants → NSF)
-    { name: 'PM Side', from: 12, to: 12 },           // 13 (Churned Accounts)
-    { name: 'Lease Funnel', from: 13, to: 14 },      // 14–15 (Funnel Methodology, Lease Funnel)
-    // Planned Initiatives (16) → ungrouped at the bottom
+    { name: 'PM Side', from: 12, to: 13 },           // 13-14 (Churned Accounts, PM Invite Rate)
+    { name: 'Lease Funnel', from: 14, to: 15 },      // 15–16 (Funnel Methodology, Lease Funnel)
+    // Planned Initiatives (17) → ungrouped at the bottom
   ];
 
   function escapeHtml(s) {
