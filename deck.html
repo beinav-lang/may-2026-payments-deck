@@ -1893,10 +1893,90 @@
 <!-- ============================================================ -->
 <!-- SECTION 02 · THE CALENDAR UNWIND (ARR + paid leases)           -->
 <!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- SECTION · ARR BY TENANT TYPE (before costs vs processing costs) -->
+<!-- ============================================================ -->
+<section data-slide-title="ARR by Tenant Type">
+  <div class="wrap">
+    <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">ARR by Tenant Type</div></div>
+    <h2 class="section-title">First-time-payer ARR hit a <span class="title-accent">record $2.99M (+32% MoM)</span> — costs holding near 36% of ARR.</h2>
+    <div class="slide-insight">First-time-paying-tenant ARR (before cost) grew <strong>+32% MoM to a record $2.99M</strong> (+21% YoY) — the best month yet. Processing costs ran <strong>~36% of ARR</strong>. <span style="color:rgba(255,255,255,0.7)">Costs aren&rsquo;t yet allocated to first-time vs returning payers — allocation infrastructure ETA Mar 2026.</span></div>
+
+    <div class="chart-shell" style="margin-top:14px">
+      <div class="ch-title">ARR before costs (revenue × 12) vs processing costs <span style="font-weight:500;color:var(--muted);font-size:11px">· Jul &rsquo;25 → Jan &rsquo;26</span></div>
+      <div class="ch-sub">Above zero: <strong style="color:#34a853">First-Time Payers ARR</strong> + <strong style="color:#3185FC">Returning Payers ARR</strong>. Below zero: <strong style="color:#e05656">Network Cost</strong> + <strong style="color:#c79a06">Stripe Fee</strong> + <strong style="color:#9b59b6">Failed Transactions</strong>. Totals above/below each bar.</div>
+      <div class="chart-wrap" style="height:330px"><canvas id="chart-arr-tenant"></canvas></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.55fr 1fr; gap:16px; margin-top:14px; align-items:stretch">
+      <div class="chart-shell" style="margin:0">
+        <div class="ch-title">% costs from ARR <span style="font-weight:500;color:var(--muted);font-size:11px">· Jul &rsquo;25 → Jan &rsquo;26</span></div>
+        <div class="chart-wrap" style="height:150px"><canvas id="chart-cost-pct"></canvas></div>
+      </div>
+      <div style="padding:14px 18px; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.22); border-radius:10px; font-size:13px; color:var(--text); line-height:1.55; display:flex; flex-direction:column; justify-content:center">
+        <div style="font-size:10.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#b91c1c; margin-bottom:6px">% costs from ARR · +0.7pp MoM</div>
+        % costs ticked up <strong>35.7% (Dec) → 36.4% (Jan)</strong>. Held at December&rsquo;s rate, January would have kept <strong style="color:#b91c1c">≈ +$160K</strong> more ARR.
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    if (typeof Chart === 'undefined') return;
+    var el = document.getElementById('chart-arr-tenant'); if(!el) return;
+    var months=["Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26"];
+    var ft=[2.81,2.85,2.83,2.61,2.94,2.27,2.99];
+    var ret=[15.99,16.40,17.29,17.66,18.27,19.03,19.44];
+    var net=[5.32,5.55,5.70,5.70,6.22,6.22,6.66];
+    var fee=[1.26,1.33,1.31,1.33,1.33,1.21,1.34];
+    var fail=[0.16,0.14,0.17,0.16,0.15,0.17,0.16];
+    var arrTot=[18.80,19.24,20.10,20.26,21.20,21.30,22.43];
+    var costTot=[6.74,7.02,7.18,7.19,7.70,7.60,8.16];
+    var m=function(v){return '$'+Math.abs(v).toFixed(2)+'M';};
+    var cl=function(col,sz){return {display:true,anchor:'center',align:'center',color:col,font:{weight:800,size:sz},formatter:function(v){return (v<0?'−':'')+m(v);}};};
+    new Chart(el,{type:'bar',data:{labels:months,datasets:[
+      {label:'First-Time Payers ARR',data:ft,backgroundColor:'#34a853',stack:'s',datalabels:cl('#fff',11)},
+      {label:'Returning Payers ARR',data:ret,backgroundColor:'#3185FC',stack:'s',datalabels:cl('#fff',11)},
+      {label:'Network Cost',data:net.map(function(v){return -v;}),backgroundColor:'#e05656',stack:'s',datalabels:cl('#fff',10.5)},
+      {label:'Stripe Fee',data:fee.map(function(v){return -v;}),backgroundColor:'#f5c518',stack:'s',datalabels:cl('#5c4a00',9.5)},
+      {label:'Failed Transactions',data:fail.map(function(v){return -v;}),backgroundColor:'#9b59b6',stack:'s',datalabels:{display:false}},
+      {label:'__pt',data:arrTot.map(function(){return 0.001;}),backgroundColor:'rgba(0,0,0,0)',stack:'s',
+        datalabels:{display:true,anchor:'end',align:'top',offset:3,color:'#1a9c4b',font:{weight:800,size:13},formatter:function(v,ctx){return '+$'+arrTot[ctx.dataIndex].toFixed(2)+'M';}}},
+      {label:'__ct',data:costTot.map(function(){return -0.001;}),backgroundColor:'rgba(0,0,0,0)',stack:'s',
+        datalabels:{display:true,anchor:'end',align:'bottom',offset:3,color:'#dc2626',font:{weight:800,size:13},formatter:function(v,ctx){return '−$'+costTot[ctx.dataIndex].toFixed(2)+'M';}}}
+    ]},
+    options: baseOpts({
+      layout:{padding:{top:26,right:8,bottom:24,left:8}},
+      plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:12,boxHeight:12,padding:11,font:{size:10.5,weight:600},filter:function(it){return it.text.indexOf('__')!==0;}}}},
+      scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:700}}},
+              y:{stacked:true,display:false,suggestedMin:-10,suggestedMax:25}}
+    })});
+  });
+})();
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    if (typeof Chart === 'undefined') return;
+    var el = document.getElementById('chart-cost-pct'); if(!el) return;
+    var months=["Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26"];
+    var pct=[35.9,36.5,35.7,35.5,36.3,35.7,36.4];
+    new Chart(el,{type:'line',data:{labels:months,datasets:[{label:'% costs from ARR',data:pct,
+      borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.09)',borderWidth:2.5,fill:true,tension:0.35,
+      pointRadius:4,pointBackgroundColor:'#ef4444',pointBorderColor:'#fff',pointBorderWidth:1.5,
+      datalabels:{display:true,anchor:'end',align:'top',offset:5,color:'#dc2626',font:{weight:700,size:10},formatter:function(v){return v.toFixed(1)+'%';}}}]},
+      options: baseOpts({
+        layout:{padding:{top:18,right:14,bottom:2,left:6}},
+        plugins:{legend:{display:false}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600}}},y:{display:false,suggestedMin:34,suggestedMax:37.6}}
+      })});
+  });
+})();
+</script>
+
 <section data-slide-title="Active Leases Overview">
   <div class="wrap">
     <div style="margin-bottom: 18px">
-      <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">Active Leases Overview</div></div>
+      <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Active Leases Overview</div></div>
       <h2 class="section-title">% Paid dropped <span class="title-accent red">−1.18pp MoM</span> — still +1.07pp vs plan.</h2>
     <div class="slide-insight">% paid leases went down with eligibility rate unchanged. Reversion is seasonal — April peaked artificially after March’s compressed cycle pushed payments forward (May 2025 showed the same shape, 2× sharper this year).</div>
     </div>
@@ -1943,7 +2023,7 @@
 <!-- ============================================================ -->
 <section data-slide-title="Paid Leases Breakdown">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Paid Leases Breakdown</div></div>
+    <div class="slide-head"><div class="slide-num">06</div><div class="title-eyebrow">Paid Leases Breakdown</div></div>
     <h2 class="section-title">Paid leases held <span class="title-accent">flat</span> — +252 net MoM, churn at a series high.</h2>
     <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were offset by a <strong>series-high 21K churn (+19% MoM)</strong> — a genuine step-up, not a measurement artifact. <strong>Numerator barely moved · denominator grew +10K</strong> → % paid fell 1.18pp.</div>
 
@@ -1995,7 +2075,7 @@
 <!-- ============================================================ -->
 <section data-slide-title="Why % Paid Leases Dropped">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">06</div><div class="title-eyebrow">Why % Paid Leases Dropped</div></div>
+    <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Why % Paid Leases Dropped</div></div>
     <h2 class="section-title">Two drivers: reactivation <span class="title-accent">reverted after April’s seasonal peak</span> · churn <span class="title-accent red">+19%</span>.</h2>
     <div class="slide-insight">The 1.18pp paid-% dip is mostly seasonal: reactivations reverted <strong>−27%</strong> off April’s seasonal peak. But churn rose <strong>+19% to a series high</strong> — a genuine step-up, not a calendar artifact — the one real watch-item.</div>
 
@@ -2220,7 +2300,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
     <div>
-      <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Paid Leases Cohort</div></div>
+      <div class="slide-head"><div class="slide-num">08</div><div class="title-eyebrow">Paid Leases Cohort</div></div>
       <h2 class="section-title" style="margin-bottom:0">Cohort retention <span class="title-accent">held through May</span> — no cohort is breaking down.</h2>
     <div class="slide-insight">The new-lease funnel is tilting to Mature: Onboarding new-actives fell <strong>−27.6% MoM</strong> — now the smaller half of the funnel for the first time — while Mature grew <strong>+7.2%</strong>. Per-cohort conversion curves held; it’s a mix shift.</div>
     </div>
@@ -2284,7 +2364,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   </style>
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">08</div><div class="title-eyebrow">Card Performance · The What</div></div>
+    <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The What</div></div>
     <h2 class="section-title">Overall card share <span class="title-accent red">dipped to 17.69%</span> (new low) — but FT-side rebounded <span class="title-accent">+2.3pp</span>.</h2>
     <div class="slide-insight">Overall card share hit a <strong>new 16-mo low (17.69%)</strong> even as first-time card adoption rebounded <strong>+2.3pp</strong>. The disconnect: card dollars are ~93% returning, and the Nov→Apr FT slide bled into returning a month later (~7pp below first-pay rate) — May’s rebound hasn’t reached returning yet.</div>
 
@@ -2343,7 +2423,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
+    <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Card Performance · The Why</div></div>
     <h2 class="section-title">The card drop wasn't gradual — it was a <span class="title-accent red">Spring 2025 step-down</span>. Both cohorts. Same months.</h2>
     <div class="slide-insight">The card decline isn’t gradual — it’s a <strong>Spring-’25 step-down</strong> hitting both cohorts at once. Drivers: rising rent (card share collapses 54%→10% as amount climbs) plus a one-time FT-adoption step; switching is ruled out. And it now compounds: <strong>card M1 retention itself stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr), so each FT cohort graduates into returning holding card at a lower rate.</div>
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1100px">
@@ -2451,7 +2531,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
     <div>
-      <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Payment Retention Cohort</div></div>
+      <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow">Payment Retention Cohort</div></div>
       <h2 class="section-title" style="margin-bottom:0">Card-first cohorts churn <span class="title-accent red">2× faster</span> than ACH — even after stripping lease churn.</h2>
     <div class="slide-insight">Retention is switch-resistant overall, but card is weakening on two fronts: <strong>card-first cohorts churn ~2× faster than ACH</strong>, and <strong>card M1 retention stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr). Each 2026 FT cohort thus graduates into “returning” holding card at a lower rate — dragging returning card share down.</div>
     </div>
@@ -3036,7 +3116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section data-slide-title="First Time Paying Tenants">
   <div class="wrap">
     <div style="margin-top: 18px">
-      <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
+      <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
       <h2 class="section-title">First-time payers — the funnel's leading edge — grew <span class="title-accent">+22% YoY</span> to 14.4K, almost entirely from existing accounts expanding.</h2>
     <div class="slide-insight">First-time payers grew <strong>+22% YoY to 14.4K</strong>, and <strong>88.7% come from existing accounts expanding</strong> (land-and-expand). The one watch-item is net-new-account intake — it only moves in January, so a new-logo push outside Q1 is the clearest upside.</div>
     </div>
@@ -3232,7 +3312,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section class="paper" data-slide-title="NSF">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">NSF</div></div>
+    <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow">NSF</div></div>
     <h2 class="section-title">NSF ARR <span class="title-accent">doubled YoY</span> — rate ticked up to 3.69%.</h2>
 
     <div class="slide-insight">NSF ARR hit an all-time high <strong>$2.04M (+100% YoY)</strong>, tracking ACH growth; the NSF rate ticked to <strong>3.69%</strong> — top of the 12-month band. Clean lever: migrate ~1,480 legacy $25-fee accounts to the $40 schedule (<strong>+$573K ARR</strong>, no PM behavior change).</div>
@@ -3295,7 +3375,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </style>
   <div class="wrap">
     <div style="margin-bottom: 14px">
-      <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow">Churned Accounts</div></div>
+      <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">Churned Accounts</div></div>
       <h2 class="section-title" style="margin-bottom: 0">Lost ARR re-accelerated <span class="title-accent red">+23% MoM</span> — count holds the plateau.</h2>
 
       <div class="slide-insight">Churned-account count holds its plateau (<strong>130 vs 128 Apr</strong>), but <strong>lost ARR re-accelerated +23% MoM to $232K</strong> as $/account rebounded to $1.78K (April was unusually low). The elevated churn baseline is sticky — <strong>+42% YoY on ARR</strong>.</div>
@@ -3325,13 +3405,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <section data-slide-title="PM Invite Rate">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">14</div><div class="title-eyebrow">PM Invite Rate</div></div>
-    <h2 class="section-title">Invites within 45 days of activation — <span class="title-accent">mature is strong, onboarding slipped</span>.</h2>
+    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">PM Invite Rate</div></div>
+    <h2 class="section-title">Invites within 45 days of activation — <span class="title-accent">onboarding improved in 2026</span>.</h2>
     <div class="slide-insight">Of leases activated each cycle, <strong>84.8% on mature PMs</strong> got an invite within ±45 days in May — but only <strong>55.6% on onboarding PMs</strong>, down ~15pp from the Feb–Mar ~70%. The ~29pp gap is the clearest top-of-funnel lever: onboarding-PM invite discipline.</div>
 
     <div class="chart-shell" style="margin-top: 16px">
       <div class="ch-title">PM invite rate — invited within ±45 days of lease activation</div>
-      <div class="ch-sub">% of each cycle&rsquo;s newly-activated leases invited within ±45 days · <strong style="color:#3185FC">Mature</strong> = lease on a PM ≥90 days past its first invoice · <strong style="color:#FF4998">Onboarding</strong> = within 90 days · <strong style="color:#94a3b8">All</strong> = blended · Sep &rsquo;25 → May &rsquo;26 · <span style="color:#b45309">May still filling</span> (±45-day window runs to early July; hollow point)</div>
+      <div class="ch-sub">% of each cycle&rsquo;s newly-activated leases invited within ±45 days · <strong style="color:#3185FC">Mature</strong> = lease on a PM ≥90 days past its first invoice · <strong style="color:#FF4998">Onboarding</strong> = within 90 days · <strong style="color:#94a3b8">All</strong> = blended · Sep &rsquo;25 → May &rsquo;26 · <strong style="color:#b45309">★</strong> <span style="color:#b45309">May still filling</span> (±45-day window runs to early July; hollow point)</div>
       <div class="chart-wrap" style="height: 380px"><canvas id="chart-pm-invite-rate"></canvas></div>
     </div>
 
@@ -3369,7 +3449,7 @@ document.addEventListener('DOMContentLoaded', function() {
         layout:{padding:{top:18,right:56,bottom:6,left:8}},
         plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:16,boxHeight:2,padding:14,font:{size:11,weight:600}}}},
         scales:{
-          x:{grid:{display:false},ticks:{font:{size:11,weight:600}}},
+          x:{grid:{display:false},ticks:{font:{size:11,weight:600},callback:function(value,index){return index===labels.length-1?labels[index]+' ★':labels[index];}}},
           y:{display:true,suggestedMin:40,suggestedMax:95,grid:{color:'rgba(22,32,80,0.06)'},ticks:{font:{size:10},callback:function(v){return v+'%';}}}
         }
       })
@@ -4043,7 +4123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Funnel Methodology">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Funnel Methodology</div></div>
+    <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Funnel Methodology</div></div>
     <h2 class="section-title">From lease activation to <span class="title-accent">payment retention</span>.</h2>
 
     <style>
@@ -4221,7 +4301,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap">
       <div>
-        <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Lease Funnel</div></div>
+        <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Lease Funnel</div></div>
         <h2 class="section-title" style="margin: 0">Where leases <span class="title-accent red">drop off</span> — invite, page-view, registration, payment, retention.</h2>
       </div>
       <details class="methodology-collapse" style="margin: 0">
@@ -4433,7 +4513,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Planned Initiatives">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Planned Initiatives</div></div>
+    <div class="slide-head"><div class="slide-num">18</div><div class="title-eyebrow">Planned Initiatives</div></div>
     <div class="q2-frame">
       <div class="q2-frame-header">
         <h2>Five initiatives to lift payments revenue</h2>
@@ -7401,9 +7481,9 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   // A group can contain `slides: [from, to]` and/or `children: [...nested groups]`.
   // Slides outside any group render as ungrouped items at the bottom.
   const tocGroups = [
-    { name: 'Business Overview', from: 1, to: 11 },  // 02–12 (Exec Summary → First-Time Paying Tenants → NSF)
-    { name: 'PM Side', from: 12, to: 13 },           // 13-14 (Churned Accounts, PM Invite Rate)
-    { name: 'Lease Funnel', from: 14, to: 15 },      // 15–16 (Funnel Methodology, Lease Funnel)
+    { name: 'Business Overview', from: 1, to: 12 },  // 02–13 (Exec Summary → ARR by Tenant Type → … → NSF)
+    { name: 'PM Side', from: 13, to: 14 },           // 14-15 (Churned Accounts, PM Invite Rate)
+    { name: 'Lease Funnel', from: 15, to: 16 },      // 16–17 (Funnel Methodology, Lease Funnel)
     // Planned Initiatives (17) → ungrouped at the bottom
   ];
 
