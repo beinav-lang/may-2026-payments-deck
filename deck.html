@@ -3414,54 +3414,42 @@ document.addEventListener('DOMContentLoaded', function() {
 <section data-slide-title="PM Invite Rate">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">PM Invite Rate</div></div>
-    <h2 class="section-title">Invites within 45 days of activation — <span class="title-accent">onboarding improved in 2026</span>.</h2>
-    <div class="slide-insight">Of leases activated each cycle, <strong>84.8% on mature PMs</strong> got an invite within ±45 days in May — but only <strong>55.6% on onboarding PMs</strong>, down ~15pp from the Feb–Mar ~70%. The ~29pp gap is the clearest top-of-funnel lever: onboarding-PM invite discipline.</div>
+    <h2 class="section-title">PM invite adoption <span class="title-accent">improved in 2026</span> — but fewer than half of active PMs send an invite.</h2>
+    <div class="slide-insight">Of merchant PMs with an active lease, <strong>~46% sent at least one tenant invite in May</strong> — up from ~41–45% through late 2025. Still, <strong>more than half of active PMs don&rsquo;t invite in a given month</strong> — PM invite adoption is the clearest top-of-funnel lever.</div>
 
     <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">PM invite rate — invited within ±45 days of lease activation</div>
-      <div class="ch-sub">% of each cycle&rsquo;s newly-activated leases invited within ±45 days · <strong style="color:#3185FC">Mature</strong> = lease on a PM ≥90 days past its first invoice · <strong style="color:#FF4998">Onboarding</strong> = within 90 days · <strong style="color:#94a3b8">All</strong> = blended · Sep &rsquo;25 → May &rsquo;26 · <strong style="color:#b45309">★</strong> <span style="color:#b45309">May still filling</span> (±45-day window runs to early July; hollow point)</div>
-      <div class="chart-wrap" style="height: 380px"><canvas id="chart-pm-invite-rate"></canvas></div>
+      <div class="ch-title">% of active merchant PMs that sent ≥1 tenant invite <span style="font-weight:500;color:var(--muted);font-size:11px">· Sep &rsquo;25 → May &rsquo;26</span></div>
+      <div class="ch-sub">Share of PMs with an active merchant lease each month that sent at least one tenant invite that month. Active-PM base grew <strong>9.4K → 10.4K</strong> over the window. <span style="color:var(--subtle)">(invites: PostHog <code style="font-style:normal">invitation_sent</code> → dbTenant; active PMs: daily lease snapshot.)</span></div>
+      <div class="chart-wrap" style="height: 360px"><canvas id="chart-pm-invite-rate"></canvas></div>
     </div>
 
     <div style="margin-top:12px; padding:10px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--muted); line-height:1.6">
-      <strong style="color:var(--text)">Why it matters →</strong> the invite is the first step of the payments funnel — a lease that&rsquo;s never invited can&rsquo;t register, convert, or pay. Mature PMs invite reliably; onboarding PMs (newest to DoorLoop) are the gap — and carry the most upside as they ramp.
+      <strong style="color:var(--text)">Why it matters →</strong> the invite is the first step of the payments funnel — a lease that&rsquo;s never invited can&rsquo;t register, convert, or pay. With under half of active PMs inviting in a given month, driving PM invite adoption is the clearest lever on the top of the funnel.
     </div>
   </div>
 </section>
 <script>
 (function(){
   document.addEventListener('DOMContentLoaded', function(){
-    if (typeof Chart === 'undefined' || typeof kpi === 'undefined') return;
-    var el = document.getElementById('chart-pm-invite-rate');
-    if (!el) return;
-    // Source: deck `kpi` object — invite stage = leases invited within ±45 days of activation / cohort total.
-    var months = kpiMonths.slice();
-    var fmtMo = function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
-    var labels = months.map(fmtMo);
-    var ser = function(c){return months.map(function(m){return kpi[m][c].invite;});};
-    var ptLabel = function(color, align){return {display:true, anchor:'center', align:align, offset:5,
-      color:color, font:{weight:700,size:9.5}, formatter:function(v){return Math.round(v)+'%';}};};
-    var line = function(label,c,color,dash,align){return {label:label,data:ser(c),borderColor:color,
-      backgroundColor:color,borderWidth: dash?2:3,borderDash:dash||[],tension:0.3,fill:false,
-      pointRadius:function(ctx){return ctx.dataIndex===months.length-1?5:3;},
-      pointBackgroundColor:function(ctx){return ctx.dataIndex===months.length-1?'#fff':color;},
-      pointBorderColor:color,pointBorderWidth:function(ctx){return ctx.dataIndex===months.length-1?2:1.5;},
-      datalabels:ptLabel(color, align)};};
-    var datasets=[
-      line('Mature','Mature','#3185FC',null,'top'),
-      line('Onboarding','Onboarding','#FF4998',null,'bottom'),
-      line('All (blended)','All','#94a3b8',[6,4],'bottom')
-    ];
-    new Chart(el,{type:'line',data:{labels:labels,datasets:datasets},
-      options: baseOpts({
-        layout:{padding:{top:18,right:56,bottom:6,left:8}},
-        plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:16,boxHeight:2,padding:14,font:{size:11,weight:600}}}},
-        scales:{
-          x:{grid:{display:false},ticks:{font:{size:11,weight:600},callback:function(value,index){return index===labels.length-1?labels[index]+' ★':labels[index];}}},
-          y:{display:true,suggestedMin:40,suggestedMax:95,grid:{color:'rgba(22,32,80,0.06)'},ticks:{font:{size:10},callback:function(v){return v+'%';}}}
-        }
-      })
-    });
+    if (typeof Chart === 'undefined') return;
+    var el = document.getElementById('chart-pm-invite-rate'); if(!el) return;
+    // Source: pm_invite_adoption.sql — % of PMs with an active merchant lease each month
+    // that sent >=1 invitation_sent (PostHog, dbTenant). Calendar month, Sep '25 -> May '26.
+    var months=["Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    var pct=[44.9,44.2,40.7,42.9,44.0,43.6,46.4,46.2,46.1];
+    new Chart(el,{type:'line',data:{labels:months,datasets:[
+      {label:'% of active PMs inviting',data:pct,borderColor:'#3185FC',backgroundColor:'rgba(49,133,252,0.10)',
+        borderWidth:3,fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#3185FC',pointBorderColor:'#fff',pointBorderWidth:1.5,
+        datalabels:{display:true,anchor:'end',align:'top',offset:6,color:'#1d4ed8',font:{weight:800,size:11},formatter:function(v){return v.toFixed(1)+'%';}}},
+      {label:'Half of active PMs',data:months.map(function(){return 50;}),borderColor:'#94a3b8',borderWidth:1.5,borderDash:[5,4],
+        fill:false,pointRadius:0,datalabels:{display:false}}
+    ]},
+    options: baseOpts({
+      layout:{padding:{top:20,right:16,bottom:4,left:6}},
+      plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:16,boxHeight:2,padding:14,font:{size:11,weight:600}}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:11,weight:600}}},
+              y:{display:true,min:0,suggestedMax:60,grid:{color:'rgba(22,32,80,0.06)'},ticks:{font:{size:10},callback:function(v){return v+'%';}}}}
+    })});
   });
 })();
 </script>
