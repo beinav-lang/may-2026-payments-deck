@@ -231,12 +231,12 @@
   .exec-narrative p strong { color: #fff; font-weight: 700; }
   .exec-narrative p .red { color: #fca5a5; font-weight: 700; }
   /* ===== Per-slide insight card (what + why) ===== */
-  .slide-insight { background: rgba(22,32,80,0.045); border-left: 4px solid #162050; border-radius: 8px;
-    padding: 11px 18px; margin: 12px 0 16px; font-size: 13.5px; line-height: 1.55; color: var(--text); max-width: 1220px; }
+  .slide-insight { background: var(--ink); border-radius: 12px;
+    padding: 14px 22px; margin: 12px 0 18px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.9); max-width: 1220px; box-shadow: 0 6px 18px rgba(22,32,80,0.12); }
   .slide-insight .si-lbl { display:inline-block; font-size: 9.5px; font-weight: 800; letter-spacing: 1.8px;
     text-transform: uppercase; color: #3185FC; margin-right: 9px; vertical-align: 1px; }
-  .slide-insight strong { color: #162050; font-weight: 800; }
-  body.slide-mode .slide-insight { font-size: 14.5px; padding: 12px 20px; }
+  .slide-insight strong { color: #fff; font-weight: 700; }
+  body.slide-mode .slide-insight { font-size: 15px; padding: 15px 24px; }
 
   /* SECTION SHELL */
   section { padding: 48px 0; }
@@ -1217,7 +1217,7 @@
 <header class="cover" data-slide-title="Executive Summary">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">02</div><div class="title-eyebrow">Executive Summary</div></div>
-    <h1>May gave back April's gain — <em>paid % fell 1.18pp to 46.88%</em>: active jumped +10K but paid count barely moved (+252).</h1>
+    <h1>May gave back April’s gain — <span class="title-accent">paid leases % normalized to 46.88%</span> after April’s seasonal peak, with card share at a 16-month low.</h1>
   </div>
 </header>
 
@@ -1256,7 +1256,7 @@
       <div class="metric flag">
         <div class="metric-label">Card Volume / Share</div>
         <div class="metric-num" style="font-size:30px; line-height:1.12">$54.10M / 17.69%</div>
-        <div class="metric-tag">volume ≈ flat vs Apr · share <span class="neg">▼ new 12-mo low</span></div>
+        <div class="metric-tag">volume ≈ flat vs Apr · share <span class="neg">▼ new 16-mo low</span></div>
       </div>
       <div class="metric up">
         <div class="metric-label">NSF</div>
@@ -1271,7 +1271,7 @@
     </div>
     <div class="exec-narrative">
       <div class="lbl">TL;DR</div>
-      <p>But the miss is softer than the headline: <strong>~half the churn spike is a partial-cycle artifact</strong> (true ≈14.2K vs April's 17.7K), and reactivations simply unwound April's calendar tailwind — more optics than engine. Where it bites for real: ARR came in at <strong>$15.59M, 96% of plan</strong>, and overall card-volume share hit a <span class="red">new 12-month low (17.69%)</span>.</p>
+      <p>But the miss is softer than the headline: <strong>~half the churn spike is a partial-cycle artifact</strong> (true ≈14.2K vs April's 17.7K), and reactivations simply unwound April's calendar tailwind — more optics than engine. Where it bites for real: ARR came in at <strong>$15.59M, 96% of plan</strong>, and overall card-volume share hit a <span class="red">new 16-month low (17.69%)</span>.</p>
     </div>
     <div style="font-size: 10.5px; color: var(--muted); margin-top: 16px; letter-spacing: 0.3px">
       Snapshot date: 2026-05-25 (cycle Apr 25 → May 24). Figures reflect the May cycle; card-volume and NSF settle further as the cycle finalizes.
@@ -1487,7 +1487,7 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">03</div><div class="title-eyebrow">Planned vs Actual</div></div>
     <h2 class="section-title">ARR missed plan by $649K — the <span class="title-accent">top of the funnel</span> led the miss, not conversion.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> ARR landed <strong>$15.59M — 96% of plan</strong>, but the whole gap is top-of-funnel: net-new Price Units hit just <strong>31% of plan</strong> while ARR/unit, $/lease and paid-rate all <strong>beat</strong>. An acquisition miss, not a monetization one.</div>
+    <div class="slide-insight">ARR landed <strong>$15.59M — 96% of plan</strong>, but the whole gap is top-of-funnel: net-new Price Units hit just <strong>31% of plan</strong> while ARR/unit, $/lease and paid-rate all <strong>beat</strong>. An acquisition miss, not a monetization one.</div>
     <div style="margin: 2px 0 16px; display: flex; align-items: center; gap: 11px; font-size: 13px; color: var(--muted);"><span style="display:inline-block; background:#fef3cd; color:#8a5a00; border:1px solid #fcd34d; border-radius:999px; padding:3px 12px; font-size:11px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; white-space:nowrap;">⟳ Targets to be reforecast</span><span>Plan was set before the Q1 acquisition shortfall — unit economics remain ahead.</span></div>
 
     <!-- Headline plan-vs-actual stats · 5 metrics -->
@@ -1901,12 +1901,11 @@
     <div style="margin-bottom: 18px">
       <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">Active Leases Overview</div></div>
       <h2 class="section-title">% Paid dropped <span class="title-accent red">−1.18pp MoM</span> — still +1.07pp vs plan.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> % paid fell <strong>−1.18pp MoM to 46.88%</strong> yet still ran <strong>+1.07pp ahead of plan</strong>. Eligibility held flat (71.7%) — the dip is the seasonal unwind of April’s artificially high peak, not softening demand.</div>
+    <div class="slide-insight">% paid leases went down with eligibility rate unchanged. Reversion is seasonal — April peaked artificially after March’s compressed cycle pushed payments forward (May 2025 showed the same shape, 2× sharper this year).</div>
     </div>
 
     <!-- Top summary card -->
     <div style="margin-bottom: 14px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.05) 0%, rgba(124,58,237,0.05) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
-      <div style="font-size: 15.5px; font-weight: 800; color: #162050; margin-bottom: 12px; line-height: 1.4">% paid leases went down with eligibility rate unchanged. Reversion is seasonal — April peaked artificially after March's compressed cycle pushed payments forward (May 2025 showed the same shape, 2× sharper this year).</div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
         <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 6px">
           <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Paid / Active</div>
@@ -1949,7 +1948,7 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Paid Leases Breakdown</div></div>
     <h2 class="section-title">Paid leases held <span class="title-accent">flat</span> — +252 net MoM, churn at a series high.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were almost fully offset by a <strong>series-high 21K churn</strong> — roughly half of it a partial-cycle artifact.</div>
+    <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were almost fully offset by a <strong>series-high 21K churn</strong> — roughly half of it a partial-cycle artifact.</div>
 
     <!-- May paid-lease summary card -->
     <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
@@ -2005,7 +2004,7 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">06</div><div class="title-eyebrow">Why % Paid Leases Dropped</div></div>
     <h2 class="section-title">Two drivers: reactivation reverted after April’s seasonal peak · churn <span class="title-accent red">+19%</span>.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> The 1.18pp paid-% dip is two calendar effects, not engine weakness: reactivations reverted <strong>−27%</strong> off April’s seasonal peak and churn rose <strong>+19%</strong> (≈half a partial-cycle artifact). <strong>Normalization, not weakness.</strong></div>
+    <div class="slide-insight">The 1.18pp paid-% dip is two calendar effects, not engine weakness: reactivations reverted <strong>−27%</strong> off April’s seasonal peak and churn rose <strong>+19%</strong> (≈half a partial-cycle artifact). <strong>Normalization, not weakness.</strong></div>
 
     <!-- DRIVER #1 · Reactivation -->
     <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
@@ -2230,7 +2229,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
       <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Lease Activation Cohorts</div></div>
       <h2 class="section-title" style="margin-bottom:0">Reactivations −27% + churn +19% = <span class="title-accent red">May's −1.18pp</span>.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> The new-lease funnel is tilting to Mature: Onboarding new-actives fell <strong>−27.6% MoM</strong> — now the smaller half of the funnel for the first time — while Mature grew <strong>+7.2%</strong>. Per-cohort conversion curves held; it’s a mix shift.</div>
+    <div class="slide-insight">The new-lease funnel is tilting to Mature: Onboarding new-actives fell <strong>−27.6% MoM</strong> — now the smaller half of the funnel for the first time — while Mature grew <strong>+7.2%</strong>. Per-cohort conversion curves held; it’s a mix shift.</div>
     </div>
 
     <div class="chart-shell" style="margin-top: 12px">
@@ -2294,7 +2293,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">08</div><div class="title-eyebrow">Card Performance · The What</div></div>
     <h2 class="section-title">Overall card share <span class="title-accent red">dipped to 17.69%</span> (new low) — but FT-side rebounded <span class="title-accent">+2.3pp</span>.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> Overall card share hit a <strong>new 12-mo low (17.69%)</strong> even as first-time card adoption rebounded <strong>+2.3pp</strong>. The disconnect: card dollars are ~93% returning, and the Nov→Apr FT slide bled into returning a month later (~7pp below first-pay rate) — May’s rebound hasn’t reached returning yet.</div>
+    <div class="slide-insight">Overall card share hit a <strong>new 16-mo low (17.69%)</strong> even as first-time card adoption rebounded <strong>+2.3pp</strong>. The disconnect: card dollars are ~93% returning, and the Nov→Apr FT slide bled into returning a month later (~7pp below first-pay rate) — May’s rebound hasn’t reached returning yet.</div>
 
     <!-- Overall card-share trend (12 months) -->
     <div class="chart-shell" style="margin-top: 16px">
@@ -2353,7 +2352,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">09</div><div class="title-eyebrow">Card Performance · The Why</div></div>
     <h2 class="section-title">The card drop wasn't gradual — it was a <span class="title-accent red">Spring 2025 step-down</span>. Both cohorts. Same months.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> The card decline isn’t gradual — it’s a <strong>Spring-’25 step-down</strong> hitting both cohorts at once. Drivers: rising rent (card share collapses 54%→10% as amount climbs) plus a one-time FT-adoption step; switching is ruled out. And it now compounds: <strong>card M1 retention itself stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr), so each FT cohort graduates into returning holding card at a lower rate.</div>
+    <div class="slide-insight">The card decline isn’t gradual — it’s a <strong>Spring-’25 step-down</strong> hitting both cohorts at once. Drivers: rising rent (card share collapses 54%→10% as amount climbs) plus a one-time FT-adoption step; switching is ruled out. And it now compounds: <strong>card M1 retention itself stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr), so each FT cohort graduates into returning holding card at a lower rate.</div>
     <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 6px 0 18px; max-width: 1100px">
       Mar–Aug '25 both cohorts crashed in lockstep: <strong style="color: var(--text)">Onboarding 50% → 41%</strong>, <strong style="color: var(--text)">Mature 54% → 46%</strong> (~8–10pp each, in 4–5 months).
       Since Aug '25 they've bounced in a low band with no clear trend.
@@ -2461,7 +2460,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
       <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Payment Retention Cohort</div></div>
       <h2 class="section-title" style="margin-bottom:0">Card-first cohorts churn <span class="title-accent red">2× faster</span> than ACH — even after stripping lease churn.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> Retention is switch-resistant overall, but card is weakening on two fronts: <strong>card-first cohorts churn ~2× faster than ACH</strong>, and <strong>card M1 retention stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr). Each 2026 FT cohort thus graduates into “returning” holding card at a lower rate — dragging returning card share down.</div>
+    <div class="slide-insight">Retention is switch-resistant overall, but card is weakening on two fronts: <strong>card-first cohorts churn ~2× faster than ACH</strong>, and <strong>card M1 retention stepped down ~3pp in 2026</strong> (62.5% Jan → ~59% Feb–Apr). Each 2026 FT cohort thus graduates into “returning” holding card at a lower rate — dragging returning card share down.</div>
     </div>
 
     <div class="chart-shell" style="margin-top: 12px">
@@ -3046,7 +3045,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="margin-top: 18px">
       <div class="slide-head"><div class="slide-num">11</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
       <h2 class="section-title">First-time payers — the funnel's leading edge — grew <span class="title-accent">+22% YoY</span> to 14.4K, almost entirely from existing accounts expanding.</h2>
-    <div class="slide-insight"><span class="si-lbl">Insight</span> First-time payers grew <strong>+22% YoY to 14.4K</strong>, and <strong>88.7% come from existing accounts expanding</strong> (land-and-expand). The one watch-item is net-new-account intake — it only moves in January, so a new-logo push outside Q1 is the clearest upside.</div>
+    <div class="slide-insight">First-time payers grew <strong>+22% YoY to 14.4K</strong>, and <strong>88.7% come from existing accounts expanding</strong> (land-and-expand). The one watch-item is net-new-account intake — it only moves in January, so a new-logo push outside Q1 is the clearest upside.</div>
     </div>
 
     <!-- KPI tile strip -->
@@ -3215,7 +3214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">NSF</div></div>
     <h2 class="section-title">NSF ARR <span class="title-accent">doubled YoY</span> — rate ticked up to 3.69%.</h2>
 
-    <div class="slide-insight"><span class="si-lbl">Insight</span> NSF ARR hit an all-time high <strong>$2.04M (+100% YoY)</strong>, tracking ACH growth; the NSF rate ticked to <strong>3.69%</strong> — top of the 12-month band. Clean lever: migrate ~1,480 legacy $25-fee accounts to the $40 schedule (<strong>+$573K ARR</strong>, no PM behavior change).</div>
+    <div class="slide-insight">NSF ARR hit an all-time high <strong>$2.04M (+100% YoY)</strong>, tracking ACH growth; the NSF rate ticked to <strong>3.69%</strong> — top of the 12-month band. Clean lever: migrate ~1,480 legacy $25-fee accounts to the $40 schedule (<strong>+$573K ARR</strong>, no PM behavior change).</div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
       <div class="chart-shell">
@@ -3278,7 +3277,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="slide-head"><div class="slide-num">13</div><div class="title-eyebrow">Churned Accounts</div></div>
       <h2 class="section-title" style="margin-bottom: 0">Lost ARR re-accelerated <span class="title-accent red">+23% MoM</span> — count holds the plateau.</h2>
 
-      <div class="slide-insight"><span class="si-lbl">Insight</span> Churned-account count holds its plateau (<strong>130 vs 128 Apr</strong>), but <strong>lost ARR re-accelerated +23% MoM to $232K</strong> as $/account rebounded to $1.78K (April was unusually low). The elevated churn baseline is sticky — <strong>+42% YoY on ARR</strong> — not transient.</div>
+      <div class="slide-insight">Churned-account count holds its plateau (<strong>130 vs 128 Apr</strong>), but <strong>lost ARR re-accelerated +23% MoM to $232K</strong> as $/account rebounded to $1.78K (April was unusually low). The elevated churn baseline is sticky — <strong>+42% YoY on ARR</strong> — not transient.</div>
 
       <details class="methodology-collapse" style="margin-top: 10px">
         <summary>
@@ -7004,6 +7003,8 @@ new Chart(document.getElementById('chart-churned-accounts'), {
     color: var(--blue);
     font-style: normal;
   }
+  body.slide-mode .cover h1 .title-accent { display: inline-block; position: relative; padding-bottom: 5px; }
+  body.slide-mode .cover h1 .title-accent::after { content:''; position:absolute; left:0; right:0; bottom:0; height:7px; background:#DFFE02; border-radius:2px; box-shadow:0 0 12px rgba(223,254,2,0.55); }
   body.slide-mode .tldr {
     background: #fff;
     border-left: 4px solid var(--blue);
