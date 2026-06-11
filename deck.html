@@ -2221,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div>
       <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Paid Leases Cohort</div></div>
-      <h2 class="section-title" style="margin-bottom:0">Reactivations −27% + churn +19% = <span class="title-accent red">May's −1.18pp</span>.</h2>
+      <h2 class="section-title" style="margin-bottom:0">Cohort retention <span class="title-accent">held through May</span> — no cohort is breaking down.</h2>
     <div class="slide-insight">The new-lease funnel is tilting to Mature: Onboarding new-actives fell <strong>−27.6% MoM</strong> — now the smaller half of the funnel for the first time — while Mature grew <strong>+7.2%</strong>. Per-cohort conversion curves held; it’s a mix shift.</div>
     </div>
 
@@ -6153,12 +6153,13 @@ function renderFcWaterfall() {
   // Stages with their cumulative count + pct (relative to total)
   // Page-view is suppressed for still-filling cohorts (k.pageview === null) — show 5 stages then.
   const hasPV = k.pageview != null;
+  const pvBug = (fcMonth === '2026-04' || fcMonth === '2026-05');   // invite_pageview event under-fires Apr–May
   const stages = [
     { id: 'total',   name: '① New active leases', sub: '',                                        count: k.total,   metric: null },
     { id: 'invited', name: '② Invited',           sub: k.invite.toFixed(1) + '% step conversion', count: k.invited, metric: 'invite' },
   ];
   if (hasPV) {
-    stages.push({ id: 'pageview', name: '③ Invite page-view', sub: k.pageview_step.toFixed(1) + '% step conversion', count: k.pageview,      metric: 'pageview_step' });
+    stages.push({ id: 'pageview', name: '③ Invite page-view', sub: k.pageview_step.toFixed(1) + '% step conversion', count: k.pageview,      metric: 'pageview_step', badge: pvBug ? 'event bug' : null });
     stages.push({ id: 'portal',   name: '④ Registered',       sub: k.register_step.toFixed(1) + '% step conversion', count: k.portal_active, metric: 'register_step' });
   } else {
     stages.push({ id: 'portal',   name: '③ Registered',       sub: k.activation.toFixed(1) + '% step conversion · page-view still filling', count: k.portal_active, metric: 'activation' });
@@ -6200,7 +6201,7 @@ function renderFcWaterfall() {
     const opacity = (1.0 - (i * 0.10)).toFixed(2);
 
     html += `<div class="wf-step">
-      <div class="wf-step-name">${s.name}${s.sub ? `<span class="wf-sub">${s.sub}</span>` : ''}</div>
+      <div class="wf-step-name">${s.name}${s.badge ? ` <span style="display:inline-block;margin-left:7px;background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;border-radius:999px;padding:1px 8px;font-size:9px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;vertical-align:middle;white-space:nowrap;">⚠ ${s.badge}</span>` : ''}${s.sub ? `<span class="wf-sub">${s.sub}</span>` : ''}</div>
       <div class="wf-step-track">`;
 
     // Staircase waterfall: spacer for cumulative-prior-loss, then this step's drop, then the bar
@@ -6465,15 +6466,18 @@ function renderCohortHeatmap() {
     html += `<td class="cohort-name">${c.cohort}</td>`;
     html += `<td class="cohort-size">${c.size.toLocaleString()}</td>`;
 
-    // Highlight key cells called out in the insight card.
-    // Consistent across All / Mature / Onboarding views — the three key cells:
-    //   Feb '26 M2: endpoint of the +5.4pp M1->M2 conversion jump (48.0% All)
-    //   Jan '26 M3: record M3 reading (45.2% All) — late-month conversion strength
-    //   Apr '26 M0: record M0 reading (25.2% All) — same-month activation+payment
+    // Highlight each cohort's May '26 reading — the anti-diagonal where the payment
+    // cycle = May. For Oct '25–Apr '26 this is the latest (rightmost) cell; Sep '25's
+    // May reading is M8 (off the M0–M7 range), so it stays unmarked.
     const highlightCellMap = {
-      "Feb '26": { 2: true },
-      "Jan '26": { 3: true },
-      "Apr '26": { 0: true }
+      "Oct '25": { 7: true },
+      "Nov '25": { 6: true },
+      "Dec '25": { 5: true },
+      "Jan '26": { 4: true },
+      "Feb '26": { 3: true },
+      "Mar '26": { 2: true },
+      "Apr '26": { 1: true },
+      "May '26": { 0: true }
     };
     const cellHl = (highlightCellMap[c.cohort] || {});
     const hlStyle = (i) => cellHl[i]
