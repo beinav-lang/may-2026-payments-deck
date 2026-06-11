@@ -194,8 +194,8 @@
   .metric-tag .pos { color: #4ade80; font-weight: 700; }
   .metric-tag .neg { color: #f87171; font-weight: 700; }
   .metric.up   .metric-num { color: #fff; }
-  .metric.down .metric-num { color: #fca5a5; }
-  .metric.flag .metric-num { color: #fcd34d; }
+  .metric.down .metric-num { color: #fff; }
+  .metric.flag .metric-num { color: #fff; }
   /* First-Time Paying Tenants reuses the .metric tile component on a LIGHT background;
      override the dark-band colors so the tiles read. Keyed on data-slide-title so it
      survives slide reordering/renumbering. */
@@ -1273,9 +1273,6 @@
       <div class="lbl">TL;DR</div>
       <p>But the miss is softer than the headline: <strong>~half the churn spike is a partial-cycle artifact</strong> (true ≈14.2K vs April's 17.7K), and reactivations simply unwound April's calendar tailwind — more optics than engine. Where it bites for real: ARR came in at <strong>$15.59M, 96% of plan</strong>, and overall card-volume share hit a <span class="red">new 16-month low (17.69%)</span>.</p>
     </div>
-    <div style="font-size: 10.5px; color: var(--muted); margin-top: 16px; letter-spacing: 0.3px">
-      Snapshot date: 2026-05-25 (cycle Apr 25 → May 24). Figures reflect the May cycle; card-volume and NSF settle further as the cycle finalizes.
-    </div>
   </div>
 </section>
 
@@ -1948,13 +1945,12 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Paid Leases Breakdown</div></div>
     <h2 class="section-title">Paid leases held <span class="title-accent">flat</span> — +252 net MoM, churn at a series high.</h2>
-    <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were almost fully offset by a <strong>series-high 21K churn</strong> — roughly half of it a partial-cycle artifact.</div>
+    <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong>. A steady existing base plus 14.4K first-time and 6.9K reactivated payers were almost fully offset by a <strong>series-high 21K churn</strong> — roughly half of it a partial-cycle artifact. <strong>Numerator barely moved · denominator grew +10K</strong> → % paid fell 1.18pp.</div>
 
     <!-- May paid-lease summary card -->
     <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px">What happened to paid leases in May</div>
       <div style="font-size: 15px; line-height: 1.65; margin-bottom: 14px">
-        May paid leases landed at <strong>181.9K (+252 net MoM)</strong> — essentially flat despite real gains, because churn at <strong style="background: rgba(220,38,38,0.15); color: #b91c1c; padding: 1px 8px; border-radius: 4px; font-weight: 800">−21,000</strong> (highest in series) offset the inflow. <strong>Numerator barely moved · denominator grew +10K</strong> → paid % dropped 1.18pp.
+        May paid leases landed at <strong>181.9K (+252 net MoM)</strong> — essentially flat despite real gains, because churn at <strong style="background: rgba(220,38,38,0.15); color: #b91c1c; padding: 1px 8px; border-radius: 4px; font-weight: 800">−21,000</strong> (highest in series) offset the inflow.
       </div>
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px">
         <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px">
@@ -3079,47 +3075,50 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="chart-wrap h340"><canvas id="chart-ft-newvexisting"></canvas></div>
     </div>
 
-    <!-- Second angle: first-time payers by lease-activation lag (M0 / M-1 / M-2 / M-3 / before) -->
+        <!-- Second angle: first-time payers split by lease cohort (Onboarding vs Mature) -->
     <div class="chart-shell" style="margin-top: 14px">
-      <div class="ch-title">First-time payers by when their lease activated <span style="font-weight:500;color:var(--muted);font-size:11px">· months from activation to first payment · Dec '25 → May '26</span></div>
-      <div class="ch-sub">M0 = lease activated the <em>same</em> cycle they first paid · M-1 / M-2 / M-3 = one / two / three cycles earlier · &ldquo;before&rdquo; = 4+ cycles earlier. Label above each bar = total first-time payers. <span style="color:var(--subtle)">(window starts Dec &rsquo;25 — lease-snapshot history begins Aug &rsquo;25, so earlier cycles can&rsquo;t resolve the full lag.)</span></div>
-      <div class="chart-wrap" style="height: 250px"><canvas id="chart-ft-activation-lag"></canvas></div>
+      <div class="ch-title">First-time payers · onboarding vs mature lease <span style="font-weight:500;color:var(--muted);font-size:11px">· share of each cycle&rsquo;s first-time payers · Dec '25 → May '26</span></div>
+      <div class="ch-sub">Each cycle&rsquo;s first-time payers split by lease cohort · <strong style="color:#3185FC">Onboarding</strong> = new lease (activated &lt;90 days from its first invoice) · <strong style="color:#162050">Mature</strong> = established lease. <em>n</em> above each bar = total first-time payers. <span style="color:var(--subtle)">(cohort uses each lease&rsquo;s first active + first invoice date; snapshot history begins Aug &rsquo;25.)</span></div>
+      <div class="chart-wrap" style="height: 250px"><canvas id="chart-ft-onb-mature"></canvas></div>
     </div>
     <script>
     (function(){
       document.addEventListener('DOMContentLoaded', function(){
         if (typeof Chart === 'undefined') return;
-        var el = document.getElementById('chart-ft-activation-lag');
+        var el = document.getElementById('chart-ft-onb-mature');
         if (!el) return;
-        // Source: Snowflake ft_activation_lag.sql — first-time payers bucketed by cycles between
-        // lease activation and first payment. Window Dec '25 -> May '26 (snapshot starts Aug '25).
+        // Source: Snowflake ft_onb_mature.sql — first-time payers split by lease cohort_status
+        // (Onboarding = activated <90d from first invoice; Mature = established). Cycle Dec '25 -> May '26.
         var rows = [
-          { c:'2025-12', M0:3466, M1:4070, M2:1406, M3:469, before:1327 },
-          { c:'2026-01', M0:4643, M1:4983, M2:2039, M3:746, before:1763 },
-          { c:'2026-02', M0:5177, M1:4591, M2:1851, M3:706, before:1732 },
-          { c:'2026-03', M0:4733, M1:5373, M2:1384, M3:517, before:1529 },
-          { c:'2026-04', M0:5744, M1:5041, M2:2063, M3:566, before:1386 },
-          { c:'2026-05', M0:5358, M1:5332, M2:1599, M3:530, before:1314 }
+          { c:'2025-12', onb:3052, mat:7686 },
+          { c:'2026-01', onb:5259, mat:8915 },
+          { c:'2026-02', onb:4825, mat:9232 },
+          { c:'2026-03', onb:4582, mat:8954 },
+          { c:'2026-04', onb:4430, mat:10369 },
+          { c:'2026-05', onb:4007, mat:10124 }
         ];
         var fmtMo=function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
         var labels=rows.map(function(r){return fmtMo(r.c);});
-        var tot=rows.map(function(r){return r.M0+r.M1+r.M2+r.M3+r.before;});
-        var segLbl=function(ctx){return ctx.dataset.data[ctx.dataIndex]>1150;};
-        var seg=function(key,label,color){return {label:label,data:rows.map(function(r){return r[key];}),backgroundColor:color,stack:'s',
-          datalabels:{display:segLbl,anchor:'center',align:'center',color:'#fff',font:{weight:700,size:9.5},formatter:function(v){return (v/1000).toFixed(1)+'k';}}};};
+        var tot=rows.map(function(r){return r.onb+r.mat;});
+        var pctOf=function(n,i){return +(100*n/tot[i]).toFixed(1);};
+        var ctrLbl={display:true,anchor:'center',align:'center',color:'#fff',font:{weight:800,size:14},formatter:function(v){return v.toFixed(1)+'%';}};
         var datasets=[
-          seg('M0','M0 · same cycle','#16a34a'),
-          seg('M1','M-1','#2563eb'),
-          seg('M2','M-2','#60a5fa'),
-          seg('M3','M-3','#a5b4fc'),
-          {label:'before (4+ cycles)',data:rows.map(function(r){return r.before;}),backgroundColor:'#cbd5e1',stack:'s',
-            datalabels:{display:true,anchor:'end',align:'end',offset:3,color:'#162050',font:{weight:800,size:11.5},formatter:function(v,ctx){return tot[ctx.dataIndex].toLocaleString();}}}
+          {label:'Onboarding lease',data:rows.map(function(r,i){return pctOf(r.onb,i);}),backgroundColor:'#3185FC',stack:'s',datalabels:ctrLbl},
+          {label:'Mature lease',data:rows.map(function(r,i){return pctOf(r.mat,i);}),backgroundColor:'#162050',stack:'s',borderRadius:{topLeft:4,topRight:4},borderSkipped:false,datalabels:ctrLbl},
+          {label:'',data:rows.map(function(){return 0;}),backgroundColor:'rgba(0,0,0,0)',stack:'s',
+            datalabels:{display:true,anchor:'end',align:'end',offset:4,color:'#162050',font:{weight:800,size:11.5},formatter:function(v,ctx){return 'n = '+tot[ctx.dataIndex].toLocaleString();}}}
         ];
         new Chart(el,{type:'bar',data:{labels:labels,datasets:datasets},
           options: baseOpts({
             layout:{padding:{top:22,right:8,bottom:0,left:4}},
-            plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:12,boxHeight:12,padding:11,font:{size:10.5,weight:600}}}},
-            scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:600}}},y:{stacked:true,display:false}}
+            plugins:{
+              legend:{display:true,position:'bottom',align:'center',labels:{boxWidth:12,boxHeight:12,padding:14,font:{size:11,weight:600},filter:function(it){return it.text;}}},
+              tooltip:{callbacks:{label:function(ctx){var r=rows[ctx.dataIndex];
+                if(ctx.dataset.label==='Onboarding lease') return ' Onboarding: '+r.onb.toLocaleString()+' ('+ctx.parsed.y.toFixed(1)+'%)';
+                if(ctx.dataset.label==='Mature lease') return ' Mature: '+r.mat.toLocaleString()+' ('+ctx.parsed.y.toFixed(1)+'%)';
+                return null;}}}
+            },
+            scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:600}}},y:{stacked:true,display:false,min:0,max:100}}
           })
         });
       });
@@ -3219,12 +3218,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px">
       <div class="chart-shell">
         <div class="ch-title">NSF ARR</div>
-        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
+        <div class="ch-sub">16-month trend · Feb '25 → May '26</div>
         <div class="chart-wrap" style="height: 410px"><canvas id="chart-nsf-arr"></canvas></div>
       </div>
       <div class="chart-shell">
         <div class="ch-title">NSF transactions &amp; % of ACH</div>
-        <div class="ch-sub">15-month trend · Mar '25 → May '26</div>
+        <div class="ch-sub">16-month trend · Feb '25 → May '26</div>
         <div class="chart-wrap" style="height: 410px"><canvas id="chart-nsf-txns"></canvas></div>
       </div>
     </div>
@@ -4758,7 +4757,7 @@ const w45Data = [
 ];
 
 const nsfData = [
-  { month:"Feb '25", arr:0.87, txns:null, pct:null, partial:false },
+  { month:"Feb '25", arr:0.87, txns:3105, pct:3.02, partial:false },
   { month:"Mar '25", arr:0.81, txns:2848, pct:2.78, partial:false },
   { month:"Apr '25", arr:0.95, txns:3241, pct:2.97, partial:false },
   { month:"May '25", arr:1.02, txns:3456, pct:3.14, partial:false },
@@ -5804,8 +5803,8 @@ new Chart(document.getElementById('chart-card-cause'), {
 
 
 // 8. NSF — ARR line + transactions/% combo
-//    chart-nsf-arr: all 17 months (Jan '25 → May '26), May '26 partial in red dashed
-//    chart-nsf-txns: only months with txns data (filter null), 14 months Mar '25 → Apr '26
+//    chart-nsf-arr: all 16 months (Feb '25 → May '26), May '26 emphasized
+//    chart-nsf-txns: months with txns data (filter null) — all 16 months Feb '25 → May '26
 const NSF_TEAL = '#0e7490';
 
 // May '26 is the index of the latest mature month for emphasis
@@ -5859,7 +5858,7 @@ if (document.getElementById('chart-nsf-arr')) new Chart(document.getElementById(
   })
 });
 
-// Filter to months that have txns/pct data (drop Jan '25, Feb '25, May '26 partial)
+// Filter to months that have txns/pct data (all 16 months Feb '25 → May '26 now populated)
 const nsfTxnsData = nsfData.filter(d => d.txns !== null && d.pct !== null);
 
 if (document.getElementById('chart-nsf-txns')) new Chart(document.getElementById('chart-nsf-txns'), {
