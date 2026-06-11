@@ -1903,7 +1903,7 @@
     <div class="slide-insight">Payments revenue (ARR before cost) reached <strong>$24.2M in May</strong> — Returning $21.1M + first-time $3.2M. Network + Stripe processing costs ran <strong>$8.7M (~36% of revenue)</strong>, steady since Nov &rsquo;25. <span style="color:rgba(255,255,255,0.7)">Costs aren&rsquo;t allocated to first-time vs returning payers — allocation infrastructure ETA Mar 2026.</span></div>
 
     <div class="chart-shell" style="margin-top:14px">
-      <div class="ch-title">ARR before costs (revenue × 12) vs processing costs <span style="font-weight:500;color:var(--muted);font-size:11px">· Nov &rsquo;25 → May &rsquo;26</span></div>
+      <div class="ch-title">ARR before costs (revenue × 12) vs processing costs <span style="font-weight:500;color:var(--muted);font-size:11px">· Nov &rsquo;25 → May &rsquo;26 · <strong style="color:#162050">bold = net ARR</strong> (revenue − cost)</span></div>
       <div class="chart-wrap" style="height:360px"><canvas id="chart-arr-tenant"></canvas></div>
     </div>
 
@@ -1931,7 +1931,24 @@
     var fee=[1.33,1.21,1.34,1.36,1.36,1.50,1.29];
     var m=function(v){return '$'+Math.abs(v).toFixed(2)+'M';};
     var cl=function(col,sz){return {display:true,anchor:'center',align:'center',color:col,font:{weight:800,size:sz},formatter:function(v){return (v<0?'−':'')+m(v);}};};
-    var zeroLine={id:'zeroLine',afterDatasetsDraw:function(chart){var ys=chart.scales.y; if(!ys) return; var y=ys.getPixelForValue(0); var ctx=chart.ctx,a=chart.chartArea; ctx.save(); ctx.beginPath(); ctx.moveTo(a.left,y); ctx.lineTo(a.right,y); ctx.lineWidth=2.5; ctx.strokeStyle='#162050'; ctx.stroke(); ctx.restore();}};
+    var barAnnot={id:'barAnnot',afterDatasetsDraw:function(chart){
+      var xs=chart.scales.x, ys=chart.scales.y, ctx=chart.ctx, a=chart.chartArea; if(!ys) return;
+      ctx.save();
+      var yz=ys.getPixelForValue(0);
+      ctx.beginPath(); ctx.moveTo(a.left,yz); ctx.lineTo(a.right,yz); ctx.lineWidth=2.5; ctx.strokeStyle='#162050'; ctx.stroke();
+      ctx.textAlign='center';
+      for(var i=0;i<months.length;i++){
+        var rev=ft[i]+ret[i], cost=net[i]+fee[i], na=rev-cost;
+        var x=xs.getPixelForValue(i), yt=ys.getPixelForValue(rev), yb=ys.getPixelForValue(-cost);
+        ctx.fillStyle='#162050'; ctx.font='800 16px "Poppins", sans-serif'; ctx.textBaseline='bottom';
+        ctx.fillText('$'+na.toFixed(2)+'M', x, yt-23);
+        ctx.fillStyle='#1a9c4b'; ctx.font='700 11px "Poppins", sans-serif'; ctx.textBaseline='bottom';
+        ctx.fillText('+$'+rev.toFixed(2)+'M', x, yt-7);
+        ctx.fillStyle='#dc2626'; ctx.font='700 11px "Poppins", sans-serif'; ctx.textBaseline='top';
+        ctx.fillText('−$'+cost.toFixed(2)+'M', x, yb+6);
+      }
+      ctx.restore();
+    }};
     new Chart(el,{type:'bar',data:{labels:months,datasets:[
       {label:'First-Time Payers ARR',data:ft,backgroundColor:'#34a853',stack:'s',datalabels:cl('#fff',11)},
       {label:'Returning Payers ARR',data:ret,backgroundColor:'#3185FC',stack:'s',datalabels:cl('#fff',11)},
@@ -1939,11 +1956,11 @@
       {label:'Stripe Fee',data:fee.map(function(v){return -v;}),backgroundColor:'#9aa3b0',stack:'s',datalabels:cl('#fff',9.5)}
     ]},
     options: baseOpts({
-      layout:{padding:{top:10,right:8,bottom:10,left:8}},
+      layout:{padding:{top:50,right:8,bottom:30,left:8}},
       plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:12,boxHeight:12,padding:11,font:{size:10.5,weight:600}}}},
       scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:700}}},
-              y:{stacked:true,display:false,suggestedMin:-10,suggestedMax:26}}
-    }), plugins:[zeroLine]});
+              y:{stacked:true,display:false,suggestedMin:-11,suggestedMax:27}}
+    }), plugins:[barAnnot]});
   });
 })();
 (function(){
