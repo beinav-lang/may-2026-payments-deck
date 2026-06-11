@@ -1899,23 +1899,22 @@
 <section data-slide-title="ARR by Tenant Type">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">ARR by Tenant Type</div></div>
-    <h2 class="section-title">First-time-payer ARR hit a <span class="title-accent">record $2.99M (+32% MoM)</span> — costs holding near 36% of ARR.</h2>
-    <div class="slide-insight">First-time-paying-tenant ARR (before cost) grew <strong>+32% MoM to a record $2.99M</strong> (+21% YoY) — the best month yet. Processing costs ran <strong>~36% of ARR</strong>. <span style="color:rgba(255,255,255,0.7)">Costs aren&rsquo;t yet allocated to first-time vs returning payers — allocation infrastructure ETA Mar 2026.</span></div>
+    <h2 class="section-title">Revenue before cost reached <span class="title-accent">$24.2M in May</span> — processing costs held near 36%.</h2>
+    <div class="slide-insight">Payments revenue (ARR before cost) reached <strong>$24.2M in May</strong> — Returning $21.1M + first-time $3.2M. Network + Stripe processing costs ran <strong>$8.7M (~36% of revenue)</strong>, steady since Nov &rsquo;25. <span style="color:rgba(255,255,255,0.7)">Costs aren&rsquo;t allocated to first-time vs returning payers — allocation infrastructure ETA Mar 2026.</span></div>
 
     <div class="chart-shell" style="margin-top:14px">
-      <div class="ch-title">ARR before costs (revenue × 12) vs processing costs <span style="font-weight:500;color:var(--muted);font-size:11px">· Jul &rsquo;25 → Jan &rsquo;26</span></div>
-      <div class="ch-sub">Above zero: <strong style="color:#34a853">First-Time Payers ARR</strong> + <strong style="color:#3185FC">Returning Payers ARR</strong>. Below zero: <strong style="color:#e05656">Network Cost</strong> + <strong style="color:#c79a06">Stripe Fee</strong> + <strong style="color:#9b59b6">Failed Transactions</strong>. Totals above/below each bar.</div>
-      <div class="chart-wrap" style="height:330px"><canvas id="chart-arr-tenant"></canvas></div>
+      <div class="ch-title">ARR before costs (revenue × 12) vs processing costs <span style="font-weight:500;color:var(--muted);font-size:11px">· Nov &rsquo;25 → May &rsquo;26</span></div>
+      <div class="chart-wrap" style="height:360px"><canvas id="chart-arr-tenant"></canvas></div>
     </div>
 
     <div style="display:grid; grid-template-columns:1.55fr 1fr; gap:16px; margin-top:14px; align-items:stretch">
       <div class="chart-shell" style="margin:0">
-        <div class="ch-title">% costs from ARR <span style="font-weight:500;color:var(--muted);font-size:11px">· Jul &rsquo;25 → Jan &rsquo;26</span></div>
+        <div class="ch-title">% costs from ARR <span style="font-weight:500;color:var(--muted);font-size:11px">· Nov &rsquo;25 → May &rsquo;26</span></div>
         <div class="chart-wrap" style="height:150px"><canvas id="chart-cost-pct"></canvas></div>
       </div>
       <div style="padding:14px 18px; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.22); border-radius:10px; font-size:13px; color:var(--text); line-height:1.55; display:flex; flex-direction:column; justify-content:center">
-        <div style="font-size:10.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#b91c1c; margin-bottom:6px">% costs from ARR · +0.7pp MoM</div>
-        % costs ticked up <strong>35.7% (Dec) → 36.4% (Jan)</strong>. Held at December&rsquo;s rate, January would have kept <strong style="color:#b91c1c">≈ +$160K</strong> more ARR.
+        <div style="font-size:10.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#b91c1c; margin-bottom:6px">% costs from ARR · −0.4pp MoM</div>
+        % costs eased to <strong>35.8% in May</strong> (from 36.2% in April). The ratio has held a tight <strong>35–36% band</strong> since Nov &rsquo;25.
       </div>
     </div>
   </div>
@@ -1925,41 +1924,34 @@
   document.addEventListener('DOMContentLoaded', function(){
     if (typeof Chart === 'undefined') return;
     var el = document.getElementById('chart-arr-tenant'); if(!el) return;
-    var months=["Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26"];
-    var ft=[2.81,2.85,2.83,2.61,2.94,2.27,2.99];
-    var ret=[15.99,16.40,17.29,17.66,18.27,19.03,19.44];
-    var net=[5.32,5.55,5.70,5.70,6.22,6.22,6.66];
-    var fee=[1.26,1.33,1.31,1.33,1.33,1.21,1.34];
-    var fail=[0.16,0.14,0.17,0.16,0.15,0.17,0.16];
-    var arrTot=[18.80,19.24,20.10,20.26,21.20,21.30,22.43];
-    var costTot=[6.74,7.02,7.18,7.19,7.70,7.60,8.16];
+    var months=["Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    var ft=[3.04,2.37,3.10,3.20,3.02,3.16,3.18];
+    var ret=[18.11,18.88,19.28,20.65,20.23,21.05,21.06];
+    var net=[6.22,6.22,6.66,6.96,6.94,7.26,7.39];
+    var fee=[1.33,1.21,1.34,1.36,1.36,1.50,1.29];
     var m=function(v){return '$'+Math.abs(v).toFixed(2)+'M';};
     var cl=function(col,sz){return {display:true,anchor:'center',align:'center',color:col,font:{weight:800,size:sz},formatter:function(v){return (v<0?'−':'')+m(v);}};};
+    var zeroLine={id:'zeroLine',afterDatasetsDraw:function(chart){var ys=chart.scales.y; if(!ys) return; var y=ys.getPixelForValue(0); var ctx=chart.ctx,a=chart.chartArea; ctx.save(); ctx.beginPath(); ctx.moveTo(a.left,y); ctx.lineTo(a.right,y); ctx.lineWidth=2.5; ctx.strokeStyle='#162050'; ctx.stroke(); ctx.restore();}};
     new Chart(el,{type:'bar',data:{labels:months,datasets:[
       {label:'First-Time Payers ARR',data:ft,backgroundColor:'#34a853',stack:'s',datalabels:cl('#fff',11)},
       {label:'Returning Payers ARR',data:ret,backgroundColor:'#3185FC',stack:'s',datalabels:cl('#fff',11)},
       {label:'Network Cost',data:net.map(function(v){return -v;}),backgroundColor:'#e05656',stack:'s',datalabels:cl('#fff',10.5)},
-      {label:'Stripe Fee',data:fee.map(function(v){return -v;}),backgroundColor:'#f5c518',stack:'s',datalabels:cl('#5c4a00',9.5)},
-      {label:'Failed Transactions',data:fail.map(function(v){return -v;}),backgroundColor:'#9b59b6',stack:'s',datalabels:{display:false}},
-      {label:'__pt',data:arrTot.map(function(){return 0.001;}),backgroundColor:'rgba(0,0,0,0)',stack:'s',
-        datalabels:{display:true,anchor:'end',align:'top',offset:3,color:'#1a9c4b',font:{weight:800,size:13},formatter:function(v,ctx){return '+$'+arrTot[ctx.dataIndex].toFixed(2)+'M';}}},
-      {label:'__ct',data:costTot.map(function(){return -0.001;}),backgroundColor:'rgba(0,0,0,0)',stack:'s',
-        datalabels:{display:true,anchor:'end',align:'bottom',offset:3,color:'#dc2626',font:{weight:800,size:13},formatter:function(v,ctx){return '−$'+costTot[ctx.dataIndex].toFixed(2)+'M';}}}
+      {label:'Stripe Fee',data:fee.map(function(v){return -v;}),backgroundColor:'#9aa3b0',stack:'s',datalabels:cl('#fff',9.5)}
     ]},
     options: baseOpts({
-      layout:{padding:{top:26,right:8,bottom:24,left:8}},
-      plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:12,boxHeight:12,padding:11,font:{size:10.5,weight:600},filter:function(it){return it.text.indexOf('__')!==0;}}}},
+      layout:{padding:{top:10,right:8,bottom:10,left:8}},
+      plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:12,boxHeight:12,padding:11,font:{size:10.5,weight:600}}}},
       scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:700}}},
-              y:{stacked:true,display:false,suggestedMin:-10,suggestedMax:25}}
-    })});
+              y:{stacked:true,display:false,suggestedMin:-10,suggestedMax:26}}
+    }), plugins:[zeroLine]});
   });
 })();
 (function(){
   document.addEventListener('DOMContentLoaded', function(){
     if (typeof Chart === 'undefined') return;
     var el = document.getElementById('chart-cost-pct'); if(!el) return;
-    var months=["Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26"];
-    var pct=[35.9,36.5,35.7,35.5,36.3,35.7,36.4];
+    var months=["Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    var pct=[35.7,35.0,35.7,34.9,35.7,36.2,35.8];
     new Chart(el,{type:'line',data:{labels:months,datasets:[{label:'% costs from ARR',data:pct,
       borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.09)',borderWidth:2.5,fill:true,tension:0.35,
       pointRadius:4,pointBackgroundColor:'#ef4444',pointBorderColor:'#fff',pointBorderWidth:1.5,
@@ -1967,7 +1959,7 @@
       options: baseOpts({
         layout:{padding:{top:18,right:14,bottom:2,left:6}},
         plugins:{legend:{display:false}},
-        scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600}}},y:{display:false,suggestedMin:34,suggestedMax:37.6}}
+        scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600}}},y:{display:false,suggestedMin:33,suggestedMax:37.6}}
       })});
   });
 })();
