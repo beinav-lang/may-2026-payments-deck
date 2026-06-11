@@ -21,5 +21,5 @@ SELECT
        ELSE 'Mature' END AS cohort_status,
   COUNT(*) AS ft
 FROM fp LEFT JOIN la ON fp.lease_id = la.lease_id
-WHERE DATE_TRUNC('month', CASE WHEN EXTRACT(DAY FROM fp.first_pay_date)>=25 THEN DATEADD(month,1,fp.first_pay_date) ELSE fp.first_pay_date END) BETWEEN '2025-09-01' AND '2026-05-01'
+WHERE DATE_TRUNC('month', CASE WHEN EXTRACT(DAY FROM fp.first_pay_date)>=25 THEN DATEADD(month,1,fp.first_pay_date) ELSE fp.first_pay_date END) BETWEEN '2025-01-01' AND '2026-05-01'
 GROUP BY 1,2 ORDER BY 1,2;

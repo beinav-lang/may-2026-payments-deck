@@ -2128,7 +2128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <!-- SECTION 07 · LEASE ACTIVATION COHORTS                          -->
 <!-- ============================================================ -->
-<section data-slide-title="Lease Activation Cohorts">
+<section data-slide-title="Paid Leases Cohort">
   <div class="wrap">
 
     <!-- ===== New-active-lease cohorts ============================ -->
@@ -2192,42 +2192,42 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       /* ===== Slide-mode: fill viewport vertically ===== */
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] > .wrap {
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] > .wrap {
         min-height: calc(100vh - 130px);
         display: flex;
         flex-direction: column;
       }
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] .chart-shell {
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] .chart-shell {
         flex: 1;
         display: flex;
         flex-direction: column;
       }
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] #cohort-heatmap {
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] #cohort-heatmap {
         flex: 1;
         display: flex;
         flex-direction: column;
       }
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] .heatmap {
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] .heatmap {
         flex: 1;
         height: 100%;
       }
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] .heatmap tbody td.cohort-name,
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] .heatmap tbody td.cohort-size,
-      body.slide-mode section[data-slide-title="Lease Activation Cohorts"] .heatmap tbody td.heat {
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] .heatmap tbody td.cohort-name,
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] .heatmap tbody td.cohort-size,
+      body.slide-mode section[data-slide-title="Paid Leases Cohort"] .heatmap tbody td.heat {
         padding-top: 14px;
         padding-bottom: 14px;
       }
     </style>
 
     <div>
-      <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Lease Activation Cohorts</div></div>
+      <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Paid Leases Cohort</div></div>
       <h2 class="section-title" style="margin-bottom:0">Reactivations −27% + churn +19% = <span class="title-accent red">May's −1.18pp</span>.</h2>
     <div class="slide-insight">The new-lease funnel is tilting to Mature: Onboarding new-actives fell <strong>−27.6% MoM</strong> — now the smaller half of the funnel for the first time — while Mature grew <strong>+7.2%</strong>. Per-cohort conversion curves held; it’s a mix shift.</div>
     </div>
 
     <div class="chart-shell" style="margin-top: 12px">
       <div class="cohort-meta">
-        <div class="ch-title" id="cohort-title" style="margin-bottom:0">% Paid leases by cohort · M0 → M7 · All accounts</div>
+        <div class="ch-title" id="cohort-title" style="margin-bottom:0">% Paid leases cohort · Anchored by activation month</div>
       </div>
 
       <!-- Toggles: account type (left) + value mode (right) -->
@@ -3074,7 +3074,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Second angle: first-time payers split by lease cohort (Onboarding vs Mature) -->
     <div class="chart-shell" style="margin-top: 14px">
-      <div class="ch-title">First-time payers · onboarding vs mature lease <span style="font-weight:500;color:var(--muted);font-size:11px">· share of each cycle&rsquo;s first-time payers · Dec '25 → May '26</span></div>
+      <div class="ch-title">First-time payers · onboarding vs mature lease <span style="font-weight:500;color:var(--muted);font-size:11px">· share of each cycle&rsquo;s first-time payers · Sep '25 → May '26</span></div>
       <div class="ch-sub">Each cycle&rsquo;s first-time payers split by lease cohort · <strong style="color:#3185FC">Onboarding</strong> = new lease (activated &lt;90 days from its first invoice) · <strong style="color:#162050">Mature</strong> = established lease. <em>n</em> above each bar = total first-time payers. <span style="color:var(--subtle)">(cohort uses each lease&rsquo;s first active + first invoice date; snapshot history begins Aug &rsquo;25.)</span></div>
       <div class="chart-wrap" style="height: 250px"><canvas id="chart-ft-onb-mature"></canvas></div>
     </div>
@@ -3085,13 +3085,16 @@ document.addEventListener('DOMContentLoaded', function() {
         var el = document.getElementById('chart-ft-onb-mature');
         if (!el) return;
         // Source: Snowflake ft_onb_mature.sql — first-time payers split by lease cohort_status
-        // (Onboarding = activated <90d from first invoice; Mature = established). Cycle Dec '25 -> May '26.
+        // (Onboarding = activated <90d from first invoice; Mature = established). Cycle Sep '25 -> May '26.
         var rows = [
+          { c:'2025-09', onb:3706, mat:9390 },
+          { c:'2025-10', onb:3908, mat:8709 },
+          { c:'2025-11', onb:4652, mat:8488 },
           { c:'2025-12', onb:3052, mat:7686 },
           { c:'2026-01', onb:5259, mat:8915 },
           { c:'2026-02', onb:4825, mat:9232 },
           { c:'2026-03', onb:4582, mat:8954 },
-          { c:'2026-04', onb:4430, mat:10369 },
+          { c:'2026-04', onb:4431, mat:10369 },
           { c:'2026-05', onb:4007, mat:10124 }
         ];
         var fmtMo=function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
@@ -3306,7 +3309,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div class="chart-shell" style="margin-top: 16px">
       <div class="ch-title">PM invite rate — invited within ±45 days of lease activation</div>
-      <div class="ch-sub">% of each cycle&rsquo;s newly-activated leases invited within ±45 days · <strong style="color:#3185FC">Mature</strong> = lease on a PM ≥90 days past its first invoice · <strong style="color:#FF4998">Onboarding</strong> = within 90 days · <strong style="color:#94a3b8">All</strong> = blended · Sep &rsquo;25 → May &rsquo;26</div>
+      <div class="ch-sub">% of each cycle&rsquo;s newly-activated leases invited within ±45 days · <strong style="color:#3185FC">Mature</strong> = lease on a PM ≥90 days past its first invoice · <strong style="color:#FF4998">Onboarding</strong> = within 90 days · <strong style="color:#94a3b8">All</strong> = blended · Sep &rsquo;25 → May &rsquo;26 · <span style="color:#b45309">May still filling</span> (±45-day window runs to early July; hollow point)</div>
       <div class="chart-wrap" style="height: 380px"><canvas id="chart-pm-invite-rate"></canvas></div>
     </div>
 
@@ -3326,18 +3329,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var fmtMo = function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
     var labels = months.map(fmtMo);
     var ser = function(c){return months.map(function(m){return kpi[m][c].invite;});};
-    var endLabel = function(color){return {display:function(ctx){return ctx.dataIndex===months.length-1;},
-      anchor:'end',align:'right',offset:6,color:color,font:{weight:800,size:12},
-      formatter:function(v){return v.toFixed(1)+'%';}};};
-    var line = function(label,c,color,dash){return {label:label,data:ser(c),borderColor:color,
+    var ptLabel = function(color, align){return {display:true, anchor:'center', align:align, offset:5,
+      color:color, font:{weight:700,size:9.5}, formatter:function(v){return Math.round(v)+'%';}};};
+    var line = function(label,c,color,dash,align){return {label:label,data:ser(c),borderColor:color,
       backgroundColor:color,borderWidth: dash?2:3,borderDash:dash||[],tension:0.3,fill:false,
       pointRadius:function(ctx){return ctx.dataIndex===months.length-1?5:3;},
-      pointBackgroundColor:color,pointBorderColor:'#fff',pointBorderWidth:1.5,
-      datalabels:endLabel(color)};};
+      pointBackgroundColor:function(ctx){return ctx.dataIndex===months.length-1?'#fff':color;},
+      pointBorderColor:color,pointBorderWidth:function(ctx){return ctx.dataIndex===months.length-1?2:1.5;},
+      datalabels:ptLabel(color, align)};};
     var datasets=[
-      line('Mature','Mature','#3185FC',null),
-      line('Onboarding','Onboarding','#FF4998',null),
-      line('All (blended)','All','#94a3b8',[6,4])
+      line('Mature','Mature','#3185FC',null,'top'),
+      line('Onboarding','Onboarding','#FF4998',null,'bottom'),
+      line('All (blended)','All','#94a3b8',[6,4],'bottom')
     ];
     new Chart(el,{type:'line',data:{labels:labels,datasets:datasets},
       options: baseOpts({
@@ -6510,7 +6513,7 @@ function renderCohortHeatmap() {
   const accLabel = { All: 'All accounts', Mature: 'Mature accounts (3+ months on platform)', Onboarding: 'Onboarding accounts (0–2 months on platform)' }[cohortView];
   const valLabel = { pct: '% Paid', count: '# Paid', delta: 'Δ MoM (pp change vs prior month)' }[mode];
   const t = document.getElementById('cohort-title');
-  if (t) t.textContent = `${valLabel} leases by cohort · M0 → M7 · ${accLabel}`;
+  if (t) t.textContent = `${valLabel} leases cohort · Anchored by activation month`;
 }
 
 window.setCohortView = function(view) {
@@ -6919,7 +6922,7 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   .slide-toc-item { border-radius: 8px !important; }
   .slide-nav-btn { border-radius: 8px; }
 
-  /* Lease Activation Cohorts slide — compress so it fits without scrolling */
+  /* Paid Leases Cohort slide — compress so it fits without scrolling */
   body.slide-mode .heatmap { font-size: 11.5px; border-spacing: 3px 3px; }
   body.slide-mode .heatmap thead th { padding: 5px 8px; font-size: 10px; }
   body.slide-mode .heatmap tbody td.cohort-name { padding: 5px 8px; font-size: 12px; }
