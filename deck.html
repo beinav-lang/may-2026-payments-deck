@@ -3421,52 +3421,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <!-- SECTION · PM INVITE RATE (invited within 45 days of activation) -->
 <!-- ============================================================ -->
-<section data-slide-title="PM Invite Rate">
-  <div class="wrap">
-    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">PM Invite Rate</div></div>
-    <h2 class="section-title">Mature PMs lag on invites at <span class="title-accent red">~45%</span> — onboarding PMs lead at ~68%.</h2>
-    <div class="slide-insight">Onboarding PMs (account &lt;90 days) invite reliably — <strong>~68% sent ≥1 tenant invite in May</strong> — but they&rsquo;re a thin slice. <strong>Mature PMs (~95% of the active base) lag at ~45%</strong>, holding blended adoption to ~46%. Both improved across 2026 — mature-PM invite adoption is the clearest top-of-funnel lever.</div>
-
-    <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">% of active merchant PMs that sent ≥1 tenant invite <span style="font-weight:500;color:var(--muted);font-size:11px">· by account age · Sep &rsquo;25 → May &rsquo;26</span></div>
-      <div class="chart-wrap" style="height: 380px"><canvas id="chart-pm-invite-rate"></canvas></div>
-    </div>
-
-    <div style="margin-top:12px; padding:10px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--muted); line-height:1.6">
-      <strong style="color:var(--text)">Why it matters →</strong> the invite is the first step of the payments funnel — a lease that&rsquo;s never invited can&rsquo;t register, convert, or pay. <strong style="color:#3185FC">Mature</strong> = account 90+ days old · <strong style="color:#FF4998">Onboarding</strong> = &lt;90 days · <strong style="color:#94a3b8">Blended</strong> = all active PMs.
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  document.addEventListener('DOMContentLoaded', function(){
-    if (typeof Chart === 'undefined') return;
-    var el = document.getElementById('chart-pm-invite-rate'); if(!el) return;
-    // Source: pm_invite_adoption.sql — % of active merchant PMs (by account age) that sent >=1
-    // invitation_sent (PostHog, dbTenant). Calendar month, Sep '25 -> May '26.
-    var months=["Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
-    var mature =[43.6,43.0,39.7,41.3,42.2,42.2,45.2,44.9,45.0];
-    var onb    =[61.6,58.7,53.6,64.8,69.4,63.6,66.0,67.7,68.0];
-    var blended=[44.9,44.2,40.7,42.9,44.0,43.6,46.4,46.2,46.1];
-    var endLab=function(color,align){return {display:function(ctx){return ctx.dataIndex===months.length-1;},
-      anchor:'center',align:align,offset:7,color:color,font:{weight:800,size:11.5},formatter:function(v){return v.toFixed(1)+'%';}};};
-    new Chart(el,{type:'line',data:{labels:months,datasets:[
-      {label:'Onboarding (<90d)',data:onb,borderColor:'#FF4998',backgroundColor:'#FF4998',borderWidth:3,tension:0.3,fill:false,
-        pointRadius:3.5,pointBackgroundColor:'#FF4998',pointBorderColor:'#fff',pointBorderWidth:1.5,datalabels:endLab('#c81e6a','top')},
-      {label:'Mature (90+d)',data:mature,borderColor:'#3185FC',backgroundColor:'#3185FC',borderWidth:3,tension:0.3,fill:false,
-        pointRadius:3.5,pointBackgroundColor:'#3185FC',pointBorderColor:'#fff',pointBorderWidth:1.5,datalabels:endLab('#1d4ed8','bottom')},
-      {label:'Blended',data:blended,borderColor:'#94a3b8',backgroundColor:'#94a3b8',borderWidth:2,borderDash:[6,4],tension:0.3,fill:false,
-        pointRadius:3,pointBackgroundColor:'#94a3b8',pointBorderColor:'#fff',pointBorderWidth:1.5,datalabels:endLab('#64748b','top')}
-    ]},
-    options: baseOpts({
-      layout:{padding:{top:20,right:20,bottom:4,left:6}},
-      plugins:{legend:{display:true,position:'top',align:'center',labels:{boxWidth:16,boxHeight:2,padding:14,font:{size:11,weight:600}}}},
-      scales:{x:{grid:{display:false},ticks:{font:{size:11,weight:600}}},
-              y:{display:true,min:0,suggestedMax:78,grid:{color:'rgba(22,32,80,0.06)'},ticks:{font:{size:10},callback:function(v){return v+'%';}}}}
-    })});
-  });
-})();
-</script>
 
 
 <!-- ============================================================ -->
@@ -4133,7 +4087,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Funnel Methodology">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Funnel Methodology</div></div>
+    <div class="slide-head"><div class="slide-num">15</div><div class="title-eyebrow">Funnel Methodology</div></div>
     <h2 class="section-title">From lease activation to <span class="title-accent">payment retention</span>.</h2>
 
     <style>
@@ -4311,7 +4265,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap">
       <div>
-        <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Lease Funnel</div></div>
+        <div class="slide-head"><div class="slide-num">16</div><div class="title-eyebrow">Lease Funnel</div></div>
         <h2 class="section-title" style="margin: 0">Where leases <span class="title-accent red">drop off</span> — invite, page-view, registration, payment, retention.</h2>
       </div>
       <details class="methodology-collapse" style="margin: 0">
@@ -4523,7 +4477,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section data-slide-title="Planned Initiatives">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">18</div><div class="title-eyebrow">Planned Initiatives</div></div>
+    <div class="slide-head"><div class="slide-num">17</div><div class="title-eyebrow">Planned Initiatives</div></div>
     <div class="q2-frame">
       <div class="q2-frame-header">
         <h2>Five initiatives to lift payments revenue</h2>
@@ -4632,7 +4586,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ -->
 <section data-slide-title="May Action Items">
   <div class="wrap">
-    <div class="slide-head"><div class="slide-num">19</div><div class="title-eyebrow">May Action Items</div></div>
+    <div class="slide-head"><div class="slide-num">18</div><div class="title-eyebrow">May Action Items</div></div>
     <h2 class="section-title"><span class="title-accent">May action items</span> — owners, ETAs &amp; status.</h2>
     <div class="slide-insight">Placeholder — to be populated during / after the May review meeting. Capture the owner, ETA, and status for each agreed action.</div>
 
@@ -7520,9 +7474,9 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   // Slides outside any group render as ungrouped items at the bottom.
   const tocGroups = [
     { name: 'Business Overview', from: 1, to: 12 },  // 02–13 (Exec Summary → ARR by Tenant Type → … → NSF)
-    { name: 'PM Side', from: 13, to: 14 },           // 14-15 (Churned Accounts, PM Invite Rate)
-    { name: 'Lease Funnel', from: 15, to: 16 },      // 16–17 (Funnel Methodology, Lease Funnel)
-    { name: 'Appendix', from: 17, to: 18 },          // 18–19 (Planned Initiatives, May Action Items)
+    { name: 'PM Side', from: 13, to: 13 },           // 14 (Churned Accounts)
+    { name: 'Lease Funnel', from: 14, to: 15 },      // 15–16 (Funnel Methodology, Lease Funnel)
+    { name: 'Appendix', from: 16, to: 17 },          // 17–18 (Planned Initiatives, May Action Items)
   ];
 
   function escapeHtml(s) {
