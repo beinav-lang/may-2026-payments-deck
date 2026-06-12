@@ -1900,7 +1900,6 @@
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">04</div><div class="title-eyebrow">ARR by Tenant Type</div></div>
     <h2 class="section-title">Returning-payer ARR went <span class="title-accent">flat</span> in May — $21.06M (≈+0% MoM).</h2>
-    <div class="slide-insight">Payments revenue (ARR before cost) reached <strong>$24.2M in May</strong> — Returning $21.1M + first-time $3.2M. Network + Stripe processing costs ran <strong>$8.7M (~36% of revenue)</strong>, steady since Nov &rsquo;25. <span style="color:rgba(255,255,255,0.7)">Costs aren&rsquo;t allocated to first-time vs returning payers — pending data infra work.</span></div>
 
     <div class="chart-shell" style="margin-top:14px">
       <div class="ch-title">ARR before costs (revenue × 12) vs processing costs <span style="font-weight:500;color:var(--muted);font-size:11px">· Nov &rsquo;25 → May &rsquo;26 · <strong style="color:#162050">bold = net ARR</strong> (revenue − cost)</span></div>
@@ -4280,9 +4279,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Cohort segmented control + Month timeline strip -->
     <div class="fc-controls">
       <div class="fc-segmented" data-control="cohort">
-        <button data-cohort="Mature" class="active">Mature</button>
+        <button data-cohort="All" class="active">All</button>
+        <button data-cohort="Mature">Mature</button>
         <button data-cohort="Onboarding">Onboarding</button>
-        <button data-cohort="All">All</button>
       </div>
       <div class="fc-timeline" id="fc-month-toggle"></div>
     </div>
@@ -6050,7 +6049,7 @@ const lastIdx = kpiMonths.length - 1;
 const partialSegment = (ctx, dashed) => ctx.p1DataIndex === lastIdx ? dashed : undefined;
 
 // ---------- KPI cohort toggle (shared across slides 09, 12, 13, 14, 15) ----------
-let kpiCohort = 'Mature';                       // 'Mature' | 'Onboarding' | 'All'
+let kpiCohort = 'All';                       // 'Mature' | 'Onboarding' | 'All'
 const kpiChartSpecs = [];                       // { chart, datasets: [{ idx, metric, labelTpl? }] }
 
 function kpiSeries(metric) {
