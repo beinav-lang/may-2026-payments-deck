@@ -3118,8 +3118,8 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="margin-top: 18px">
       <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
-      <h2 class="section-title">First-time payers up <span class="title-accent">+22%</span> — but new-PM landings are <span class="title-accent red">down ~10% YoY</span>. That's the real ARR gap.</h2>
-    <div class="slide-insight">The <strong>+22% YoY</strong> jump in first-time payers is <strong>88.7% existing accounts</strong> adding tenants. But the number of <strong>new PMs starting to pay is down ~10% YoY</strong> (~250/mo; 2026 sits below 2025 every month) — exactly why <strong>net-new Price Units are at 31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
+      <h2 class="section-title">First-time payers up <span class="title-accent">+22%</span> — but new accounts getting paid are <span class="title-accent red">down ~10% YoY</span>. That's the real ARR gap.</h2>
+    <div class="slide-insight">The <strong>+22% YoY</strong> jump in first-time payers is <strong>88.7% existing accounts</strong> adding tenants. But the number of <strong>accounts getting their first payment is down ~10% YoY</strong> (~250/mo; 2026 sits below 2025 every month) — exactly why <strong>net-new Price Units are at 31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
     </div>
 
     <!-- KPI tile strip -->
@@ -3130,7 +3130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="metric-tag"><span class="pos">▲ +22% YoY</span> · 88.7% existing PMs</div>
       </div>
       <div class="metric down">
-        <div class="metric-label">New Paying PM Accounts · per mo.</div>
+        <div class="metric-label">First-Time Paid Accounts · per mo.</div>
         <div class="metric-num">248</div>
         <div class="metric-tag"><span class="neg">▼ −10% YoY</span> · 320→289 avg '25→'26</div>
       </div>
@@ -3143,8 +3143,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Hero chart -->
     <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">New paying PM accounts per month — new-logo landings are slipping <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
-      <div class="ch-sub">Distinct PM accounts making their first-ever tenant payment each cycle. 2026 (pink) runs below 2025 (navy) <strong>every month</strong> — ~10% fewer new PMs landing.</div>
+      <div class="ch-title">First-time-paid accounts per month — new-logo intake is slipping <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
+      <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment each cycle — new accounts coming online. 2026 (pink) runs below 2025 (navy) <strong>every month</strong>, ~10% fewer.</div>
       <div class="chart-wrap" style="height:300px"><canvas id="chart-ft-newpm"></canvas></div>
     </div>
 
@@ -3152,14 +3152,14 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Takeaway strip -->
     <div style="margin-top: 12px; padding: 10px 16px; background: rgba(5,150,105,0.07); border-left: 3px solid #059669; border-radius: 6px; font-size: 12.5px; color: var(--text); line-height: 1.5">
       <span style="color: #047857; font-weight: 800">✓ Expansion is healthy — the gap is new-logo.</span>
-      Tenant growth is strong, but it's existing PMs deepening. The ARR lever is <strong>landing more PMs</strong> — net-new Price Units sit at 31% of plan, and new-PM landings only spike in January. Widening the base, not just deepening it, is the unlock.
+      Tenant growth is strong, but it's existing PMs deepening. The ARR lever is <strong>landing more PMs</strong> — net-new Price Units sit at 31% of plan, and new-account intake only spikes in January. Widening the base, not just deepening it, is the unlock.
     </div>
 
   </div>
 </section>
 
 <script>
-// First-Time Paying Tenants · Hero — new paying PM accounts per month (PM's first-ever tenant payment), 2025 vs 2026.
+// First-Time Paying Tenants · Hero — first-time-paid accounts per month (account's first-ever tenant payment received), 2025 vs 2026.
 // Source: data/2026-05/sql/new_pm_landings.sql — distinct dbtenant (PM) by first payment cycle.
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
@@ -3197,14 +3197,14 @@ document.addEventListener('DOMContentLoaded', function() {
             labels: { boxWidth: 16, boxHeight: 3, font: { size: 12, weight: 800 }, padding: 16, color: '#162050' } },
           datalabels: { clip: false },
           tooltip: { mode: 'index', intersect: false,
-            callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.parsed.y == null ? '—' : ctx.parsed.y + ' new PMs') } }
+            callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.parsed.y == null ? '—' : ctx.parsed.y + ' new accounts') } }
         },
         scales: {
           x: { grid: { display: false }, ticks: { font: { size: 11, weight: 700 }, color: '#64748b' } },
           y: { beginAtZero: false, suggestedMin: 200, suggestedMax: 390,
                grid: { color: 'rgba(22,32,80,0.06)' },
                ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', stepSize: 50 },
-               title: { display: true, text: 'New paying PM accounts / mo', font: { size: 10, weight: 700 }, color: '#94a3b8' } }
+               title: { display: true, text: 'First-time-paid accounts / mo', font: { size: 10, weight: 700 }, color: '#94a3b8' } }
         }
       }
     });
