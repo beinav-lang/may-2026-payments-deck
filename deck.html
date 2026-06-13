@@ -2442,45 +2442,21 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 class="section-title">The card drop wasn't gradual — it was a <span class="title-accent red">Spring 2025 step-down</span>. Both cohorts. Same months.</h2>
     <div class="slide-insight"><strong>Two structural drivers</strong>, both first-time: rent rising mechanically pushes card down (<strong>54%→10%</strong> as the amount climbs), and new-PM cohorts onboard <strong>~6pp lower</strong>. Not switching — existing card payers are stickier than ever.</div>
 
-    <!-- The chart — proof of cross-cohort drift -->
-    <div class="chart-shell">
-      <div class="ch-title">First-time paying tenants · card adoption by PM age</div>
-      <div class="chart-wrap" style="height: 320px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
-    </div>
+    <!-- Two drivers · one proof chart each -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
 
-    <!-- Two driver cards · Driver 1 wider for the structural-proof chart -->
-    <div style="display: grid; grid-template-columns: 1.35fr 1fr; gap: 14px; margin-top: 14px">
-
-      <!-- Driver 1 · Amount drift (platform-wide) — with mini structural-proof chart -->
-      <div style="padding: 16px 20px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 8px">Driver 1 · Amount drift · platform-wide</div>
-
-        <!-- The structural proof: card share collapses 54% → 10% as amount rises -->
-        <div style="background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 6px; padding: 10px 12px; margin: 4px 0 10px">
-          <div style="font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px">Card share by transaction amount · 12 mo</div>
-          <div style="height: 110px"><canvas id="chart-amount-buckets"></canvas></div>
-        </div>
-
-        <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          The mechanism: <strong>card share collapses 54% → 10%</strong> as amount climbs $0 → $2,000+.
-          Median FT amount has risen <strong>$1,050 → $1,150 (+10%)</strong>; sweet-spot share (&lt;$1,200) shrank <strong>54.8% → 51.3%</strong>.
-          Every cohort drags down mechanically — no behaviour change required.
-        </div>
+      <div style="padding: 14px 18px; background: rgba(245,158,11,0.08); border-left: 4px solid #f59e0b; border-radius: 8px; display: flex; flex-direction: column">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b45309; margin-bottom: 4px">Driver 1 · Rising rent</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 8px">Card share by payment amount</div>
+        <div style="height: 360px"><canvas id="chart-amount-buckets"></canvas></div>
+        <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 10px">Card share collapses <strong>54%&rarr;10%</strong> as the amount climbs. Median first-time rent rose <strong>$1,050&rarr;$1,150 (+10%)</strong>, so every cohort drifts down <strong>mechanically</strong>.</div>
       </div>
 
-      <!-- Driver 2 · Spring '25 step + ongoing Onboarding drift -->
-      <div style="padding: 16px 20px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px; display: flex; flex-direction: column">
-        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 8px">Driver 2 · Spring '25 step + ongoing Onboarding drift</div>
-        <div style="font-size: 24px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px">
-          Onb <span style="color: #b91c1c">50% → 37%</span> · <span style="font-size: 14px; color: #b91c1c">−13pp</span><br>
-          Mat <span style="color: #b91c1c">54% → 46%</span> · <span style="font-size: 14px; color: #b91c1c">−8pp</span>
-        </div>
-        <div style="font-size: 11.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.4">Mar '25 peak → May '26 · full window</div>
-        <div style="font-size: 13px; color: var(--text); line-height: 1.55">
-          <strong>Two phases.</strong> Mar–Aug '25: both crashed in lockstep (−8pp each) — a synchronized step at first payment.
-          After Aug '25: <strong style="color: #162050">Mature stabilized</strong> at 45–47%, but <strong style="color: #b91c1c">Onboarding kept dropping another −5pp</strong>.
-          The step hit both cohorts at once; the continued Onboarding drift is new-PM-specific.
-        </div>
+      <div style="padding: 14px 18px; background: rgba(220,38,38,0.08); border-left: 4px solid #dc2626; border-radius: 8px; display: flex; flex-direction: column">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 4px">Driver 2 &middot; Spring-&rsquo;25 adoption step</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 8px">First-time card adoption &middot; Onboarding vs Mature</div>
+        <div style="height: 360px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
+        <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 10px">Both cohorts <strong>stepped down ~8pp in spring &rsquo;25</strong> (same months). Mature then held ~46%; <strong>Onboarding kept drifting lower</strong>.</div>
       </div>
 
     </div>
