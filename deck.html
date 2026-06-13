@@ -211,16 +211,16 @@
   /* band shares the standard grey slide bg; KPI tiles + narrative become solid navy cards that pop */
   body.slide-mode > section.metrics-band[data-slide-merge="prev"] { background: #F0EFEB; color: var(--text); padding-top: 6px; }
   .metrics-band[data-slide-merge="prev"] .metrics-band-title { color: var(--blue); }
-  .metrics-band .metrics-grid { gap: 16px; display: flex; flex-wrap: wrap; }
+  .metrics-band .metrics-grid { gap: 16px; display: grid; grid-template-columns: repeat(3, 1fr); }
   .metrics-band .metrics-grid .metric {
-    flex: 1 1 calc(33.333% - 11px);
+    flex: 1 1 calc(33.333% - 11px); min-width: 0;
     background: var(--ink);
     border: none;
     border-radius: 14px;
     padding: 18px 20px;
     box-shadow: 0 6px 18px rgba(22,32,80,0.12);
   }
-  .metrics-band .metrics-grid .metric:nth-child(n+5) { padding-top: 18px; margin-top: 0; border-top: none; }
+  .metrics-band .metrics-grid .metric:nth-child(n+4) { padding-top: 18px; margin-top: 0; border-top: none; }
   .exec-narrative {
     margin-top: 28px; padding: 20px 26px;
     background: var(--ink);
@@ -1246,7 +1246,7 @@
       </div>
       <div class="metric flag">
         <div class="metric-label">Card Volume / Share</div>
-        <div class="metric-num" style="font-size:30px; line-height:1.12">$54.10M / 17.69%</div>
+        <div class="metric-num" style="font-size:26px; line-height:1.12; white-space:nowrap">$54.10M / 17.69%</div>
         <div class="metric-tag">vol <span class="neg">▼ 94% of $57.3M plan</span> · share <span class="neg">▼ 0.57pp vs 18.26%</span></div>
       </div>
       <div class="metric up">
@@ -6872,7 +6872,7 @@ new Chart(document.getElementById('chart-churned-accounts'), {
   body.slide-mode section.paper { padding-top: 20px; padding-bottom: 20px; }
   body.slide-mode .metrics-band { padding: 56px 0 64px; }
   body.slide-mode .metrics-band .metric { padding-top: 18px; padding-bottom: 18px; }
-  body.slide-mode .metrics-band .metric:nth-child(n+5) { padding-top: 44px; margin-top: 40px; }
+  body.slide-mode .metrics-band .metric:nth-child(n+4) { padding-top: 44px; margin-top: 40px; }
 
   /* Wider page wrap in slide mode — slides have one focus, use the screen */
   body.slide-mode .wrap { max-width: 1600px; padding: 0 32px; }
