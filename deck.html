@@ -2402,7 +2402,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Two charts side-by-side -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px">
       <div class="chart-shell">
         <div class="ch-title">Card adoption — % of paying tenants paying via card</div>
         <div class="chart-wrap" style="height: 400px"><canvas id="chart-card-adoption"></canvas></div>
@@ -3119,27 +3119,8 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="margin-top: 18px">
       <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
-      <h2 class="section-title">First-time payers up <span class="title-accent">+22%</span> — but new accounts getting paid are <span class="title-accent red">down ~10% YoY</span>. That's the real ARR gap.</h2>
-    <div class="slide-insight">The <strong>+22% YoY</strong> jump in first-time payers is <strong>88.7% existing accounts</strong> adding tenants. But the number of <strong>accounts getting their first payment is down ~10% YoY</strong> (~250/mo; 2026 sits below 2025 every month) — exactly why <strong>net-new Price Units are at 31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
-    </div>
-
-    <!-- KPI tile strip -->
-    <div class="metrics-grid" style="margin-top: 18px; grid-template-columns: repeat(3, 1fr)">
-      <div class="metric up">
-        <div class="metric-label">First-Time Payers (tenants) · May '26</div>
-        <div class="metric-num">14,369</div>
-        <div class="metric-tag"><span class="pos">▲ +22% YoY</span> · 88.7% existing PMs</div>
-      </div>
-      <div class="metric down">
-        <div class="metric-label">First-Time Paid Accounts · per mo.</div>
-        <div class="metric-num">248</div>
-        <div class="metric-tag"><span class="neg">▼ −10% YoY</span> · 320→289 avg '25→'26</div>
-      </div>
-      <div class="metric down" style="border-right:none; padding-right:0">
-        <div class="metric-label">Net-New Price Units · vs Plan</div>
-        <div class="metric-num">31%</div>
-        <div class="metric-tag"><span class="neg">▼ the acquisition miss</span> · 6.1K vs 19.9K</div>
-      </div>
+      <h2 class="section-title">First-time payers up <span class="title-accent">+22%</span> — but it's all existing-PM expansion; <span class="title-accent red">new-logo intake isn't growing</span>. That's the real ARR gap.</h2>
+    <div class="slide-insight">The <strong>+22% YoY</strong> in first-time payers is <strong>88.7% existing accounts</strong> adding tenants (left). Two reads of new-logo, one conclusion: <strong>new-PM tenant volume is flat</strong>, and <strong>~10% fewer new PMs are landing</strong> (right) — fewer, but larger (e.g., Costello). Net-new Price Units sit at <strong>31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
     </div>
 
     <!-- Two charts: FT tenants by PM tenure (the +22% decomposition) + new-PM landings (−10%) -->
@@ -3147,12 +3128,12 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="chart-shell">
         <div class="ch-title">First-time paying tenants · by PM tenure <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
         <div class="ch-sub">Split by the tenant's PM tenure. The <strong>+22%</strong> is <strong>mature-PM (existing)</strong> expansion; new-PM (onboarding ≤3 mo) tenants are <strong>flat YoY</strong>.</div>
-        <div class="chart-wrap" style="height:278px"><canvas id="chart-ft-onb-mature"></canvas></div>
+        <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-onb-mature"></canvas></div>
       </div>
       <div class="chart-shell">
         <div class="ch-title">First-time-paid accounts per month <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
         <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment. 2026 (pink) below 2025 (navy) <strong>every month</strong>, ~10% fewer.</div>
-        <div class="chart-wrap" style="height:278px"><canvas id="chart-ft-newpm"></canvas></div>
+        <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-newpm"></canvas></div>
       </div>
     </div>
 
