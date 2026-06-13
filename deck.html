@@ -3178,18 +3178,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const mature  = [6533,6668,7129,7922,7979,8803,9337,9811,9322,8681,8435,7737,9099,9658,9380,10710,10451];
     const onboard = [5904,4605,4591,4796,3801,4344,4438,4086,4084,4205,4867,3204,5570,4862,4653,4544,3914];
     const totals = mature.map((m,i)=>m+onboard[i]);
+    const totalsOnTop = {
+      id: 'totalsOnTop',
+      afterDatasetsDraw(chart) {
+        const ctx = chart.ctx, meta = chart.getDatasetMeta(1);
+        if (!meta || !meta.data) return;
+        ctx.save();
+        ctx.fillStyle = '#162050'; ctx.font = '800 9.5px "Poppins", sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+        meta.data.forEach((bar, i) => ctx.fillText((totals[i]/1000).toFixed(1)+'K', bar.x, bar.y - 3));
+        ctx.restore();
+      }
+    };
+    const segLbl = { display:true, anchor:'center', align:'center', color:'#fff', font:{weight:800,size:8.5}, formatter:v=>(v/1000).toFixed(1)+'K' };
     new Chart(el, {
       type: 'bar',
+      plugins: [totalsOnTop],
       data: { labels, datasets: [
-        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#162050', stack: 'ft', datalabels: { display:false } },
+        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#162050', stack: 'ft', datalabels: segLbl },
         { label: 'New PM (0–2 mo)', data: onboard, backgroundColor: '#dc2626', stack: 'ft',
-          borderRadius:{topLeft:3,topRight:3}, borderSkipped:false,
-          datalabels: { display:true, anchor:'end', align:'top', offset:1, color:'#162050',
-            font:{weight:800,size:8.5}, formatter:(v,ctx)=>(totals[ctx.dataIndex]/1000).toFixed(1)+'K' } }
+          borderRadius:{topLeft:3,topRight:3}, borderSkipped:false, datalabels: segLbl }
       ]},
       options: {
         responsive:true, maintainAspectRatio:false,
-        layout:{ padding:{ top:16, right:6, bottom:2, left:4 } },
+        layout:{ padding:{ top:18, right:6, bottom:2, left:4 } },
         plugins:{
           legend:{ display:true, position:'top', align:'start', labels:{ boxWidth:12, boxHeight:12, font:{size:10.5,weight:700}, padding:8, color:'#162050' } },
           datalabels:{ clip:false },
