@@ -3142,11 +3142,18 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
-    <!-- Hero chart -->
-    <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">First-time-paid accounts per month — new-logo intake is slipping <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
-      <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment each cycle — new accounts coming online. 2026 (pink) runs below 2025 (navy) <strong>every month</strong>, ~10% fewer.</div>
-      <div class="chart-wrap" style="height:300px"><canvas id="chart-ft-newpm"></canvas></div>
+    <!-- Two charts: FT tenants by PM tenure (the +22% decomposition) + new-PM landings (−10%) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
+      <div class="chart-shell">
+        <div class="ch-title">First-time paying tenants · by PM tenure <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
+        <div class="ch-sub">Split by the tenant's PM tenure. The <strong>+22%</strong> is <strong>mature-PM (existing)</strong> expansion; new-PM (onboarding ≤3 mo) tenants are <strong>flat YoY</strong>.</div>
+        <div class="chart-wrap" style="height:278px"><canvas id="chart-ft-onb-mature"></canvas></div>
+      </div>
+      <div class="chart-shell">
+        <div class="ch-title">First-time-paid accounts per month <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
+        <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment. 2026 (pink) below 2025 (navy) <strong>every month</strong>, ~10% fewer.</div>
+        <div class="chart-wrap" style="height:278px"><canvas id="chart-ft-newpm"></canvas></div>
+      </div>
     </div>
 
 
@@ -3158,6 +3165,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </div>
 </section>
+
+<script>
+// Slide 12 · First-time paying tenants by PM tenure (Stripe). Source: data/2026-05/sql/ft_pm_tenure_stripe.sql
+// Onboarding = tenant's PM in its first 3 months on platform (<=2 mo since the PM's first Stripe payment); Mature = 3+.
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Chart === 'undefined') return;
+    const el = document.getElementById('chart-ft-onb-mature');
+    if (!el) return;
+    const labels = ["Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    const mature  = [6533,6668,7129,7922,7979,8803,9337,9811,9322,8681,8435,7737,9099,9658,9380,10710,10451];
+    const onboard = [5904,4605,4591,4796,3801,4344,4438,4086,4084,4205,4867,3204,5570,4862,4653,4544,3914];
+    const totals = mature.map((m,i)=>m+onboard[i]);
+    new Chart(el, {
+      type: 'bar',
+      data: { labels, datasets: [
+        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#162050', stack: 'ft', datalabels: { display:false } },
+        { label: 'New PM (0–2 mo)', data: onboard, backgroundColor: '#dc2626', stack: 'ft',
+          borderRadius:{topLeft:3,topRight:3}, borderSkipped:false,
+          datalabels: { display:true, anchor:'end', align:'top', offset:1, color:'#162050',
+            font:{weight:800,size:8.5}, formatter:(v,ctx)=>(totals[ctx.dataIndex]/1000).toFixed(1)+'K' } }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        layout:{ padding:{ top:16, right:6, bottom:2, left:4 } },
+        plugins:{
+          legend:{ display:true, position:'top', align:'start', labels:{ boxWidth:12, boxHeight:12, font:{size:10.5,weight:700}, padding:8, color:'#162050' } },
+          datalabels:{ clip:false },
+          tooltip:{ mode:'index', intersect:false, callbacks:{
+            footer: items=>'Total: '+items.reduce((a,i)=>a+i.parsed.y,0).toLocaleString(),
+            label: ctx=>ctx.dataset.label+': '+ctx.parsed.y.toLocaleString() } }
+        },
+        scales:{
+          x:{ stacked:true, grid:{display:false}, ticks:{ font:{size:9,weight:600}, color:'#64748b', maxRotation:0, autoSkip:true, autoSkipPadding:4 } },
+          y:{ stacked:true, beginAtZero:true, grid:{color:'rgba(22,32,80,0.06)'}, ticks:{ font:{size:9.5,weight:600}, color:'#94a3b8', callback:v=>(v/1000)+'K' } }
+        }
+      }
+    });
+  });
+})();
+</script>
 
 <script>
 // First-Time Paying Tenants · Hero — first-time-paid accounts per month (account's first-ever tenant payment received), 2025 vs 2026.
