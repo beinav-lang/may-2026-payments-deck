@@ -2439,7 +2439,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">The card drop was a <span class="title-accent red">step, not a slide</span> — Spring 2025, both cohorts at once.</h2>
+    <h2 class="section-title">The card drop was a <span class="title-accent red">Spring-’25 step</span> — then a slow grind to new lows.</h2>
     <div class="slide-insight"><strong>Two structural drivers</strong>, both first-time: rent rising mechanically pushes card down (<strong>54%→10%</strong> as the amount climbs), and new-PM cohorts onboard <strong>~6pp lower</strong>. Not switching — existing card payers are stickier than ever.</div>
 
     <!-- Two drivers · one proof chart each -->
@@ -2456,7 +2456,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div style="font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 4px">Driver 2 &middot; Spring-&rsquo;25 adoption step</div>
         <div style="font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 8px">First-time card adoption &middot; Onboarding vs Mature</div>
         <div style="height: 360px"><canvas id="chart-pm-tenure-decomp"></canvas></div>
-        <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 10px">Both cohorts <strong>stepped down ~8pp in spring &rsquo;25</strong> (same months). Mature then held ~46%; <strong>Onboarding kept drifting lower</strong>.</div>
+        <div style="font-size: 12.5px; color: var(--text); line-height: 1.5; margin-top: 10px">Both cohorts <strong>stepped down ~8pp in spring &rsquo;25</strong> (same months) — then <strong>ground lower through early &rsquo;26</strong> to a fresh low (FT adoption hit a 17-mo low in April).</div>
       </div>
 
     </div>
@@ -2981,16 +2981,19 @@ document.addEventListener('DOMContentLoaded', function() {
       beforeDatasetsDraw(chart) {
         const xs = chart.scales.x, ctx = chart.ctx, a = chart.chartArea;
         if (!xs || !a) return;
-        const x1 = xs.getPixelForValue(2), x2 = xs.getPixelForValue(7); // Mar '25 -> Aug '25
         ctx.save();
-        ctx.fillStyle = 'rgba(220,38,38,0.07)';
-        ctx.fillRect(x1, a.top, x2 - x1, a.bottom - a.top);
-        ctx.strokeStyle = 'rgba(220,38,38,0.40)'; ctx.lineWidth = 1; ctx.setLineDash([4, 3]);
-        ctx.beginPath(); ctx.moveTo(x1, a.top); ctx.lineTo(x1, a.bottom);
-        ctx.moveTo(x2, a.top); ctx.lineTo(x2, a.bottom); ctx.stroke(); ctx.setLineDash([]);
-        ctx.fillStyle = '#b91c1c'; ctx.font = '800 11px \"Poppins\", sans-serif';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-        ctx.fillText("Spring '25 step \u00b7 \u22128pp", (x1 + x2) / 2, a.top + 1);
+        const band = (i1, i2, fill, stroke, label, lc) => {
+          const x1 = xs.getPixelForValue(i1), x2 = xs.getPixelForValue(i2);
+          ctx.fillStyle = fill; ctx.fillRect(x1, a.top, x2 - x1, a.bottom - a.top);
+          ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.setLineDash([4, 3]);
+          ctx.beginPath(); ctx.moveTo(x1, a.top); ctx.lineTo(x1, a.bottom);
+          ctx.moveTo(x2, a.top); ctx.lineTo(x2, a.bottom); ctx.stroke(); ctx.setLineDash([]);
+          ctx.fillStyle = lc; ctx.font = '800 10.5px \"Poppins\", sans-serif';
+          ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+          ctx.fillText(label, (x1 + x2) / 2, a.top + 1);
+        };
+        band(2, 7, 'rgba(220,38,38,0.07)', 'rgba(220,38,38,0.40)', "Spring '25 step \u00b7 \u22128pp", '#b91c1c');
+        band(10, 15, 'rgba(22,32,80,0.06)', 'rgba(22,32,80,0.32)', "then a slow grind \u2192 new low", '#162050');
         ctx.restore();
       }
     };
