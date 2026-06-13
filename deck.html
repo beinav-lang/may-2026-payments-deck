@@ -3121,23 +3121,18 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- KPI tile strip -->
-    <div class="metrics-grid" style="margin-top: 18px">
+    <div class="metrics-grid" style="margin-top: 18px; grid-template-columns: repeat(3, 1fr)">
       <div class="metric up">
         <div class="metric-label">First-time Payers · May '26</div>
         <div class="metric-num">14,369</div>
         <div class="metric-tag"><span class="pos">▲ +22% YoY</span> · peak 15.3K Apr '26</div>
       </div>
       <div class="metric up">
-        <div class="metric-label">YoY Growth</div>
-        <div class="metric-num">+22%</div>
-        <div class="metric-tag">+2,589 vs 11,780 (May '25)</div>
-      </div>
-      <div class="metric up">
         <div class="metric-label">From Existing Accounts</div>
         <div class="metric-num">88.7%</div>
         <div class="metric-tag">12,744 of 14,369 · land-and-expand</div>
       </div>
-      <div class="metric up">
+      <div class="metric up" style="border-right:none; padding-right:0">
         <div class="metric-label">Tenants / Existing Acct</div>
         <div class="metric-num">3.28</div>
         <div class="metric-tag">steady 3.3–3.6 across 2026 · expansion engine</div>
@@ -3151,88 +3146,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="chart-wrap h340"><canvas id="chart-ft-newvexisting"></canvas></div>
     </div>
 
-        <!-- Second angle: first-time payers split by PM-account age at first payment -->
-    <style>
-      .ftacct-toggle button { border:1px solid var(--border); background:#fff; color:var(--muted); border-radius:6px; padding:4px 11px; font-size:11px; font-weight:700; cursor:pointer; }
-      .ftacct-toggle button.active { background:var(--ink); color:#fff; border-color:var(--ink); }
-    </style>
-    <div class="chart-shell" style="margin-top: 14px">
-      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap">
-        <div>
-          <div class="ch-title" style="margin-bottom:2px">First-time payers · by account age at first payment <span style="font-weight:500;color:var(--muted);font-size:11px">· Jan '25 → May '26</span></div>
-          <div class="ch-sub">Each cycle&rsquo;s first-time payers split by how old their <strong>PM account</strong> was when they first paid · <strong style="color:#3185FC">Onboarding</strong> = account &lt;90 days old · <strong style="color:#162050">Mature</strong> = 90+ days. <em>n</em> above each bar = total first-time payers. <span style="color:var(--subtle)">(Jan–Jul &rsquo;25 excludes FT payers whose lease predates the Aug &rsquo;25 snapshot — ≤23% of those months.)</span></div>
-        </div>
-        <div class="ftacct-toggle" style="display:flex; gap:5px; flex-shrink:0; margin-top:2px">
-          <button class="active" data-ftmode="pct" onclick="setFtAcctMode('pct')">% share</button>
-          <button data-ftmode="count" onclick="setFtAcctMode('count')"># count</button>
-        </div>
-      </div>
-      <div class="chart-wrap" style="height: 250px"><canvas id="chart-ft-acct-age"></canvas></div>
-    </div>
-    <script>
-    (function(){
-      document.addEventListener('DOMContentLoaded', function(){
-        if (typeof Chart === 'undefined') return;
-        var el = document.getElementById('chart-ft-acct-age');
-        if (!el) return;
-        // Source: Snowflake ft_acctage.sql — first-time payers split by PM-account age at first payment
-        // (Onboarding = account <90 days old; Mature = 90+ days). Cycle Sep '25 -> May '26.
-        var rows = [
-          { c:'2025-01', onb:3379, mat:5678  },
-          { c:'2025-02', onb:2638, mat:6229  },
-          { c:'2025-03', onb:3128, mat:6489  },
-          { c:'2025-04', onb:3185, mat:7423  },
-          { c:'2025-05', onb:2512, mat:7777  },
-          { c:'2025-06', onb:3294, mat:8867  },
-          { c:'2025-07', onb:3327, mat:9413  },
-          { c:'2025-08', onb:3086, mat:10381 },
-          { c:'2025-09', onb:3047, mat:10044 },
-          { c:'2025-10', onb:3257, mat:9356  },
-          { c:'2025-11', onb:3847, mat:9288  },
-          { c:'2025-12', onb:2328, mat:8407  },
-          { c:'2026-01', onb:4113, mat:10053 },
-          { c:'2026-02', onb:3340, mat:10711 },
-          { c:'2026-03', onb:2709, mat:10820 },
-          { c:'2026-04', onb:3098, mat:11674 },
-          { c:'2026-05', onb:3144, mat:10986 }
-        ];
-        var fmtMo=function(m){var pp=m.split('-');return new Date(+pp[0],+pp[1]-1,1).toLocaleString('en',{month:'short'})+" '"+pp[0].slice(2);};
-        var labels=rows.map(function(r){return fmtMo(r.c);});
-        var tot=rows.map(function(r){return r.onb+r.mat;});
-        var maxTot=Math.max.apply(null,tot);
-        var mode='pct', chart;
-        function ctr(){var isPct=mode==='pct';return {display:true,anchor:'center',align:'center',color:'#fff',
-          font:{weight:800,size:isPct?13:11},formatter:function(v){return isPct?v.toFixed(1)+'%':(v/1000).toFixed(1)+'k';}};}
-        function ds(){var isPct=mode==='pct';var val=function(n,i){return isPct?+(100*n/tot[i]).toFixed(1):n;};
-          return [
-            {label:'Onboarding',data:rows.map(function(r,i){return val(r.onb,i);}),backgroundColor:'#3185FC',stack:'s',datalabels:ctr()},
-            {label:'Mature',data:rows.map(function(r,i){return val(r.mat,i);}),backgroundColor:'#162050',stack:'s',borderRadius:{topLeft:4,topRight:4},borderSkipped:false,datalabels:ctr()},
-            {label:'',data:rows.map(function(){return 0;}),backgroundColor:'rgba(0,0,0,0)',stack:'s',
-              datalabels:{display:true,anchor:'end',align:'end',offset:4,color:'#162050',font:{weight:800,size:11},formatter:function(v,ctx){return 'n = '+tot[ctx.dataIndex].toLocaleString();}}}
-          ];}
-        chart=new Chart(el,{type:'bar',data:{labels:labels,datasets:ds()},
-          options: baseOpts({
-            layout:{padding:{top:22,right:8,bottom:0,left:4}},
-            plugins:{
-              legend:{display:true,position:'bottom',align:'center',labels:{boxWidth:12,boxHeight:12,padding:14,font:{size:11,weight:600},filter:function(it){return it.text;}}},
-              tooltip:{callbacks:{label:function(ctx){var r=rows[ctx.dataIndex];var pc=function(n){return ' ('+(100*n/tot[ctx.dataIndex]).toFixed(1)+'%)';};
-                if(ctx.dataset.label==='Onboarding') return ' Onboarding: '+r.onb.toLocaleString()+pc(r.onb);
-                if(ctx.dataset.label==='Mature') return ' Mature: '+r.mat.toLocaleString()+pc(r.mat);
-                return null;}}}
-            },
-            scales:{x:{stacked:true,grid:{display:false},ticks:{font:{size:11,weight:600}}},
-                    y:{stacked:true,display:false,min:0,max:100}}
-          })
-        });
-        window.setFtAcctMode=function(m){mode=m;
-          document.querySelectorAll('.ftacct-toggle button[data-ftmode]').forEach(function(b){b.classList.toggle('active',b.dataset.ftmode===m);});
-          chart.data.datasets=ds();
-          chart.options.scales.y.max=(m==='pct')?100:Math.ceil(maxTot*1.12);
-          chart.update();
-        };
-      });
-    })();
-    </script>
 
     <!-- Takeaway strip -->
     <div style="margin-top: 12px; padding: 10px 16px; background: rgba(5,150,105,0.07); border-left: 3px solid #059669; border-radius: 6px; font-size: 12.5px; color: var(--text); line-height: 1.5">
