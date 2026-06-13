@@ -3120,21 +3120,14 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="margin-top: 18px">
       <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
       <h2 class="section-title">First-time payers up <span class="title-accent">+22%</span> — but it's all existing-PM expansion; <span class="title-accent red">new-logo intake isn't growing</span>. That's the real ARR gap.</h2>
-    <div class="slide-insight">The <strong>+22% YoY</strong> in first-time payers is <strong>88.7% existing accounts</strong> adding tenants (left). Two reads of new-logo, one conclusion: <strong>new-PM tenant volume is flat</strong>, and <strong>~10% fewer new PMs are landing</strong> (right) — fewer, but larger (e.g., Costello). Net-new Price Units sit at <strong>31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
+    <div class="slide-insight">The <strong>+22% YoY</strong> in first-time payers is <strong>88.7% existing accounts</strong> adding tenants — entirely <strong>mature-PM (existing)</strong> expansion. New-PM (onboarding) tenant volume is <strong>flat</strong>, and net-new Price Units sit at <strong>31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
     </div>
 
-    <!-- Two charts: FT tenants by PM tenure (the +22% decomposition) + new-PM landings (−10%) -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
-      <div class="chart-shell">
-        <div class="ch-title">First-time paying tenants · by PM tenure <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
-        <div class="ch-sub">Split by the tenant's PM tenure. The <strong>+22%</strong> is <strong>mature-PM (existing)</strong> expansion; new-PM (onboarding ≤3 mo) tenants are <strong>flat YoY</strong>.</div>
-        <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-onb-mature"></canvas></div>
-      </div>
-      <div class="chart-shell">
-        <div class="ch-title">First-time-paid accounts per month <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2024–2026</span></div>
-        <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment. 2026 (pink) runs below 2025 (navy) <strong>every month</strong> — and at/under 2024 (grey): new-PM landings aren't growing.</div>
-        <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-newpm"></canvas></div>
-      </div>
+    <!-- FT tenants by PM tenure (the +22% decomposition) -->
+    <div class="chart-shell" style="margin-top: 16px">
+      <div class="ch-title">First-time paying tenants · by PM tenure <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
+      <div class="ch-sub">Split by the tenant's PM tenure. The <strong>+22%</strong> is <strong>mature-PM (existing)</strong> expansion (navy); new-PM (onboarding ≤3 mo) tenant volume is <strong>flat YoY</strong> (red) — the base is deepening, not widening.</div>
+      <div class="chart-wrap" style="height:412px"><canvas id="chart-ft-onb-mature"></canvas></div>
     </div>
 
 
@@ -3165,19 +3158,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const ctx = chart.ctx, meta = chart.getDatasetMeta(1);
         if (!meta || !meta.data) return;
         ctx.save();
-        ctx.fillStyle = '#162050'; ctx.font = '800 9.5px "Poppins", sans-serif';
+        ctx.fillStyle = '#162050'; ctx.font = '800 11px "Poppins", sans-serif';
         ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
         meta.data.forEach((bar, i) => ctx.fillText((totals[i]/1000).toFixed(1)+'K', bar.x, bar.y - 3));
         ctx.restore();
       }
     };
-    const segLbl = { display:true, anchor:'center', align:'center', color:'#fff', font:{weight:800,size:8.5}, formatter:v=>(v/1000).toFixed(1)+'K' };
+    const segLbl = { display:true, anchor:'center', align:'center', color:'#fff', font:{weight:800,size:10}, formatter:v=>(v/1000).toFixed(1)+'K' };
     new Chart(el, {
       type: 'bar',
       plugins: [totalsOnTop],
       data: { labels, datasets: [
-        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#162050', stack: 'ft', datalabels: segLbl },
-        { label: 'New PM (0–2 mo)', data: onboard, backgroundColor: '#dc2626', stack: 'ft',
+        { label: 'New PM (0–2 mo)', data: onboard, backgroundColor: '#dc2626', stack: 'ft', datalabels: segLbl },
+        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#162050', stack: 'ft',
           borderRadius:{topLeft:3,topRight:3}, borderSkipped:false, datalabels: segLbl }
       ]},
       options: {
@@ -3200,59 +3193,6 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
-<script>
-// First-Time Paying Tenants · Hero — first-time-paid accounts per month (account's first-ever tenant payment received), 2025 vs 2026.
-// Source: data/2026-05/sql/new_pm_landings.sql — distinct dbtenant (PM) by first payment cycle.
-(function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Chart === 'undefined') return;
-    const el = document.getElementById('chart-ft-newpm');
-    if (!el) return;
-
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const y2024 = [328,305,306,265,309,290,284,313,311,303,282,289];
-    const y2025 = [369,359,290,308,274,308,278,297,259,282,254,234];
-    const y2026 = [345,321,260,271,248,null,null,null,null,null,null,null];
-
-    const dl = (color, align) => ({ display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
-                     align: align, anchor: 'center', offset: 4, color: color, clamp: true,
-                     font: { weight: 700, size: 8 }, formatter: v => v });
-
-    new Chart(el, {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [
-          { label: '2024', data: y2024, borderColor: '#94a3b8', backgroundColor: '#94a3b8',
-            borderWidth: 2, borderDash: [5,3], tension: 0.35, pointRadius: 2.5, pointHoverRadius: 4, datalabels: dl('#64748b','bottom') },
-          { label: '2025', data: y2025, borderColor: '#162050', backgroundColor: '#162050',
-            borderWidth: 2.5, tension: 0.35, pointRadius: 3, pointHoverRadius: 5, datalabels: dl('#162050','top') },
-          { label: '2026', data: y2026, borderColor: '#ff4998', backgroundColor: '#ff4998',
-            borderWidth: 3.5, tension: 0.35, pointRadius: 4, pointHoverRadius: 6, datalabels: dl('#c01a6f','bottom') }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 26, right: 18, bottom: 4, left: 8 } },
-        plugins: {
-          legend: { display: true, position: 'top', align: 'end',
-            labels: { boxWidth: 16, boxHeight: 3, font: { size: 12, weight: 800 }, padding: 16, color: '#162050' } },
-          datalabels: { clip: false },
-          tooltip: { mode: 'index', intersect: false,
-            callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.parsed.y == null ? '—' : ctx.parsed.y + ' new accounts') } }
-        },
-        scales: {
-          x: { grid: { display: false }, ticks: { font: { size: 11, weight: 700 }, color: '#64748b' } },
-          y: { beginAtZero: false, suggestedMin: 200, suggestedMax: 390,
-               grid: { color: 'rgba(22,32,80,0.06)' },
-               ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', stepSize: 50 },
-               title: { display: true, text: 'First-time-paid accounts / mo', font: { size: 10, weight: 700 }, color: '#94a3b8' } }
-        }
-      }
-    });
-  });
-})();
-</script>
 
 <section class="paper" data-slide-title="NSF">
   <div class="wrap">
