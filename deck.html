@@ -211,8 +211,9 @@
   /* band shares the standard grey slide bg; KPI tiles + narrative become solid navy cards that pop */
   body.slide-mode > section.metrics-band[data-slide-merge="prev"] { background: #F0EFEB; color: var(--text); padding-top: 6px; }
   .metrics-band[data-slide-merge="prev"] .metrics-band-title { color: var(--blue); }
-  .metrics-band .metrics-grid { gap: 16px; }
+  .metrics-band .metrics-grid { gap: 16px; display: flex; flex-wrap: wrap; }
   .metrics-band .metrics-grid .metric {
+    flex: 1 1 calc(25% - 12px);
     background: var(--ink);
     border: none;
     border-radius: 14px;
@@ -1233,11 +1234,6 @@
         <div class="metric-num">$15.59M</div>
         <div class="metric-tag"><span class="neg">▼ 96.0% of plan</span> · −$649K vs $16.24M</div>
       </div>
-      <div class="metric down">
-        <div class="metric-label">ARR vs Plan</div>
-        <div class="metric-num">−$649K</div>
-        <div class="metric-tag"><span class="neg">▼ 96.0% of plan</span> · vs $16.24M target</div>
-      </div>
       <div class="metric flag">
         <div class="metric-label">Paid Leases</div>
         <div class="metric-num">46.88%</div>
@@ -1251,7 +1247,7 @@
       <div class="metric down">
         <div class="metric-label">YTD Additional ARR</div>
         <div class="metric-num">$1.88M</div>
-        <div class="metric-tag"><span class="neg">▼ −$640K vs plan</span> · $640,492 short</div>
+        <div class="metric-tag"><span class="neg">▼ $640,492 short of plan</span></div>
       </div>
       <div class="metric flag">
         <div class="metric-label">Card Volume / Share</div>
@@ -1546,8 +1542,8 @@
       <div style="padding: 14px 16px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
         <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">YTD Additional ARR</div>
         <div style="font-size: 24px; font-weight: 800; color: #162050; line-height: 1.1; margin-top: 4px">$1.88M</div>
-        <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan $2.53M</div>
-        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−$649K · 74.3%</div>
+        <div style="font-size: 11.5px; color: var(--muted); margin-top: 4px">Plan $2.52M</div>
+        <div style="margin-top: 6px; display: inline-block; padding: 3px 9px; background: rgba(220,38,38,0.12); border-radius: 12px; font-size: 11.5px; font-weight: 800; color: #b91c1c"><span style="display:inline-block;font-size:13px;line-height:1;margin-right:3px;vertical-align:-1px">▼</span>−$640K · 74.6%</div>
       </div>
     </div>
 
