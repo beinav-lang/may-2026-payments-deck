@@ -1592,7 +1592,7 @@
     <!-- ARR trend folded in from former slide 04 — Feb peak → Mar dip → Apr recovery -->
     <div class="chart-shell" style="margin-bottom: 24px">
       <div class="ch-title" style="text-align: center">Payments ARR · plan vs actual + next-month projection</div>
-      <div class="ch-sub" style="text-align: center">Beat plan Jan–Mar, then landed −$649K under the May plan · June projected $16.74M vs $16.84M target</div>
+      <div class="ch-sub" style="text-align: center">Beat plan Jan–Mar, then landed −$649K under the May plan · June projected $17.12M vs $16.84M target</div>
       <div class="chart-wrap" style="height: 260px"><canvas id="chart-arr"></canvas></div>
     </div>
 
@@ -4871,7 +4871,7 @@ const actualF  = [...arr26.map(t => t.arr), null];
 const planF    = [...arr26.map(t => arrPlanByMonth[t.month] ?? null), 16.84];
 const projF    = actualF.map(() => null);
 projF[F_MAY]   = arr26[F_MAY].arr;                                  // anchor at May actual
-projF[F_MAY+1] = 16.74;                                             // June projection
+projF[F_MAY+1] = 17.12;                                             // June projection
 
 new Chart(document.getElementById('chart-arr'), {
   type: 'line',
@@ -4897,7 +4897,7 @@ new Chart(document.getElementById('chart-arr'), {
         pointBackgroundColor: '#ff4998', pointBorderColor: '#fff', pointBorderWidth: 1.5,
         datalabels: {
           display: ctx => ctx.dataIndex === F_MAY || ctx.dataIndex === F_MAY+1,
-          anchor: 'end', align: 'top', offset: 7, color: '#be2a6e', font: { weight: 800, size: 11 },
+          anchor: 'end', align: ctx => ctx.dataIndex === F_MAY+1 ? 'bottom' : 'top', offset: 7, color: '#be2a6e', font: { weight: 800, size: 11 },
           formatter: v => '$' + v.toFixed(2) + 'M'
         }
       },
@@ -4907,7 +4907,7 @@ new Chart(document.getElementById('chart-arr'), {
         pointBackgroundColor: '#f59e0b', pointBorderColor: '#fff', pointBorderWidth: 1.5,
         datalabels: {
           display: ctx => ctx.dataIndex === F_MAY+1,
-          anchor: 'end', align: 'bottom', offset: 9, color: '#b45309', font: { weight: 800, size: 12 },
+          anchor: 'end', align: 'top', offset: 9, color: '#b45309', font: { weight: 800, size: 12 },
           formatter: v => '$' + v.toFixed(2) + 'M'
         }
       }
@@ -4919,7 +4919,7 @@ new Chart(document.getElementById('chart-arr'), {
     scales: {
       x: { grid: { color: C.grid, drawBorder: false },
            ticks: { ...monthAxisTicks(arrFocus), callback: (v, i) => fmtMonthShort(arrFocus[i].month) } },
-      y: { display: false, suggestedMin: 13.4, suggestedMax: 17.4 }
+      y: { display: false, suggestedMin: 13.4, suggestedMax: 17.6 }
     }
   })
 });
