@@ -1929,7 +1929,7 @@
     var net=[6.22,6.22,6.66,6.96,6.94,7.26,7.39];
     var fee=[1.33,1.21,1.34,1.36,1.36,1.50,1.29];
     var m=function(v){return '$'+Math.abs(v).toFixed(2)+'M';};
-    var cl=function(col,sz){return {display:true,anchor:'center',align:'center',color:col,font:{weight:800,size:sz},formatter:function(v){return (v<0?'−':'')+m(v);}};};
+    var cl=function(col,sz,wt){return {display:true,anchor:'center',align:'center',color:col,font:{weight:wt||800,size:sz},formatter:function(v){return (v<0?'−':'')+m(v);}};};
     var barAnnot={id:'barAnnot',afterDatasetsDraw:function(chart){
       var xs=chart.scales.x, ys=chart.scales.y, ctx=chart.ctx, a=chart.chartArea; if(!ys) return;
       ctx.save();
@@ -1951,7 +1951,7 @@
     var legendGap={id:'legendGap',beforeInit:function(c){if(!c.legend)return;var f=c.legend.fit;c.legend.fit=function(){f.call(this);this.height+=22;};}};
     new Chart(el,{type:'bar',data:{labels:months,datasets:[
       {label:'First-Time Payers ARR',data:ft,backgroundColor:'#34a853',stack:'s',datalabels:cl('#fff',11)},
-      {label:'Returning Payers ARR',data:ret,backgroundColor:'#3185FC',stack:'s',datalabels:cl('#fff',11)},
+      {label:'Returning Payers ARR',data:ret,backgroundColor:'#3185FC',stack:'s',datalabels:cl('#fff',15,900)},
       {label:'Network Cost',data:net.map(function(v){return -v;}),backgroundColor:'#e05656',stack:'s',datalabels:cl('#fff',10.5)},
       {label:'Stripe Fee',data:fee.map(function(v){return -v;}),backgroundColor:'#9aa3b0',stack:'s',datalabels:cl('#fff',9.5)}
     ]},
@@ -2439,7 +2439,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="paper" data-slide-title="Card Performance · The Why">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Card Performance · The Why</div></div>
-    <h2 class="section-title">The card drop wasn't gradual — it was a <span class="title-accent red">Spring 2025 step-down</span>. Both cohorts. Same months.</h2>
+    <h2 class="section-title">The card drop was a <span class="title-accent red">step, not a slide</span> — Spring 2025, both cohorts at once.</h2>
     <div class="slide-insight"><strong>Two structural drivers</strong>, both first-time: rent rising mechanically pushes card down (<strong>54%→10%</strong> as the amount climbs), and new-PM cohorts onboard <strong>~6pp lower</strong>. Not switching — existing card payers are stickier than ever.</div>
 
     <!-- Two drivers · one proof chart each -->
