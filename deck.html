@@ -2976,6 +2976,24 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
+    const stepBand = {
+      id: 'stepBand',
+      beforeDatasetsDraw(chart) {
+        const xs = chart.scales.x, ctx = chart.ctx, a = chart.chartArea;
+        if (!xs || !a) return;
+        const x1 = xs.getPixelForValue(2), x2 = xs.getPixelForValue(7); // Mar '25 -> Aug '25
+        ctx.save();
+        ctx.fillStyle = 'rgba(220,38,38,0.07)';
+        ctx.fillRect(x1, a.top, x2 - x1, a.bottom - a.top);
+        ctx.strokeStyle = 'rgba(220,38,38,0.40)'; ctx.lineWidth = 1; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.moveTo(x1, a.top); ctx.lineTo(x1, a.bottom);
+        ctx.moveTo(x2, a.top); ctx.lineTo(x2, a.bottom); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = '#b91c1c'; ctx.font = '800 11px \"Poppins\", sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+        ctx.fillText("Spring '25 step \u00b7 \u22128pp", (x1 + x2) / 2, a.top + 1);
+        ctx.restore();
+      }
+    };
     new Chart(el, {
       type: 'line',
       data: { labels, datasets: [
@@ -3000,7 +3018,8 @@ document.addEventListener('DOMContentLoaded', function() {
                grid: { color: 'rgba(22,32,80,0.06)' },
                ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', callback: v => v + '%' } }
         }
-      }
+      },
+      plugins: [stepBand]
     });
   });
 })();
