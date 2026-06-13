@@ -204,6 +204,8 @@
   section[data-slide-title="First Time Paying Tenants"] .metric-label { color: var(--muted); }
   section[data-slide-title="First Time Paying Tenants"] .metric-tag { color: var(--muted); }
   section[data-slide-title="First Time Paying Tenants"] .metric-tag .pos { color: var(--green); }
+  section[data-slide-title="First Time Paying Tenants"] .metric.down .metric-num { color: var(--text); }
+  section[data-slide-title="First Time Paying Tenants"] .metric-tag .neg { color: #dc2626; }
 
   /* ===== Slide 2 · Executive Summary — grey slide, dark cards pop ===== */
   header.cover[data-slide-title="Executive Summary"] { border-bottom: none; }
@@ -3116,113 +3118,93 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div style="margin-top: 18px">
       <div class="slide-head"><div class="slide-num">12</div><div class="title-eyebrow">First Time Paying Tenants</div></div>
-      <h2 class="section-title">First-time payers — the funnel's leading edge — grew <span class="title-accent">+22% YoY</span> to 14.4K, almost entirely from existing accounts expanding.</h2>
-    <div class="slide-insight">First-time payers grew <strong>+22% YoY to 14.4K</strong>, and <strong>88.7% come from existing accounts expanding</strong> (land-and-expand). The one watch-item is net-new-account intake — it only moves in January, so a new-logo push outside Q1 is the clearest upside.</div>
+      <h2 class="section-title">First-time payers up <span class="title-accent">+22%</span> — but new-PM landings are <span class="title-accent red">down ~10% YoY</span>. That's the real ARR gap.</h2>
+    <div class="slide-insight">The <strong>+22% YoY</strong> jump in first-time payers is <strong>88.7% existing accounts</strong> adding tenants. But the number of <strong>new PMs starting to pay is down ~10% YoY</strong> (~250/mo; 2026 sits below 2025 every month) — exactly why <strong>net-new Price Units are at 31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
     </div>
 
     <!-- KPI tile strip -->
     <div class="metrics-grid" style="margin-top: 18px; grid-template-columns: repeat(3, 1fr)">
       <div class="metric up">
-        <div class="metric-label">First-time Payers · May '26</div>
+        <div class="metric-label">First-Time Payers (tenants) · May '26</div>
         <div class="metric-num">14,369</div>
-        <div class="metric-tag"><span class="pos">▲ +22% YoY</span> · peak 15.3K Apr '26</div>
+        <div class="metric-tag"><span class="pos">▲ +22% YoY</span> · 88.7% existing PMs</div>
       </div>
-      <div class="metric up">
-        <div class="metric-label">From Existing Accounts</div>
-        <div class="metric-num">88.7%</div>
-        <div class="metric-tag">12,744 of 14,369 · land-and-expand</div>
+      <div class="metric down">
+        <div class="metric-label">New Paying PM Accounts · per mo.</div>
+        <div class="metric-num">248</div>
+        <div class="metric-tag"><span class="neg">▼ −10% YoY</span> · 320→289 avg '25→'26</div>
       </div>
-      <div class="metric up" style="border-right:none; padding-right:0">
-        <div class="metric-label">Tenants / Existing Acct</div>
-        <div class="metric-num">3.28</div>
-        <div class="metric-tag">steady 3.3–3.6 across 2026 · expansion engine</div>
+      <div class="metric down" style="border-right:none; padding-right:0">
+        <div class="metric-label">Net-New Price Units · vs Plan</div>
+        <div class="metric-num">31%</div>
+        <div class="metric-tag"><span class="neg">▼ the acquisition miss</span> · 6.1K vs 19.9K</div>
       </div>
     </div>
 
     <!-- Hero chart -->
     <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">First-time paying tenants per month · new vs existing accounts <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
-      <div class="ch-sub">Stacked bars: pink = newly-paying accounts (base) · navy = existing accounts expanding. Labels show tenants per segment.</div>
-      <div class="chart-wrap h340"><canvas id="chart-ft-newvexisting"></canvas></div>
+      <div class="ch-title">New paying PM accounts per month — new-logo landings are slipping <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
+      <div class="ch-sub">Distinct PM accounts making their first-ever tenant payment each cycle. 2026 (pink) runs below 2025 (navy) <strong>every month</strong> — ~10% fewer new PMs landing.</div>
+      <div class="chart-wrap" style="height:300px"><canvas id="chart-ft-newpm"></canvas></div>
     </div>
 
 
     <!-- Takeaway strip -->
     <div style="margin-top: 12px; padding: 10px 16px; background: rgba(5,150,105,0.07); border-left: 3px solid #059669; border-radius: 6px; font-size: 12.5px; color: var(--text); line-height: 1.5">
-      <span style="color: #047857; font-weight: 800">✓ Intake is a strength.</span>
-      The single watch-item is net-new-account acquisition, which only moves the needle in January — a new-logo push <em>outside</em> Q1 is the clearest upside lever on this funnel's leading edge.
+      <span style="color: #047857; font-weight: 800">✓ Expansion is healthy — the gap is new-logo.</span>
+      Tenant growth is strong, but it's existing PMs deepening. The ARR lever is <strong>landing more PMs</strong> — net-new Price Units sit at 31% of plan, and new-PM landings only spike in January. Widening the base, not just deepening it, is the unlock.
     </div>
 
   </div>
 </section>
 
 <script>
-// First-Time Paying Tenants · Hero — first-time paying tenants per month, new vs existing accounts.
-// Source: window.DATA.ft_by_account_type. Excludes partial current month via CYCLE_MONTH.
+// First-Time Paying Tenants · Hero — new paying PM accounts per month (PM's first-ever tenant payment), 2025 vs 2026.
+// Source: data/2026-05/sql/new_pm_landings.sql — distinct dbtenant (PM) by first payment cycle.
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
     if (typeof Chart === 'undefined') return;
-    const el = document.getElementById('chart-ft-newvexisting');
-    if (!el || !window.DATA || !window.DATA.ft_by_account_type) return;
+    const el = document.getElementById('chart-ft-newpm');
+    if (!el) return;
 
-    const CYCLE_MONTH = '2026-05-01';                       // latest COMPLETE calendar month
-    const rows = window.DATA.ft_by_account_type.filter(r => r.MONTH <= CYCLE_MONTH);
-    const months = [...new Set(rows.map(r => r.MONTH))].sort();
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const y2025 = [369,359,290,308,274,308,278,297,259,282,254,234];
+    const y2026 = [345,321,260,271,248,null,null,null,null,null,null,null];
 
-    const fmt = m => {
-      const d = new Date(m + 'T00:00:00');
-      return d.toLocaleString('en-US', { month: 'short' }) + " '" + String(d.getFullYear()).slice(2);
-    };
-    const labels = months.map(fmt);
-
-    const sumBy = seg => months.map(m =>
-      rows.filter(r => r.MONTH === m && r.ACCOUNT_PAID_SEGMENT === seg)
-          .reduce((a, r) => a + r.TENANTS, 0));
-    const existing = sumBy('Existing account (paid before)');
-    const newAcct  = sumBy('Account first-time paid this month');
-
-    const segLabel = { display: true, anchor: 'center', align: 'center', clamp: true,
-                       font: { weight: 800, size: 10 },
-                       formatter: v => (v / 1000).toFixed(1) + 'K' };
+    const dl2026 = { display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
+                     align: 'bottom', anchor: 'end', offset: 6, color: '#c01a6f',
+                     font: { weight: 800, size: 11 }, formatter: v => v };
+    const dl2025 = { display: ctx => [0,4,11].indexOf(ctx.dataIndex) !== -1,
+                     align: 'top', anchor: 'end', offset: 6, color: '#162050',
+                     font: { weight: 700, size: 10 }, formatter: v => v };
 
     new Chart(el, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels,
+        labels: months,
         datasets: [
-          {
-            label: 'New-paying accounts',
-            data: newAcct, backgroundColor: '#ff4998', stack: 'ft',
-            datalabels: { ...segLabel, color: '#162050' }
-          },
-          {
-            label: 'Existing accounts (paid before)',
-            data: existing, backgroundColor: '#162050', stack: 'ft',
-            borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false,
-            datalabels: { ...segLabel, color: '#fff' }
-          }
+          { label: '2025', data: y2025, borderColor: '#162050', backgroundColor: '#162050',
+            borderWidth: 2.5, tension: 0.35, pointRadius: 3, pointHoverRadius: 5, datalabels: dl2025 },
+          { label: '2026', data: y2026, borderColor: '#ff4998', backgroundColor: '#ff4998',
+            borderWidth: 3.5, tension: 0.35, pointRadius: 4.5, pointHoverRadius: 6, datalabels: dl2026 }
         ]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        layout: { padding: { top: 8, right: 12, bottom: 4, left: 8 } },
+        layout: { padding: { top: 26, right: 18, bottom: 4, left: 8 } },
         plugins: {
-          legend: { display: true, position: 'top', align: 'start',
-            labels: { boxWidth: 14, boxHeight: 12, font: { size: 12, weight: 700 }, padding: 12, color: '#162050' } },
+          legend: { display: true, position: 'top', align: 'end',
+            labels: { boxWidth: 16, boxHeight: 3, font: { size: 12, weight: 800 }, padding: 16, color: '#162050' } },
           datalabels: { clip: false },
-          tooltip: {
-            mode: 'index', intersect: false,
-            callbacks: {
-              footer: items => 'Total: ' + items.reduce((a, i) => a + i.parsed.y, 0).toLocaleString(),
-              label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString()
-            }
-          }
+          tooltip: { mode: 'index', intersect: false,
+            callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.parsed.y == null ? '—' : ctx.parsed.y + ' new PMs') } }
         },
         scales: {
-          x: { stacked: true, grid: { display: false },
-               ticks: { font: { size: 10, weight: 600 }, color: '#64748b', maxRotation: 0, autoSkipPadding: 4 } },
-          y: { stacked: true, beginAtZero: true, grid: { color: 'rgba(22,32,80,0.06)' },
-               ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', callback: v => (v / 1000) + 'K' } }
+          x: { grid: { display: false }, ticks: { font: { size: 11, weight: 700 }, color: '#64748b' } },
+          y: { beginAtZero: false, suggestedMin: 200, suggestedMax: 390,
+               grid: { color: 'rgba(22,32,80,0.06)' },
+               ticks: { font: { size: 10, weight: 600 }, color: '#94a3b8', stepSize: 50 },
+               title: { display: true, text: 'New paying PM accounts / mo', font: { size: 10, weight: 700 }, color: '#94a3b8' } }
         }
       }
     });
