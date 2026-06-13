@@ -2336,7 +2336,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div>
       <div class="slide-head"><div class="slide-num">08</div><div class="title-eyebrow">Paid Leases Cohort</div></div>
       <h2 class="section-title" style="margin-bottom:0">May cycle reads <span class="title-accent red">soft, broadly</span>.</h2>
-    <div class="slide-insight">Every cohort&rsquo;s <strong>May-cycle reading is among the lowest at the same point in the curve</strong> — the Mature cohort hits series lows at nearly every tenure (M0 −1.4pp), while fresh activations still pay normally. So May&rsquo;s −1.18pp dip is <strong>broad across tenured leases</strong>, not one cohort breaking down.</div>
+    <div class="slide-insight">Reading the <strong>May-cycle diagonal</strong>, the Mature cohort prints a <strong>series low at nearly every longer tenure</strong> (M2&ndash;M7 all below prior cohorts), while new-PM (Onboarding) leases pay within their normal range. So May&rsquo;s −1.18pp dip is <strong>broad across tenured leases</strong>, not one cohort breaking down.</div>
     </div>
 
     <div class="chart-shell" style="margin-top: 12px">
@@ -2371,11 +2371,11 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px">
       <!-- Watch · upper-funnel thinning intensifying -->
       <div style="padding: 8px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 11.5px; color: var(--text); line-height: 1.5">
-        <strong style="color: #b45309">⚠ Onboarding cohort shrank again</strong> · <span style="color: var(--muted)">May Onboarding new active leases <strong style="color: var(--text)">7,056 (−27.6% MoM)</strong>; Mature new active <strong style="color: var(--text)">18,570 (+7.2% MoM)</strong>. Total cohort still grew (25.6K vs 27.1K in Apr) but the split is widening — Onboarding is now the smaller half of the funnel for the first time in this series.</span>
+        <strong style="color: #b45309">⚠ New-PM activations thinning</strong> · <span style="color: var(--muted)">May new active leases eased to 25.6K (from 27.1K in Apr) — both halves softened: Onboarding (new-PM) <strong style="color: var(--text)">10,392 (−8.8% MoM)</strong>, Mature <strong style="color: var(--text)">15,234 (−2.7% MoM)</strong>. Onboarding's share of activations slipped to a series-low <strong style="color: var(--text)">~41%</strong> (≈46% last fall) — fewer activations are coming from new PMs.</span>
       </div>
       <!-- Watch · M0 cohort conversion reverted -->
       <div style="padding: 8px 14px; background: rgba(245,158,11,0.10); border-left: 3px solid #f59e0b; border-radius: 4px; font-size: 11.5px; color: var(--text); line-height: 1.5">
-        <strong style="color: #b45309">⚠ May M0 conversion stepped back</strong> · <span style="color: var(--muted)">Mature M0 paid <strong style="color: var(--text)">26.2% (−1.4pp MoM)</strong>, Onboarding M0 <strong style="color: var(--text)">5.1% (flat)</strong>. The Jan–Apr "M0 step-up" trend (Onboarding doubled to ~11%) <strong style="color: var(--text)">did not extend into May</strong>. With a record-large Mature acquisition cohort and softer M0, same-month conversion has the most room to recover.</span>
+        <strong style="color: #b45309">⚠ New-PM tenants slow to convert</strong> · <span style="color: var(--muted)">Onboarding M0 (same-cycle) just <strong style="color: var(--text)">8.3%</strong> vs Mature <strong style="color: var(--text)">28.6%</strong> — tenants on new PMs (0–2 mo) take far longer to make a first payment. Mature M0 firmed <strong style="color: var(--text)">+1.5pp MoM</strong>; the gap is structural (new PMs still ramping portal adoption), not a May break.</span>
       </div>
     </div>
 
@@ -2433,7 +2433,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">10</div><div class="title-eyebrow">Card Performance · The Why</div></div>
     <h2 class="section-title">The card drop was a <span class="title-accent red">Spring-’25 step</span> — then a slow grind to new lows.</h2>
-    <div class="slide-insight"><strong>Two structural drivers</strong>, both first-time: rent rising mechanically pushes card down (<strong>54%→10%</strong> as the amount climbs), and new-PM cohorts onboard <strong>~6pp lower</strong>. Not switching — existing card payers are stickier than ever.</div>
+    <div class="slide-insight"><strong>Two structural drivers</strong>, both first-time: rent rising mechanically pushes card down (<strong>54%→10%</strong> as the amount climbs), and new-PM cohorts onboard <strong>~10pp lower</strong>. Not switching — existing card payers are stickier than ever.</div>
 
     <!-- Two drivers · one proof chart each -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px">
@@ -2943,10 +2943,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const el = document.getElementById('chart-pm-tenure-decomp');
     if (!el) return;
 
-    // Onboarding (0-3 mo) and Mature (3+ mo) consolidated from q2_pm_tenure.sql + q2_jan25.csv
+    // FT card adoption by PM tenure (Stripe, NO snapshot): first-time payers split by their PM's months on platform.
+    // Source: data/2026-05/sql/ft_card_pm_tenure.sql -- onboarding = PM in first 3 months (<=2 mo since first Stripe payment).
     const labels   = ["Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
-    const onboard  = [38.44, 46.80, 50.21, 40.85, 42.89, 37.21, 41.21, 42.07, 39.68, 43.09, 50.23, 38.57, 36.51, 42.42, 42.63, 36.61, 37.11];
-    const mature   = [46.37, 48.16, 53.91, 50.52, 50.04, 45.93, 46.07, 45.87, 46.00, 46.73, 50.71, 49.15, 47.56, 46.02, 44.20, 44.12, 45.88];
+    const onboard  = [40.13, 45.10, 48.90, 42.14, 42.83, 37.20, 41.75, 40.14, 39.86, 42.50, 49.27, 42.63, 36.80, 39.08, 35.63, 33.78, 37.20];
+    const mature   = [50.13, 50.51, 56.33, 53.51, 51.84, 48.37, 47.58, 47.73, 47.63, 47.94, 51.36, 49.67, 50.46, 48.81, 48.53, 47.07, 47.34];
 
     const mkSet = (lbl, data, color, labelAlign) => ({
       label: lbl,
@@ -2993,7 +2994,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new Chart(el, {
       type: 'line',
       data: { labels, datasets: [
-        mkSet('Onboarding · 0–3 mo', onboard, '#dc2626', 'bottom'),
+        mkSet('Onboarding · 0–2 mo', onboard, '#dc2626', 'bottom'),
         mkSet('Mature · 3+ mo',       mature,  '#162050', 'top')
       ]},
       options: {
@@ -4159,7 +4160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </summary>
         <div class="elig-band" style="margin-top: 8px; max-width: 720px">
           <div class="elig-body">
-            Cohort = leases first-active in the selected month, on a <strong>PM with active Merchant Account</strong> and a <strong>rent frequency of Monthly or shorter</strong>. <strong>Mature</strong> = lease activated ≥90 days after the PM's first invoice; <strong>Onboarding</strong> = activated within 90 days. <strong>Re-tenant exclusion (applied to all months &amp; all stages):</strong> drop a lease if any of its tenants has <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">invitationAcceptedAt</code> before the lease activation AND appears on ≥1 other lease (~9% of Mature each month). All numbers below use this Ex-re-tenants cohort. <strong>Stage sources:</strong> <strong>Invited</strong> and <strong>Invite page-view</strong> are PostHog product events (<code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">invitation_sent</code> / <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">invitation_pageview</code>), matched to the lease by the invite <em>recipient</em> (<code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">sentToId</code>) within ±45 days of activation; <strong>Registered</strong> = tenant <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">portalInfo.invitationAcceptedAt</code> (±45d); Converted/Retained from Stripe payments. <strong>Apr–May '26 invite page-view is still filling</strong> (its ±45-day window runs into July and recent event volume lags), so it can read below Registered for those two months — the default view is Mar '26.
+            Cohort = leases first-active in the selected month, on a <strong>PM with active Merchant Account</strong> and a <strong>rent frequency of Monthly or shorter</strong>. <strong>Mature</strong> = the lease's PM had 3+ months on platform (months since the PM's first Stripe payment) at activation; <strong>Onboarding</strong> = PM in its first 3 months. <em>(PM-tenure, Stripe — not lease activation timing / snapshot.)</em> <strong>Re-tenant exclusion (applied to all months &amp; all stages):</strong> drop a lease if any of its tenants has <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">invitationAcceptedAt</code> before the lease activation AND appears on ≥1 other lease (~9% of Mature each month). All numbers below use this Ex-re-tenants cohort. <strong>Stage sources:</strong> <strong>Invited</strong> and <strong>Invite page-view</strong> are PostHog product events (<code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">invitation_sent</code> / <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">invitation_pageview</code>), matched to the lease by the invite <em>recipient</em> (<code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">sentToId</code>) within ±45 days of activation; <strong>Registered</strong> = tenant <code style="font-style: normal; font-size: 10.5px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px">portalInfo.invitationAcceptedAt</code> (±45d); Converted/Retained from Stripe payments. <strong>Apr–May '26 invite page-view is still filling</strong> (its ±45-day window runs into July and recent event volume lags), so it can read below Registered for those two months — the default view is Mar '26.
           </div>
         </div>
       </details>
@@ -4616,44 +4617,45 @@ const cardByPop = [
   { month:'2026-05', ftCard:7.75, ftAch:17.15, retCard:46.35, retAch:234.52, ftCardShare:31.13, retCardShare:16.50, ftTenants:14433, retTenants:169517 }
 ];
 
-// Lease cohorts (lease_cohort.sql) — % paid leases AND # paid leases at M0..M7 per cohort
-// Cohort = leases that became active in the payments-month (Sep '25 → Apr '26)
-// Three account-type views: All | Mature (3+ mo) | Onboarding (0–2 mo)
-// All cohorts sourced from paid_leases_cohort_heatmap.csv (broader definition,
-// no re-tenant exclusion) — consistent across all months.
+// Paid-leases cohorts — % paid leases AND # paid leases at M0..M7 per cohort.
+// Cohort = leases that became active in the payments-month (Sep '25 → May '26).
+// Onboarding/Mature SPLIT = PM tenure (months since the PM's first Stripe payment;
+//   <=2 mo = Onboarding) — NOT snapshot lease-activation timing. Re-derived via
+//   data/2026-05/sql/paid_leases_cohort_pm_tenure.sql. The All totals are preserved
+//   from the original broader source (paid_leases_cohort_heatmap.csv); only the split was re-cut.
 const cohortDataAll = {
   All: [
-    { cohort: "Sep '25", size: 22068, pct: [16.66, 34.77, 38.44, 37.82, 37.45, 37.30, 35.34, 34.42], counts: [3677, 7673, 8482, 8346, 8265, 8231, 7800, 7595] },
-    { cohort: "Oct '25", size: 22385, pct: [18.04, 37.31, 39.69, 41.03, 40.63, 38.54, 37.54, 35.59], counts: [4039, 8351, 8884, 9183, 9094, 8627, 8404, 7966] },
-    { cohort: "Nov '25", size: 23704, pct: [17.53, 30.45, 37.03, 38.42, 37.28, 36.09, 33.95, null], counts: [4155, 7217, 8779, 9106, 8838, 8556, 8047, null] },
-    { cohort: "Dec '25", size: 23920, pct: [14.09, 32.34, 37.86, 37.57, 36.82, 34.53, null, null], counts: [3369, 7736, 9057, 8987, 8808, 8259, null, null] },
-    { cohort: "Jan '26", size: 21712, pct: [19.78, 36.08, 38.68, 39.43, 36.77, null, null, null], counts: [4295, 7833, 8397, 8561, 7984, null, null, null] },
-    { cohort: "Feb '26", size: 26813, pct: [19.53, 35.57, 41.30, 40.53, null, null, null, null], counts: [5236, 9537, 11075, 10867, null, null, null, null] },
-    { cohort: "Mar '26", size: 27034, pct: [16.32, 31.96, 36.22, null, null, null, null, null], counts: [4413, 8640, 9791, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 27061, pct: [19.46, 33.30, null, null, null, null, null, null], counts: [5265, 9010, null, null, null, null, null, null] },
-    { cohort: "May '26", size: 25626, pct: [20.39, null, null, null, null, null, null, null], counts: [5225, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size: 22068, pct: [16.7, 34.8, 38.4, 37.8, 37.5, 37.3, 35.3, 34.4], counts: [3677, 7673, 8482, 8346, 8265, 8231, 7800, 7595] },
+    { cohort: "Oct '25", size: 22385, pct: [18.0, 37.3, 39.7, 41.0, 40.6, 38.5, 37.5, 35.6], counts: [4039, 8351, 8884, 9183, 9094, 8627, 8404, 7966] },
+    { cohort: "Nov '25", size: 23704, pct: [17.5, 30.4, 37.0, 38.4, 37.3, 36.1, 33.9, null], counts: [4155, 7217, 8779, 9106, 8838, 8556, 8047, null] },
+    { cohort: "Dec '25", size: 23920, pct: [14.1, 32.3, 37.9, 37.6, 36.8, 34.5, null, null], counts: [3369, 7736, 9057, 8987, 8808, 8259, null, null] },
+    { cohort: "Jan '26", size: 21712, pct: [19.8, 36.1, 38.7, 39.4, 36.8, null, null, null], counts: [4295, 7833, 8397, 8561, 7984, null, null, null] },
+    { cohort: "Feb '26", size: 26813, pct: [19.5, 35.6, 41.3, 40.5, null, null, null, null], counts: [5236, 9537, 11075, 10867, null, null, null, null] },
+    { cohort: "Mar '26", size: 27034, pct: [16.3, 32.0, 36.2, null, null, null, null, null], counts: [4413, 8640, 9791, null, null, null, null, null] },
+    { cohort: "Apr '26", size: 27061, pct: [19.5, 33.3, null, null, null, null, null, null], counts: [5265, 9010, null, null, null, null, null, null] },
+    { cohort: "May '26", size: 25626, pct: [20.4, null, null, null, null, null, null, null], counts: [5225, null, null, null, null, null, null, null] }
   ],
   Mature: [
-    { cohort: "Sep '25", size: 12759, pct: [25.8, 44.8, 46.9, 45.4, 44.4, 44.1, 41.7, 40.1], counts: [3294, 5710, 5983, 5795, 5670, 5626, 5322, 5116] },
-    { cohort: "Oct '25", size: 12522, pct: [26.4, 41.0, 42.7, 42.8, 42.0, 39.9, 38.6, 36.4], counts: [3303, 5134, 5347, 5364, 5265, 4998, 4836, 4554] },
-    { cohort: "Nov '25", size: 13391, pct: [27.7, 41.8, 44.4, 44.5, 42.1, 40.7, 37.6, null], counts: [3712, 5604, 5950, 5960, 5644, 5453, 5040, null] },
-    { cohort: "Dec '25", size: 12018, pct: [24.6, 41.7, 44.5, 43.7, 40.8, 38.1, null, null], counts: [2953, 5014, 5349, 5250, 4909, 4576, null, null] },
-    { cohort: "Jan '26", size: 12944, pct: [29.3, 44.8, 45.7, 44.9, 42.4, null, null, null], counts: [3790, 5793, 5920, 5815, 5488, null, null, null] },
-    { cohort: "Feb '26", size: 16044, pct: [29.0, 41.5, 44.4, 42.2, null, null, null, null], counts: [4658, 6664, 7123, 6778, null, null, null, null] },
-    { cohort: "Mar '26", size: 15837, pct: [25.6, 41.9, 43.6, null, null, null, null, null], counts: [4052, 6630, 6902, null, null, null, null, null] },
-    { cohort: "Apr '26", size: 17317, pct: [27.6, 40.3, null, null, null, null, null, null], counts: [4779, 6987, null, null, null, null, null, null] },
-    { cohort: "May '26", size: 18570, pct: [26.2, null, null, null, null, null, null, null], counts: [4868, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size: 11967, pct: [27.0, 45.1, 48.1, 46.6, 45.5, 45.1, 42.6, 41.0], counts: [3231, 5392, 5754, 5571, 5442, 5398, 5101, 4906] },
+    { cohort: "Oct '25", size: 10084, pct: [30.7, 45.7, 48.0, 47.8, 46.7, 44.4, 42.9, 40.2], counts: [3097, 4611, 4840, 4819, 4713, 4475, 4327, 4049] },
+    { cohort: "Nov '25", size: 11429, pct: [30.7, 45.0, 48.6, 49.2, 46.5, 44.7, 41.2, null], counts: [3514, 5144, 5560, 5623, 5310, 5106, 4708, null] },
+    { cohort: "Dec '25", size: 11262, pct: [24.9, 43.1, 46.4, 45.4, 43.7, 40.6, null, null], counts: [2808, 4856, 5226, 5108, 4922, 4574, null, null] },
+    { cohort: "Jan '26", size: 11789, pct: [28.0, 42.5, 44.9, 44.7, 41.2, null, null, null], counts: [3299, 5011, 5292, 5265, 4859, null, null, null] },
+    { cohort: "Feb '26", size: 14821, pct: [28.8, 41.0, 45.6, 43.9, null, null, null, null], counts: [4262, 6075, 6763, 6504, null, null, null, null] },
+    { cohort: "Mar '26", size: 15894, pct: [23.5, 37.7, 40.8, null, null, null, null, null], counts: [3729, 5997, 6477, null, null, null, null, null] },
+    { cohort: "Apr '26", size: 15662, pct: [27.1, 40.0, null, null, null, null, null, null], counts: [4249, 6260, null, null, null, null, null, null] },
+    { cohort: "May '26", size: 15234, pct: [28.6, null, null, null, null, null, null, null], counts: [4361, null, null, null, null, null, null, null] }
   ],
   Onboarding: [
-    { cohort: "Sep '25", size:  9309, pct: [4.1, 21.1, 26.8, 27.4, 27.9, 28.0, 26.6, 26.6], counts: [383, 1963, 2499, 2551, 2595, 2605, 2478, 2479] },
-    { cohort: "Oct '25", size:  9863, pct: [7.5, 32.6, 35.9, 38.7, 38.8, 36.8, 36.2, 34.6], counts: [736, 3217, 3537, 3819, 3829, 3629, 3568, 3412] },
-    { cohort: "Nov '25", size: 10313, pct: [4.3, 15.6, 27.4, 30.5, 31.0, 30.1, 29.2, null], counts: [443, 1613, 2829, 3146, 3194, 3103, 3007, null] },
-    { cohort: "Dec '25", size: 11902, pct: [3.5, 22.9, 31.2, 31.4, 32.8, 30.9, null, null], counts: [416, 2722, 3708, 3737, 3899, 3683, null, null] },
-    { cohort: "Jan '26", size:  8768, pct: [5.8, 23.3, 28.3, 31.3, 28.5, null, null, null], counts: [505, 2040, 2477, 2746, 2496, null, null, null] },
-    { cohort: "Feb '26", size: 10769, pct: [5.4, 26.7, 36.7, 38.0, null, null, null, null], counts: [578, 2873, 3952, 4089, null, null, null, null] },
-    { cohort: "Mar '26", size: 11197, pct: [3.2, 18.0, 25.8, null, null, null, null, null], counts: [361, 2010, 2889, null, null, null, null, null] },
-    { cohort: "Apr '26", size:  9744, pct: [5.0, 20.8, null, null, null, null, null, null], counts: [486, 2023, null, null, null, null, null, null] },
-    { cohort: "May '26", size:  7056, pct: [5.1, null, null, null, null, null, null, null], counts: [357, null, null, null, null, null, null, null] }
+    { cohort: "Sep '25", size: 10101, pct: [4.4, 22.6, 27.0, 27.5, 27.9, 28.0, 26.7, 26.6], counts: [446, 2281, 2728, 2775, 2823, 2833, 2699, 2689] },
+    { cohort: "Oct '25", size: 12301, pct: [7.7, 30.4, 32.9, 35.5, 35.6, 33.8, 33.1, 31.8], counts: [942, 3740, 4044, 4364, 4381, 4152, 4077, 3917] },
+    { cohort: "Nov '25", size: 12275, pct: [5.2, 16.9, 26.2, 28.4, 28.7, 28.1, 27.2, null], counts: [641, 2073, 3219, 3483, 3528, 3450, 3339, null] },
+    { cohort: "Dec '25", size: 12658, pct: [4.4, 22.8, 30.3, 30.6, 30.7, 29.1, null, null], counts: [561, 2880, 3831, 3879, 3886, 3685, null, null] },
+    { cohort: "Jan '26", size: 9923, pct: [10.0, 28.4, 31.3, 33.2, 31.5, null, null, null], counts: [996, 2822, 3105, 3296, 3125, null, null, null] },
+    { cohort: "Feb '26", size: 11992, pct: [8.1, 28.9, 36.0, 36.4, null, null, null, null], counts: [974, 3462, 4312, 4363, null, null, null, null] },
+    { cohort: "Mar '26", size: 11140, pct: [6.1, 23.7, 29.7, null, null, null, null, null], counts: [684, 2643, 3314, null, null, null, null, null] },
+    { cohort: "Apr '26", size: 11399, pct: [8.9, 24.1, null, null, null, null, null, null], counts: [1016, 2750, null, null, null, null, null, null] },
+    { cohort: "May '26", size: 10392, pct: [8.3, null, null, null, null, null, null, null], counts: [864, null, null, null, null, null, null, null] }
   ]
 };
 
@@ -4827,25 +4829,27 @@ const breakdown = [
   {month:'2026-05', existing:160689, first_time:14356, reactivated:6930, churned:20998}
 ];
 
-// V2 metrics (kpi_dashboard_v2.sql + RE-TENANT EXCLUSION): FPC + Retention re-anchored to lease activation.
+// V2 metrics (lease_funnel_events.sql + RE-TENANT EXCLUSION): FPC + Retention re-anchored to lease activation.
 // FPC = first payment within 45d of activation. Retention = 2nd payment within 45d after first payment (= P1 column in SQL).
 // activation = portal-activated leases ÷ invited leases.
 // KPI cohort = leases first-active >= Sep '25, MA flag = 1, rent freq monthly-or-shorter.
+// Onboarding/Mature SPLIT = PM tenure (months since the PM's first Stripe payment; <=2 mo = Onboarding),
+//   NOT snapshot lease-activation timing.
 // EXCLUSION (applied to ALL months and ALL stages):
 //   Drop a lease L if any tenant T on L appears on >=1 OTHER lease AND T's invitationAcceptedAt < L.first_active_date.
 //   ~9% of Mature cohort excluded each month (was claimed ~4-5%).
 // Each month also has an `All` cut = Mature + Onboarding combined (rates rebuilt from
 // summed counts, not naïvely averaged).
 const kpi = {
-  '2025-09':{Mature:{attach:70.79, activation:86.65, fpc:76.59, invite:81.69, retention:87.67, p1:87.67, p2:84.6, habit:0.0, pageview_step:93.66, register_step:92.52, total:8335, invited:6809, pageview:6377, portal_active:5900, attached:5900, converted:4519, retained:3962},Onboarding:{attach:42.22, activation:67.3, fpc:63.52, invite:62.74, retention:88.98, p1:88.98, p2:84.31, habit:0.0, pageview_step:77.16, register_step:87.21, total:6156, invited:3862, pageview:2980, portal_active:2599, attached:2599, converted:1651, retained:1469},All:{attach:58.65, activation:79.65, fpc:72.6, invite:73.64, retention:88.02, p1:88.02, p2:84.52, habit:0.0, pageview_step:87.69, register_step:90.83, total:14491, invited:10671, pageview:9357, portal_active:8499, attached:8499, converted:6170, retained:5431}},
-  '2025-10':{Mature:{attach:68.34, activation:87.59, fpc:75.12, invite:78.02, retention:86.56, p1:86.56, p2:82.58, habit:0.0, pageview_step:93.37, register_step:93.81, total:11159, invited:8706, pageview:8129, portal_active:7626, attached:7626, converted:5729, retained:4959},Onboarding:{attach:50.3, activation:79.66, fpc:72.29, invite:63.14, retention:89.69, p1:89.69, p2:83.96, habit:0.0, pageview_step:88.39, register_step:90.12, total:10669, invited:6736, pageview:5954, portal_active:5366, attached:5366, converted:3879, retained:3479},All:{attach:59.52, activation:84.13, fpc:73.95, invite:70.74, retention:87.82, p1:87.82, p2:83.14, habit:0.0, pageview_step:91.2, register_step:92.25, total:21828, invited:15442, pageview:14083, portal_active:12992, attached:12992, converted:9608, retained:8438}},
-  '2025-11':{Mature:{attach:70.74, activation:86.55, fpc:74.92, invite:81.73, retention:85.88, p1:85.88, p2:82.62, habit:0.0, pageview_step:93.74, register_step:92.33, total:11335, invited:9264, pageview:8684, portal_active:8018, attached:8018, converted:6007, retained:5159},Onboarding:{attach:37.18, activation:77.02, fpc:57.84, invite:48.28, retention:89.16, p1:89.16, p2:83.78, habit:0.0, pageview_step:88.09, register_step:87.44, total:10034, invited:4844, pageview:4267, portal_active:3731, attached:3731, converted:2158, retained:1924},All:{attach:54.98, activation:83.28, fpc:69.5, invite:66.02, retention:86.75, p1:86.75, p2:82.93, habit:0.0, pageview_step:91.8, register_step:90.72, total:21369, invited:14108, pageview:12951, portal_active:11749, attached:11749, converted:8165, retained:7083}},
-  '2025-12':{Mature:{attach:72.36, activation:88.23, fpc:73.77, invite:82.02, retention:86.63, p1:86.63, p2:83.61, habit:0.0, pageview_step:95.12, register_step:92.76, total:10161, invited:8334, pageview:7927, portal_active:7353, attached:7353, converted:5424, retained:4699},Onboarding:{attach:46.49, activation:81.13, fpc:66.31, invite:57.3, retention:90.79, p1:90.79, p2:87.84, habit:0.0, pageview_step:92.01, register_step:88.17, total:9654, invited:5532, pageview:5090, portal_active:4488, attached:4488, converted:2976, retained:2702},All:{attach:59.76, activation:85.4, fpc:70.94, invite:69.98, retention:88.11, p1:88.11, p2:85.11, habit:0.0, pageview_step:93.88, register_step:90.97, total:19815, invited:13866, pageview:13017, portal_active:11841, attached:11841, converted:8400, retained:7401}},
-  '2026-01':{Mature:{attach:73.17, activation:93.68, fpc:75.33, invite:78.1, retention:87.87, p1:87.87, p2:83.87, habit:0.0, pageview_step:99.77, register_step:93.9, total:10765, invited:8408, pageview:8389, portal_active:7877, attached:7877, converted:5934, retained:5214},Onboarding:{attach:52.12, activation:78.57, fpc:70.02, invite:66.34, retention:87.83, p1:87.83, p2:83.96, habit:0.0, pageview_step:87.35, register_step:89.94, total:7653, invited:5077, pageview:4435, portal_active:3989, attached:3989, converted:2793, retained:2453},All:{attach:64.43, activation:87.99, fpc:73.55, invite:73.22, retention:87.85, p1:87.85, p2:83.9, habit:0.0, pageview_step:95.1, register_step:92.53, total:18418, invited:13485, pageview:12824, portal_active:11866, attached:11866, converted:8727, retained:7667}},
-  '2026-02':{Mature:{attach:75.3, activation:89.97, fpc:77.66, invite:83.7, retention:84.71, p1:84.71, p2:78.21, habit:0.0, pageview_step:95.01, register_step:94.69, total:12170, invited:10186, pageview:9678, portal_active:9164, attached:9164, converted:7117, retained:6029},Onboarding:{attach:56.13, activation:80.28, fpc:69.81, invite:69.92, retention:89.81, p1:89.81, p2:85.47, habit:0.0, pageview_step:89.93, register_step:89.27, total:8639, invited:6040, pageview:5432, portal_active:4849, attached:4849, converted:3385, retained:3040},All:{attach:67.34, activation:86.36, fpc:74.94, invite:77.98, retention:86.35, p1:86.35, p2:80.55, habit:0.0, pageview_step:93.12, register_step:92.74, total:20809, invited:16226, pageview:15110, portal_active:14013, attached:14013, converted:10502, retained:9069}},
-  '2026-03':{Mature:{attach:69.26, activation:85.43, fpc:76.83, invite:81.07, retention:84.37, p1:84.37, p2:72.81, habit:0.0, pageview_step:89.32, register_step:95.64, total:13346, invited:10820, pageview:9664, portal_active:9243, attached:9243, converted:7101, retained:5991},Onboarding:{attach:51.72, activation:73.48, fpc:67.24, invite:70.38, retention:89.2, p1:89.2, p2:69.01, habit:0.0, pageview_step:79.64, register_step:92.27, total:7479, invited:5264, pageview:4192, portal_active:3868, attached:3868, converted:2601, retained:2320},All:{attach:62.96, activation:81.52, fpc:74.0, invite:77.23, retention:85.66, p1:85.66, p2:71.79, habit:0.0, pageview_step:86.15, register_step:94.62, total:20825, invited:16084, pageview:13856, portal_active:13111, attached:13111, converted:9702, retained:8311}},
-  '2026-04':{Mature:{attach:73.3, activation:82.72, fpc:74.19, invite:88.61, retention:78.51, p1:78.51, p2:21.54, habit:0.0, pageview_step:67.91, register_step:121.8, total:13803, invited:12231, pageview:8306, portal_active:10117, attached:10117, converted:7506, retained:5893},Onboarding:{attach:53.88, activation:78.84, fpc:70.54, invite:68.34, retention:72.28, p1:72.28, p2:12.05, habit:0.0, pageview_step:65.68, register_step:120.03, total:8430, invited:5761, pageview:3784, portal_active:4542, attached:4542, converted:3204, retained:2316},All:{attach:65.93, activation:81.48, fpc:73.06, invite:80.92, retention:76.65, p1:76.65, p2:18.7, habit:0.0, pageview_step:67.2, register_step:121.25, total:22233, invited:17992, pageview:12090, portal_active:14659, attached:14659, converted:10710, retained:8209}},
-  '2026-05':{Mature:{attach:72.87, activation:85.89, fpc:70.58, invite:84.83, retention:43.49, p1:43.49, p2:0.0, habit:0.0, pageview_step:44.83, register_step:191.61, total:12917, invited:10958, pageview:4912, portal_active:9412, attached:9412, converted:6643, retained:2889},Onboarding:{attach:41.19, activation:74.02, fpc:62.8, invite:55.65, retention:26.67, p1:26.67, p2:0.0, habit:0.0, pageview_step:43.34, register_step:170.78, total:8002, invited:4453, pageview:1930, portal_active:3296, attached:3296, converted:2070, retained:552},All:{attach:60.75, activation:82.46, fpc:68.56, invite:73.67, retention:39.49, p1:39.49, p2:0.0, habit:0.0, pageview_step:44.4, register_step:185.74, total:20919, invited:15411, pageview:6842, portal_active:12708, attached:12708, converted:8713, retained:3441}}
+  '2025-09':{Mature:{attach:72.5, activation:87.09, fpc:77.06, invite:83.24, retention:87.64, p1:87.64, p2:84.7, habit:0.0, pageview_step:93.91, register_step:92.74, total:7559, invited:6292, pageview:5909, portal_active:5480, attached:5480, converted:4223, retained:3701},Onboarding:{attach:43.5, activation:68.87, fpc:64.52, invite:63.16, retention:88.85, p1:88.85, p2:84.12, habit:0.0, pageview_step:78.76, register_step:87.45, total:6933, invited:4379, pageview:3449, portal_active:3016, attached:3016, converted:1946, retained:1729},All:{attach:58.63, activation:79.62, fpc:72.61, invite:73.63, retention:88.02, p1:88.02, p2:84.52, habit:0.0, pageview_step:87.7, register_step:90.79, total:14492, invited:10671, pageview:9358, portal_active:8496, attached:8496, converted:6169, retained:5430}},
+  '2025-10':{Mature:{attach:73.49, activation:87.95, fpc:76.95, invite:83.56, retention:86.25, p1:86.25, p2:82.19, habit:0.0, pageview_step:93.67, register_step:93.9, total:9335, invited:7800, pageview:7306, portal_active:6860, attached:6860, converted:5279, retained:4553},Onboarding:{attach:49.01, activation:80.12, fpc:70.6, invite:61.17, retention:89.75, p1:89.75, p2:84.27, habit:0.0, pageview_step:88.69, register_step:90.34, total:12494, invited:7642, pageview:6778, portal_active:6123, attached:6123, converted:4323, retained:3880},All:{attach:59.48, activation:84.08, fpc:73.96, invite:70.74, retention:87.83, p1:87.83, p2:83.13, habit:0.0, pageview_step:91.21, register_step:92.18, total:21829, invited:15442, pageview:14084, portal_active:12983, attached:12983, converted:9602, retained:8433}},
+  '2025-11':{Mature:{attach:73.89, activation:88.73, fpc:76.53, invite:83.27, retention:85.94, p1:85.94, p2:83.09, habit:0.0, pageview_step:95.51, register_step:92.91, total:9861, invited:8211, pageview:7842, portal_active:7286, attached:7286, converted:5576, retained:4792},Onboarding:{attach:38.72, activation:75.57, fpc:57.98, invite:51.24, retention:88.51, p1:88.51, p2:82.59, habit:0.0, pageview_step:86.64, register_step:87.22, total:11510, invited:5898, pageview:5110, portal_active:4457, attached:4457, converted:2584, retained:2287},All:{attach:54.95, activation:83.23, fpc:69.49, invite:66.02, retention:86.75, p1:86.75, p2:82.93, habit:0.0, pageview_step:91.8, register_step:90.67, total:21371, invited:14109, pageview:12952, portal_active:11743, attached:11743, converted:8160, retained:7079}},
+  '2025-12':{Mature:{attach:76.05, activation:90.69, fpc:75.83, invite:83.86, retention:86.64, p1:86.64, p2:83.55, habit:0.0, pageview_step:97.14, register_step:93.37, total:8866, invited:7435, pageview:7222, portal_active:6743, attached:6743, converted:5113, retained:4430},Onboarding:{attach:46.44, activation:79.08, fpc:64.48, invite:58.72, retention:90.36, p1:90.36, p2:87.5, habit:0.0, pageview_step:90.11, register_step:87.76, total:10950, invited:6430, pageview:5794, portal_active:5085, attached:5085, converted:3279, retained:2963},All:{attach:59.69, activation:85.31, fpc:70.95, invite:69.97, retention:88.1, p1:88.1, p2:85.09, habit:0.0, pageview_step:93.88, register_step:90.87, total:19816, invited:13865, pageview:13016, portal_active:11828, attached:11828, converted:8392, retained:7393}},
+  '2026-01':{Mature:{attach:75.12, activation:92.42, fpc:76.01, invite:81.29, retention:87.4, p1:87.4, p2:83.32, habit:0.0, pageview_step:98.55, register_step:93.77, total:9523, invited:7741, pageview:7629, portal_active:7154, attached:7154, converted:5438, retained:4753},Onboarding:{attach:52.85, activation:81.84, fpc:69.78, invite:64.57, retention:88.56, p1:88.56, p2:84.84, habit:0.0, pageview_step:90.42, register_step:90.5, total:8892, invited:5742, pageview:5192, portal_active:4699, attached:4699, converted:3279, retained:2904},All:{attach:64.37, activation:87.91, fpc:73.54, invite:73.22, retention:87.84, p1:87.84, p2:83.89, habit:0.0, pageview_step:95.09, register_step:92.45, total:18415, invited:13483, pageview:12821, portal_active:11853, attached:11853, converted:8717, retained:7657}},
+  '2026-02':{Mature:{attach:77.55, activation:91.39, fpc:78.89, invite:84.86, retention:85.3, p1:85.3, p2:79.24, habit:0.0, pageview_step:96.09, register_step:95.11, total:11000, invited:9335, pageview:8970, portal_active:8531, attached:8531, converted:6730, retained:5741},Onboarding:{attach:55.79, activation:79.45, fpc:68.83, invite:70.22, retention:88.21, p1:88.21, p2:83.78, habit:0.0, pageview_step:89.1, register_step:89.17, total:9810, invited:6889, pageview:6138, portal_active:5473, attached:5473, converted:3767, retained:3323},All:{attach:67.29, activation:86.32, fpc:74.96, invite:77.96, retention:86.35, p1:86.35, p2:80.87, habit:0.0, pageview_step:93.12, register_step:92.69, total:20810, invited:16224, pageview:15108, portal_active:14004, attached:14004, converted:10497, retained:9064}},
+  '2026-03':{Mature:{attach:71.76, activation:87.08, fpc:78.75, invite:82.42, retention:84.18, p1:84.18, p2:76.03, habit:0.0, pageview_step:90.71, register_step:95.99, total:11914, invited:9819, pageview:8907, portal_active:8550, attached:8550, converted:6733, retained:5668},Onboarding:{attach:51.07, activation:72.71, fpc:65.06, invite:70.23, retention:89.33, p1:89.33, p2:74.43, habit:0.0, pageview_step:79.02, register_step:92.01, total:8912, invited:6259, pageview:4946, portal_active:4551, attached:4551, converted:2961, retained:2645},All:{attach:62.91, activation:81.48, fpc:73.99, invite:77.2, retention:85.75, p1:85.75, p2:75.54, habit:0.0, pageview_step:86.16, register_step:94.57, total:20826, invited:16078, pageview:13853, portal_active:13101, attached:13101, converted:9694, retained:8313}},
+  '2026-04':{Mature:{attach:76.02, activation:83.73, fpc:76.5, invite:90.79, retention:81.93, p1:81.93, p2:25.59, habit:0.0, pageview_step:69.06, register_step:121.24, total:12350, invited:11213, pageview:7744, portal_active:9389, attached:9389, converted:7183, retained:5885},Onboarding:{attach:53.14, activation:77.52, fpc:67.04, invite:68.55, retention:75.46, p1:75.46, p2:13.49, habit:0.0, pageview_step:64.19, register_step:120.76, total:9884, invited:6775, pageview:4349, portal_active:5252, attached:5252, converted:3521, retained:2657},All:{attach:65.85, activation:81.39, fpc:73.11, invite:80.9, retention:79.8, p1:79.8, p2:21.61, habit:0.0, pageview_step:67.23, register_step:121.07, total:22234, invited:17988, pageview:12093, portal_active:14641, attached:14641, converted:10704, retained:8542}},
+  '2026-05':{Mature:{attach:75.1, activation:87.01, fpc:73.45, invite:86.31, retention:46.83, p1:46.83, p2:0.05, habit:0.0, pageview_step:45.71, register_step:190.34, total:11963, invited:10325, pageview:4720, portal_active:8984, attached:8984, converted:6599, retained:3090},Onboarding:{attach:43.32, activation:75.72, fpc:65.56, invite:57.21, retention:30.28, p1:30.28, p2:0.08, habit:0.0, pageview_step:46.03, register_step:164.5, total:8955, invited:5123, pageview:2358, portal_active:3879, attached:3879, converted:2543, retained:770},All:{attach:61.49, activation:83.27, fpc:71.07, invite:73.85, retention:42.22, p1:42.22, p2:0.05, habit:0.0, pageview_step:45.82, register_step:181.73, total:20918, invited:15448, pageview:7078, portal_active:12863, attached:12863, converted:9142, retained:3860}}
 };
 const kpiMonths = Object.keys(kpi);
 
