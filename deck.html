@@ -3131,8 +3131,8 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-onb-mature"></canvas></div>
       </div>
       <div class="chart-shell">
-        <div class="ch-title">First-time-paid accounts per month <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2025 vs 2026</span></div>
-        <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment. 2026 (pink) below 2025 (navy) <strong>every month</strong>, ~10% fewer.</div>
+        <div class="ch-title">First-time-paid accounts per month <span style="font-weight: 500; color: var(--muted); font-size: 11px">· 2024–2026</span></div>
+        <div class="ch-sub">Distinct PM accounts <strong>receiving</strong> their first-ever tenant payment. 2026 (pink) runs below 2025 (navy) <strong>every month</strong> — and at/under 2024 (grey): new-PM landings aren't growing.</div>
         <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-newpm"></canvas></div>
       </div>
     </div>
@@ -3210,25 +3210,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!el) return;
 
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const y2024 = [328,305,306,265,309,290,284,313,311,303,282,289];
     const y2025 = [369,359,290,308,274,308,278,297,259,282,254,234];
     const y2026 = [345,321,260,271,248,null,null,null,null,null,null,null];
 
-    const dl2026 = { display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
-                     align: 'bottom', anchor: 'end', offset: 6, color: '#c01a6f',
-                     font: { weight: 800, size: 11 }, formatter: v => v };
-    const dl2025 = { display: ctx => [0,4,11].indexOf(ctx.dataIndex) !== -1,
-                     align: 'top', anchor: 'end', offset: 6, color: '#162050',
-                     font: { weight: 700, size: 10 }, formatter: v => v };
+    const dl = (color, align) => ({ display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
+                     align: align, anchor: 'center', offset: 4, color: color, clamp: true,
+                     font: { weight: 700, size: 8 }, formatter: v => v });
 
     new Chart(el, {
       type: 'line',
       data: {
         labels: months,
         datasets: [
+          { label: '2024', data: y2024, borderColor: '#94a3b8', backgroundColor: '#94a3b8',
+            borderWidth: 2, borderDash: [5,3], tension: 0.35, pointRadius: 2.5, pointHoverRadius: 4, datalabels: dl('#64748b','bottom') },
           { label: '2025', data: y2025, borderColor: '#162050', backgroundColor: '#162050',
-            borderWidth: 2.5, tension: 0.35, pointRadius: 3, pointHoverRadius: 5, datalabels: dl2025 },
+            borderWidth: 2.5, tension: 0.35, pointRadius: 3, pointHoverRadius: 5, datalabels: dl('#162050','top') },
           { label: '2026', data: y2026, borderColor: '#ff4998', backgroundColor: '#ff4998',
-            borderWidth: 3.5, tension: 0.35, pointRadius: 4.5, pointHoverRadius: 6, datalabels: dl2026 }
+            borderWidth: 3.5, tension: 0.35, pointRadius: 4, pointHoverRadius: 6, datalabels: dl('#c01a6f','bottom') }
         ]
       },
       options: {
