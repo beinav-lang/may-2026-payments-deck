@@ -1591,8 +1591,8 @@
 
     <!-- ARR trend folded in from former slide 04 — Feb peak → Mar dip → Apr recovery -->
     <div class="chart-shell" style="margin-bottom: 24px">
-      <div class="ch-title" style="text-align: center">Payments ARR · plan vs actual + next-month projection</div>
-      <div class="ch-sub" style="text-align: center">Beat plan Jan–Mar, then landed −$649K under the May plan · June projected $17.12M vs $16.84M target</div>
+      <div class="ch-title" style="text-align: center">Payments ARR · monthly actual (Feb '25 → May '26)</div>
+      <div class="ch-sub" style="text-align: center">Up from $9.82M (Feb '25) to $15.59M (May '26) — +$5.8M, +59% in 15 months</div>
       <div class="chart-wrap" style="height: 260px"><canvas id="chart-arr"></canvas></div>
     </div>
 
@@ -4824,62 +4824,36 @@ const monthLabels = arr => arr.map(x => fmtMonth(x.month || x));
 // ---------- charts ----------
 // 1. ARR vs Plan
 // ---- Slide 3 ARR · focused 2026 plan-vs-actual + June projection ----
-const arr26    = trendForArr.filter(t => t.month >= '2026-01');     // Jan..May '26 actual
-const arrFocus = [...arr26, { month: '2026-06' }];                  // + June (target / projection)
-const F_MAY    = arr26.length - 1;                                  // May '26 index (last actual)
-const actualF  = [...arr26.map(t => t.arr), null];
-const planF    = [...arr26.map(t => arrPlanByMonth[t.month] ?? null), 16.84];
-const projF    = actualF.map(() => null);
-projF[F_MAY]   = arr26[F_MAY].arr;                                  // anchor at May actual
-projF[F_MAY+1] = 17.12;                                             // June projection
+const arrAll  = trendForArr;            // Feb '25 .. May '26 actual ARR
+const arrLast = arrAll.length - 1;      // May '26 (last point, emphasized)
 
 new Chart(document.getElementById('chart-arr'), {
   type: 'line',
   data: {
-    labels: monthLabels(arrFocus),
+    labels: monthLabels(arrAll),
     datasets: [
-      { label: 'Actual', data: actualF, borderColor: C.blue, order: 1,
-        backgroundColor: 'rgba(49,133,252,0.08)', borderWidth: 3, fill: true, tension: 0.3,
-        pointRadius: ctx => actualF[ctx.dataIndex] == null ? 0 : (ctx.dataIndex === F_MAY ? 7 : 4.5),
-        pointBackgroundColor: ctx => ctx.dataIndex === F_MAY ? '#1d4ed8' : C.blue,
+      { label: 'Actual Payments ARR', data: arrSeries, borderColor: C.blue, order: 1,
+        backgroundColor: 'rgba(49,133,252,0.10)', borderWidth: 3, fill: true, tension: 0.3,
+        pointRadius: ctx => ctx.dataIndex === arrLast ? 7 : 3,
+        pointBackgroundColor: ctx => ctx.dataIndex === arrLast ? '#1d4ed8' : C.blue,
         pointBorderColor: '#fff', pointBorderWidth: 1.5,
         datalabels: {
-          display: ctx => actualF[ctx.dataIndex] != null,
+          display: ctx => ctx.dataIndex % 3 === 0,
           anchor: 'end', align: 'top', offset: 7,
-          color: ctx => ctx.dataIndex === F_MAY ? '#1d4ed8' : '#64748b',
-          font: ctx => ({ weight: ctx.dataIndex === F_MAY ? 800 : 600, size: ctx.dataIndex === F_MAY ? 13 : 10 }),
-          formatter: v => '$' + v.toFixed(2) + 'M'
-        }
-      },
-      { label: 'Plan / target', data: planF, borderColor: '#ff4998', order: 2,
-        borderWidth: 2, borderDash: [6,4], tension: 0.3, fill: false,
-        pointRadius: ctx => planF[ctx.dataIndex] == null ? 0 : (ctx.dataIndex === F_MAY+1 ? 6 : 4),
-        pointBackgroundColor: '#ff4998', pointBorderColor: '#fff', pointBorderWidth: 1.5,
-        datalabels: {
-          display: ctx => ctx.dataIndex === F_MAY || ctx.dataIndex === F_MAY+1,
-          anchor: 'end', align: ctx => ctx.dataIndex === F_MAY+1 ? 'bottom' : 'top', offset: 7, color: '#be2a6e', font: { weight: 800, size: 11 },
-          formatter: v => '$' + v.toFixed(2) + 'M'
-        }
-      },
-      { label: 'June projection', data: projF, borderColor: '#f59e0b', order: 0,
-        borderWidth: 2.5, borderDash: [2,3], tension: 0, fill: false, spanGaps: true,
-        pointRadius: ctx => ctx.dataIndex === F_MAY+1 ? 7 : 0,
-        pointBackgroundColor: '#f59e0b', pointBorderColor: '#fff', pointBorderWidth: 1.5,
-        datalabels: {
-          display: ctx => ctx.dataIndex === F_MAY+1,
-          anchor: 'end', align: 'top', offset: 9, color: '#b45309', font: { weight: 800, size: 12 },
+          color: ctx => ctx.dataIndex === arrLast ? '#1d4ed8' : '#64748b',
+          font: ctx => ({ weight: ctx.dataIndex === arrLast ? 800 : 600, size: ctx.dataIndex === arrLast ? 13 : 10 }),
           formatter: v => '$' + v.toFixed(2) + 'M'
         }
       }
     ]
   },
   options: baseOpts({
-    layout: { padding: { top: 40, right: 56, bottom: 12, left: 10 } },
-    plugins: { legend: { display: true, position: 'top', align: 'center', labels: { boxWidth: 16, boxHeight: 2, padding: 14, font: { size: 11, weight: 600 } } } },
+    layout: { padding: { top: 40, right: 28, bottom: 12, left: 10 } },
+    plugins: { legend: { display: false } },
     scales: {
       x: { grid: { color: C.grid, drawBorder: false },
-           ticks: { ...monthAxisTicks(arrFocus), callback: (v, i) => fmtMonthShort(arrFocus[i].month) } },
-      y: { display: false, suggestedMin: 13.4, suggestedMax: 17.6 }
+           ticks: { ...monthAxisTicks(arrAll), callback: (v, i) => fmtMonthShort(arrAll[i].month) } },
+      y: { display: false, suggestedMin: 9, suggestedMax: 16.8 }
     }
   })
 });
