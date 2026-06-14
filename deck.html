@@ -2013,7 +2013,12 @@
 
     <!-- May paid-lease summary card -->
     <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px">
+        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #eab308; border-radius: 6px">
+          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Reactivated · Δ vs Apr</div>
+          <div style="font-size: 18px; font-weight: 800; color: #a16207; margin-top: 2px">−2,618</div>
+          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 6,930 · vs Apr 9,548 (−27%)</div>
+        </div>
         <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px">
           <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ First-time paid · Δ vs Apr</div>
           <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−760</div>
@@ -2034,6 +2039,12 @@
 
     <div class="chart-shell" data-chart-breakdown-shell style="margin-top: 14px">
       <div class="ch-title">Paid Leases breakdown</div>
+      <div style="display:flex; gap:18px; flex-wrap:wrap; margin:2px 0 2px; font-size:12px; font-weight:700; color:#162050">
+        <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:14px; height:10px; background:#facc15; border-radius:2px; display:inline-block"></span>Reactivated</span>
+        <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:14px; height:10px; background:#2563eb; border-radius:2px; display:inline-block"></span>First-time</span>
+        <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:14px; height:10px; background:#7c3aed; border-radius:2px; display:inline-block"></span>Existing</span>
+        <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:14px; height:10px; background:#dc2626; border-radius:2px; display:inline-block"></span>Churned</span>
+      </div>
       <div class="chart-wrap" style="height:640px"><canvas id="chart-breakdown"></canvas></div>
     </div>
 
@@ -4917,18 +4928,22 @@ new Chart(document.getElementById('chart-breakdown'), {
     id: 'momPaidBracket',
     afterDatasetsDraw(c) {
       const x = c.scales.x, a = c.chartArea, ctx = c.ctx, n = c.data.labels.length;
-      const cur  = breakdown[n-1].existing + breakdown[n-1].first_time + breakdown[n-1].reactivated;
-      const prev = breakdown[n-2].existing + breakdown[n-2].first_time + breakdown[n-2].reactivated;
-      const d = cur - prev;
-      const txt = (d >= 0 ? '▲ +' : '▼ −') + Math.abs(d).toLocaleString();
-      const col = d >= 0 ? '#047857' : '#b91c1c';
-      const xa = x.getPixelForValue(n-2), xm = x.getPixelForValue(n-1), mid = (xa+xm)/2, yb = a.top - 18;
-      ctx.save();
-      ctx.strokeStyle = col; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(xa, yb+5); ctx.lineTo(xa, yb); ctx.lineTo(xm, yb); ctx.lineTo(xm, yb+5); ctx.stroke();
-      ctx.fillStyle = col; ctx.font = '800 12px "Poppins", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
-      ctx.fillText(txt, mid, yb - 3);
-      ctx.restore();
+      const tot = i => breakdown[i].existing + breakdown[i].first_time + breakdown[i].reactivated;
+      const yb = a.top - 18;
+      const drawBracket = (li, ri) => {
+        const d = tot(ri) - tot(li);
+        const txt = (d >= 0 ? '▲ +' : '▼ −') + Math.abs(d).toLocaleString();
+        const col = d >= 0 ? '#047857' : '#b91c1c';
+        const xl = x.getPixelForValue(li), xr = x.getPixelForValue(ri), mid = (xl+xr)/2;
+        ctx.save();
+        ctx.strokeStyle = col; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(xl, yb+5); ctx.lineTo(xl, yb); ctx.lineTo(xr, yb); ctx.lineTo(xr, yb+5); ctx.stroke();
+        ctx.fillStyle = col; ctx.font = '800 12px "Poppins", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+        ctx.fillText(txt, mid, yb - 3);
+        ctx.restore();
+      };
+      drawBracket(n-3, n-2);
+      drawBracket(n-2, n-1);
     }
   }],
   data: {
@@ -5004,14 +5019,9 @@ new Chart(document.getElementById('chart-breakdown'), {
   },
   options: baseOpts({
     layout: { padding: { top: 56, right: 32, bottom: 22, left: 8 } },
+    layout: { padding: { top: 30 } },
     plugins: {
-      legend: {
-        display: true, position: 'top', align: 'center',
-        labels: {
-          boxWidth: 14, boxHeight: 10, font: { size: 12, weight: 700 }, padding: 14,
-          filter: (item) => item.text !== '__total__' && item.text !== '__mom_delta__'
-        }
-      },
+      legend: { display: false },
       tooltip: { filter: (item) => item.dataset.label !== '__total__' && item.dataset.label !== '__mom_delta__' }
     },
     scales: {
