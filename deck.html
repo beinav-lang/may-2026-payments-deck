@@ -1980,32 +1980,14 @@
     <div style="margin-bottom: 18px">
       <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Active Leases Overview</div></div>
       <h2 class="section-title">% Paid dropped <span class="title-accent red">−1.18pp MoM</span> — still +1.07pp vs plan.</h2>
-    <div class="slide-insight">% paid leases went down with eligibility rate unchanged. Reversion is seasonal — April peaked artificially after March’s compressed cycle pushed payments forward (May 2025 showed the same shape, 2× sharper this year).</div>
-    </div>
-
-    <!-- Top summary card -->
-    <div style="margin-bottom: 14px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.05) 0%, rgba(124,58,237,0.05) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
-        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 6px">
-          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Paid / Active</div>
-          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px">
-            <div style="font-size: 22px; font-weight: 800; color: var(--purple)">48.06% → 46.88%</div>
-            <div style="font-size: 13px; font-weight: 800; color: var(--warn)">▼ −1.18pp MoM</div>
-          </div>
-        </div>
-        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #2563eb; border-radius: 6px">
-          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Eligible / Active</div>
-          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px">
-            <div style="font-size: 22px; font-weight: 800; color: #1d4ed8">71.80% → 71.70%</div>
-            <div style="font-size: 13px; font-weight: 800; color: #64748b">─ flat (−0.10pp)</div>
-          </div>
-        </div>
-      </div>
+    <div class="slide-insight">% paid leases slipped −1.18pp MoM while eligibility held flat (71.7%) — the dip is <strong>churn</strong>, not weaker conversion: a <strong>series-high ~21K paid leases fell off (+19% MoM)</strong>, faster than new and maturing leases replaced them. Still +1.07pp ahead of plan.</div>
     </div>
 
     <div class="chart-shell">
       <div class="chart-wrap" style="height:520px"><canvas id="chart-pct-paid"></canvas></div>
     </div>
+
+
 
     <!-- Definitions card -->
     <div style="margin-top:12px; padding:11px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--text); line-height:1.6">
@@ -5228,9 +5210,9 @@ const seasonalityBandPlugin = {
   }
 };
 
-new Chart(document.getElementById('chart-pct-paid'), {
+var __ppc=document.getElementById('chart-pct-paid'); if(__ppc) new Chart(__ppc, {
   type: 'bar',
-  plugins: [seasonalityBandPlugin],
+  plugins: [],
   data: {
     labels: monthLabels(trendFromMar25),
     datasets: [
@@ -5257,105 +5239,26 @@ new Chart(document.getElementById('chart-pct-paid'), {
         borderColor: C.purple,
         backgroundColor: 'rgba(124,58,237,0.08)',
         borderWidth: 4,
-        // Thicken Apr→May segments in BOTH years so the reversion line itself
-        // visibly punches forward (not just the points).
-        segment: {
-          borderWidth: ctx => {
-            const i = ctx.p0DataIndex;
-            if (i === 3 || i === 15) return 7;          // the Apr→May segments
-            return i >= 11 ? 6 : 4;
-          },
-          borderColor: ctx => {
-            const i = ctx.p0DataIndex;
-            if (i === 3)  return '#b45309';             // 2025 reversion: amber
-            if (i === 15) return '#b91c1c';             // 2026 reversion: red
-            return C.purple;
-          }
-        },
-        // Highlight April (Apr '25 idx 3, Apr '26 idx 15) and May (May '25 idx 4, May '26 idx 16).
-        // April = peak (larger, accent-filled); May = trough (slightly larger, white-fill ring).
-        pointRadius: ctx => {
-          const i = ctx.dataIndex;
-          if (i === 3 || i === 15) return 10;           // April peak
-          if (i === 4 || i === 16) return 9;            // May trough
-          return i >= 11 ? 8 : 5;
-        },
-        pointStyle: ctx => {
-          const i = ctx.dataIndex;
-          if (i === 3 || i === 15) return 'triangle';   // peak — triangle up
-          return 'circle';
-        },
-        pointRotation: 0,
-        pointBackgroundColor: ctx => {
-          const i = ctx.dataIndex;
-          if (i === 3)  return '#f59e0b';               // Apr '25 amber
-          if (i === 15) return '#dc2626';               // Apr '26 red
-          if (i === 4 || i === 16) return '#fff';       // May points · white fill for "reverted" feel
-          return C.purple;
-        },
-        pointBorderColor: ctx => {
-          const i = ctx.dataIndex;
-          if (i === 4)  return '#b45309';               // May '25 amber ring
-          if (i === 16) return '#b91c1c';               // May '26 red ring
-          if (i === 3 || i === 15) return '#fff';
-          return '#fff';
-        },
-        pointBorderWidth: ctx => {
-          const i = ctx.dataIndex;
-          if (i === 4 || i === 16) return 3.5;          // May = thick ring
-          if (i === 3 || i === 15) return 2.5;
-          return 2;
-        },
+        segment: { borderWidth: ctx => (ctx.p0DataIndex >= 11 ? 6 : 4) },
+        pointRadius: ctx => (ctx.dataIndex >= 11 ? 8 : 5),
+        pointStyle: 'circle',
+        pointBackgroundColor: C.purple,
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
         tension: 0.3,
         yAxisID: 'yPct',
         order: 2,
         datalabels: {
           display: true,
-          // Apr/May points (idx 3/4, 15/16): drop the % label BELOW the line so
-          // it doesn't fight the callout pill above. Others: center on the
-          // line (white pill on the trace, as before).
-          anchor: ctx => {
-            const i = ctx.dataIndex;
-            return (i === 3 || i === 4 || i === 15 || i === 16) ? 'end' : 'center';
-          },
-          align: ctx => {
-            const i = ctx.dataIndex;
-            return (i === 3 || i === 4 || i === 15 || i === 16) ? 'bottom' : 'center';
-          },
-          offset: ctx => {
-            const i = ctx.dataIndex;
-            return (i === 3 || i === 4 || i === 15 || i === 16) ? 12 : 0;
-          },
+          anchor: 'center',
+          align: 'center',
           backgroundColor: '#fff',
-          borderColor: ctx => {
-            const i = ctx.dataIndex;
-            if (i === 3 || i === 4)  return '#b45309'; // tint 2025 Apr/May to match band
-            if (i === 15 || i === 16) return '#b91c1c'; // tint 2026 Apr/May to match band
-            return C.purple;
-          },
-          borderWidth: ctx => {
-            const i = ctx.dataIndex;
-            return (i === 3 || i === 4 || i === 15 || i === 16) ? 1.5 : 2;
-          },
+          borderColor: C.purple,
+          borderWidth: 2,
           borderRadius: 4,
-          padding: ctx => {
-            const i = ctx.dataIndex;
-            return (i === 3 || i === 4 || i === 15 || i === 16)
-              ? { top: 2, bottom: 2, left: 5, right: 5 }
-              : { top: 4, bottom: 4, left: 7, right: 7 };
-          },
-          color: ctx => {
-            const i = ctx.dataIndex;
-            if (i === 3 || i === 4)  return '#b45309';
-            if (i === 15 || i === 16) return '#b91c1c';
-            return C.purple;
-          },
-          font: ctx => {
-            const i = ctx.dataIndex;
-            return (i === 3 || i === 4 || i === 15 || i === 16)
-              ? { weight: 800, size: 11 }
-              : { weight: 800, size: 14 };
-          },
+          padding: { top: 4, bottom: 4, left: 7, right: 7 },
+          color: C.purple,
+          font: { weight: 800, size: 13 },
           formatter: v => v == null ? '' : v.toFixed(2) + '%'
         }
       },
