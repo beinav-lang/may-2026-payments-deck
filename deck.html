@@ -2078,13 +2078,38 @@
 <section data-slide-title="Why % Paid Leases Dropped">
   <div class="wrap">
     <div class="slide-head"><div class="slide-num">07</div><div class="title-eyebrow">Why % Paid Leases Dropped</div></div>
-    <h2 class="section-title">Two drivers: reactivation <span class="title-accent">reverted after April’s calendar spike</span> · churn <span class="title-accent red">+19%</span>.</h2>
-    <div class="slide-insight">The 1.18pp paid-% dip is mostly seasonal: reactivations reverted <strong>−27%</strong> off April’s calendar spike. But churn rose <strong>+19% to a series high</strong> — a genuine step-up, not a calendar artifact — the one real watch-item. For the rest of 2026, % paid leases shouldn’t swing on reactivation timing — the artifact doesn’t recur until next March.</div>
+    <h2 class="section-title">Two drivers: churn <span class="title-accent red">+19%</span> · reactivation <span class="title-accent">reverted after April’s calendar spike</span>.</h2>
+    <div class="slide-insight">Churn rose <strong>+19% to a series high</strong> — a genuine step-up, not a calendar artifact — <strong>the one real watch-item</strong>. The rest of the 1.18pp dip is seasonal: reactivations reverted <strong>−27%</strong> off April’s calendar spike, which won’t recur until next March.</div>
 
-    <!-- DRIVER #1 · Reactivation -->
-    <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
+    <!-- DRIVER #1 · Churn -->
+    <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
       <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px">
-        <div style="font-size: 16px; font-weight: 900; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.8px">Driver #1 · Reactivation</div>
+        <div style="font-size: 16px; font-weight: 900; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.8px">Driver #1 · Churn</div>
+        <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 17,653 → May 20,998 · <span style="color: var(--warn)">+3,345 (+19%)</span></div>
+      </div>
+
+      <!-- Insight card above chart -->
+      <div style="padding: 14px 18px; background: rgba(220,38,38,0.05); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text); margin: 0 0 10px">
+        Churn climbed to <strong>21.0K — highest in the 17-month series</strong> (Jan '25 onwards). Biggest % surge: <strong style="color: #b91c1c">churn_db_tenant +36% MoM, +227% YoY</strong> (PM cancellations, led by Shelter Rock).
+      </div>
+      <div class="chart-wrap" style="height: 320px"><canvas id="chart-churn-breakdown"></canvas></div>
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 10px 0 0; justify-content: center">
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
+        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
+      </div>
+
+      <!-- Insight callout: Shelter Rock -->
+      <div style="margin-top: 14px; padding: 14px 18px; background: rgba(220,38,38,0.06); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text)">
+        <div style="font-size: 11px; font-weight: 800; color: #b91c1c; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px">🚨 Shelter Rock · cancelled May 18</div>
+        <div><strong style="color: #162050; font-size: 14px">277 paid leases lost</strong> — all 277 paid in April, then <strong style="color: var(--text)">zero</strong> paid in May after the PM cancelled their DoorLoop subscription. <strong style="color: var(--text)">Biggest single-PM cancellation in 12 months</strong> (next largest: John King / Realty Zero · 220 leases · Dec '25).</div>
+      </div>
+    </div>
+
+    <!-- DRIVER #2 · Reactivation -->
+    <div style="margin-top: 16px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
+      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px">
+        <div style="font-size: 16px; font-weight: 900; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.8px">Driver #2 · Reactivation</div>
         <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 9,548 → May 6,930 · <span style="color: var(--warn)">−2,618 (−27%)</span></div>
       </div>
       <!-- Insight card above chart -->
@@ -2124,31 +2149,6 @@
           </div>
         </div>
       </details>
-    </div>
-
-    <!-- DRIVER #2 · Churn -->
-    <div style="margin-top: 16px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
-      <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px">
-        <div style="font-size: 16px; font-weight: 900; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.8px">Driver #2 · Churn</div>
-        <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 17,653 → May 20,998 · <span style="color: var(--warn)">+3,345 (+19%)</span></div>
-      </div>
-
-      <!-- Insight card above chart -->
-      <div style="padding: 14px 18px; background: rgba(220,38,38,0.05); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text); margin: 0 0 10px">
-        Churn climbed to <strong>21.0K — highest in the 17-month series</strong> (Jan '25 onwards). Biggest % surge: <strong style="color: #b91c1c">churn_db_tenant +36% MoM, +227% YoY</strong> (PM cancellations, led by Shelter Rock).
-      </div>
-      <div class="chart-wrap" style="height: 320px"><canvas id="chart-churn-breakdown"></canvas></div>
-      <div style="display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; margin: 10px 0 0; justify-content: center">
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #f59e0b; border-radius: 2px"></span><strong>churn_tenant</strong> <span style="color: var(--muted)">· PM + lease still active</span></div>
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #3185FC; border-radius: 2px"></span><strong>churn_lease_end</strong> <span style="color: var(--muted)">· lease ended naturally</span></div>
-        <div style="display: flex; align-items: center; gap: 6px"><span style="display: inline-block; width: 11px; height: 11px; background: #dc2626; border-radius: 2px"></span><strong>churn_db_tenant</strong> <span style="color: var(--muted)">· PM cancelled DoorLoop</span></div>
-      </div>
-
-      <!-- Insight callout: Shelter Rock -->
-      <div style="margin-top: 14px; padding: 14px 18px; background: rgba(220,38,38,0.06); border-left: 4px solid #dc2626; border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text)">
-        <div style="font-size: 11px; font-weight: 800; color: #b91c1c; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px">🚨 Shelter Rock · cancelled May 18</div>
-        <div><strong style="color: #162050; font-size: 14px">277 paid leases lost</strong> — all 277 paid in April, then <strong style="color: var(--text)">zero</strong> paid in May after the PM cancelled their DoorLoop subscription. <strong style="color: var(--text)">Biggest single-PM cancellation in 12 months</strong> (next largest: John King / Realty Zero · 220 leases · Dec '25).</div>
-      </div>
     </div>
 
   </div>
