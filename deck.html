@@ -1979,28 +1979,33 @@
   <div class="wrap">
     <div style="margin-bottom: 18px">
       <div class="slide-head"><div class="slide-num">05</div><div class="title-eyebrow">Active Leases Overview</div></div>
-      <h2 class="section-title">388K active → 182K paid — <span class="title-accent">46.88%</span> (<span class="title-accent red">−1.18pp MoM</span>, +1.07pp vs plan).</h2>
-    <div class="slide-insight">Eligibility held flat at <strong>71.7%</strong>; the <strong>−1.18pp drop in % paid is churn-driven</strong> — a series-high spike outpaced the month’s new-payer inflows (next slide).</div>
+      <h2 class="section-title">% Paid dropped <span class="title-accent red">−1.18pp MoM</span> — still +1.07pp vs plan.</h2>
+    <div class="slide-insight">% paid leases went down with eligibility rate unchanged. Reversion is seasonal — April peaked artificially after March’s compressed cycle pushed payments forward (May 2025 showed the same shape, 2× sharper this year).</div>
     </div>
 
-    <!-- Active-lease funnel (current-month levels) -->
-    <div style="margin: 28px 0 18px; display: flex; flex-direction: column; gap: 16px">
-      <div style="width:100%; background:#162050; border-radius:10px; padding:22px 26px; color:#fff; display:flex; justify-content:space-between; align-items:center">
-        <span style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.85">Active leases</span>
-        <span style="font-size:32px; font-weight:900">388,032</span>
+    <!-- Top summary card -->
+    <div style="margin-bottom: 14px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.05) 0%, rgba(124,58,237,0.05) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 6px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Paid / Active</div>
+          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px">
+            <div style="font-size: 22px; font-weight: 800; color: var(--purple)">48.06% → 46.88%</div>
+            <div style="font-size: 13px; font-weight: 800; color: var(--warn)">▼ −1.18pp MoM</div>
+          </div>
+        </div>
+        <div style="padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #2563eb; border-radius: 6px">
+          <div style="font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700">% Eligible / Active</div>
+          <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px">
+            <div style="font-size: 22px; font-weight: 800; color: #1d4ed8">71.80% → 71.70%</div>
+            <div style="font-size: 13px; font-weight: 800; color: #64748b">─ flat (−0.10pp)</div>
+          </div>
+        </div>
       </div>
-      <div style="width:71.7%; min-width:360px; background:#2563eb; border-radius:10px; padding:22px 26px; color:#fff; display:flex; justify-content:space-between; align-items:center">
-        <span style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.9">Eligible · 71.7%</span>
-        <span style="font-size:32px; font-weight:900">278,223</span>
-      </div>
-      <div style="width:46.9%; min-width:360px; background:#7c3aed; border-radius:10px; padding:22px 26px; color:#fff; display:flex; justify-content:space-between; align-items:center">
-        <span style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.9">Paid · 46.88%</span>
-        <span style="font-size:32px; font-weight:900">181,939</span>
-      </div>
-      <div style="font-size:13.5px; color:var(--warn); font-weight:800; margin-top:8px">Paid ▼ −1.18pp MoM · ▲ +1.07pp vs plan — and the −1.18pp is <span style="color:#b91c1c">churn</span> (next slide).</div>
     </div>
 
-
+    <div class="chart-shell">
+      <div class="chart-wrap" style="height:520px"><canvas id="chart-pct-paid"></canvas></div>
+    </div>
 
     <!-- Definitions card -->
     <div style="margin-top:12px; padding:11px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--text); line-height:1.6">
@@ -2047,12 +2052,12 @@
 
     <div class="chart-shell" data-chart-breakdown-shell style="margin-top: 14px">
       <div class="ch-title">Paid Leases breakdown</div>
-      <div class="chart-wrap" style="height:560px"><canvas id="chart-breakdown"></canvas></div>
+      <div class="chart-wrap" style="height:640px"><canvas id="chart-breakdown"></canvas></div>
     </div>
 
     <div style="margin-top:12px; padding:10px 14px; background:#f7f9fd; border:1px solid var(--divider); border-radius:8px; font-size:11.5px; color:var(--muted); line-height:1.6">
       <strong style="color:var(--text)">Definitions →</strong>
-      <span style="color:var(--green); font-weight:700">Reactivated</span> = paid this month + in some prior month, not previous ·
+      <span style="color:#c2410c; font-weight:700">Reactivated</span> = paid this month + in some prior month, not previous ·
       <span style="color:var(--blue); font-weight:700">First-time</span> = paid for the first time ·
       <span style="color:var(--purple); font-weight:700">Existing</span> = paid this and previous month ·
       <span style="color:var(--warn); font-weight:700">Churned</span> = paid previous month, not this
@@ -4930,7 +4935,7 @@ new Chart(document.getElementById('chart-breakdown'), {
     labels: monthLabels(breakdown),
     datasets: [
       { label: 'Reactivated', data: breakdown.map(b => b.reactivated),
-        backgroundColor: 'rgba(5,150,105,0.90)', stack: 'all',
+        backgroundColor: 'rgba(234,88,12,0.92)', stack: 'all',
         borderRadius: 0, borderSkipped: false, borderWidth: 0,
         datalabels: segLabel() },
       { label: 'First-time', data: breakdown.map(b => b.first_time),
@@ -5223,7 +5228,7 @@ const seasonalityBandPlugin = {
   }
 };
 
-var __ppc = document.getElementById('chart-pct-paid'); if (__ppc) new Chart(__ppc, {
+new Chart(document.getElementById('chart-pct-paid'), {
   type: 'bar',
   plugins: [seasonalityBandPlugin],
   data: {
