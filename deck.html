@@ -3123,11 +3123,18 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="slide-insight">The <strong>+22% YoY</strong> in first-time payers is <strong>88.7% existing accounts</strong> adding tenants — entirely <strong>mature-PM (existing)</strong> expansion. New-PM (onboarding) tenant volume is <strong>flat</strong>, and net-new Price Units sit at <strong>31% of plan</strong>. The base is <strong>deepening, not widening</strong> — new-logo acquisition, not tenant payments, is what's holding ARR below plan.</div>
     </div>
 
-    <!-- FT tenants by PM tenure (the +22% decomposition) -->
-    <div class="chart-shell" style="margin-top: 16px">
-      <div class="ch-title">First-time paying tenants · by PM tenure <span style="font-weight: 500; color: var(--muted); font-size: 11px">· Jan '25 → May '26</span></div>
-      <div class="ch-sub">Split by the tenant's PM tenure. The <strong>+22%</strong> is <strong>mature-PM (existing)</strong> expansion (navy); new-PM (onboarding ≤3 mo) tenant volume is <strong>flat YoY</strong> (red) — the base is deepening, not widening.</div>
-      <div class="chart-wrap" style="height:412px"><canvas id="chart-ft-onb-mature"></canvas></div>
+    <!-- FT tenants by PM tenure: count (left) + 100% share (right) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px">
+      <div class="chart-shell">
+        <div class="ch-title">First-time paying tenants · by PM tenure <span style="font-weight: 500; color: var(--muted); font-size: 11px">· count</span></div>
+        <div class="ch-sub">The <strong>+22%</strong> is <strong>mature-PM (existing)</strong> expansion (grey); new-PM (onboarding ≤3 mo) tenant volume is <strong>flat YoY</strong> (blue).</div>
+        <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-onb-mature"></canvas></div>
+      </div>
+      <div class="chart-shell">
+        <div class="ch-title">Same split · as a share <span style="font-weight: 500; color: var(--muted); font-size: 11px">· % of first-time payers</span></div>
+        <div class="ch-sub">New-PM (onboarding) <strong>share keeps shrinking</strong> — ~47% → ~27% — as mature expansion outpaces it.</div>
+        <div class="chart-wrap" style="height:360px"><canvas id="chart-ft-share"></canvas></div>
+      </div>
     </div>
 
 
@@ -3158,19 +3165,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const ctx = chart.ctx, meta = chart.getDatasetMeta(1);
         if (!meta || !meta.data) return;
         ctx.save();
-        ctx.fillStyle = '#162050'; ctx.font = '800 11px "Poppins", sans-serif';
+        ctx.fillStyle = '#162050'; ctx.font = '800 9.5px "Poppins", sans-serif';
         ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
         meta.data.forEach((bar, i) => ctx.fillText((totals[i]/1000).toFixed(1)+'K', bar.x, bar.y - 3));
         ctx.restore();
       }
     };
-    const segLbl = { display:true, anchor:'center', align:'center', color:'#fff', font:{weight:800,size:10}, formatter:v=>(v/1000).toFixed(1)+'K' };
+    const segLbl = { display:true, anchor:'center', align:'center', color:'#fff', font:{weight:800,size:8.5}, formatter:v=>(v/1000).toFixed(1)+'K' };
     new Chart(el, {
       type: 'bar',
       plugins: [totalsOnTop],
       data: { labels, datasets: [
-        { label: 'New PM (0–2 mo)', data: onboard, backgroundColor: '#dc2626', stack: 'ft', datalabels: segLbl },
-        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#162050', stack: 'ft',
+        { label: 'New PM (0–2 mo)', data: onboard, backgroundColor: '#3185FC', stack: 'ft', datalabels: segLbl },
+        { label: 'Mature PM (3+ mo)', data: mature, backgroundColor: '#64748b', stack: 'ft',
           borderRadius:{topLeft:3,topRight:3}, borderSkipped:false, datalabels: segLbl }
       ]},
       options: {
@@ -3186,6 +3193,44 @@ document.addEventListener('DOMContentLoaded', function() {
         scales:{
           x:{ stacked:true, grid:{display:false}, ticks:{ font:{size:9,weight:600}, color:'#64748b', maxRotation:0, autoSkip:true, autoSkipPadding:4 } },
           y:{ stacked:true, beginAtZero:true, grid:{color:'rgba(22,32,80,0.06)'}, ticks:{ font:{size:9.5,weight:600}, color:'#94a3b8', callback:v=>(v/1000)+'K' } }
+        }
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+// Slide 12 · FT tenants by PM tenure — 100% share view (same data as chart-ft-onb-mature).
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Chart === 'undefined') return;
+    const el = document.getElementById('chart-ft-share');
+    if (!el) return;
+    const labels = ["Jan '25","Feb '25","Mar '25","Apr '25","May '25","Jun '25","Jul '25","Aug '25","Sep '25","Oct '25","Nov '25","Dec '25","Jan '26","Feb '26","Mar '26","Apr '26","May '26"];
+    const mature  = [6533,6668,7129,7922,7979,8803,9337,9811,9322,8681,8435,7737,9099,9658,9380,10710,10451];
+    const onboard = [5904,4605,4591,4796,3801,4344,4438,4086,4084,4205,4867,3204,5570,4862,4653,4544,3914];
+    const onbPct = onboard.map((o,i)=> 100*o/(o+mature[i]));
+    const matPct = mature.map((m,i)=> 100*m/(m+onboard[i]));
+    const pctLbl = { display:true, anchor:'center', align:'center', color:'#fff', font:{weight:800,size:10}, formatter:v=>Math.round(v)+'%' };
+    new Chart(el, {
+      type: 'bar',
+      data: { labels, datasets: [
+        { label: 'New PM (0–2 mo)', data: onbPct, backgroundColor: '#3185FC', stack: 's', datalabels: pctLbl },
+        { label: 'Mature PM (3+ mo)', data: matPct, backgroundColor: '#64748b', stack: 's',
+          borderRadius:{topLeft:3,topRight:3}, borderSkipped:false, datalabels: pctLbl }
+      ]},
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        layout:{ padding:{ top:8, right:6, bottom:2, left:4 } },
+        plugins:{
+          legend:{ display:true, position:'top', align:'start', labels:{ boxWidth:12, boxHeight:12, font:{size:10.5,weight:700}, padding:8, color:'#162050' } },
+          datalabels:{ clip:false },
+          tooltip:{ mode:'index', intersect:false, callbacks:{ label: ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%' } }
+        },
+        scales:{
+          x:{ stacked:true, grid:{display:false}, ticks:{ font:{size:9,weight:600}, color:'#64748b', maxRotation:0, autoSkip:true, autoSkipPadding:4 } },
+          y:{ stacked:true, beginAtZero:true, max:100, grid:{color:'rgba(22,32,80,0.06)'}, ticks:{ font:{size:9.5,weight:600}, color:'#94a3b8', callback:v=>v+'%' } }
         }
       }
     });
