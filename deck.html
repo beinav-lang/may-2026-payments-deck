@@ -2085,7 +2085,7 @@
     <div style="margin-top: 14px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid #dc2626; border-radius: 8px">
       <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px">
         <div style="font-size: 16px; font-weight: 900; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.8px">Driver #1 · Churn</div>
-        <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 17,653 → May 20,998 · <span style="color: var(--warn)">+3,345 (+19%)</span></div>
+        <div style="font-size: 14px; font-weight: 800; color: #162050"><span style="color: var(--warn)">≈ −0.86pp</span> on % paid leases</div>
       </div>
 
       <!-- Insight card above chart -->
@@ -2110,7 +2110,7 @@
     <div style="margin-top: 16px; padding: 16px 20px; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 8px">
       <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px">
         <div style="font-size: 16px; font-weight: 900; color: #6d28d9; text-transform: uppercase; letter-spacing: 0.8px">Driver #2 · Reactivation</div>
-        <div style="font-size: 14px; font-weight: 800; color: #162050">Apr 9,548 → May 6,930 · <span style="color: var(--warn)">−2,618 (−27%)</span></div>
+        <div style="font-size: 14px; font-weight: 800; color: #162050"><span style="color: var(--warn)">≈ −0.67pp</span> on % paid leases</div>
       </div>
       <!-- Insight card above chart -->
       <div style="padding: 14px 18px; background: rgba(124,58,237,0.06); border-left: 4px solid var(--purple); border-radius: 6px; font-size: 13px; line-height: 1.6; color: var(--text); margin: 0 0 10px">
@@ -2190,6 +2190,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const isHighlight = i => (isApr(i) || isMay(i));
   new Chart(el, {
     type: 'bar',
+    plugins: [{
+      id: 'momReact',
+      afterDatasetsDraw(c) {
+        const x=c.scales.x, a=c.chartArea, ctx=c.ctx, n=c.data.labels.length;
+        const xa=x.getPixelForValue(n-2), xm=x.getPixelForValue(n-1), mid=(xa+xm)/2, yb=a.top+18;
+        ctx.save();
+        ctx.strokeStyle='#6d28d9'; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.moveTo(xa,yb+5); ctx.lineTo(xa,yb); ctx.lineTo(xm,yb); ctx.lineTo(xm,yb+5); ctx.stroke();
+        ctx.fillStyle='#6d28d9'; ctx.font='800 12px \"Poppins\", sans-serif'; ctx.textAlign='center'; ctx.textBaseline='bottom';
+        ctx.fillText('▼ −2,618 (−27%)', mid, yb-3);
+        ctx.restore();
+      }
+    }],
     data: {
       labels: reactivationHistory.map(d => d.m),
       datasets: [{
@@ -2231,7 +2244,7 @@ document.addEventListener('DOMContentLoaded', function() {
                           : '#64748b'
           }
         },
-        y: { display: false, beginAtZero: true, grace: '15%' }
+        y: { display: false, beginAtZero: true, grace: '28%' }
       }
     }
   });
@@ -5575,7 +5588,19 @@ if (document.getElementById('chart-churn-breakdown')) {
   // db_tenant on bottom (smallest), lease_end middle, tenant on top.
   new Chart(document.getElementById('chart-churn-breakdown'), {
     type: 'bar',
-    plugins: [churnTotalPlugin],
+    plugins: [churnTotalPlugin, {
+      id: 'momChurn',
+      afterDatasetsDraw(c) {
+        const x=c.scales.x, a=c.chartArea, ctx=c.ctx, n=c.data.labels.length;
+        const xa=x.getPixelForValue(n-2), xm=x.getPixelForValue(n-1), mid=(xa+xm)/2, yb=a.top+18;
+        ctx.save();
+        ctx.strokeStyle='#b91c1c'; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.moveTo(xa,yb+5); ctx.lineTo(xa,yb); ctx.lineTo(xm,yb); ctx.lineTo(xm,yb+5); ctx.stroke();
+        ctx.fillStyle='#b91c1c'; ctx.font='800 12px \"Poppins\", sans-serif'; ctx.textAlign='center'; ctx.textBaseline='bottom';
+        ctx.fillText('▲ +3,386 (+19%)', mid, yb-3);
+        ctx.restore();
+      }
+    }],
     data: {
       labels: churnBreakdown.map(d => d.month),
       datasets: [
@@ -5632,7 +5657,7 @@ if (document.getElementById('chart-churn-breakdown')) {
                font: ctx => ({ weight: ctx.index === cbLastIdx ? 800 : 600, size: 11 }),
                color: ctx => ctx.index === cbLastIdx ? '#162050' : '#64748b'
              } },
-        y: { stacked: true, beginAtZero: true,
+        y: { stacked: true, beginAtZero: true, suggestedMax: 27000,
              ticks: { font: { size: 10 }, callback: v => v.toLocaleString() },
              grid: { color: 'rgba(0,0,0,0.04)' } }
       }
