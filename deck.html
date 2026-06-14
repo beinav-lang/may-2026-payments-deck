@@ -2011,32 +2011,6 @@
     <h2 class="section-title">Paid leases flat (+252) — a <span class="title-accent red">series-high 21K churn</span> ate every gain.</h2>
     <div class="slide-insight">Paid leases barely moved — <strong>+252 net to 181.9K</strong> — because a <strong>series-high 21K churn (+19% MoM)</strong> ate the month’s inflows. Existing leases dropped off faster than new payers replaced them, so paid stayed flat against a growing active base — <strong>that’s the entire −1.18pp</strong>.</div>
 
-    <!-- May paid-lease summary card -->
-    <div style="margin-top: 16px; padding: 18px 22px; background: linear-gradient(135deg, rgba(22,32,80,0.04) 0%, rgba(49,133,252,0.04) 100%); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); line-height: 1.6">
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px">
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid #eab308; border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Reactivated · Δ vs Apr</div>
-          <div style="font-size: 18px; font-weight: 800; color: #a16207; margin-top: 2px">−2,618</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 6,930 · vs Apr 9,548 (−27%)</div>
-        </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">+ First-time paid · Δ vs Apr</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--warn); margin-top: 2px">−760</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 14,356 · vs Apr 15,116 (−5%)</div>
-        </div>
-        <div style="padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 6px">
-          <div style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700">Existing (retained) · Δ vs Apr</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--green); margin-top: 2px">+3,666</div>
-          <div style="font-size: 10.5px; color: var(--muted); margin-top: 2px">May 160,689 · vs Apr 157,023 (+2.3%)</div>
-        </div>
-        <div style="padding: 10px 12px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.25); border-left: 4px solid #dc2626; border-radius: 6px">
-          <div style="font-size: 10px; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 800">− Churned · Δ vs Apr</div>
-          <div style="font-size: 20px; font-weight: 800; color: #b91c1c; margin-top: 2px">+3,345</div>
-          <div style="font-size: 10.5px; color: #b91c1c; margin-top: 2px; font-weight: 700">May 20,998 · vs Apr 17,653 · highest in series</div>
-        </div>
-      </div>
-    </div>
-
     <div class="chart-shell" data-chart-breakdown-shell style="margin-top: 14px">
       <div class="ch-title">Paid Leases breakdown</div>
       <div style="display:flex; gap:18px; flex-wrap:wrap; margin:2px 0 2px; font-size:12px; font-weight:700; color:#162050">
@@ -5019,7 +4993,7 @@ new Chart(document.getElementById('chart-breakdown'), {
   },
   options: baseOpts({
     layout: { padding: { top: 56, right: 32, bottom: 22, left: 8 } },
-    layout: { padding: { top: 30 } },
+    layout: { padding: { top: 44 } },
     plugins: {
       legend: { display: false },
       tooltip: { filter: (item) => item.dataset.label !== '__total__' && item.dataset.label !== '__mom_delta__' }
