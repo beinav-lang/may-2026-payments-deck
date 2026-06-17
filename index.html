@@ -1633,7 +1633,10 @@ tr.totrow td{font-weight:800;border-top:2px solid var(--navy);background:#f4f7fd
     <colgroup><col style="width:13%"><col style="width:15%"><col span="5" style="width:14.4%"></colgroup>
     <tr><th style="text-align:center;">Activation month</th><th data-den="1">New active leases</th><th>&#8804; 7 days</th><th>&#8804; 14 days</th><th>&#8804; 30 days</th><th>&#8804; 45 days</th><th>&#8804; 90 days</th></tr>
   </table>
-  <div class="readcard">Each step is <b>cumulative</b> — % completing within N days of that step's start (denominator switches with the metric). The slow, leaky steps are <b>invite→registered and registered→1st payment for Onboarding</b> leases: invites fire fast (~80% in 7d) but new-PM portal registration and first payment lag mature by <b>15–25pp</b>. Switch the metric to trace where each cohort stalls.</div>
+  <div style="display:flex;gap:12px;align-items:stretch;margin-top:9px;">
+    <div class="readcard" style="flex:1;margin:0;"><b>Mature PMs invite at activation.</b> ~<b>80%</b> of new active leases are invited within <b>±7 days</b> of activation, and the rate is essentially <b>flat afterward</b> (only ~+5pp out to 90 days) — for mature accounts the activation→invite step is effectively <b>instant</b>.</div>
+    <div class="readcard" style="flex:1;margin:0;"><b>Onboarding is where it leaks.</b> New-PM invites trickle in (~<b>35–40% in 7d</b>), and portal registration + 1st payment lag mature by <b>15–25pp</b>. Switch the <b>Metric</b> chip to trace where each cohort stalls.</div>
+  </div>
   <div class="foot"><span></span><span>Funnel &nbsp;·&nbsp; <span class="n">15</span> / 17</span></div>
 </section>
 <section id="s16" class="slide alt"><img class="logo" src="https://cdn.prod.website-files.com/5f073e32d304276cc8b4ff30/69d3ea8d95b0b381d2acdc36_doorloop-blue-logo-transparent.svg" alt="DoorLoop">
